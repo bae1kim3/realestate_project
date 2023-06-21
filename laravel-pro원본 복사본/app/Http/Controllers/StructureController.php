@@ -43,18 +43,28 @@ class StructureController extends Controller
         //                 ->withInput($req->all());
         // }
 
-
-        // 월세 클릭했을때, 월세값 없이 넘겨주면 에러
-        // 전세, 매매일때, 
-
-
-
         // db에 있는 역이름이랑 $req 넘어온 역이름 비교 -> 둘이 일치 안하면 에러메세지 뜨게
 
         // //세션에 id값 가져와서 u_id로 보내줌
         // // 주소 -> 위경도로 바꿔서 보내줌
         // //역이름 보내줘야함
         // // 주소 변환해서 넘겨주기
+
+        // 월세 클릭했을때, 월세값 없이 넘겨주면 에러
+        // 전세, 매매일때, 
+
+        //0622 add
+        $radio_Btn = $req->sell_cat_info;
+        $p_month = $req->p_month;
+        $p_deposit = $req->p_deposit;
+        if($radio_Btn==="월세" && !$p_month) {
+            $error['p_month_err'] = '월세 가격을 적어주세요';
+        }
+        elseif(($radio_Btn==="전세" || $radio_Btn==="매매") && $p_month) {
+            $error['buy_err'] = '거래 유형을 확인하고 가격을 적어주세요'
+        }
+
+
 
         // '대구시' 빼고 주소 넘겨주기
         $error = [];
