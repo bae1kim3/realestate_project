@@ -1,6 +1,7 @@
 var selectBox = document.getElementById("option");
 var mapContainer = document.getElementById("map"); // 지도를 표시할 div
 let checkboxes = document.querySelectorAll('.dropdown-menu input[id="opt"]');
+let scheckboxes = document.querySelectorAll('.dropdown-menu input[id="sopt"]');
 let selectValues = [];
 let level = 8;
 // 지도에 표시된 마커 객체를 가지고 있을 배열입니다
@@ -26,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function (checkbox) {
             selectValues.splice(index, 1);
         }
     }
-    console.log(value);
+    console.log(checkbox);
     let url =
         "http://127.0.0.1:8000/api/mapopt/" +
         (selectValues.length ? selectValues.join(",") : "1") +
@@ -495,6 +496,8 @@ checkboxes.forEach(function (checkbox) {
             });
     });
 });
+
+scheckboxes.addEventListener("click", function (checkbox) {});
 
 const getpark = document.getElementById("getpark");
 getpark.addEventListener("click", function (checkbox) {
