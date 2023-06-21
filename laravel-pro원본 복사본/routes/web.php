@@ -100,3 +100,4 @@ Route::get('/photos/more/{lastPhotoId}', [PhotoLoadController::class, 'loadMoreP
 Route::get('/search', [SearchController::class, 'search']);
 
 
+Route::get('/map', [MapController::class,'map'])->name('map.map');
