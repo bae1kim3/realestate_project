@@ -1,0 +1,45 @@
+/* Tailwind CSS를 임포트합니다. */
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* 아래에 다크모드 스타일을 추가하세요. */
+
+@media (prefers-color-scheme: dark) {
+    /* 다크모드 스타일 */
+
+    /* 전체 페이지 배경색 */
+    body {
+        background-color: #121212;
+    }
+
+    /* 텍스트 색상 */
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    span,
+    a {
+        color: #f1f1f1;
+    }
+
+    /* 링크 색상 */
+    a {
+        color: #a9c1ff;
+    }
+
+    /* 버튼 배경색 */
+    .bg-gray-200.dark\:bg-gray-800 {
+        background-color: #4b5563;
+    }
+
+    /* 버튼 아이콘 색상 */
+    .text-gray-600.dark\:text-gray-300 {
+        color: #d1d5db;
+    }
+}

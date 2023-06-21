@@ -1,0 +1,7 @@
+*
+!data/
+!.gitignore
+
+echo _ide_helper.php >> .gitignore
+echo _ide_helper_models.php >> .gitignore
+echo .phpstorm.meta.php >> .gitignore
