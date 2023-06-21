@@ -51,7 +51,7 @@
                     </x-nav-link>
                 </div>
             </div>
-
+              <div class="mt-5"><a href="{{route('map.map')}}">MAP</a></div>
             @if (isset(session()->all()['auth']))
                 <!-- Settings Dropdown -->
                 <div class="ml-3 relative">

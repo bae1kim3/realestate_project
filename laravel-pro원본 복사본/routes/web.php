@@ -10,6 +10,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Livewire\FindUsername;
 use App\Http\Livewire\NoticeUsername;
 use App\Http\Controllers\CheckController;
+use App\Http\Controllers\MapController;
 use App\Http\Controllers\UserPassController;
 use App\Http\Livewire\FindUserPass;
 use App\Http\Livewire\UserPassInput;
