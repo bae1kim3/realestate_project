@@ -7,7 +7,6 @@ use App\Models\S_info;
 use App\Models\State_option;
 use App\Models\Subway;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 // use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -88,17 +87,18 @@ class StructureController extends Controller
         }
         else {
 
+        $data['u_no'] = $user_no;
         $data['s_name'] = $req->s_name;
+        $data['s_add'] = $pieces;
         $data['s_type'] = $req->sell_cat_info;
         $data['s_size'] = $req->s_size;
+        $data['s_fl'] = $req->s_fl;
+        $data['s_log']= $req->s_log;
+        $data['s_stai'] = $req->sub_name;
+        $data['s_lat']= $req->s_lat;
         $data['p_deposit'] = $req->p_deposit;
         $data['p_month'] = $req->p_month;
-        $data['s_fl'] = $req->s_fl;
-        $data['u_no'] = $user_no;
-        $data['s_lat']= $req->s_lat;
-        $data['s_log']= $req->s_log;
-        $data['s_add'] = $pieces;
-        $data['s_stai'] = $req->sub_name;
+        $data['animal_size'] = $req->animal_size;
         $data01['s_parking'] = $req->s_parking;
         $data01['s_ele'] = $req->s_ele;
 
