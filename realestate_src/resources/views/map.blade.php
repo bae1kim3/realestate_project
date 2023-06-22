@@ -49,10 +49,10 @@
             </div>
             <div class="dropdown-menu">
                 <label>
-                <input type="checkbox" id="opt" name="option4" value="주차장" > 주차
+                <input type="checkbox" id="sopt" name="option4" value="s_parking" > 주차
                 </label>
                 <label>
-                <input type="checkbox" id="opt" name="option6" value="ele" > 엘
+                <input type="checkbox" id="sopt" name="option6" value="s_ele" > 엘
                 </label>
             </div>
         </div>

@@ -11,7 +11,7 @@ class MapController extends Controller
         return view('map');
     }
 
-    function getopt($opt,$gu)
+    function getopt($opt,$gu,$sopt)
     {
         $lat = 0;
         $lng = 0;
@@ -61,12 +61,15 @@ class MapController extends Controller
 
         $info['latlng']=['lat'=>$lat,'lng'=>$lng];
         $array = explode(',', $opt);
+         // '구 선택'이 아닐 때
         if($gu != '구 선택'){
+            // 매매가 평균 구하는 쿼리
             $info['savg']=DB::table('s_infos')
             ->select('p_deposit')
             ->where('s_add', 'LIKE', $gu.'%')
             ->where('s_type','매매')
             ->get();
+            // '구 선택'이 아닐 때 '월세', '전세', '매매' 중에서 하나만 넘어왔을 때
             if(count($array)==1 && $array[0] != 1){
                 $info['sinfo'] = DB::table('s_infos')
                 ->where('s_add', 'LIKE', $gu . '%')
@@ -76,6 +79,7 @@ class MapController extends Controller
                 ->get();
             return $info;
             }
+            // '구 선택'이 아닐 때 '월세', '전세', '매매' 중에서 두개가 넘어왔을 때
             else if(count($array)==2){
                 $info['sinfo'] = DB::table('s_infos')
                 ->where('s_add', 'LIKE', $gu . '%')
@@ -86,6 +90,7 @@ class MapController extends Controller
                 ->get();
             return $info;
             }
+            // '구 선택'이 아닐 때 '월세', '전세', '매매' 중에서 세개가 넘어왔을 때
             else if(count($array)==3){
                 $info['sinfo'] = DB::table('s_infos')
                 ->where('s_add', 'LIKE', $gu . '%')
@@ -96,24 +101,27 @@ class MapController extends Controller
                 })
                 ->get();
             return $info;
+            // '구 선택'이 아닐 때 '월세', '전세', '매매' 중에서 아무것도 넘어오지 않았을 때( 구 만 검색)
             }else if($array[0] == 1){
                 $info['sinfo']=DB::table('s_infos')
                     ->where('s_add', 'LIKE', $gu.'%')
                     ->get();
                 return $info;
             }
-            // "구 선택"일 때
+    // "구 선택"일 때
         } else {
             $info['savg']=DB::table('s_infos')
             ->select('p_deposit')
             ->where('s_type','매매')
             ->get();
+            // "구 선택"일 때 '월세', '전세', '매매' 중에서 하나만 넘어왔을 때
             if(count($array)==1 && $array[0] != 1){
                 $info['sinfo'] = DB::table('s_infos')
                 ->where('s_type',$array[0])
                 ->get();
             return $info;
             }
+            // "구 선택"일 때 '월세', '전세', '매매' 중에서 두개가 넘어왔을 때
             else if(count($array)==2){
                 $info['sinfo'] = DB::table('s_infos')
                 ->where('s_type',$array[0])
@@ -121,6 +129,7 @@ class MapController extends Controller
                 ->get();
             return $info;
             }
+            // "구 선택"일 때 '월세', '전세', '매매' 중에서 세개가 넘어왔을 때
             else if(count($array)==3){
                 $info['sinfo'] = DB::table('s_infos')
                 ->where('s_type',$array[0])
@@ -128,6 +137,7 @@ class MapController extends Controller
                 ->orwhere('s_type',$array[2])
                 ->get();
             return $info;
+            // "구 선택"일 때 '월세', '전세', '매매' 중에서 아무것도 넘어오지 않았을 때(구 선택일 때는 아무 값도 설정하지 않았기 때문에 전체값을 넘겨준다.)
             } else if($array[0] == 1){
                 $info['sinfo']=DB::table('s_infos')
                     ->get();

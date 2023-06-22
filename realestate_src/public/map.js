@@ -1,8 +1,9 @@
 var selectBox = document.getElementById("option");
 var mapContainer = document.getElementById("map"); // 지도를 표시할 div
 let checkboxes = document.querySelectorAll('.dropdown-menu input[id="opt"]');
-// let scheckboxes = document.querySelectorAll('.dropdown-menu input[id="sopt"]');
+let scheckboxes = document.querySelectorAll('.dropdown-menu input[id="sopt"]');
 let selectValues = [];
+let soptionValues = [];
 let level = 8;
 // 지도에 표시된 마커 객체를 가지고 있을 배열입니다
 let markers = [];
@@ -32,7 +33,9 @@ document.addEventListener("DOMContentLoaded", function (/* checkbox */) {
         "http://127.0.0.1:8000/api/mapopt/" +
         (selectValues.length ? selectValues.join(",") : "1") +
         "/" +
-        (selectedOption ? selectedOption : "1");
+        selectedOption +
+        "/" +
+        (soptionValues.length ? soptionValues.join(",") : "1");
     console.log(url);
     console.log(selectValues);
     console.log(selectedOption);
@@ -192,7 +195,9 @@ selectBox.addEventListener("change", function (/* checkbox */) {
         "http://127.0.0.1:8000/api/mapopt/" +
         (selectValues.length ? selectValues.join(",") : "1") +
         "/" +
-        (selectedOption ? selectedOption : "1");
+        selectedOption +
+        "/" +
+        (soptionValues.length ? soptionValues.join(",") : "1");
     console.log(url);
     console.log(selectValues);
     console.log(selectedOption);
@@ -356,7 +361,9 @@ checkboxes.forEach(function (checkbox) {
             "http://127.0.0.1:8000/api/mapopt/" +
             (selectValues.length ? selectValues.join(",") : "1") +
             "/" +
-            (selectedOption ? selectedOption : "1");
+            selectedOption +
+            "/" +
+            (soptionValues.length ? soptionValues.join(",") : "1");
         console.log(url);
         console.log(selectValues);
         console.log(selectedOption);
@@ -514,7 +521,7 @@ getpark.addEventListener("click", function (checkbox) {
         "http://127.0.0.1:8000/api/mapopt/" +
         (selectValues.length ? selectValues.join(",") : "1") +
         "/" +
-        (selectedOption ? selectedOption : "1");
+        selectedOption;
     console.log(url);
     console.log(selectValues);
     console.log(selectedOption);
@@ -574,4 +581,165 @@ getpark.addEventListener("click", function (checkbox) {
                     }
                 });
         });
+});
+
+scheckboxes.forEach(function (checkbox) {
+    checkbox.addEventListener("change", function () {
+        var selectedOption = selectBox.value;
+        let value = checkbox.value;
+        if (checkbox.checked) {
+            soptionValues.push(value);
+        } else {
+            let index = soptionValues.indexOf(value);
+            if (index !== -1) {
+                soptionValues.splice(index, 1);
+            }
+        }
+        console.log(value);
+        let url =
+            "http://127.0.0.1:8000/api/mapopt/" +
+            (selectValues.length ? selectValues.join(",") : "1") +
+            "/" +
+            selectedOption +
+            "/" +
+            (soptionValues.length ? soptionValues.join(",") : "1");
+        console.log(url);
+        console.log(selectValues);
+        console.log(selectedOption);
+        console.log(soptionValues);
+        // AJAX 요청 보내기
+
+        fetch(url)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                // 지도에 표시된 마커 객체를 가지고 있을 배열입니다
+                setMarkers();
+                console.log(markers);
+                markers = [];
+                var imageSrc = "maphome.png";
+                var imageSize = new kakao.maps.Size(24, 35);
+                var markerImage = new kakao.maps.MarkerImage(
+                    imageSrc,
+                    imageSize
+                );
+                map.setLevel(level);
+                for (let i = 0; i < data["sinfo"].length; i++) {
+                    // 마커 하나를 지도위에 표시합니다
+                    addMarker(
+                        new kakao.maps.LatLng(
+                            data["sinfo"][i].s_log,
+                            data["sinfo"][i].s_lat
+                        )
+                    );
+                }
+                let ssum = 0;
+                for (let i = 0; i < data["savg"].length; i++) {
+                    ssum += data["savg"][i].p_deposit;
+                }
+                let savg = ssum / data["savg"].length;
+                var container = document.getElementById("sidebar");
+                container.innerText = "";
+                var accordion = document.createElement("div");
+                accordion.className = "accordion";
+                accordion.id = "accordionExample";
+
+                // 아코디언 아이템 생성
+                var accordionItem = document.createElement("div");
+                accordionItem.className = "accordion-item";
+
+                // 아코디언 헤더 생성
+                var accordionHeader = document.createElement("h2");
+                accordionHeader.className = "accordion-header";
+                accordionHeader.id = "headingOne";
+
+                // 아코디언 버튼 생성
+                var accordionButton = document.createElement("button");
+                accordionButton.className = "accordion-button collapsed";
+                accordionButton.type = "button";
+                accordionButton.setAttribute("data-bs-toggle", "collapse");
+                accordionButton.setAttribute("data-bs-target", "#collapseOne");
+                accordionButton.setAttribute("aria-expanded", "true");
+                accordionButton.setAttribute("aria-controls", "collapseOne");
+                accordionButton.textContent = `${
+                    selectedOption == "구 선택" ? "전체 구" : selectedOption
+                }의평균매매가`;
+
+                // 아코디언 컨텐츠 생성
+                var accordionCollapse = document.createElement("div");
+                accordionCollapse.id = "collapseOne";
+                accordionCollapse.className = "accordion-collapse collapse";
+                accordionCollapse.setAttribute("aria-labelledby", "headingOne");
+                accordionCollapse.setAttribute(
+                    "data-bs-parent",
+                    "#accordionExample"
+                );
+
+                var accordionBody = document.createElement("div");
+                accordionBody.className = "accordion-body";
+                accordionBody.innerHTML = `${
+                    selectedOption == "구 선택" ? "전체 구" : selectedOption
+                }의 평균 : ${savg.toLocaleString("ko-KR")}원`;
+
+                // 요소들을 구조에 맞게 추가
+                accordionHeader.appendChild(accordionButton);
+                accordionCollapse.appendChild(accordionBody);
+                accordionItem.appendChild(accordionHeader);
+                accordionItem.appendChild(accordionCollapse);
+                accordion.appendChild(accordionItem);
+
+                // 최종적으로 생성된 구조를 원하는 위치에 추가
+                // var container = document.getElementById("sidebar"); // 적절한 컨테이너 요소 선택
+                container.appendChild(accordion);
+                // 마커를 생성하고 지도위에 표시하는 함수입니다
+
+                for (let i = 0; i < data["sinfo"].length; i++) {
+                    var card = document.createElement("div");
+                    // 카드 요소 생성
+                    card.className = "card";
+                    card.style.width = "18rem";
+
+                    // 이미지 요소 생성
+                    var image = document.createElement("img");
+                    image.src = "maphome.png"; // 이미지 소스를 설정해주세요
+                    image.className = "card-img-top";
+                    image.alt = "..."; // 대체 텍스트를 설정해주세요
+
+                    // 카드 바디 요소 생성
+                    var cardBody = document.createElement("div");
+                    cardBody.className = "card-body";
+
+                    // 카드 내용 생성
+                    var cardText = document.createElement("p");
+                    cardText.className = "card-text";
+                    cardText.innerHTML =
+                        "매매유형 : " +
+                        data["sinfo"][i].s_type +
+                        "<br>주소 : " +
+                        data["sinfo"][i].s_add;
+
+                    // 요소들을 조합하여 구조 생성
+                    cardBody.appendChild(cardText);
+                    card.appendChild(image);
+                    card.appendChild(cardBody);
+                    var container = document.getElementById("sidebar");
+                    // 생성한 카드를 원하는 위치에 추가
+                    container.appendChild(card);
+                }
+                // 마커를 생성하고 지도위에 표시하는 함수입니다
+                function addMarker(position) {
+                    // 마커를 생성합니다
+                    var marker = new kakao.maps.Marker({
+                        position: position,
+                        image: markerImage,
+                    });
+
+                    // 마커가 지도 위에 표시되도록 설정합니다
+                    marker.setMap(map);
+
+                    // 생성된 마커를 배열에 추가합니다
+                    markers.push(marker);
+                }
+            });
+    });
 });
