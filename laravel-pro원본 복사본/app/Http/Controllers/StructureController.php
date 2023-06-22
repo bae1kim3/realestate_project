@@ -61,7 +61,7 @@ class StructureController extends Controller
             $error['p_month_err'] = '월세 가격을 적어주세요';
         }
         elseif(($radio_Btn==="전세" || $radio_Btn==="매매") && $p_month) {
-            $error['buy_err'] = '거래 유형을 확인하고 가격을 적어주세요'
+            $error['buy_err'] = '거래 유형을 확인하고 가격을 적어주세요';
         }
 
 

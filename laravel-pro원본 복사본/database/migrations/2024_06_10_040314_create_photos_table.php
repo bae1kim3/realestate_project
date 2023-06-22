@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('url');
             $table->string('hashname');
             $table->string('originalname');
+            $table->enum('mvp_photo', ['0', '1'])->default('0');
             $table->timestamps();
         });
     }
