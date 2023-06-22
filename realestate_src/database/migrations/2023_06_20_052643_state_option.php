@@ -12,10 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create ('state_options', function (Blueprint $table) {
-            $table->increments('s_no');
+            $table->foreignId('s_no')->constrained('s_infos');
             $table->enum('s_parking', ['0','1'])->default('0');
             $table->enum('s_ele', ['0','1'])->default('0');
             $table->timestamps();
+
         });
     }
 
@@ -26,4 +27,5 @@ return new class extends Migration
     {
         Schema::dropIfExists('state_options');
     }
+    
 };

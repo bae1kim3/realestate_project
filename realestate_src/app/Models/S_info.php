@@ -12,6 +12,8 @@ class S_info extends Model
     protected $guarded = [];
     protected $dates = ['deleted_at'];
 
+    protected $primaryKey = 's_no';
+    
     protected $fillable = [
         'u_no'
         ,'s_name'

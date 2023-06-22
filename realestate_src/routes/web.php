@@ -100,5 +100,8 @@ Route::get('/welcome', [PhotoLoadController::class, 'index'])->name('welcome');
 Route::get('/photos/more/{lastPhotoId}', [PhotoLoadController::class, 'loadMorePhotos']);
 Route::get('/search', [SearchController::class, 'search']);
 
-
+// 지도
 Route::get('/map', [MapController::class,'map'])->name('map.map');
+
+// stat_option post
+Route::post('/statoption/post', [StatOpController::class, 'statOpPost'])->name('stat.option.post');

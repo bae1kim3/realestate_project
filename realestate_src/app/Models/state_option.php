@@ -12,4 +12,6 @@ class State_option extends Model
         's_ele'
         ,'s_parking'
     ];
+
+    protected $primaryKey = 's_no';
 }

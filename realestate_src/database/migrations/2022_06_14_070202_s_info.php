@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('s_infos', function (Blueprint $table) {
             $table->increments('s_no');
             $table->unsignedBigInteger('u_no'); // 외래 키
-            $table->foreign('u_no')->references('id')->on('users')->onDelete('set null');
-            // $table->foreign('u_no')->references('id')->on('users');
+            $table->foreign('u_no')->references('id')->on('users');
             $table->string('s_name', 100);
             $table->string('s_add', 500);
             $table->enum('s_type', ['매매', '전세', '월세']);
