@@ -102,6 +102,7 @@ class MapController extends Controller
                     ->get();
                 return $info;
             }
+            // "구 선택"일 때
         } else {
             $info['savg']=DB::table('s_infos')
             ->select('p_deposit')

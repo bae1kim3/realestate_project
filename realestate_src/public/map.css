@@ -8,9 +8,10 @@
     height: 100%;
     overflow: scroll;
     background-color: black;
+    z-index: 2;
 }
-.card{
-    margin: 0 auto;
+.card {
+    margin: 4% auto;
 }
 .container1 {
     width: 100%;
@@ -60,7 +61,13 @@
     margin-right: 5px;
 }
 
-#map{
+#map {
     height: 92vh;
     width: 100%;
+}
+
+.sidebar::-webkit-scrollbar,
+#map::-webkit-scrollbar,
+.container1::-webkit-scrollbar {
+    display: none;
 }

@@ -1,7 +1,7 @@
 var selectBox = document.getElementById("option");
 var mapContainer = document.getElementById("map"); // 지도를 표시할 div
 let checkboxes = document.querySelectorAll('.dropdown-menu input[id="opt"]');
-let scheckboxes = document.querySelectorAll('.dropdown-menu input[id="sopt"]');
+// let scheckboxes = document.querySelectorAll('.dropdown-menu input[id="sopt"]');
 let selectValues = [];
 let level = 8;
 // 지도에 표시된 마커 객체를 가지고 있을 배열입니다
@@ -16,18 +16,18 @@ function setMarkers() {
 }
 
 // 처음 윈도우를 로드 했을 때 실행되는
-document.addEventListener("DOMContentLoaded", function (checkbox) {
+document.addEventListener("DOMContentLoaded", function (/* checkbox */) {
     var selectedOption = selectBox.value;
-    let value = checkbox.value;
-    if (checkbox.checked) {
-        selectValues.push(value);
-    } else {
-        let index = selectValues.indexOf(value);
-        if (index !== -1) {
-            selectValues.splice(index, 1);
-        }
-    }
-    console.log(checkbox);
+    // let value = checkbox.value;
+    // if (checkbox.checked) {
+    //     selectValues.push(value);
+    // } else {
+    //     let index = selectValues.indexOf(value);
+    //     if (index !== -1) {
+    //         selectValues.splice(index, 1);
+    //     }
+    // }
+    // console.log(checkbox);
     let url =
         "http://127.0.0.1:8000/api/mapopt/" +
         (selectValues.length ? selectValues.join(",") : "1") +
@@ -176,18 +176,18 @@ document.addEventListener("DOMContentLoaded", function (checkbox) {
         });
 });
 
-selectBox.addEventListener("change", function (checkbox) {
+selectBox.addEventListener("change", function (/* checkbox */) {
     var selectedOption = selectBox.value;
-    let value = checkbox.value;
-    if (checkbox.checked) {
-        selectValues.push(value);
-    } else {
-        let index = selectValues.indexOf(value);
-        if (index !== -1) {
-            selectValues.splice(index, 1);
-        }
-    }
-    console.log(value);
+    // let value = checkbox.value;
+    // if (checkbox.checked) {
+    //     selectValues.push(value);
+    // } else {
+    //     let index = selectValues.indexOf(value);
+    //     if (index !== -1) {
+    //         selectValues.splice(index, 1);
+    //     }
+    // }
+    // console.log(value);
     let url =
         "http://127.0.0.1:8000/api/mapopt/" +
         (selectValues.length ? selectValues.join(",") : "1") +
@@ -497,8 +497,6 @@ checkboxes.forEach(function (checkbox) {
     });
 });
 
-scheckboxes.addEventListener("click", function (checkbox) {});
-
 const getpark = document.getElementById("getpark");
 getpark.addEventListener("click", function (checkbox) {
     var selectedOption = selectBox.value;
@@ -528,9 +526,9 @@ getpark.addEventListener("click", function (checkbox) {
             console.log(data);
             const servicekey =
                 "cHVjVjglbOBfaJaLkhiSbBrRU2U3MkuefQS0rxexSVZcSA8vF6zeNrhf7LmjNlJGibN%2BM%2BPpK9GGjbmpsfD7FA%3D%3D";
-            let pageno = 1;
+            let pageno = 0;
             let numofrows = 10;
-            let radius = "10";
+            let radius = "3";
 
             const url =
                 "https://apis.data.go.kr/6270000/dgInParkwalk/getDgWalkParkList?serviceKey=" +
@@ -545,6 +543,7 @@ getpark.addEventListener("click", function (checkbox) {
                 data["latlng"].lng +
                 "&radius=" +
                 radius;
+            console.log(url);
             fetch(url)
                 .then((response) => response.json())
                 .then((data1) => {
