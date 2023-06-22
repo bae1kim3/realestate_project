@@ -109,8 +109,10 @@ class StructureController extends Controller
         $data['p_deposit'] = $req->p_deposit;
         $data['p_month'] = $req->p_month;
         $data['animal_size'] = $req->animal_size;
+        
         $data01['s_parking'] = $req->s_parking;
         $data01['s_ele'] = $req->s_ele;
+
 
         $s_info = S_info::create($data);
         State_option::create($data01);
