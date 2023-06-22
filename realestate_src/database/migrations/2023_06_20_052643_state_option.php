@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create ('state_options', function (Blueprint $table) {
             $table->foreignId('s_no')->constrained('s_infos');
+            // fk 묶는거 이거 좀 아직 수상!!!!!!!!!!!!!!!!!!!!!!!!
             $table->enum('s_parking', ['0','1'])->default('0');
             $table->enum('s_ele', ['0','1'])->default('0');
             $table->timestamps();
