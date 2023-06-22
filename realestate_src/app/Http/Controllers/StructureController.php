@@ -135,6 +135,8 @@ class StructureController extends Controller
     $maxPhotos = 10;
     $totalPhotos = count($photos);
 
+    $isFirstPhoto = true; // 첫번째 사진인지 체크
+
     if ($totalPhotos < $minPhotos || $totalPhotos > $maxPhotos) {
         return redirect()->back()->withErrors([
             'error' => '사진은 ' . $minPhotos . ' 이상 ' . $maxPhotos . ' 이하로 올려주세요'
@@ -155,12 +157,17 @@ class StructureController extends Controller
             // Store
                 $path = $photo->store('public');
 
+                $mvp_photo = $isFirstPhoto ? '1' : '0'; // 대표 사진 플래그 설정
+
                 $photo = Photo::create([
                     's_no' => $s_no,
                     'url' => Storage::url($path),
                     'hashname' => $photo->hashName(),
-                    'originalname' => $photo->getClientOriginalName()
+                    'originalname' => $photo->getClientOriginalName(),
+                    'mvp_photo' => $mvp_photo, // 대표 사진 플래그 저장
                 ]);
+
+                $isFirstPhoto = false; // 첫번째 사진 체크 후 '0' 들어가게
             }
 
             return redirect()->back()->with([
