@@ -49,9 +49,9 @@
 <input type="text"  class="rounded-lg px-2 py-1 dark:bg-gray-800" name="search" id="search" placeholder="역이름, 주소로 검색해 주세요">
 <button onclick="searchProperties()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">검색</button>
 
-    <div id="scroll-container" class="scroll-item">
+        <div id="scroll-container" class="scroll-item">
         @foreach ($photos as $photo)
-            <img class="photo-item" src="{{asset($photo->url)}}" alt="{{$photo->url}}">
+            <img class="photo-item" src="{{asset($photo->url)}}" alt="{{$photo->url}}" data-value="{{$lastPhotoId}}">
         @endforeach
     </div>
 

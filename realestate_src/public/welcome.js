@@ -1,6 +1,5 @@
-var loadingPhotos = false; 
-    var photosLoaded = 0; 
-
+var loadingPhotos = false;
+    
     function loadMorePhotos() {
         if (loadingPhotos) return; // 로딩 중인 경우 중복 로드 방지
         loadingPhotos = true; // 로딩 상태로 변경
@@ -13,12 +12,12 @@ var loadingPhotos = false;
         xhr.onload = function() {
             if (xhr.status === 200) {
                 var response = JSON.parse(xhr.responseText);
-                var newPhotosHtml = generatePhotoHtml(response.photos);
+                var newPhotosHtml = generatePhotoHtml(response.photos, response.lastPhotoId);
                 var scrollContainer = document.getElementById('scroll-container');
                 scrollContainer.insertAdjacentHTML('beforeend', newPhotosHtml);
                 loadingPhotos = false; // 로딩 완료 상태로 변경
 
-                photosLoaded += response.photos.length; // 갱신된 사진 수 추가
+                photosLoaded = response.lastPhotoId; // 갱신된 사진 수 추가
                 if (photosLoaded >= 19) { // 최대로 갱신될 사진 숫자
                     scrollContainer.removeEventListener('scroll', scrollHandler); // 설정한 숫자 이상일 경우 스크롤 이벤트 제거
                 }
@@ -29,10 +28,10 @@ var loadingPhotos = false;
         xhr.send();
     }
 
-    function generatePhotoHtml(photos) {
+    function generatePhotoHtml(photos, lastPhotoId) {
         var html = '';
         photos.forEach(function(photo) {
-            html += '<img class="photo-item mr-4 dark:bg-red-800" src="' + photo.url + '" alt="Photo">';
+            html += '<img class="photo-item mr-4 dark:bg-red-800" src="' + photo.url + '" data-value="' + lastPhotoId + '">';
         });
         return html;
     }
