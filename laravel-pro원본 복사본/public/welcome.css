@@ -1,0 +1,13 @@
+.scroll-item {
+    overflow-x: auto;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.photo-item {
+    display: inline-block;
+    margin-right: 10px;
+    width: 21%;
+    height: 10rem;
+    border: 1px solid black;
+}
