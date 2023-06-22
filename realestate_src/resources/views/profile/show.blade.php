@@ -38,7 +38,15 @@
                 <x-section-border />
 
                 <div class="mt-10 sm:mt-0">
-                    @livewire('profile.delete-user-form')
+                {{--@livewire('profile.delete-user-form')--}}
+                    <h1 style="margin-left:40%">Delete account</h1>
+                    <p style="margin-left:40%">
+                        Permanently delete your account.
+                    <p>
+                    <br>
+                    <x-danger-button style="margin-left:40%">
+                        <a href="{{ route('profile.chk_del_user') }}">Delete account</a>
+                    </x-danger-button>
                 </div>
             @endif
         </div>
