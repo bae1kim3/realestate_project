@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('originalname');
             $table->enum('mvp_photo', ['0', '1'])->default('0');
             $table->timestamps();
+            $table->softDeletes(); // add 0624 jy : photo 지울때 물리적 삭제 하면 안될거 같음,, 관리자한테 유저가 게시글 잘못 삭제했다고 살려달라 할수도 있지 않음..???
         });
     }
 

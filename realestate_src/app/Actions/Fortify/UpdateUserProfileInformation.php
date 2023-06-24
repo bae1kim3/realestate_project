@@ -18,9 +18,16 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
     public function update(User $user, array $input): void
     {
         Validator::make($input, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'name' => ['required', 'string', 'max:20', 'same:'.$this->$user->name], // add 0624 jy 수정 안되게(같은값 넣어야 수정되게) TODO : 한글만 추가!!
+            'email' => ['required', 'email', 'max:30', 'uniqe:users'],
             'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
+            'u_id' =>['required', 'min:6|max:20', 'string', 'unique:users', 'same:'.$this->$user->u_id],
+            'phone_no' => ['required', 'integer'],
+            'u_addr' => ['required', 'string'],
+            'seller_license' => ['nullable', 'integer', 'max:10'],
+            'animal_size' => ['nullable', Rule::in(['0', '1'])],
+            'b_name' => ['nullable', 'string', 'max:20']
+            // TODO 추가해야 될거: u_id(unique), phone_no, u_addr, seller_license, animal_size, b_name
         ])->validateWithBag('updateProfileInformation');
 
         if (isset($input['photo'])) {
