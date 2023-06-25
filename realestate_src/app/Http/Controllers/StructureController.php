@@ -20,29 +20,29 @@ class StructureController extends Controller
     public function structInsertStore (Request $req) {
 
         // TODO :'한글' 유효성검사
-        $validator = Validator::make(
-            $req->all(), [
-                // 's_name' => 'required|regex:/^(?=.*[가-힣a-zA-Z0-9])+$/|max:30' // 유효성검사 왜 이따구.......
-                's_name' => 'required|alpha_dash|max:30'
-                // alpha_dash : 한글 영문 숫자 - _ 다 되는데 ㄱㄱ 이런 글자도 통과됨..
-                // 's_name' => 'required|regex:/^(?=.*[가-힣])(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/u|max:30'
-                ,'sell_cat_info' => 'required|in:월세,전세,매매'
-                ,'s_size' => 'required|integer|max:99999999999'
-                ,'p_deposit' => 'required|integer|max:99999999999'
-                ,'p_month' => 'nullable|integer|max:99999999999'
-                ,'s_stai' => 'string'
-                ,'s_fl' => 'required|integer|max:999'
-                ,'s_parking' => 'required|in:0,1'
-                ,'s_ele' => 'required|in:0,1'
-                // ,'s_addr' => 'required|regex:/^[가-힣0-9]+$/' //일단 주소 api 사용해보고 , 얘도 유효성검사 왜 이따구
+        // $validator = Validator::make(
+        //     $req->all(), [
+        //         // 's_name' => 'required|regex:/^(?=.*[가-힣a-zA-Z0-9])+$/|max:30' // 유효성검사 왜 이따구.......
+        //         's_name' => 'required|alpha_dash|max:30'
+        //         // alpha_dash : 한글 영문 숫자 - _ 다 되는데 ㄱㄱ 이런 글자도 통과됨..
+        //         // 's_name' => 'required|regex:/^(?=.*[가-힣])(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/u|max:30'
+        //         ,'sell_cat_info' => 'required|in:월세,전세,매매'
+        //         ,'s_size' => 'required|integer|max:99999999999'
+        //         ,'p_deposit' => 'required|integer|max:99999999999'
+        //         ,'p_month' => 'nullable|integer|max:99999999999'
+        //         ,'s_stai' => 'string'
+        //         ,'s_fl' => 'required|integer|max:999'
+        //         ,'s_parking' => 'required|in:0,1'
+        //         ,'s_ele' => 'required|in:0,1'
+        //         // ,'s_addr' => 'required|regex:/^[가-힣0-9]+$/' //일단 주소 api 사용해보고 , 얘도 유효성검사 왜 이따구
 
-            ]);
-        if ($validator->fails()) {
-                return redirect()
-                        ->back()
-                        ->withErrors($validator)
-                        ->withInput($req->all());
-        }
+        //     ]);
+        // if ($validator->fails()) {
+        //         return redirect()
+        //                 ->back()
+        //                 ->withErrors($validator)
+        //                 ->withInput($req->all());
+        // }
 
         
 
@@ -68,19 +68,19 @@ class StructureController extends Controller
             //         $error['buy_err'] = '거래 유형을 확인하고 가격을 적어주세요';
 
             //     } // del 0625 jy : 이거 어차피 deposit required라서 유효성에서 걸림
-            }
+            // }
 
         // '대구시' 빼고 주소 넘겨주기
         $s_addr_all = $req->s_addr;
+        $pieces="";
         if(!$s_addr_all){
             $error['addr_err'] = '주소를 입력해주세요';
-            $pieces="";
+            
             // //return redirect()->back()->with('addr_error', $addr_error);
             // //Session::flash('addr_error', $addr_error);
         }
         elseif(mb_strpos($s_addr_all, '대구') === false) {
             $error['gu_err'] = '대구 지역 주소가 아닙니다';
-            $pieces="";
         }
         else {
             $pieces = mb_substr($s_addr_all, 3);
