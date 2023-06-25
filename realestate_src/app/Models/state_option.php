@@ -15,7 +15,8 @@ class State_option extends Model
     
     // $fillable : insert, update 할 수 있는 필드 설정
     protected $fillable = [
-        's_ele'
+        's_no'
+        ,'s_ele'
         ,'s_parking'
     ];
 

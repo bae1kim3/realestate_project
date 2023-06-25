@@ -41,7 +41,7 @@
                     {{-- <form action="{{route('struct.insert.post')}}" id="frm" method="post"> --}}
                         {{-- @csrf --}}
                         <label for="s_name">건물 이름</label>
-                        <input type="text" placeholder="건물 이름" name="s_name" id="s_name" value="{{old('s_name')}}">
+                        <input type="text" placeholder="건물 이름" name="s_name" id="s_name" value="{{old('s_name')}}" maxlength="30">
                         <br>
                         <label for="sell_cat">매매 유형</label>
                         <input type="radio" name="sell_cat_info" value="월세" id="sell_cat_month" value="{{old('sell_cat_info')}}">
@@ -52,12 +52,12 @@
                         <label for="sell_cat_buy">매매</label>
                         <br>
                         <label for="s_size">방 면적</label>
-                        <input type="text" name="s_size" id="s_size" value="{{old('s_size')}}">m²
+                        <input type="text" name="s_size" id="s_size" value="{{old('s_size')}}" maxlength="11">m²
                         <br>
                         <label for="s_addr" >주소</label>
                         {{-- <input type="text" id="sample6_postcode" placeholder="우편번호"> 삭제예정!!--}}
                         <input type="text" id="sample6_address" name="s_addr" placeholder="대구 지역 내 도로명 주소" readonly>
-                            <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+                            <x-button type="button" onclick="sample6_execDaumPostcode()" value="주소 검색">주소 검색</x-button>
                         <br>
                         {{-- @if(session('addr_error'))
                         <div class="alert alert-success" role="alert">
@@ -86,13 +86,19 @@
                         <div>{{session()->get('sub_err')}}</div>
                         @endif
                         <br>
-                        <label for="p_deposit">보증금/매매가/전세가</label>
-                        <input type="text" name="p_deposit" id="p_deposit" value="{{old('p_deposit')}}">만원
+                        <label for="p_deposit">매매가/전세가/보증금</label>
+                        <input type="text" name="p_deposit" id="p_deposit" value="{{old('p_deposit')}}" maxlength="11">만원
+                        @if(session()->has('buy_err'))
+                        <div>{{session()->get('buy_err')}}</div>
+                        @endif
                         <label for="p_month">월세</label>
-                        <input type="text" name="p_month" id="p_month" value="{{old('p_month')}}">만원
+                        <input type="text" name="p_month" id="p_month" value="{{old('p_month')}}" maxlength="11">만원
+                        @if(session()->has('p_month_err'))
+                        <div>{{session()->get('p_month_err')}}</div>
+                        @endif
                         <br>
                         <label for="s_fl">층수</label>
-                        <input type="text" name="s_fl" id="s_fl" value="{{old('s_fl')}}">층
+                        <input type="text" name="s_fl" id="s_fl" value="{{old('s_fl')}}" maxlength="3">층
                         <hr>
                         <h3>건물 옵션</h3>
                         <label for="s_parking">주차 가능 여부</label>
@@ -114,15 +120,19 @@
                         <label for="n_animal_size">불가능</label>
                         <br>
 
-                        @if(session('sys_error'))
+                        @if(session('insert_err'))
                         <div class="alert alert-success" role="alert">
-                            {{ session('sys_error') }}
+                            {{ session('insert_err') }}
                         </div>
                         @endif
+                        @if(!session('result'))
+                        <x-button id="submit_btn">방 올리기</x-button>                        
+                        @else
                         <x-button type="button" id="submit_btn">방 올리기</x-button>
+                        @endif
                         <x-button type="button" onclick="location.href='{{url('/')}}'">취소</x-button>
                     </form>
-                                <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1def08893c26998733c374c40b12ac42&libraries=services,clusterer,drawing"></script>
+                    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1def08893c26998733c374c40b12ac42&libraries=services,clusterer,drawing"></script>
                     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
                     <script src="{{asset('addr.js')}}"></script>
                     <script src="{{asset('geo.js')}}"></script>

@@ -90,7 +90,7 @@ Route::get('/password-reset',[ResetPasswordController::class, 'resetps'])->name(
 Route::get('/chk-del-user', [UserController::class, 'chkDelUser'])->name('profile.chk_del_user');
 Route::post('/chk-del-user-post',[UserController::class, 'chkDelUserPost'])->name('profile.chk_del_user.post');
 
-//건물 수정, 삭제
+//건물 정보 post
 Route::post('/s-insert-post',[StructureController::class, 'structInsertStore'])->name('struct.insert.post');
 
 // 건물 상세 (임시)
@@ -103,5 +103,3 @@ Route::get('/search', [SearchController::class, 'search']);
 // 지도
 Route::get('/map', [MapController::class,'map'])->name('map.map');
 
-// stat_option post
-Route::post('/statoption/post', [StatOpController::class, 'statOpPost'])->name('stat.option.post');
