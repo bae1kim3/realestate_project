@@ -125,9 +125,10 @@
                             {{ session('insert_err') }}
                         </div>
                         @endif
-                        @if(!session('result'))
+                        {{-- @if(!session('result'))
                         <x-button id="submit_btn">방 올리기</x-button>                        
-                        @else
+                        @else --}}
+                        {{-- 이거 아닌거 같음 흑 --}}
                         <x-button type="button" id="submit_btn">방 올리기</x-button>
                         @endif
                         <x-button type="button" onclick="location.href='{{url('/')}}'">취소</x-button>
