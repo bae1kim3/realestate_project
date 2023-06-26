@@ -7,7 +7,7 @@
     width: 20%;
     height: 100%;
     overflow: scroll;
-    background-color: black;
+    background-color: #1f2937;
     z-index: 10;
 }
 .card {

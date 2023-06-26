@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function (/* checkbox */) {
 
                 // 이미지 요소 생성
                 var image = document.createElement("img");
-                image.src = data["sinfo"][0].url; // 이미지 소스를 설정해주세요
+                image.src = data["sinfo"][i].url; // 이미지 소스를 설정해주세요
                 image.className = "card-img-top";
                 image.alt = "..."; // 대체 텍스트를 설정해주세요
 
@@ -296,7 +296,7 @@ selectBox.addEventListener("change", function (/* checkbox */) {
 
                 // 이미지 요소 생성
                 var image = document.createElement("img");
-                image.src = data["sinfo"][0].url; // 이미지 소스를 설정해주세요
+                image.src = data["sinfo"][i].url; // 이미지 소스를 설정해주세요
                 image.className = "card-img-top";
                 image.alt = "..."; // 대체 텍스트를 설정해주세요
 
@@ -463,7 +463,7 @@ checkboxes.forEach(function (checkbox) {
 
                     // 이미지 요소 생성
                     var image = document.createElement("img");
-                    image.src = data["sinfo"][0].url; // 이미지 소스를 설정해주세요
+                    image.src = data["sinfo"][i].url; // 이미지 소스를 설정해주세요
                     image.className = "card-img-top";
                     image.alt = "..."; // 대체 텍스트를 설정해주세요
 
@@ -523,7 +523,9 @@ getpark.addEventListener("click", function (checkbox) {
         "http://127.0.0.1:8000/api/mapopt/" +
         (selectValues.length ? selectValues.join(",") : "1") +
         "/" +
-        selectedOption;
+        selectedOption +
+        "/" +
+        (soptionValues.length ? soptionValues.join(",") : "1");
     console.log(url);
     console.log(selectValues);
     console.log(selectedOption);
@@ -704,7 +706,7 @@ scheckboxes.forEach(function (checkbox) {
 
                     // 이미지 요소 생성
                     var image = document.createElement("img");
-                    image.src = data["sinfo"][0].url; // 이미지 소스를 설정해주세요
+                    image.src = data["sinfo"][i].url; // 이미지 소스를 설정해주세요
                     image.className = "card-img-top";
                     image.alt = "..."; // 대체 텍스트를 설정해주세요
 

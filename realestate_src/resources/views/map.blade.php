@@ -10,11 +10,11 @@
     <link rel="stylesheet" href="{{asset('map.css')}}">
 </head>
 <body>
+{{-- <x-guest-layout> --}}
 <div class="contents">
     <nav class="nav sticky-top justify-content-end p-3" style="background-color: #1f2937;">
-        <a class="nav-link active link-light position-absolute top-50 start-0 translate-middle-y ms-4" aria-current="page" href="#">로고</a>
-        <a class="nav-link link-light" href="#" id="aa">찜 목록</a>
-        <a class="nav-link link-light" href="#" id="aa">방 내놓기</a>
+        <a class="nav-link active link-light position-absolute top-50 start-0 translate-middle-y ms-4" aria-current="page" href="{{route('welcome')}}">로고</a>
+        <a class="nav-link link-light" href="{{route('dashboard')}}" id="aa">매물 올리기</a>
         <button id="getpark">주변 시설</button>
             <select id="option" name="gu" >
             <option>구 선택</option>
@@ -67,5 +67,6 @@
 <div></div>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9abea084b391e97658a9380c837b9608&libraries=services,clusterer,drawing"></script>
     <script src="{{asset('map.js')}}"></script>
+{{-- </x-guest-layout> --}}
 </body>
 </html>
