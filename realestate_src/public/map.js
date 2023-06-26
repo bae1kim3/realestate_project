@@ -87,7 +87,8 @@ document.addEventListener("DOMContentLoaded", function (/* checkbox */) {
             for (let i = 0; i < data["savg"].length - 1; i++) {
                 ssum += data["savg"][i].p_deposit;
             }
-            let savg = ssum / data["savg"].length;
+            let savg1 = ssum / data["savg"].length;
+            let savg = isNaN(savg1) ? "0" : savg1;
             console.log(savg);
             // 부모 요소 생성
             var accordion = document.createElement("div");
@@ -141,7 +142,6 @@ document.addEventListener("DOMContentLoaded", function (/* checkbox */) {
             // 최종적으로 생성된 구조를 원하는 위치에 추가
             var container = document.getElementById("sidebar"); // 적절한 컨테이너 요소 선택
             container.appendChild(accordion);
-
             for (let i = 0; i < data["sinfo"].length; i++) {
                 // 카드 요소 생성
                 var card = document.createElement("div");
@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function (/* checkbox */) {
 
                 // 이미지 요소 생성
                 var image = document.createElement("img");
-                image.src = "maphome.png"; // 이미지 소스를 설정해주세요
+                image.src = data["sinfo"][0].url; // 이미지 소스를 설정해주세요
                 image.className = "card-img-top";
                 image.alt = "..."; // 대체 텍스트를 설정해주세요
 
@@ -231,7 +231,8 @@ selectBox.addEventListener("change", function (/* checkbox */) {
             for (let i = 0; i < data["savg"].length; i++) {
                 ssum += data["savg"][i].p_deposit;
             }
-            let savg = ssum / data["savg"].length;
+            let savg1 = ssum / data["savg"].length;
+            let savg = isNaN(savg1) ? "0" : savg1;
             var container = document.getElementById("sidebar");
             container.innerText = "";
             var accordion = document.createElement("div");
@@ -295,7 +296,7 @@ selectBox.addEventListener("change", function (/* checkbox */) {
 
                 // 이미지 요소 생성
                 var image = document.createElement("img");
-                image.src = "maphome.png"; // 이미지 소스를 설정해주세요
+                image.src = data["sinfo"][0].url; // 이미지 소스를 설정해주세요
                 image.className = "card-img-top";
                 image.alt = "..."; // 대체 텍스트를 설정해주세요
 
@@ -397,7 +398,8 @@ checkboxes.forEach(function (checkbox) {
                 for (let i = 0; i < data["savg"].length; i++) {
                     ssum += data["savg"][i].p_deposit;
                 }
-                let savg = ssum / data["savg"].length;
+                let savg1 = ssum / data["savg"].length;
+                let savg = isNaN(savg1) ? "0" : savg1;
                 var container = document.getElementById("sidebar");
                 container.innerText = "";
                 var accordion = document.createElement("div");
@@ -461,7 +463,7 @@ checkboxes.forEach(function (checkbox) {
 
                     // 이미지 요소 생성
                     var image = document.createElement("img");
-                    image.src = "maphome.png"; // 이미지 소스를 설정해주세요
+                    image.src = data["sinfo"][0].url; // 이미지 소스를 설정해주세요
                     image.className = "card-img-top";
                     image.alt = "..."; // 대체 텍스트를 설정해주세요
 
@@ -637,7 +639,8 @@ scheckboxes.forEach(function (checkbox) {
                 for (let i = 0; i < data["savg"].length; i++) {
                     ssum += data["savg"][i].p_deposit;
                 }
-                let savg = ssum / data["savg"].length;
+                let savg1 = ssum / data["savg"].length;
+                let savg = isNaN(savg1) ? "0" : savg1;
                 var container = document.getElementById("sidebar");
                 container.innerText = "";
                 var accordion = document.createElement("div");
@@ -701,7 +704,7 @@ scheckboxes.forEach(function (checkbox) {
 
                     // 이미지 요소 생성
                     var image = document.createElement("img");
-                    image.src = "maphome.png"; // 이미지 소스를 설정해주세요
+                    image.src = data["sinfo"][0].url; // 이미지 소스를 설정해주세요
                     image.className = "card-img-top";
                     image.alt = "..."; // 대체 텍스트를 설정해주세요
 

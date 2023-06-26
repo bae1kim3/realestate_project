@@ -4,14 +4,14 @@
 }
 
 .sidebar {
-    width: 25%;
+    width: 20%;
     height: 100%;
     overflow: scroll;
     background-color: black;
     z-index: 10;
 }
 .card {
-    margin: 4% auto;
+    margin: 3% auto;
 }
 .container1 {
     width: 100%;
