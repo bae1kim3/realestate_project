@@ -126,11 +126,14 @@ class UserController extends Controller
                             //user 삭제
                             $user->delete();
                         }
-                        else {return redirect()->back()->with('error', $error);}
+                        else {$error = "다시 시도해주세요";
+                            return redirect()->back()->with('error', $error);}
                     }
-                    else {return redirect()->back()->with('error', $error);}
+                    else {$error = "다시 시도해주세요";
+                        return redirect()->back()->with('error', $error);}
                 }
-                else {return redirect()->back()->with('error', $error);}
+                else {$error = "다시 시도해주세요";
+                    return redirect()->back()->with('error', $error);}
                 
                 // users에 있는 id랑 s_infos에 있는 u_id 매치해서 같을 때 s_infos 삭제
                 // $u_no = $s_info_u_no[0]->u_no;
