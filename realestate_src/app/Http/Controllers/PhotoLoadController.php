@@ -11,10 +11,11 @@ class PhotoLoadController extends Controller
     public function index()
 {
     $lastPhotoId = 5;
-    $photos = Photo::where('mvp_photo', '1')
-        ->orderBy('created_at', 'desc')
-        ->take($lastPhotoId)
-        ->get();
+    $photos = Photo::join('s_infos', 's_infos.s_no', 'photos.s_no')
+                ->where('mvp_photo', '1')
+                ->orderBy('photos.updated_at', 'desc')
+                ->take($lastPhotoId)
+                ->get();
     return view('/welcome')->with('photos', $photos)->with('lastPhotoId', $lastPhotoId);
 }
 
@@ -23,8 +24,9 @@ public function loadMorePhotos(Request $request)
     $lastPhotoId = $request->lastPhotoId;
     $updatePhoto = 3;
 
-    $photos = Photo::where('mvp_photo', '1')
-        ->orderBy('created_at', 'desc')
+    $photos = Photo::join('s_infos', 's_infos.s_no', 'photos.s_no')
+        ->where('mvp_photo', '1')
+        ->orderBy('photos.updated_at', 'desc')
         ->skip($lastPhotoId)
         ->take($updatePhoto)
         ->get();

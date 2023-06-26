@@ -10,7 +10,6 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="{{ asset('nav.css') }}">
-
         <!-- Styles -->
         <style>
             /* ! tailwindcss v3.2.4 | MIT License | https://tailwindcss.com */
@@ -49,112 +48,236 @@
 <input type="text"  class="rounded-lg px-2 py-1 dark:bg-gray-800" name="search" id="search" placeholder="역이름, 주소로 검색해 주세요">
 <button onclick="searchProperties()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">검색</button>
 
-        <div id="scroll-container" class="scroll-item">
-        @foreach ($photos as $photo)
-            <img class="photo-item" src="{{asset($photo->url)}}" alt="{{$photo->url}}" data-value="{{$lastPhotoId}}">
-        @endforeach
-    </div>
-
-                <div class="mt-16">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-                        <a href="https://laravel.com/docs" class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
-                            <div>
-                                <div class="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-7 h-7 stroke-red-500">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
-                                    </svg>
-                                </div>
-
-                                <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">펫 방</h2>
-
-                                <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                                    집사라
-                                </p>
-                            </div>
-
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="self-center shrink-0 stroke-red-500 w-6 h-6 mx-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
-                            </svg>
-                        </a>
-
-                        <a href="https://laracasts.com" class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
-                            <div>
-                                <div class="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-7 h-7 stroke-red-500">
-                                        <path stroke-linecap="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z" />
-                                    </svg>
-                                </div>
-
-                                <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">메뉴</h2>
-
-                                <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                                    준비중....
-                                </p>
-                            </div>
-
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="self-center shrink-0 stroke-red-500 w-6 h-6 mx-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
-                            </svg>
-                        </a>
-
-                        <a href="https://laravel-news.com" class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
-                            <div>
-                                <div class="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-7 h-7 stroke-red-500">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z" />
-                                    </svg>
-                                </div>
-
-                                <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">뉴스</h2>
-
-                                <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                                    준비중....
-                                </p>
-                            </div>
-
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="self-center shrink-0 stroke-red-500 w-6 h-6 mx-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
-                            </svg>
-                        </a>
-
-                        <div class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
-                            <div>
-                                <div class="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-7 h-7 stroke-red-500">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.115 5.19l.319 1.913A6 6 0 008.11 10.36L9.75 12l-.387.775c-.217.433-.132.956.21 1.298l1.348 1.348c.21.21.329.497.329.795v1.089c0 .426.24.815.622 1.006l.153.076c.433.217.956.132 1.298-.21l.723-.723a8.7 8.7 0 002.288-4.042 1.087 1.087 0 00-.358-1.099l-1.33-1.108c-.251-.21-.582-.299-.905-.245l-1.17.195a1.125 1.125 0 01-.98-.314l-.295-.295a1.125 1.125 0 010-1.591l.13-.132a1.125 1.125 0 011.3-.21l.603.302a.809.809 0 001.086-1.086L14.25 7.5l1.256-.837a4.5 4.5 0 001.528-1.732l.146-.292M6.115 5.19A9 9 0 1017.18 4.64M6.115 5.19A8.965 8.965 0 0112 3c1.929 0 3.716.607 5.18 1.64" />
-                                    </svg>
-                                </div>
-
-                                <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">실거래가</h2>
-
-                                <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                                    준비중.....
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex justify-center mt-16 px-0 sm:items-center sm:justify-between">
-                    <div class="text-center text-sm text-gray-500 dark:text-gray-400 sm:text-left">
-                        <div class="flex items-center gap-4">
-                            <a href="https://github.com/sponsors/taylorotwell" class="group inline-flex items-center hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="-mt-px mr-1 w-5 h-5 stroke-gray-400 dark:stroke-gray-600 group-hover:stroke-gray-600 dark:group-hover:stroke-gray-400">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                                </svg>
-                                펫 방
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="ml-4 text-center text-sm text-gray-500 dark:text-gray-400 sm:text-right sm:ml-0">
-                        @copyright
-                    </div>
-                </div>
-            </div>
+<div id="scroll-container" class="scroll-item">
+    @foreach ($photos as $photo)
+        <div class="photo-item" style="background-image: url('{{ asset($photo->url) }}');">
+            <span class="photo-info">
+                <span class="info-text">{{$photo->s_add}}</span><br>
+                <span class="info-text">{{$photo->p_deposit}}</span>
+                @if($photo->s_type === '월세')
+                    <span class="info-text"> / {{$photo->p_month}}</span>
+                @endif
+                <br><span class="info-text">{{substr($photo->updated_at, 0, 10)}}</span>
+            </span>
         </div>
-    </x-app-layout>
+        <input type="hidden" id="lastPhotoItem" data-id="{{$lastPhotoId}}">
+    @endforeach
+    
+</div>
 
+
+
+
+
+
+<div class="flex items-start gap-8">
+    <div class="w-1/2">
+    <h2 class="text-2xl font-bold mb-4">동물보호센터</h2>
+    <div class="accordion">
+        <div class="accordion-item">
+          <div class="accordion-title font-bold cursor-pointer">대구유기동물보호협회</div>
+          <div class="accordion-content">
+            <p>전화번호 : 053-964-6258</p>
+            <p>주소 : 대구광역시 동구 금강로 151-13 (금강동)</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-title font-bold cursor-pointer">동행동물병원</div>
+          <div class="accordion-content">
+            <p>전화번호 : 053-636-8720</p>
+            <p>주소 : 대구광역시 달서구 진천로 117 (대천동) 117,118 호</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-title font-bold cursor-pointer">멘토동물병원</div>
+          <div class="accordion-content">
+            <p>전화번호 : 053-291-7579</p>
+            <p>주소 : 대구광역시 수성구 용학로 294 (범물동) 2층</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-title font-bold cursor-pointer">세인트동물병원</div>
+          <div class="accordion-content">
+            <p>전화번호 : 053-744-8285</p>
+            <p>주소 : 대구광역시 수성구 청호로 484 (만촌동)</p>
+          </div>
+        </div>
+          </div>
+          </div>
+
+
+    <hr class="my-8 border-gray-300">
+
+    <div class="w-1/2">
+      <h2 class="text-2xl font-bold mb-4">응급동물병원</h2>
+      <div class="accordion">
+        <div class="accordion-item">
+          <div class="accordion-title font-bold cursor-pointer">북구</div>
+          <div class="accordion-content">
+            <p>플러스동물의료센터</p>
+            <p>전화번호 : 053-424-2455</p>
+            <p>주소 : 대구광역시 북구 중앙대로 526</p>
+            <hr>
+            <p>가온동물병원</p>
+            <p>전화번호 : 053-958-0075</p>
+            <p>주소 : 대구광역시 북구 서변동 1746-9</p>
+            <hr>
+            <p>해솔동물병원</p>
+            <p>전화번호 : 053-959-7775</p>
+            <p>주소 : 대구광역시 북구 대현동 340-15</p>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <div class="accordion-title font-bold cursor-pointer">서구</div>
+          <div class="accordion-content">
+            <p>삼성동물병원</p>
+            <p>전화번호 : 053-556-8575</p>
+            <p>주소 : 대구광역시 서구 내당4동 서대구로 37</p>
+            <hr>
+            <p>진동물병원</p>
+            <p>전화번호 : 053-554-3575</p>
+            <p>주소 : 대구광역시 서구 비산2.3동 국채보상로 407</p>
+            <hr>
+            <p>가야동물병원</p>
+            <p>전화번호 : 053-558-3037</p>
+            <p>주소 : 대구광역시 서구 평리동 1522-3</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-title font-bold cursor-pointer">중구</div>
+          <div class="accordion-content">
+            <p>센트럴동물병원</p>
+            <p>전화번호 : 053-214-5577</p>
+            <p>주소 : 대구광역시 중구 대신동 1424</p>
+            <hr>
+            <p>최우식동물병원</p>
+            <p>전화번호 : 053-767-1588</p>
+            <p>주소 : 대구광역시 중구 남산4동</p>
+            <hr>
+            <p>중부동물병원</p>
+            <p>전화번호 : 053-253-8278</p>
+            <p>주소 : 대구광역시 중구 봉산동 53-2</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-title font-bold cursor-pointer">남구</div>
+          <div class="accordion-content">
+            <p>박순석동물메디컬센터</p>
+            <p>전화번호 : 053-657-0959</p>
+            <p>주소 : 대구광역시 남구 대명로 72 더원빌딩 2층</p>
+            <hr>
+            <p>현대동물병원</p>
+            <p>전화번호 : 053-475-5259</p>
+            <p>주소 : 대구광역시 남구 봉덕로 89</p>
+            <hr>
+            <p>중앙동물병원</p>
+            <p>전화번호 : 053-625-9198</p>
+            <p>주소 : 대구광역시 남구 대명6동 1111</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-title font-bold cursor-pointer">수성구</div>
+          <div class="accordion-content">
+            <p>24시범어동물의료센터</p>
+            <p>전화번호 : 053-716-7585</p>
+            <p>주소 : 대구광역시 수성구 수성동3가 10</p>
+            <hr>
+            <p>대구시지동물병원</p>
+            <p>전화번호 : 070-8862-5945</p>
+            <p>주소 : 대구광역시 수성구 달구벌대로 3014</p>
+            <hr>
+            <p>조은동물병원</p>
+            <p>전화번호 : 053-742-0075</p>
+            <p>주소 : 대구광역시 수성구 만촌동 달구벌대로 2562</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-title font-bold cursor-pointer">동구</div>
+          <div class="accordion-content">
+            <p>봄이온동물병원</p>
+            <p>전화번호 : 053-962-3264</p>
+            <p>주소 : 대구광역시 동구 각산동 444-7번지 101호</p>
+            <hr>
+            <p>수호동물병원</p>
+            <p>전화번호 : 053-982-0275</p>
+            <p>주소 : 대구광역시 동구 봉무동 1539-3 이시아시티빌딩 205호</p>
+            <hr>
+            <p>변수의과동물병원</p>
+            <p>전화번호 : 053-983-2069</p>
+            <p>주소 : 대구광역시 동구 검사동 957-41</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-title font-bold cursor-pointer">달서구</div>
+          <div class="accordion-content">
+            <p>대구24시바른동물의료센터</p>
+            <p>전화번호 : 053-571-0075</p>
+            <p>주소 : 대구광역시 달서구 와룡로 142 2층</p>
+            <hr>
+            <p>24시라이프동물의료센터</p>
+            <p>전화번호 : 053-567-2475</p>
+            <p>주소 : 대구광역시 달서구 감삼동 69-1 1층</p>
+            <hr>
+            <p>대구탑스동물메디컬센터</p>
+            <p>전화번호 : 053-637-7501</p>
+            <p>주소 : 대구광역시 달서구 상인2동 월배로 166</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-title font-bold cursor-pointer">달성군</div>
+          <div class="accordion-content">
+            <p>화원연합동물병원</p>
+            <p>전화번호 : 053-634-7975</p>
+            <p>주소 : 대구광역시 달성군 화원읍 천내리 156-1</p>
+            <hr>
+            <p>현풍동물병원</p>
+            <p>전화번호 : 053-614-3570</p>
+            <p>주소 : 대구광역시 달성군 테크노공원로51 봉리타워 현풍동물병원 613 205호</p>
+            <hr>
+            <p>다사종합동물병원</p>
+            <p>전화번호 : 053-591-7581</p>
+            <p>주소 : 대구광역시 달성군 다사읍 죽곡리 23-6</p>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const accordionItems = document.querySelectorAll('.accordion-item');
+
+    accordionItems.forEach(item => {
+      const title = item.querySelector('.accordion-title');
+      title.addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+        accordionItems.forEach(item => item.classList.remove('active'));
+        if (!isActive) {
+          item.classList.add('active');
+        }
+      });
+    });
+  </script>
+
+    </x-app-layout>
     <script src="{{asset('welcome.js')}}"></script>
     </body>
 </html>
