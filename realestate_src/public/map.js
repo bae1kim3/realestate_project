@@ -7,10 +7,29 @@ let soptionValues = [];
 let level = 8;
 // 지도에 표시된 마커 객체를 가지고 있을 배열입니다
 let markers = [];
+let pmarkers = [];
 let map;
 let marker;
 var iwContent = [];
 var infowindow = [];
+var markerImage;
+var imageSrc = "maphome.png";
+var imageSize = new kakao.maps.Size(24, 35);
+
+// 마커를 생성하고 지도위에 표시하는 함수입니다
+function addMarker(position) {
+    // 마커를 생성합니다
+    marker = new kakao.maps.Marker({
+        position: position,
+        image: markerImage,
+    });
+
+    // 마커가 지도 위에 표시되도록 설정합니다
+    marker.setMap(map);
+
+    // 생성된 마커를 배열에 추가합니다
+    markers.push(marker);
+}
 
 function setMarkers() {
     for (var i = 0; i < markers.length; i++) {
@@ -21,6 +40,13 @@ function setMarkers() {
 // 처음 윈도우를 로드 했을 때 실행되는
 document.addEventListener("DOMContentLoaded", function (/* checkbox */) {
     var selectedOption = selectBox.value;
+    const elements = document.getElementsByTagName("p");
+    for (let i = 0; i < elements.length; i++) {
+        if (elements[i].textContent.includes("")) {
+            // 원하는 동작 수행
+            console.log("특정 텍스트가 일치하는 요소:", elements[i]);
+        }
+    }
     // let value = checkbox.value;
     // if (checkbox.checked) {
     //     selectValues.push(value);
@@ -56,9 +82,7 @@ document.addEventListener("DOMContentLoaded", function (/* checkbox */) {
                 level: level, // 지도의 확대 레벨
             };
 
-            var imageSrc = "maphome.png";
-            var imageSize = new kakao.maps.Size(24, 35);
-            var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+            markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
             map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
             for (let i = 0; i < data["sinfo"].length; i++) {
@@ -69,24 +93,6 @@ document.addEventListener("DOMContentLoaded", function (/* checkbox */) {
                         data["sinfo"][i].s_lat
                     )
                 );
-            }
-
-            // 마커를 생성하고 지도위에 표시하는 함수입니다
-            function addMarker(position) {
-                // 마커를 생성합니다
-                marker = new kakao.maps.Marker({
-                    position: position,
-                    image: markerImage,
-                });
-
-                // 마커가 지도 위에 표시되도록 설정합니다
-                marker.setMap(map);
-
-                // 생성된 마커를 배열에 추가합니다
-                markers.push(marker);
-            }
-
-            for (let i = 0; i < data["sinfo"].length; i++) {
                 // 마커에 커서가 오버됐을 때 마커 위에 표시할 인포윈도우를 생성합니다
                 iwContent[
                     i
@@ -96,6 +102,11 @@ document.addEventListener("DOMContentLoaded", function (/* checkbox */) {
                 infowindow[i] = new kakao.maps.InfoWindow({
                     content: iwContent[i],
                 });
+
+                kakao.maps.event.addListener(marker, "click", function () {
+                    alert("marker click!");
+                });
+
                 kakao.maps.event.addListener(
                     markers[i],
                     "mouseover",
@@ -243,9 +254,7 @@ selectBox.addEventListener("change", function (/* checkbox */) {
             setMarkers();
             console.log(markers);
             markers = [];
-            var imageSrc = "maphome.png";
-            var imageSize = new kakao.maps.Size(24, 35);
-            var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+            markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
             map.setCenter(
                 new kakao.maps.LatLng(data["latlng"].lat, data["latlng"].lng)
             );
@@ -258,6 +267,38 @@ selectBox.addEventListener("change", function (/* checkbox */) {
                         data["sinfo"][i].s_log,
                         data["sinfo"][i].s_lat
                     )
+                );
+                // 마커에 커서가 오버됐을 때 마커 위에 표시할 인포윈도우를 생성합니다
+                iwContent[
+                    i
+                ] = `<div style="padding:5px;"><b>${data["sinfo"][i].s_name}</b>(${data["sinfo"][i].s_type})</div>`; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+
+                // 인포윈도우를 생성합니다
+                infowindow[i] = new kakao.maps.InfoWindow({
+                    content: iwContent[i],
+                });
+
+                kakao.maps.event.addListener(marker, "click", function () {
+                    alert("marker click!");
+                });
+
+                kakao.maps.event.addListener(
+                    markers[i],
+                    "mouseover",
+                    function () {
+                        // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+                        infowindow[i].open(map, markers[i]);
+                    }
+                );
+
+                // 마커에 마우스아웃 이벤트를 등록합니다
+                kakao.maps.event.addListener(
+                    markers[i],
+                    "mouseout",
+                    function () {
+                        // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+                        infowindow[i].close();
+                    }
                 );
             }
             let ssum = 0;
@@ -354,48 +395,6 @@ selectBox.addEventListener("change", function (/* checkbox */) {
                 // 생성한 카드를 원하는 위치에 추가
                 container.appendChild(card);
             }
-            function addMarker(position) {
-                // 마커를 생성합니다
-                var marker = new kakao.maps.Marker({
-                    position: position,
-                    image: markerImage,
-                });
-
-                // 마커가 지도 위에 표시되도록 설정합니다
-                marker.setMap(map);
-                // 생성된 마커를 배열에 추가합니다
-                markers.push(marker); // 카드를 추가할 컨테이너 요소를 선택해주세요
-            }
-
-            for (let i = 0; i < data["sinfo"].length; i++) {
-                // 마커에 커서가 오버됐을 때 마커 위에 표시할 인포윈도우를 생성합니다
-                iwContent[
-                    i
-                ] = `<div style="padding:5px;"><b>${data["sinfo"][i].s_name}</b>(${data["sinfo"][i].s_type})</div>`; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-
-                // 인포윈도우를 생성합니다
-                infowindow[i] = new kakao.maps.InfoWindow({
-                    content: iwContent[i],
-                });
-                kakao.maps.event.addListener(
-                    markers[i],
-                    "mouseover",
-                    function () {
-                        // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
-                        infowindow[i].open(map, markers[i]);
-                    }
-                );
-
-                // 마커에 마우스아웃 이벤트를 등록합니다
-                kakao.maps.event.addListener(
-                    markers[i],
-                    "mouseout",
-                    function () {
-                        // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
-                        infowindow[i].close();
-                    }
-                );
-            }
         });
 });
 
@@ -441,8 +440,6 @@ checkboxes.forEach(function (checkbox) {
                 setMarkers();
                 console.log(markers);
                 markers = [];
-                var imageSrc = "maphome.png";
-                var imageSize = new kakao.maps.Size(24, 35);
                 var markerImage = new kakao.maps.MarkerImage(
                     imageSrc,
                     imageSize
@@ -455,6 +452,38 @@ checkboxes.forEach(function (checkbox) {
                             data["sinfo"][i].s_log,
                             data["sinfo"][i].s_lat
                         )
+                    );
+                    // 마커에 커서가 오버됐을 때 마커 위에 표시할 인포윈도우를 생성합니다
+                    iwContent[
+                        i
+                    ] = `<div style="padding:5px;"><b>${data["sinfo"][i].s_name}</b>(${data["sinfo"][i].s_type})</div>`; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+
+                    // 인포윈도우를 생성합니다
+                    infowindow[i] = new kakao.maps.InfoWindow({
+                        content: iwContent[i],
+                    });
+
+                    kakao.maps.event.addListener(marker, "click", function () {
+                        alert("marker click!");
+                    });
+
+                    kakao.maps.event.addListener(
+                        markers[i],
+                        "mouseover",
+                        function () {
+                            // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+                            infowindow[i].open(map, markers[i]);
+                        }
+                    );
+
+                    // 마커에 마우스아웃 이벤트를 등록합니다
+                    kakao.maps.event.addListener(
+                        markers[i],
+                        "mouseout",
+                        function () {
+                            // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+                            infowindow[i].close();
+                        }
                     );
                 }
                 let ssum = 0;
@@ -551,133 +580,97 @@ checkboxes.forEach(function (checkbox) {
                     // 생성한 카드를 원하는 위치에 추가
                     container.appendChild(card);
                 }
-                // 마커를 생성하고 지도위에 표시하는 함수입니다
-                function addMarker(position) {
-                    // 마커를 생성합니다
-                    var marker = new kakao.maps.Marker({
-                        position: position,
-                        image: markerImage,
-                    });
-
-                    // 마커가 지도 위에 표시되도록 설정합니다
-                    marker.setMap(map);
-
-                    // 생성된 마커를 배열에 추가합니다
-                    markers.push(marker);
-                }
-
-                for (let i = 0; i < data["sinfo"].length; i++) {
-                    // 마커에 커서가 오버됐을 때 마커 위에 표시할 인포윈도우를 생성합니다
-                    iwContent[
-                        i
-                    ] = `<div style="padding:5px;"><b>${data["sinfo"][i].s_name}</b>(${data["sinfo"][i].s_type})</div>`; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-
-                    // 인포윈도우를 생성합니다
-                    infowindow[i] = new kakao.maps.InfoWindow({
-                        content: iwContent[i],
-                    });
-                    kakao.maps.event.addListener(
-                        markers[i],
-                        "mouseover",
-                        function () {
-                            // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
-                            infowindow[i].open(map, markers[i]);
-                        }
-                    );
-
-                    // 마커에 마우스아웃 이벤트를 등록합니다
-                    kakao.maps.event.addListener(
-                        markers[i],
-                        "mouseout",
-                        function () {
-                            // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
-                            infowindow[i].close();
-                        }
-                    );
-                }
             });
     });
 });
 
 const getpark = document.getElementById("getpark");
 getpark.addEventListener("click", function (checkbox) {
-    var selectedOption = selectBox.value;
-    let value = checkbox.value;
-    if (checkbox.checked) {
-        selectValues.push(value);
-    } else {
-        let index = selectValues.indexOf(value);
-        if (index !== -1) {
-            selectValues.splice(index, 1);
+    if (pmarkers.length == 0) {
+        var selectedOption = selectBox.value;
+        let value = checkbox.value;
+        if (checkbox.checked) {
+            selectValues.push(value);
+        } else {
+            let index = selectValues.indexOf(value);
+            if (index !== -1) {
+                selectValues.splice(index, 1);
+            }
         }
-    }
-    console.log(value);
-    let url =
-        "http://127.0.0.1:8000/api/mapopt/" +
-        (selectValues.length ? selectValues.join(",") : "1") +
-        "/" +
-        selectedOption +
-        "/" +
-        (soptionValues.length ? soptionValues.join(",") : "1");
-    console.log(url);
-    console.log(selectValues);
-    console.log(selectedOption);
-    // AJAX 요청 보내기
+        console.log(value);
+        let url =
+            "http://127.0.0.1:8000/api/mapopt/" +
+            (selectValues.length ? selectValues.join(",") : "1") +
+            "/" +
+            selectedOption +
+            "/" +
+            (soptionValues.length ? soptionValues.join(",") : "1");
+        console.log(url);
+        console.log(selectValues);
+        console.log(selectedOption);
+        // AJAX 요청 보내기
 
-    fetch(url)
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data);
-            const servicekey =
-                "cHVjVjglbOBfaJaLkhiSbBrRU2U3MkuefQS0rxexSVZcSA8vF6zeNrhf7LmjNlJGibN%2BM%2BPpK9GGjbmpsfD7FA%3D%3D";
-            let pageno = 0;
-            let numofrows = 10;
-            let radius = "3";
+        fetch(url)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                const servicekey =
+                    "cHVjVjglbOBfaJaLkhiSbBrRU2U3MkuefQS0rxexSVZcSA8vF6zeNrhf7LmjNlJGibN%2BM%2BPpK9GGjbmpsfD7FA%3D%3D";
+                let pageno = 0;
+                let numofrows = 10;
+                let radius = "3";
 
-            const url =
-                "https://apis.data.go.kr/6270000/dgInParkwalk/getDgWalkParkList?serviceKey=" +
-                servicekey +
-                "&pageNo=" +
-                pageno +
-                "&numOfRows=" +
-                numofrows +
-                "&type=json&lat=" +
-                data["latlng"].lat +
-                "&lot=" +
-                data["latlng"].lng +
-                "&radius=" +
-                radius;
-            console.log(url);
-            fetch(url)
-                .then((response) => response.json())
-                .then((data1) => {
-                    console.log(data1.body.items.item);
-                    console.log(data1);
-                    let getdata = data1.body.items.item;
-                    var imageSrc = "mapp.png";
-                    var imageSize = new kakao.maps.Size(24, 35);
-                    var markerImage = new kakao.maps.MarkerImage(
-                        imageSrc,
-                        imageSize
-                    );
-                    for (let i = 0; i < getdata.length; i++) {
-                        console.log(getdata[i].lat, getdata[i].lot);
-                        let markerPosition = new kakao.maps.LatLng(
-                            getdata[i].lat,
-                            getdata[i].lot
+                const url =
+                    "https://apis.data.go.kr/6270000/dgInParkwalk/getDgWalkParkList?serviceKey=" +
+                    servicekey +
+                    "&pageNo=" +
+                    pageno +
+                    "&numOfRows=" +
+                    numofrows +
+                    "&type=json&lat=" +
+                    data["latlng"].lat +
+                    "&lot=" +
+                    data["latlng"].lng +
+                    "&radius=" +
+                    radius;
+                console.log(url);
+                fetch(url)
+                    .then((response) => response.json())
+                    .then((data1) => {
+                        console.log(data1.body.items.item);
+                        console.log(data1);
+                        let getdata = data1.body.items.item;
+                        var imageSrc = "mapp.png";
+                        var imageSize = new kakao.maps.Size(24, 35);
+                        var markerImage = new kakao.maps.MarkerImage(
+                            imageSrc,
+                            imageSize
                         );
+                        for (let i = 0; i < getdata.length; i++) {
+                            console.log(getdata[i].lat, getdata[i].lot);
+                            let markerPosition = new kakao.maps.LatLng(
+                                getdata[i].lat,
+                                getdata[i].lot
+                            );
 
-                        marker = new kakao.maps.Marker({
-                            position: markerPosition,
-                            image: markerImage,
-                        });
+                            marker = new kakao.maps.Marker({
+                                position: markerPosition,
+                                image: markerImage,
+                            });
 
-                        marker.setMap(map);
-                        // 생성된 마커를 배열에 추가합니다
-                        markers.push(marker);
-                    }
-                });
-        });
+                            marker.setMap(map);
+                            // 생성된 마커를 배열에 추가합니다
+                            pmarkers.push(marker);
+                            console.log(pmarkers);
+                        }
+                    });
+            });
+    } else {
+        for (var i = 0; i < pmarkers.length; i++) {
+            pmarkers[i].setMap(null);
+        }
+        pmarkers = [];
+    }
 });
 
 scheckboxes.forEach(function (checkbox) {
@@ -729,6 +722,38 @@ scheckboxes.forEach(function (checkbox) {
                             data["sinfo"][i].s_lat
                         )
                     );
+                    // 마커에 커서가 오버됐을 때 마커 위에 표시할 인포윈도우를 생성합니다
+                    iwContent[
+                        i
+                    ] = `<div style="padding:5px;"><b>${data["sinfo"][i].s_name}</b>(${data["sinfo"][i].s_type})</div>`; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+
+                    // 인포윈도우를 생성합니다
+                    infowindow[i] = new kakao.maps.InfoWindow({
+                        content: iwContent[i],
+                    });
+
+                    kakao.maps.event.addListener(marker, "click", function () {
+                        alert("marker click!");
+                    });
+
+                    kakao.maps.event.addListener(
+                        markers[i],
+                        "mouseover",
+                        function () {
+                            // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+                            infowindow[i].open(map, markers[i]);
+                        }
+                    );
+
+                    // 마커에 마우스아웃 이벤트를 등록합니다
+                    kakao.maps.event.addListener(
+                        markers[i],
+                        "mouseout",
+                        function () {
+                            // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+                            infowindow[i].close();
+                        }
+                    );
                 }
                 let ssum = 0;
                 for (let i = 0; i < data["savg"].length; i++) {
@@ -823,50 +848,6 @@ scheckboxes.forEach(function (checkbox) {
                     var container = document.getElementById("sidebar");
                     // 생성한 카드를 원하는 위치에 추가
                     container.appendChild(card);
-                }
-                // 마커를 생성하고 지도위에 표시하는 함수입니다
-                function addMarker(position) {
-                    // 마커를 생성합니다
-                    var marker = new kakao.maps.Marker({
-                        position: position,
-                        image: markerImage,
-                    });
-
-                    // 마커가 지도 위에 표시되도록 설정합니다
-                    marker.setMap(map);
-
-                    // 생성된 마커를 배열에 추가합니다
-                    markers.push(marker);
-                }
-
-                for (let i = 0; i < data["sinfo"].length; i++) {
-                    // 마커에 커서가 오버됐을 때 마커 위에 표시할 인포윈도우를 생성합니다
-                    iwContent[
-                        i
-                    ] = `<div style="padding:5px;"><b>${data["sinfo"][i].s_name}</b>(${data["sinfo"][i].s_type})</div>`; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-
-                    // 인포윈도우를 생성합니다
-                    infowindow[i] = new kakao.maps.InfoWindow({
-                        content: iwContent[i],
-                    });
-                    kakao.maps.event.addListener(
-                        markers[i],
-                        "mouseover",
-                        function () {
-                            // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
-                            infowindow[i].open(map, markers[i]);
-                        }
-                    );
-
-                    // 마커에 마우스아웃 이벤트를 등록합니다
-                    kakao.maps.event.addListener(
-                        markers[i],
-                        "mouseout",
-                        function () {
-                            // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
-                            infowindow[i].close();
-                        }
-                    );
                 }
             });
     });
