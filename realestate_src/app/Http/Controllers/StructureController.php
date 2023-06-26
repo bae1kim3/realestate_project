@@ -94,114 +94,126 @@ class StructureController extends Controller
 
         $user_no = Auth::user()->id; // 유저 넘버 가져오기
 
-        if($error) {
-            // 리다이렉트 해서 에러 세션에 담음
-            return redirect()->back()->with($error);
+        // update 0626 jy : 위치변경
+        $photos = $req->file('photo');
+        if (!$photos) {
+            $error['photo_err'] = '사진을 선택해주세요';
         }
-        else {
 
-            $data['u_no'] = $user_no;
-            $data['s_name'] = $req->s_name;
-            $data['s_add'] = $pieces;
-            $data['s_type'] = $req->sell_cat_info;
-            $data['s_size'] = $req->s_size;
-            $data['s_fl'] = $req->s_fl;
-            $data['s_log']= $req->s_log;
-            $data['s_stai'] = $req->sub_name;
-            $data['s_lat']= $req->s_lat;
-            $data['p_deposit'] = $req->p_deposit;
-            $data['p_month'] = $req->p_month;
-            $data['animal_size'] = $req->animal_size;
-            
-            // 건물 옵션 del 0625 jy
-            // $data01['s_parking'] = $req->s_parking;
-            // $data01['s_ele'] = $req->s_ele;
+        if (!empty($error)) {
+            // 리다이렉트 해서 에러 세션에 담음
+            return redirect()->back()->withErrors($error);
+        } else {
 
-            $s_info_result = S_info::create($data); // 건물 정보 insert
-            $req->session()->put('result',$s_info_result); // add 0625 jy : view에서 submit 버튼 if 조건문 주는거 때문에 session에 값 넣어줬음
+            // if($error) {
+            //     // 리다이렉트 해서 에러 세션에 담음
+            //     return redirect()->back()->with($error);
+            // }
+            // else { // del 0626 jy : 위에 중복해서 있음
 
-            // State_option::create($data01); // del 0625 jy : s_info db에 넘겨주고 그 다음에 다른 컨트롤러에서 db로 넘겨줌 // del : 이 방법 안씀
-            // $s_no = $s_info->id; // del 0625 jy
+                $data['u_no'] = $user_no;
+                $data['s_name'] = $req->s_name;
+                $data['s_add'] = $pieces;
+                $data['s_type'] = $req->sell_cat_info;
+                $data['s_size'] = $req->s_size;
+                $data['s_fl'] = $req->s_fl;
+                $data['s_log']= $req->s_log;
+                $data['s_stai'] = $req->sub_name;
+                $data['s_lat']= $req->s_lat;
+                $data['p_deposit'] = $req->p_deposit;
+                $data['p_month'] = $req->p_month;
+                $data['animal_size'] = $req->animal_size;
+                
+                // 건물 옵션 del 0625 jy
+                // $data01['s_parking'] = $req->s_parking;
+                // $data01['s_ele'] = $req->s_ele;
 
-            // add 0625 jy start
-            if($s_info_result) {
-                $s_no_desc = S_info::orderby('s_no', 'desc')->first(); // 내림차순 정렬
-                $s_no = $s_no_desc->s_no; // s_no
+                $s_info_result = S_info::create($data); // 건물 정보 insert
+                $req->session()->put('result',$s_info_result); // add 0625 jy : view에서 submit 버튼 if 조건문 주는거 때문에 session에 값 넣어줬음
 
-                $data01['s_parking'] = $req->s_parking;
-                $data01['s_ele'] = $req->s_ele;
-                $data01['s_no'] = $s_no;
-                State_option::create($data01); // 건물 옵션 insert
+                // State_option::create($data01); // del 0625 jy : s_info db에 넘겨주고 그 다음에 다른 컨트롤러에서 db로 넘겨줌 // del : 이 방법 안씀
+                // $s_no = $s_info->id; // del 0625 jy
 
-            // photo start -----------------------------------
-                $photos = $req->file('photo');
+                // add 0625 jy start
+                if($s_info_result) {
+                    $s_no_desc = S_info::orderby('s_no', 'desc')->first(); // 내림차순 정렬
+                    $s_no = $s_no_desc->s_no; // s_no
 
-                //파일 선택이 안 된 경우
-                if (!$photos) {
-                    return redirect()->back()->withErrors([
-                        'error' => 'No photos selected'
-                    ]);
-                }
-                // $photos = is_array($photos) ? $photos : [$photos]; //del 0625 jy
+                    $data01['s_parking'] = $req->s_parking;
+                    $data01['s_ele'] = $req->s_ele;
+                    $data01['s_no'] = $s_no;
+                    State_option::create($data01); // 건물 옵션 insert
 
-                // 최소 5장, 최대 10장의 사진 검사
-                $photos = is_array($photos) ? $photos : [$photos];
+                // photo start -----------------------------------
+                    // $photos = $req->file('photo'); // del 0626 jy
 
-                // 최소 5장, 최대 10장의 사진 검사
-                $minPhotos = 5;
-                $maxPhotos = 10;
-                $totalPhotos = count($photos);
-
-                $isFirstPhoto = true; // 첫번째 사진인지 체크
-
-                if ($totalPhotos < $minPhotos || $totalPhotos > $maxPhotos) {
-                    return redirect()->back()->withErrors([
-                        'error' => '사진은 ' . $minPhotos . ' 이상 ' . $maxPhotos . ' 이하로 올려주세요'
-                    ]);
-                } else {
-                    foreach ($photos as $photo) {
-                        if (!$photo) {
-                            continue;
-                        }
-
-                        // 확장자 검사
-                        $extension = $photo->getClientOriginalExtension();
-                        if (!in_array($extension, ['jpg', 'jpeg', 'png'])) {
-                            return redirect()->back()->withErrors([
-                                'error' => '파일형식은 jpg와 png만 지원합니다'
-                            ]);
-                        }
-                        // Store
-                        $path = $photo->store('public');
-                        
-                        $mvp_photo = $isFirstPhoto ? '1' : '0'; // 대표 사진 플래그 설정
-
-                            $photo = Photo::create([
-                                's_no' => $s_no,
-                                'url' => Storage::url($path),
-                                'hashname' => $photo->hashName(),
-                                'originalname' => $photo->getClientOriginalName(),
-                                'mvp_photo' => $mvp_photo, // 대표 사진 플래그 저장
-                            ]);
-
-                            $isFirstPhoto = false; // 첫번째 사진 체크 후 '0' 들어가게
-
-                        }
-
-                        // return redirect()->route('stat.option.post');// del 0625 jy
-                        // return redirect()->back()->with([
-                        //     'status' => '이미지 업로드 성공!'
-                        //     ]); // del 0625 jy
-                        return redirect()->back()->with(['status' => '이미지 업로드 성공!']); // update 0625 jy
+                    //파일 선택이 안 된 경우
+                    if (!$photos) {
+                        return redirect()->back()->withErrors([
+                            'error' => 'No photos selected'
+                        ]);
                     }
+                    // $photos = is_array($photos) ? $photos : [$photos]; //del 0625 jy
+
+                    // 최소 5장, 최대 10장의 사진 검사
+                    $photos = is_array($photos) ? $photos : [$photos];
+
+                    // 최소 5장, 최대 10장의 사진 검사
+                    $minPhotos = 5;
+                    $maxPhotos = 10;
+                    $totalPhotos = count($photos);
+
+                    $isFirstPhoto = true; // 첫번째 사진인지 체크
+
+                    if ($totalPhotos < $minPhotos || $totalPhotos > $maxPhotos) {
+                        return redirect()->back()->withErrors([
+                            'error' => '사진은 ' . $minPhotos . ' 이상 ' . $maxPhotos . ' 이하로 올려주세요'
+                        ]);
+                    } else {
+                        foreach ($photos as $photo) {
+                            if (!$photo) {
+                                continue;
+                            }
+
+                            // 확장자 검사
+                            $extension = $photo->getClientOriginalExtension();
+                            if (!in_array($extension, ['jpg', 'jpeg', 'png'])) {
+                                return redirect()->back()->withErrors([
+                                    'error' => '파일형식은 jpg와 png만 지원합니다'
+                                ]);
+                            }
+                            // Store
+                            $path = $photo->store('public');
+                            
+                            $mvp_photo = $isFirstPhoto ? '1' : '0'; // 대표 사진 플래그 설정
+
+                                $photo = Photo::create([
+                                    's_no' => $s_no,
+                                    'url' => Storage::url($path),
+                                    'hashname' => $photo->hashName(),
+                                    'originalname' => $photo->getClientOriginalName(),
+                                    'mvp_photo' => $mvp_photo, // 대표 사진 플래그 저장
+                                ]);
+
+                                $isFirstPhoto = false; // 첫번째 사진 체크 후 '0' 들어가게
+
+                            }
+
+                            // return redirect()->route('stat.option.post');// del 0625 jy
+                            // return redirect()->back()->with([
+                            //     'status' => '이미지 업로드 성공!'
+                            //     ]); // del 0625 jy
+                            return redirect()->back()->with(['status' => '이미지 업로드 성공!']); // update 0625 jy
+                        }
+                }
+                else {
+                    return redirect()->back()->with(['insert_err' => '정보 등록에 실패했습니다']);
+                }
+                // add 0625 end jy
             }
-            else {
-                return redirect()->back->with(['insert_err' => '정보 등록에 실패했습니다']);
-            }
-            // add 0625 end jy
         }
     }
-}
+// }
 
 
 

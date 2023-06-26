@@ -28,7 +28,6 @@
                         <div class="row">
                             <div class="col-md-4 offset-md-4">
                                 <form action="{{ route('struct.insert.post') }}" id="frm" method="POST" enctype="multipart/form-data">
-                                    {{-- <form action="{{route('struct.insert.post')}}" id="frm" method="post" enctype="multipart/form-data"> --}}
                                     @csrf
                                     {{-- <div class="form-group"> --}}
                                         <input type="file" name="photo[]" class="form-control-file" multiple>
@@ -38,8 +37,8 @@
 
                     {{--작성 폼 시작--}}
 
-                    {{-- <form action="{{route('struct.insert.post')}}" id="frm" method="post"> --}}
-                        {{-- @csrf --}}
+                    {{-- <form action="{{route('struct.insert.post')}}" id="frm" method="post"> del --}}
+                        {{-- @csrf del--}}
                         <label for="s_name">건물 이름</label>
                         <input type="text" placeholder="건물 이름" name="s_name" id="s_name" value="{{old('s_name')}}" maxlength="30">
                         <br>
@@ -130,7 +129,7 @@
                         @else --}}
                         {{-- 이거 아닌거 같음 흑 --}}
                         <x-button type="button" id="submit_btn">방 올리기</x-button>
-                        @endif
+                        {{-- @endif --}}
                         <x-button type="button" onclick="location.href='{{url('/')}}'">취소</x-button>
                     </form>
                     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1def08893c26998733c374c40b12ac42&libraries=services,clusterer,drawing"></script>
