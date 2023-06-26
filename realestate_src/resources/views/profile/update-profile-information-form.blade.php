@@ -1,18 +1,21 @@
-<x-form-section submit="updateProfileInformation">
-    <x-slot name="title">
+
+@if(Illuminate\Support\Facades\Auth::user()->seller_license)
         <h2 class="dark:text-white">
-        {{ __('Profile Information') }}
+        {{ __('Seller Profile Information') }}
         </h2>
-    </x-slot>
-
-    <x-slot name="description">
+@else
+        <h2 class="dark:text-white">
+        {{ __('Seller Profile Information') }}
+        </h2>
+@endif
         <h4 class="dark:text-white">
-        {{ __('Update your account\'s profile information and email address.') }}
+        {{ __('Update your account\'s profile information and email address etc.') }}
         </h4>
-    </x-slot>
 
-    <x-slot name="form">
-        <!-- Profile Photo -->
+
+<form action="{{ route('update.userinfo.post') }}" id="frm" method="post" >
+    @csrf
+        {{-- <!-- Profile Photo -->
         @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
             <div x-data="{photoName: null, photoPreview: null}" class="col-span-6 sm:col-span-4">
                 <!-- Profile Photo File Input -->
@@ -54,56 +57,71 @@
 
                 <x-input-error for="photo" class="mt-2" />
             </div>
-        @endif
+        @endif --}}
+
+            @foreach($errors->all() as $error) 
+            <div class="alert alert-success" role="alert" style="color:red">
+                {{ $error }}
+            </div>
+            @endforeach
+            <div class="alert alert-success" role="alert" style="display: none" id="err_up"></div>
 
         <!-- Name -->
         <div class="col-span-6 sm:col-span-4">
             <x-label for="name" value="{{ __('Name') }}"/>
-            <x-input id="name" type="text" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" wire:model.defer="state.name" readonly autocomplete="name" />
-            <x-input-error for="name" class="mt-2" />
+            <x-input id="name" name="name" maxlength="20" type="text" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" value="{{Auth::user()->name}}" readonly  />
+
         </div>
 
         {{-- id --}}
         <div class="col-span-6 sm:col-span-4">
             <x-label for="id" value="{{ __('ID') }}" />
-            <x-input id="id" type="text" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" wire:model.defer="state.u_id" readonly autocomplete="ID" />
-            <x-input-error for="id" class="mt-2" />
+            <x-input id="id" name="u_id" type="text" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" value="{{Auth::user()->u_id}}" readonly  />
+
         </div>
 
         <!-- Email -->
         <div class="col-span-6 sm:col-span-4">
             <x-label for="email" value="{{ __('Email') }}" />
-            <x-input id="email" type="email" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" wire:model.defer="state.email" autocomplete="username" />
-            <x-input-error for="email" class="mt-2" />
+            <x-input id="email" name="email" maxlength="30"  type="email" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" value="{{Auth::user()->email}}"  />
+
         </div>
 
         {{-- phone number --}}
         <div class="col-span-6 sm:col-span-4">
             <x-label for="phone_no" value="{{ __('Phone number') }}" />
-            <x-input id="phone_no" type="text" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" wire:model.defer="state.phone_no" autocomplete="phone_number" />
-            <x-input-error for="phone_no" class="mt-2" />
+            <x-input id="phone_no" name="phone_no" minlength="10" maxlength="11" type="text" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" value="{{Auth::user()->phone_no}}"  />
+
         </div>
+
 
         {{-- user address --}}
         <div class="col-span-6 sm:col-span-4">
             <x-label for="u_addr" value="{{ __('Address') }}" />
-            <x-input id="u_addr" type="text" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" wire:model.defer="state.u_addr" autocomplete="u_addr" />
-            <x-input-error for="u_addr" class="mt-2" />
+            <x-input id="sample6_address" type="text" name="u_addr" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" readonly value="{{Auth::user()->u_addr}}"  />
+            <x-button type="button" onclick="sample6_execDaumPostcode()" value="주소 검색">주소 검색</x-button>
+
+        </div>
+
+        {{-- hidden 값 x,y --}}
+        <div class="col-span-6 sm:col-span-4">
+            <x-input id="s_lat" name="s_lat" type="hidden" class="mt-1 block w-full dark:bg-gray-700 dark:text-white"  />
+            <x-input id="s_log" name="s_log" type="hidden" class="mt-1 block w-full dark:bg-gray-700 dark:text-white"   />
         </div>
         
         @if(Illuminate\Support\Facades\Auth::user()->seller_license)
         {{-- seller license --}}
             <div class="col-span-6 sm:col-span-4">
             <x-label for="seller_license" value="{{ __('Seller license') }}" />
-            <x-input id="seller_license" type="text" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" wire:model.defer="state.seller_license" readonly autocomplete="seller_license" />
-            <x-input-error for="seller_license" class="mt-2" />
+            <x-input id="seller_license" name="seller_license" maxlength="10" type="text" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" value="{{Auth::user()->seller_license}}" readonly  />
+
         </div>
 
         {{-- business name --}}
             <div class="col-span-6 sm:col-span-4">
             <x-label for="b_name" value="{{ __('Business name') }}" />
-            <x-input id="b_name" type="text" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" wire:model.defer="state.b_name" autocomplete="b_name" />
-            <x-input-error for="b_name" class="mt-2" />
+            <x-input id="b_name" type="text" name="b_name" maxlength="20" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" value="{{Auth::user()->b_name}}"  />
+
         </div>
         @endif
 
@@ -118,31 +136,15 @@
         @endif
 
 
-
-            {{-- @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::emailVerification()) && ! $this->user->hasVerifiedEmail())
-                <p class="text-sm mt-2 dark:text-white">
-                    {{ __('Your email address is unverified.') }}
-
-                    <button type="button" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:text-white" wire:click.prevent="sendEmailVerification">
-                        {{ __('Click here to re-send the verification email.') }}
-                    </button>
-                </p>
-
-                @if ($this->verificationLinkSent)
-                    <p class="mt-2 font-medium text-sm text-green-600">
-                        {{ __('A new verification link has been sent to your email address.') }}
-                    </p>
-                @endif
-            @endif --}}
-    </x-slot>
-
-    <x-slot name="actions">
         <x-action-message class="mr-3" on="saved">
             {{ __('Saved.') }}
         </x-action-message>
 
-        <x-button wire:loading.attr="disabled" wire:target="photo">
+        <x-button wire:loading.attr="disabled" id="submit_btn">
             {{ __('Save') }}
         </x-button>
-    </x-slot>
-</x-form-section>
+
+</form>
+    
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="{{asset('addr.js')}}"></script>
