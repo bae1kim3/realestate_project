@@ -125,12 +125,7 @@
                             {{ session('insert_err') }}
                         </div>
                         @endif
-                        {{-- @if(!session('result'))
-                        <x-button id="submit_btn">방 올리기</x-button>                        
-                        @else --}}
-                        {{-- 이거 아닌거 같음 흑 --}}
                         <x-button type="button" id="submit_btn">방 올리기</x-button>
-                        {{-- @endif --}}
                         <x-button type="button" onclick="location.href='{{url('/')}}'">취소</x-button>
                     </form>
                     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1def08893c26998733c374c40b12ac42&libraries=services,clusterer,drawing"></script>
