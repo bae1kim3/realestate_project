@@ -18,6 +18,7 @@ use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\PhotoLoadController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\StructureController;
+use App\Http\Controllers\UpdateUserInfoController;
 
 
 
@@ -102,4 +103,7 @@ Route::get('/search', [SearchController::class, 'search']);
 
 // 지도
 Route::get('/map', [MapController::class,'map'])->name('map.map');
+
+// 마이페이지 post
+Route::post('/updateuserinfo', [UpdateUserInfoController::class, 'updateUserInfo'])->name('update.userinfo.post');
 
