@@ -6,6 +6,11 @@ submit_btn.addEventListener('click', () => {
     var val = document.getElementById('sample6_address').value;
     var s_log = document.getElementById('s_log');
     var s_lat = document.getElementById('s_lat');
+    if(!val) {
+        $err = document.getElementById('err_up').innerHTML = "주소를 입력하세요";
+        err_up.style.display = 'block';
+        return
+    }
 
     var callback = function(result, status) {
         if (status === kakao.maps.services.Status.OK) {

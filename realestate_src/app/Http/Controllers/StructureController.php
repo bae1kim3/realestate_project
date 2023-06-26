@@ -93,7 +93,6 @@ class StructureController extends Controller
         }
 
         $user_no = Auth::user()->id; // 유저 넘버 가져오기
-
         // update 0626 jy : 위치변경
         $photos = $req->file('photo');
         if (!$photos) {
@@ -204,6 +203,7 @@ class StructureController extends Controller
                             //     'status' => '이미지 업로드 성공!'
                             //     ]); // del 0625 jy
                             return redirect()->back()->with(['status' => '이미지 업로드 성공!']); // update 0625 jy
+                            
                         }
                 }
                 else {

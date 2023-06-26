@@ -23,6 +23,7 @@
                         {{ $error }}
                     </div>
                     @endforeach
+                    <div class="alert alert-success" role="alert" style="display: none" id="err_up"></div>
 
                     <div class="container">
                         <div class="row">
