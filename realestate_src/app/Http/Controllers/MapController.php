@@ -61,6 +61,7 @@ class MapController extends Controller
 
         $info['latlng']=['lat'=>$lat,'lng'=>$lng];
         $array = explode(',', $opt);
+        $soptarray = explode(',', $sopt);
          // '구 선택'이 아닐 때
         if($gu != '구 선택'){
             // 매매가 평균 구하는 쿼리
@@ -71,41 +72,44 @@ class MapController extends Controller
             ->get();
             // '구 선택'이 아닐 때 '월세', '전세', '매매' 중에서 하나만 넘어왔을 때
             if(count($array)==1 && $array[0] != 1){
-                $info['sinfo'] = DB::table('s_infos')
-                ->where('s_add', 'LIKE', $gu . '%')
-                ->where(function ($query) use ($array) {
-                    $query->where('s_type', $array[0]);
-                })
+                $info['sinfo'] =DB::table('s_infos AS sinfo')
+                ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
+                ->select('sinfo.*', 'phot.url')
+                ->where('sinfo.s_add', 'LIKE', $gu.'%')
+                ->whereIn('sinfo.s_type', [$array[0]])
+                ->where('phot.mvp_photo', '1')
                 ->get();
             return $info;
             }
             // '구 선택'이 아닐 때 '월세', '전세', '매매' 중에서 두개가 넘어왔을 때
             else if(count($array)==2){
-                $info['sinfo'] = DB::table('s_infos')
-                ->where('s_add', 'LIKE', $gu . '%')
-                ->where(function ($query) use ($array) {
-                    $query->where('s_type', $array[0])
-                        ->orWhere('s_type', $array[1]);
-                })
+                $info['sinfo'] =DB::table('s_infos AS sinfo')
+                ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
+                ->select('sinfo.*', 'phot.url')
+                ->where('sinfo.s_add', 'LIKE', $gu.'%')
+                ->whereIn('sinfo.s_type', [$array[0], $array[1]])
+                ->where('phot.mvp_photo', '1')
                 ->get();
             return $info;
             }
             // '구 선택'이 아닐 때 '월세', '전세', '매매' 중에서 세개가 넘어왔을 때
             else if(count($array)==3){
-                $info['sinfo'] = DB::table('s_infos')
-                ->where('s_add', 'LIKE', $gu . '%')
-                ->where(function ($query) use ($array) {
-                    $query->where('s_type', $array[0])
-                        ->orWhere('s_type', $array[1])
-                        ->orWhere('s_type', $array[2]);
-                })
+                $info['sinfo'] =DB::table('s_infos AS sinfo')
+                ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
+                ->select('sinfo.*', 'phot.url')
+                ->where('sinfo.s_add', 'LIKE', $gu.'%')
+                ->whereIn('sinfo.s_type', [$array[0], $array[1], $array[2]])
+                ->where('phot.mvp_photo', '1')
                 ->get();
             return $info;
             // '구 선택'이 아닐 때 '월세', '전세', '매매' 중에서 아무것도 넘어오지 않았을 때( 구 만 검색)
             }else if($array[0] == 1){
-                $info['sinfo']=DB::table('s_infos')
-                    ->where('s_add', 'LIKE', $gu.'%')
-                    ->get();
+                $info['sinfo'] =DB::table('s_infos AS sinfo')
+                ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
+                ->select('sinfo.*', 'phot.url')
+                ->where('sinfo.s_add', 'LIKE', $gu.'%')
+                ->where('phot.mvp_photo', '1')
+                ->get();
                 return $info;
             }
     // "구 선택"일 때
@@ -116,31 +120,40 @@ class MapController extends Controller
             ->get();
             // "구 선택"일 때 '월세', '전세', '매매' 중에서 하나만 넘어왔을 때
             if(count($array)==1 && $array[0] != 1){
-                $info['sinfo'] = DB::table('s_infos')
-                ->where('s_type',$array[0])
+                $info['sinfo'] =DB::table('s_infos AS sinfo')
+                ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
+                ->select('sinfo.*', 'phot.url')
+                ->whereIn('sinfo.s_type', [$array[0]])
+                ->where('phot.mvp_photo', '1')
                 ->get();
             return $info;
             }
             // "구 선택"일 때 '월세', '전세', '매매' 중에서 두개가 넘어왔을 때
             else if(count($array)==2){
-                $info['sinfo'] = DB::table('s_infos')
-                ->where('s_type',$array[0])
-                ->orwhere('s_type',$array[1])
+                $info['sinfo'] =DB::table('s_infos AS sinfo')
+                ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
+                ->select('sinfo.*', 'phot.url')
+                ->whereIn('sinfo.s_type', [$array[0], $array[1]])
+                ->where('phot.mvp_photo', '1')
                 ->get();
             return $info;
             }
             // "구 선택"일 때 '월세', '전세', '매매' 중에서 세개가 넘어왔을 때
             else if(count($array)==3){
-                $info['sinfo'] = DB::table('s_infos')
-                ->where('s_type',$array[0])
-                ->orwhere('s_type',$array[1])
-                ->orwhere('s_type',$array[2])
+                $info['sinfo'] =DB::table('s_infos AS sinfo')
+                ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
+                ->select('sinfo.*', 'phot.url')
+                ->whereIn('sinfo.s_type', [$array[0], $array[1], $array[2]])
+                ->where('phot.mvp_photo', '1')
                 ->get();
             return $info;
             // "구 선택"일 때 '월세', '전세', '매매' 중에서 아무것도 넘어오지 않았을 때(구 선택일 때는 아무 값도 설정하지 않았기 때문에 전체값을 넘겨준다.)
             } else if($array[0] == 1){
-                $info['sinfo']=DB::table('s_infos')
-                    ->get();
+                $info['sinfo'] =DB::table('s_infos AS sinfo')
+                ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
+                ->select('sinfo.*', 'phot.url')
+                ->where('phot.mvp_photo', '1')
+                ->get();
             return $info;
             }
         }
