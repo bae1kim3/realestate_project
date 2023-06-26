@@ -5,7 +5,7 @@
         </h2>
 @else
         <h2 class="dark:text-white">
-        {{ __('Seller Profile Information') }}
+        {{ __('Private Profile Information') }}
         </h2>
 @endif
         <h4 class="dark:text-white">
@@ -131,7 +131,9 @@
             <x-label for="animal_size" value="{{ __('Animal size') }}" />
             {{-- <x-input id="animal_size" type="text" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" wire:model.defer="state.animal_size" autocomplete="animal_size" /> --}}
             <x-label for="animal_size" value="{{ __('대형 동물') }}" class="dark:text-white"/>
-            <input type="checkbox" id="animal_size" @if(Illuminate\Support\Facades\Auth::user()->animal_size === "1") checked @endif value="1" name="animal_size" class="dark:bg-gray-700">
+            <input type="radio" name="animal_size" id="animal_size_sm" @if(Illuminate\Support\Facades\Auth::user()->animal_size === "1") checked @endif value="1" name="animal_size" class="dark:bg-gray-700">
+            <x-label for="animal_size" value="{{ __('중소형 동물') }}" class="dark:text-white"/>
+            <input type="radio" name="animal_size" id="animal_size_lg" @if(Illuminate\Support\Facades\Auth::user()->animal_size === "0") checked @endif value="0" name="animal_size" class="dark:bg-gray-700">
         </div>
         @endif
 
