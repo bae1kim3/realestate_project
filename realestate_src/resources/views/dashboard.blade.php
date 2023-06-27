@@ -27,6 +27,8 @@
                         {{ $error }}
                     </div>
                 @endforeach
+                <div class="alert alert-success" role="alert" style="display: none" id="err_up"></div>
+
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4 offset-md-4">
