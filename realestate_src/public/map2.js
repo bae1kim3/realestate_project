@@ -240,6 +240,13 @@ document.addEventListener("click", function (event) {
         dropdownMenu.classList.toggle("open");
     }
 });
+document.addEventListener("click", function (event) {
+    const dropdownToggle = event.target.closest(".dropdown-toggle1");
+    if (dropdownToggle) {
+        const dropdownMenu = dropdownToggle.nextElementSibling;
+        dropdownMenu.classList.toggle("open1");
+    }
+});
 
 checkboxes.forEach(function (checkbox) {
     checkbox.addEventListener("change", function () {

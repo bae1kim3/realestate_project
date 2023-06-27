@@ -31,7 +31,7 @@
     position: relative;
     display: inline-block;
 }
-
+.dropdown-toggle1,
 .dropdown-toggle,
 #getpark,
 .selectbox {
@@ -98,4 +98,25 @@ a,
 a:hover {
     color: black;
     text-decoration: none;
+}
+
+#loginuser {
+    background-color: #ece6cc;
+    margin-left: 10%;
+    border-radius: 30px;
+    text-align: center;
+}
+
+.open1 {
+    margin-top: 5px;
+    border-radius: 20%;
+    border-top: none;
+    background-color: #ece6cc;
+    margin-left: 10%;
+    width: 6vw;
+    min-width: 5rem;
+    display: inline-block;
+}
+.dropdown-toggle1 {
+    text-align: center;
 }

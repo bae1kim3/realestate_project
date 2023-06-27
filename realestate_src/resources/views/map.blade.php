@@ -58,10 +58,23 @@
                 </label>
             </div>
         </div>
-    @if(!empty($u_info))
-        <a href="{{route('profile.show')}}" class="a_uid"><div id="u_id">{{$u_info->u_id}}</div></a>
+
+    @if(!empty($u_info) && !empty(session('u_id')))
+        <div class="dropdown" >
+            <div class="dropdown-toggle1" id="loginuser" data-toggle="dropdown">
+            {{$u_info->u_id}}
+            </div>
+            <div class="dropdown-menu ">
+            <a href="{{route('profile.show')}}">
+                <div>마이페이지</div>
+            </a>
+            <a href="{{route('user.logout')}}">
+                <div>로그아웃</div>
+            </a>
+            </div>
+        </div>
     @else
-        <button type="button" class="btn btn-dark" id="aa" onclick="location.href = '{{route('login')}}'">로그인</button>
+        <button type="button" class="btn btn-dark" style="background-color: rgb(47, 193, 255);" id="aa" onclick="location.href = '{{route('login')}}'">로그인</button>
     @endif
     </nav>
     <div class="container1">

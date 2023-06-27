@@ -168,5 +168,12 @@ class UserController extends Controller
             return "판매자 정보를 찾을 수 없습니다.";
         }
     }
+    function logout() {
+        $id = session('id');
+        User::destroy($id);
+        Session::flush(); // 세션 파기
+        Auth::logout(); // 로그아웃
+        return redirect()->route('welcome');
+    }
 }
 
