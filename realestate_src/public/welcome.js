@@ -33,13 +33,15 @@ function loadMorePhotos() {
 }
 
 function generatePhotoHtml(photo, lastPhotoId) {
+    var deposit = photo.p_deposit.toLocaleString();
+    var month = photo.p_month.toLocaleString();
     var html = '<div class="photo-item" style="background-image: url(\'' + photo.url + '\');">' +
         '<span class="photo-info">' +
         '<span class="info-text">' + photo.s_add + '</span><br>' +
-        '<span class="info-text">' + photo.p_deposit + '</span>';
+        '<span class="info-text">' + deposit + '</span>';
 
     if (photo.s_type === '월세') {
-        html += '<span class="info-text"> / ' + photo.p_month + '</span>';
+        html += '<span class="info-text"> / ' + month + '</span>';
     }
     html += '<br><span class="info-text">' + photo.updated_at.substr(0, 10) + '</span>' +
         '</span>' +
