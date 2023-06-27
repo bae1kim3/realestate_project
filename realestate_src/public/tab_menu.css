@@ -1,0 +1,43 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.main {
+    display: flex;
+    flex-direction: column;
+}
+.tabs {
+    display: flex;
+}
+.tabs .tab {
+    font-size: 1rem;
+    text-align: center;
+    line-height: 50px;
+    width: 15em;
+    height: 50px;
+    cursor: pointer;
+    position: relative;
+}
+.items {
+    width: 100%;
+    display: none;
+    padding: 20px;
+    background-color: #fff;
+    position: relative;
+}
+.items::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 15em;
+    height: 5px;
+    background-color: #81bcff;
+}
+.items:nth-child(2)::before {
+    left: 15em;
+    background-color: #81bcff;
+}
+.items.active {
+    display: inline-block;
+}
