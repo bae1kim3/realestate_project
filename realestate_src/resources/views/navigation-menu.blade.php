@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="{{ asset('nav.css') }}">
+
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100 dark:bg-gray-800">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -9,7 +10,7 @@
                     <a href="{{ route('dashboard') }}">
                         <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
                     </a>
-                    <div class=" ml-2">
+                    <div class="ml-2">
                         <button type="button" x-bind:class="darkMode ? 'bg-indigo-500' : 'bg-gray-200'"
                             x-on:click="darkMode = !darkMode"
                             class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
@@ -51,10 +52,13 @@
                     </x-nav-link>
                 </div>
             </div>
-            <div class="mt-5"><a href="{{ route('map.map') }}">MAP</a></div>
+
+            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex justify-center" style="margin-top:20px; margin-right:200px">
+            </div>
+
             @if (isset(session()->all()['auth']))
                 <!-- Settings Dropdown -->
-                <div class="ml-3 relative">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex justify-center">
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
@@ -81,19 +85,16 @@
 
                         <x-slot name="content">
                             <!-- Account Management -->
-                            <div class="block px-4 py-2 text-xs text-gray-400">
-                                {{ __('Manage Account') }}
-                            </div>
 
                             <x-dropdown-link :href="route('profile.show')">
                                 {{ __('Profile') }}
                             </x-dropdown-link>
 
-                            @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                                <x-dropdown-link :href="route('api-tokens.index')">
-                                    {{ __('API Tokens') }}
-                                </x-dropdown-link>
-                            @endif
+                            {{-- @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
+                                    <x-dropdown-link :href="route('api-tokens.index')">
+                                        {{ __('API Tokens') }}
+                                    </x-dropdown-link>
+                                @endif --}}
 
                             <div class="border-t border-gray-200"></div>
 
@@ -110,22 +111,24 @@
                 </div>
             @else
                 <div
-                    class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
                     @if (Route::has('login'))
                         <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                             @auth
                                 <a href="{{ url('/dashboard') }}"
                                     class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">매물올리기</a>
+                                    <a href="{{ route('map.map') }}">MAP</a>
                             @else
-                                <a href="{{ route('login') }}"
-                                    class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 dark:text-white">Log
-                                    in</a>
-
-                                @if (Route::has('register'))
-                                    <a href="{{ route('register') }}"
-                                        class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 dark:text-white">Select
-                                        Register</a>
-                                @endif
+                                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                    <a href="{{ route('map.map') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">MAP</a>
+                                    <a href="{{ route('login') }}"
+                                        class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 dark:text-white">Log
+                                        in</a>
+                                    @if (Route::has('register'))
+                                        <a href="{{ route('register') }}"
+                                            class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 dark:text-white">Select
+                                            Register</a>
+                                    @endif
+                                </div>
                             @endauth
                         </div>
                     @endif
@@ -133,7 +136,7 @@
 
 
             <!-- Hamburger -->
-            <div class="-mr-2 flex items-center sm:hidden">
+            <div class="flex items-center sm:hidden">
                 <button @click="open = ! open"
                     class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
@@ -141,7 +144,7 @@
                             stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6h16M4 12h16M4 18h16" />
                         <path :class="{ 'hidden': !open, 'inline-flex': open }" class="hidden" stroke-linecap="round"
-                            stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            stroke-linejoin="round" stroke-width="1" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
@@ -151,35 +154,67 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')">
+            <x-responsive-nav-link class="dark:text-white" :href="route('welcome')" :active="request()->routeIs('welcome')">
                 {{ __('HOME') }}
             </x-responsive-nav-link>
         </div>
 
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link class="dark:text-white" :href="route('map.map')" :active="request()->routeIs('map.map')">
+                {{ __('Map') }}
+            </x-responsive-nav-link>
+        </div>
+        @if (!session('u_id'))
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link class="dark:text-white" :href="route('login')" :active="request()->routeIs('login')">
+                {{ __('login') }}
+            </x-responsive-nav-link>
+        </div>
+        @endif
+
+        @if (session('seller_lisence'))
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link class="dark:text-white" :href="url(url('/dashboard'))" :active="request()->routeIs('dashborad')">
+                {{ __('매물올리기') }}
+            </x-responsive-nav-link>
+        </div>
+        @endif
+
+        <div class="pt-2 pb-3 space-y-1">
+            @if (Route::has('register'))
+                <x-responsive-nav-link class="dark:text-white" :href="route('register')" :active="request()->routeIs('register')">
+                    {{ __('register') }}
+                </x-responsive-nav-link>
+            @endif
+        </div>
         <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200">
+        <div class="pt-4 pb-1 border-gray-200">
             <div class="px-4">
                 @if (auth()->check())
-                    <div class="px-4">
-                        <div class="font-medium text-base text-gray-800">{{ auth()->user()->name }}</div>
-                        <div class="font-medium text-sm text-gray-500">{{ auth()->user()->email }}</div>
-                    </div>
+                    <x-responsive-nav-link :href="route('profile.show')" :active="request()->routeIs('profile.show')">
+                    <div class="font-medium text-base text-gray-500 dark:text-white">{{ auth()->user()->name }}</div>
+                    <div class="font-medium text-sm text-gray-500 dark:text-white">{{ auth()->user()->email }}</div>
+                    </x-responsive-nav-link>
                 @endif
 
             </div>
 
-            <div class="mt-3 space-y-1">
+            
                 <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}">
+                @if(session('u_id'))
+                <div class="mt-3 space-y-1">
+                    <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
-                    <x-responsive-nav-link :href="route('logout')"
+                    <x-responsive-nav-link class="dark:text-white" :href="route('logout')"
                         onclick="event.preventDefault();
-                                        this.closest('form').submit();">
+                                            this.closest('form').submit();">
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
                 </form>
-            </div>
+                </div>
+                @endif
+            
         </div>
     </div>
 </nav>

@@ -28,11 +28,14 @@
         </x-slot>
     <body class="antialiased">
         <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-            @if (Route::has('login') && session('seller_license'))
+            @if (Route::has('login')&&session('seller_license'))
                 <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                     @auth
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex justify-center">
+                        <a href="{{ route('map.map') }}" style="margin-right: 20px;">MAP</a>
                         <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">매물올리기</a>
-                    @else
+                    </div>
+                        @else
                         <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a>
 
                         @if (Route::has('register'))
@@ -42,12 +45,15 @@
                 </div>
             @endif
 
-    <div class="max-w-7xl mx-auto p-6 lg:p-8">
-
+  <div class="max-w-7xl mx-auto p-6 lg:p-8">
+    <div style="text-align: center;">
       <label for="search" class="text-black dark:text-white">매물 검색</label>
       <input type="text" class="rounded-lg px-2 py-1 dark:bg-gray-800 dark:text-white" name="search" id="search" placeholder="역이름, 주소로 검색해 주세요">
       <button onclick="searchProperties()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">검색</button>
-
+    </div>
+  <br>
+  <br>
+  <br>
       <div id="scroll-container" class="scroll-item">
           @foreach ($photos as $photo)
           <a href="{{ route('struct.detail', ['s_no' => $photo->s_no]) }}">
@@ -218,12 +224,10 @@
             <p class="dark:text-white">전화번호 : 053-571-0075</p>
             <p class="dark:text-white">주소 : 대구광역시 달서구 와룡로 142 2층</p>
             <hr>
-            <br>
             <p class="dark:text-white">24시라이프동물의료센터</p>
             <p class="dark:text-white">전화번호 : 053-567-2475</p>
             <p class="dark:text-white">주소 : 대구광역시 달서구 감삼동 69-1 1층</p>
             <hr>
-            <br>
             <p class="dark:text-white">대구탑스동물메디컬센터</p>
             <p class="dark:text-white">전화번호 : 053-637-7501</p>
             <p class="dark:text-white">주소 : 대구광역시 달서구 상인2동 월배로 166</p>
