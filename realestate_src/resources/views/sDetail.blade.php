@@ -194,7 +194,7 @@
 
             btn2.addEventListener("click", () => {
                 newWindow = window.open("{{ route('sellerPhone', ['s_no' => $photo->s_no]) }}", "find",
-                    "width=800,height=500");
+                    "width=550,height=100");
             });
 
             const btn1 = document.getElementById("btn1");

@@ -1,12 +1,20 @@
 <?php
 namespace App\Http\Livewire\Profile;
 
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Show extends Component
 {
     public $showPhoneNumberVerificationModal = false;
     public $phoneNumber;
+
+    
+    public function usersdetail()
+    {
+        $abc = Auth::user()->u_id;
+        return view('profile.show')->with('abc',$abc);
+    }
 
     public function verifyPhoneNumber()
     {

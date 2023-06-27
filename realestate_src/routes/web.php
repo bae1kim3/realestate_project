@@ -21,9 +21,6 @@ use App\Http\Controllers\MapController;
 use App\Http\Controllers\JjimController;
 use App\Http\Controllers\UpdateUserInfoController;
 
-
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -99,7 +96,6 @@ Route::get('/sDetail/{s_no}', [StructureDetailController::class, 'stateInfo'])->
 
 Route::get('/welcome', [PhotoLoadController::class, 'index'])->name('welcome.com');
 Route::get('/photos/more/{lastPhotoId}', [PhotoLoadController::class, 'loadMorePhotos']);
-Route::get('/search', [SearchController::class, 'search']);
 
 Route::get('/sellerphone/{s_no}',[UserController::class, 'sellerPhone'])->name('sellerPhone');
 Route::get('/map', [MapController::class,'map'])->name('map.map');
@@ -107,3 +103,4 @@ Route::get('/jjims', [JjimController::class, 'store'])->name('jjims.store');
 
 
 Route::post('/updateuserinfo', [UpdateUserInfoController::class, 'updateUserInfo'])->name('update.userinfo.post');
+Route::get('/logout', [UserController::class, 'logout'])->name('user.logout');

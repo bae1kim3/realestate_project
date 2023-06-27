@@ -14,7 +14,9 @@
 <div class="contents">
     <nav class="nav sticky-top justify-content-end p-3" style="background-color: #1f2937;">
         <a class="nav-link active link-light position-absolute top-50 start-0 translate-middle-y ms-4" aria-current="page" href="{{route('welcome')}}">로고</a>
+        @if(!empty($u_info->seller_license))
         <a class="nav-link link-light" href="{{route('dashboard')}}" id="aa">매물 올리기</a>
+        @endif
         <button id="getpark">주변 시설</button>
             <select id="option" name="gu" class="selectbox" >
                 <option>구 선택</option>
@@ -56,7 +58,24 @@
                 </label>
             </div>
         </div>
-        <button type="button" class="btn btn-dark" id="aa" onclick="location.href = '{{route('login')}}'">로그인</button>
+
+    @if(!empty($u_info) && !empty(session('u_id')))
+        <div class="dropdown" >
+            <div class="dropdown-toggle1" id="loginuser" data-toggle="dropdown">
+            {{$u_info->u_id}}
+            </div>
+            <div class="dropdown-menu ">
+            <a href="{{route('profile.show')}}">
+                <div>마이페이지</div>
+            </a>
+            <a href="{{route('user.logout')}}">
+                <div>로그아웃</div>
+            </a>
+            </div>
+        </div>
+    @else
+        <button type="button" class="btn btn-dark" style="background-color: rgb(47, 193, 255);" id="aa" onclick="location.href = '{{route('login')}}'">로그인</button>
+    @endif
     </nav>
     <div class="container1">
         <div class="sidebar" id="sidebar">

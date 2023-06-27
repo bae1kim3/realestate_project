@@ -2,13 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class MapController extends Controller
 {
     function map(){
-        return view('map');
+        if(!empty(session('u_id'))) {
+            $u_info = User::where('u_id',(session()->get('u_id') ))->first();
+            return view('map')->with('u_info',$u_info);
+        }else{
+            return view('map');
+        }
     }
 
     function getopt($opt,$gu,$sopt)

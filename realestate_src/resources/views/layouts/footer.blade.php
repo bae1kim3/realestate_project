@@ -7,7 +7,6 @@
     <title>Document</title>
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="{{ asset('footer.css') }}">
     @livewireStyles
 
     <style>
@@ -19,6 +18,7 @@
             color: white;
             background-color: #215083;
             margin-top: 30px;
+            font-size:13px;
         }
 
         footer>h4 {
