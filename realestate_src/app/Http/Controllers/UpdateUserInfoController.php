@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Photo;
+use App\Models\S_info;
 
 class UpdateUserInfoController extends Controller
 {
@@ -111,4 +113,37 @@ class UpdateUserInfoController extends Controller
             return redirect()->back();
         }
     }
-}
+
+    public function printMyBuilding(Request $req) {
+
+            // $photos = Photo::join('s_infos', 's_infos.s_no', 'photos.s_no')
+            //     ->where('mvp_photo', '1')
+            //     ->orderBy('photos.updated_at', 'desc')
+            //     ->get();
+    
+            // return view('welcome', compact('photos', 'lastPhotoId'));
+            
+
+            $id = Auth::user()->id;
+            // s_info u_no, user id로 이너조인-> $id랑 같은거 중에 s_no select함
+            // $s_info = S_info::join('users', 's_infos.u_no', '=', 'users.id')
+            //         ->where('s_infos.u_no', '=', $id)
+            //         ->get();
+            $user_info = User::join('s_infos', 'users.id', '=', 's_infos.u_no')
+                ->join('photos', 's_infos.s_no', '=', 'photos.s_no')
+                ->where('s_infos.u_no', '=', $id)
+                ->where('mvp_photo', '1')
+                ->get();
+                
+            // collection에서 s_no만 뽑아서 array에 담음
+            // $s_no = $s_info->pluck('s_no')->toArray();
+            // url 배열
+            // session()->put('s_info', $s_info);
+            // $url = Photo::whereIn('s_no', $s_no)->where('mvp_photo', '1')->pluck('url')->toArray();
+
+            // $url = $user_info->pluck('url')->toArray();
+            // return view('profile.update-profile-information-form')->with('s_info', $s_info); // with으로 못들고옴
+            return view('profile.update-profile-information-form')->with('user', $user_info);
+        }
+    }
+

@@ -110,7 +110,8 @@ class UserController extends Controller
                 return redirect()->route('welcome');
             }
             else
-            { // TODO : user가 올린 매물이 있을 때 => 포토 삭제 -> 건물옵션 삭제-> 건물 삭제 -> user 삭제*************
+            { // user가 올린 매물이 있을 때 => 포토 삭제 -> 건물옵션 삭제-> 건물 삭제 -> user 삭제
+                
                 // Photos 삭제
                 $photo_deleted_rows = Photo::whereIn('p_no', $photo_p_no_list)->delete();
                 if($photo_deleted_rows > 0) {

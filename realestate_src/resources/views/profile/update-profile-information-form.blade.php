@@ -1,4 +1,6 @@
+<x-app-layout>
 <link rel="stylesheet" href="{{asset('tab_menu.css')}}">
+<link rel="stylesheet" href="{{asset('mypagelist.css')}}">
 
 @if(Illuminate\Support\Facades\Auth::user()->seller_license)
         <h2 class="dark:text-white">
@@ -34,7 +36,7 @@
 </div>
 <div class='content'>
     <div id='tab1' data-tab-content class='items active'>
-        <p>
+        <div>
             <form action="{{ route('update.userinfo.post') }}" id="frm" method="post" >
         @csrf
             {{-- <!-- Profile Photo -->
@@ -165,15 +167,51 @@
             </x-button>
 
             </form>
-        </p>
+        </div>
     </div>
     <div id='tab2' data-tab-content class='items'>
-        <h2>Tab2</h2>
-        <p>탭 2에 들어갈 내용</p>
+        <div>
+            @foreach($user as $val)
+                <a href="{{ route('struct.detail', ['s_no' => $val->s_no]) }}">
+                <div class="photo-item" style="background-image: url('{{ asset($val->url) }}');">
+                    <span class="photo-info">
+                        <span class="info-text">{{ $val->s_name }}</span><br>
+                        <span class="info-text">{{ $val->s_add }}</span>
+                    </span>
+                </div>
+                </a>
+            @endforeach
+        </div>
     </div>
 </div>
 
+@if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
+                <div class="mt-10 sm:mt-0 dark:text-white">
+                    <h1 style="margin-left:40%">If you wannt change password?</h1>
+                    <br>
+                    <x-button style="margin-left:40%"><div><a href="{{ route('profile.chk_phone_no') }}">Update Password</a></div></x-button>
+                </div>
 
+                <x-section-border />
+            @endif
+
+ @if (Laravel\Jetstream\Jetstream::hasAccountDeletionFeatures())
+                <x-section-border />
+
+                <div class="mt-10 sm:mt-0">
+                {{--@livewire('profile.delete-user-form')--}}
+                    <h1 style="margin-left:40%">Delete account</h1>
+                    <p style="margin-left:40%">
+                        Permanently delete your account.
+                    <p>
+                    <br>
+                    <x-danger-button style="margin-left:40%">
+                        <a href="{{ route('profile.chk_del_user') }}">Delete account</a>
+                    </x-danger-button>
+                </div>
+            @endif
+
+</x-app-layout>
 
 
 
