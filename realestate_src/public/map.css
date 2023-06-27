@@ -38,8 +38,12 @@
     width: 6vw;
     cursor: pointer;
     padding: 10px;
+    min-width: 70px;
     background-color: #eee;
     border: 1px solid black;
+    white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+    overflow: hidden; /* 넘치는 텍스트 숨김 */
+    text-overflow: ellipsis;
 }
 
 .dropdown-menu {
@@ -54,8 +58,11 @@
 
 .open {
     width: 6vw;
-    min-width: 5rem;
+    min-width: 70px;
     display: inline-block;
+    white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+    overflow: hidden; /* 넘치는 텍스트 숨김 */
+    text-overflow: ellipsis;
 }
 
 .dropdown-menu label input[type="checkbox"] {
@@ -112,10 +119,13 @@ a:hover {
     border-radius: 20%;
     border-top: none;
     background-color: #ece6cc;
-    margin-left: 12%;
+    margin-left: 10%;
     width: 6vw;
     min-width: 5rem;
     display: inline-block;
+    white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+    overflow: hidden; /* 넘치는 텍스트 숨김 */
+    text-overflow: ellipsis;
 }
 .dropdown-toggle1 {
     text-align: center;
