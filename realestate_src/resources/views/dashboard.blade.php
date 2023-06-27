@@ -52,7 +52,7 @@
                                 <x-label for="s_addr" style="font-size:20px" class="dark:text-white">주소</x-label>
                                 <x-input type="text" id="sample6_address" name="s_addr" placeholder="대구 지역 내 도로명 주소" readonly class="block mt-1 w-full dark:bg-gray-700 dark:text-white"/>
                                 <br>
-                                <x-button><x-input type="button"  class="dark:text-white" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"/></x-button>
+                                <x-button type="button"><x-input type="button"  class="dark:text-white" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"/></x-button>
                                 <br>
 
                                 @if(session()->has('addr_err'))
