@@ -33,13 +33,13 @@
             </div>
             <div class="dropdown-menu">
                 <label class="custom-label" >
-                <input type="checkbox" id="opt" name="option4" value="월세" > 월세
+                <input type="checkbox" class="opt" id="optcheck1" value="월세" > 월세
                 </label>
                 <label class="custom-label">
-                <input type="checkbox" id="opt" name="option5" value="전세" > 전세
+                <input type="checkbox" class="opt" id="optcheck2" value="전세" > 전세
                 </label>
                 <label class="custom-label">
-                <input type="checkbox" id="opt" name="option6" value="매매" > 매매
+                <input type="checkbox" class="opt" id="optcheck3" value="매매" > 매매
                 </label>
             </div>
         </div>
@@ -49,14 +49,14 @@
             </div>
             <div class="dropdown-menu">
                 <label class="custom-label">
-                <input type="checkbox" id="sopt" name="option4" value="s_parking" > 주차
+                <input type="checkbox" class="sopt" id="optcheck4" value="s_parking" > 주차
                 </label>
                 <label class="custom-label">
-                <input type="checkbox" id="sopt" name="option6" value="s_ele" > 엘
+                <input type="checkbox" class="sopt" id="optcheck5" value="s_ele" > 엘
                 </label>
             </div>
         </div>
-        <button type="button" class="btn btn-dark" id="aa">로그인</button>
+        <button type="button" class="btn btn-dark" id="aa" onclick="location.href = '{{route('login')}}'">로그인</button>
     </nav>
     <div class="container1">
         <div class="sidebar" id="sidebar">
@@ -66,7 +66,7 @@
 </div>
 <div></div>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9abea084b391e97658a9380c837b9608&libraries=services,clusterer,drawing"></script>
-    <script src="{{asset('map.js')}}"></script>
+    <script src="{{asset('map2.js')}}"></script>
 {{-- </x-guest-layout> --}}
 </body>
 </html>
