@@ -31,7 +31,7 @@
     position: relative;
     display: inline-block;
 }
-
+.dropdown-toggle1,
 .dropdown-toggle,
 #getpark,
 .selectbox {
@@ -82,7 +82,7 @@
     box-sizing: border-box;
 }
 
-#u_id {
+/* #u_id {
     text-align: center;
     width: 4vw;
     height: 100%;
@@ -92,10 +92,31 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
 a,
 .a_uid,
 a:hover {
     color: black;
     text-decoration: none;
+}
+
+#loginuser {
+    background-color: #ece6cc;
+    margin-left: 10%;
+    border-radius: 30px;
+    text-align: center;
+}
+
+.open1 {
+    margin-top: 5px;
+    border-radius: 20%;
+    border-top: none;
+    background-color: #ece6cc;
+    margin-left: 12%;
+    width: 6vw;
+    min-width: 5rem;
+    display: inline-block;
+}
+.dropdown-toggle1 {
+    text-align: center;
 }
