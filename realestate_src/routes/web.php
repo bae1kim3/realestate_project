@@ -96,7 +96,6 @@ Route::get('/sDetail/{s_no}', [StructureDetailController::class, 'stateInfo'])->
 
 Route::get('/welcome', [PhotoLoadController::class, 'index'])->name('welcome.com');
 Route::get('/photos/more/{lastPhotoId}', [PhotoLoadController::class, 'loadMorePhotos']);
-Route::get('/search', [SearchController::class, 'search']);
 
 Route::get('/sellerphone/{s_no}',[UserController::class, 'sellerPhone'])->name('sellerPhone');
 Route::get('/map', [MapController::class,'map'])->name('map.map');
