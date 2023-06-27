@@ -181,6 +181,7 @@
                 </div>
                 </a>
             @endforeach
+    {{ $user->links() }}
         </div>
     </div>
 </div>
@@ -189,13 +190,15 @@
                 <div class="mt-10 sm:mt-0 dark:text-white">
                     <h1 style="margin-left:40%">If you wannt change password?</h1>
                     <br>
-                    <x-button style="margin-left:40%"><div><a href="{{ route('profile.chk_phone_no') }}">Update Password</a></div></x-button>
+                    <a href="{{ route('profile.chk_phone_no') }}">
+                    <x-button style="margin-left:40%">Update Password</x-button>
+                    </a>
                 </div>
 
                 <x-section-border />
             @endif
 
- @if (Laravel\Jetstream\Jetstream::hasAccountDeletionFeatures())
+@if (Laravel\Jetstream\Jetstream::hasAccountDeletionFeatures())
                 <x-section-border />
 
                 <div class="mt-10 sm:mt-0">
@@ -205,9 +208,10 @@
                         Permanently delete your account.
                     <p>
                     <br>
-                    <x-danger-button style="margin-left:40%">
-                        <a href="{{ route('profile.chk_del_user') }}">Delete account</a>
+                        <a href="{{ route('profile.chk_del_user') }}">
+                    <x-danger-button style="margin-left:40%">Delete account
                     </x-danger-button>
+                    </a>
                 </div>
             @endif
 

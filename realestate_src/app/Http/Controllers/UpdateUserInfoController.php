@@ -43,12 +43,12 @@ class UpdateUserInfoController extends Controller
                 $updateData['b_name'] = 'b_name';
             }
             $validator = Validator::make($req->all(), [
-                'name' => ['required', 'string', 'max:20'], // add 0624 jy 수정 안되게(같은값 넣어야 수정되게) TODO : 한글만 추가!!
+                'name' => ['required', 'string', 'max:20'], // add 0624 jy 수정 안되게(같은값 넣어야 수정되게)
                 'email' => ['required', 'email', 'max:30',  Rule::unique('users')->ignore($user->id)],
-                'u_id' =>['required', 'min:6','max:20', 'string',  Rule::unique('users')->ignore($user->id)],
+                'u_id' =>['required', 'min:6','max:20', 'string', 'regex:/^[a-zA-Z0-9]+$/', Rule::unique('users')->ignore($user->id)],
                 'phone_no' => ['required', 'string', 'min:10', 'max:11'],
                 'u_addr' => ['required', 'string'],
-                'seller_license' => ['nullable', 'integer', 'max:9999999999'],
+                'seller_license' => ['nullable', 'integer'],
                 'b_name' => ['required', 'string', 'max:20']
             ]);
 
@@ -90,12 +90,12 @@ class UpdateUserInfoController extends Controller
 
             
             $validator = Validator::make($req->all(), [
-                'name' => ['required', 'string', 'max:20'], // add 0624 jy 수정 안되게(같은값 넣어야 수정되게) TODO : 한글만 추가!!
+                'name' => ['required', 'string', 'regex:/^[가-힣]+$/u', 'max:20'], // add 0624 jy 수정 안되게(같은값 넣어야 수정되게) 
                 'email' => ['required', 'email', 'max:30',  Rule::unique('users')->ignore($user->id)],
-                'u_id' =>['required', 'min:6','max:20', 'string',  Rule::unique('users')->ignore($user->id)],
+                'u_id' =>['required', 'min:6','max:20', 'string',  'regex:/^[a-zA-Z0-9]+$/', Rule::unique('users')->ignore($user->id)],
                 'phone_no' => ['required', 'string', 'min:10', 'max:11'],
                 'u_addr' => ['required', 'string'],
-                'animal_size' => ['nullable', 'in:0,1']
+                'animal_size' => ['nullable', Rule::in(['0', '1'])]
             ]);
 
             if ($validator->fails()) {
@@ -114,7 +114,7 @@ class UpdateUserInfoController extends Controller
         }
     }
 
-    public function printMyBuilding(Request $req) {
+    public function printMyBuilding() {
 
             // $photos = Photo::join('s_infos', 's_infos.s_no', 'photos.s_no')
             //     ->where('mvp_photo', '1')
@@ -133,7 +133,8 @@ class UpdateUserInfoController extends Controller
                 ->join('photos', 's_infos.s_no', '=', 'photos.s_no')
                 ->where('s_infos.u_no', '=', $id)
                 ->where('mvp_photo', '1')
-                ->get();
+                // ->get();
+                ->paginate(4);
                 
             // collection에서 s_no만 뽑아서 array에 담음
             // $s_no = $s_info->pluck('s_no')->toArray();

@@ -104,3 +104,5 @@ Route::get('/jjims', [JjimController::class, 'store'])->name('jjims.store');
 
 Route::post('/updateuserinfo', [UpdateUserInfoController::class, 'updateUserInfo'])->name('update.userinfo.post');
 Route::get('/logout', [UserController::class, 'logout'])->name('user.logout');
+
+Route::get('/user/profile', [UpdateUserInfoController::class, 'printMyBuilding'])->name('profile.com');

@@ -27,9 +27,9 @@ class StructureController extends Controller
         //         // alpha_dash : 한글 영문 숫자 - _ 다 되는데 ㄱㄱ 이런 글자도 통과됨..
         //         // 's_name' => 'required|regex:/^(?=.*[가-힣])(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/u|max:30'
         //         ,'sell_cat_info' => 'required|in:월세,전세,매매'
-        //         ,'s_size' => 'required|integer|max:99999999999'
-        //         ,'p_deposit' => 'required|integer|max:99999999999'
-        //         ,'p_month' => 'nullable|integer|max:99999999999'
+        //         ,'s_size' => 'required|integer|max:11'
+        //         ,'p_deposit' => 'required|integer|max:11'
+        //         ,'p_month' => 'nullable|integer|max:11'
         //         ,'s_stai' => 'string'
         //         ,'s_fl' => 'required|integer|max:999'
         //         ,'s_parking' => 'required|in:0,1'

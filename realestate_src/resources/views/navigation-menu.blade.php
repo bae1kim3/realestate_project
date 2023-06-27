@@ -86,7 +86,7 @@
                         <x-slot name="content">
                             <!-- Account Management -->
 
-                            <x-dropdown-link :href="route('profile.show')">
+                            <x-dropdown-link :href="route('profile.com')">
                                 {{ __('Profile') }}
                             </x-dropdown-link>
 
@@ -191,7 +191,7 @@
         <div class="pt-4 pb-1 border-gray-200">
             <div class="px-4">
                 @if (auth()->check())
-                    <x-responsive-nav-link :href="route('profile.show')" :active="request()->routeIs('profile.show')">
+                    <x-responsive-nav-link :href="route('profile.com')" :active="request()->routeIs('profile.com')">
                     <div class="font-medium text-base text-gray-500 dark:text-white">{{ auth()->user()->name }}</div>
                     <div class="font-medium text-sm text-gray-500 dark:text-white">{{ auth()->user()->email }}</div>
                     </x-responsive-nav-link>
