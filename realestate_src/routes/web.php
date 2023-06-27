@@ -21,9 +21,6 @@ use App\Http\Controllers\MapController;
 use App\Http\Controllers\JjimController;
 use App\Http\Controllers\UpdateUserInfoController;
 
-
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
