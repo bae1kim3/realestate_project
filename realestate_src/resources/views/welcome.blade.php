@@ -48,6 +48,7 @@
 
       <div id="scroll-container" class="scroll-item">
           @foreach ($photos as $photo)
+          <a href="{{ route('struct.detail', ['s_no' => $photo->s_no]) }}">
               <div class="photo-item" style="background-image: url('{{ asset($photo->url) }}');">
                   <span class="photo-info">
                       <span class="info-text">{{ $photo->s_add }}</span><br>
@@ -58,6 +59,7 @@
                       <br><span class="info-text">{{ substr($photo->updated_at, 0, 10) }}</span>
                   </span>
               </div>
+          </a>
               <input type="hidden" id="lastPhotoItem" data-id="{{ $lastPhotoId }}">
           @endforeach
       </div>
