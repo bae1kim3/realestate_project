@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -18,9 +17,6 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
-    use SoftDeletes;
-
-    protected $dates = ['deleted_at']; 
 
     /**
      * The attributes that are mass assignable.
@@ -36,7 +32,7 @@ class User extends Authenticatable
         'phone_no',
         'seller_license',
         'animal_size',
-        'pw_question',
+        // 'pw_question',
         'pw_answer',
         'b_name'
     ];

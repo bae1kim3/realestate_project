@@ -28,9 +28,10 @@ class FindUserPass extends Component
         $user = User::where('email', $email)->first();
 
             if ($this->pw_answer === $user->pw_answer) {
-                // return view('auth.reset-password');
                 return redirect()->route('password-reset');
-            } else {
+            }
+            else {
+                Session::flush();
                 Session::flash('error_message', '입력한 답변이 일치하지 않습니다.');
                 $this->pw_answer = '';
             }

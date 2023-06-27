@@ -1,4 +1,3 @@
-
 <x-app-layout>
     <x-authentication-card>
     <x-slot name="logo">
@@ -32,4 +31,6 @@
     </div>
 </x-authentication-card>
 </x-app-layout>
+@include('layouts.footer')
+
 

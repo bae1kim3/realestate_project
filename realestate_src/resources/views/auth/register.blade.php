@@ -17,16 +17,21 @@
             </div>
         @endif
 
-            @csrf
-                <div class="flex items-center justify-end mt-4">
-                    <a href="{{ route('user-register') }}"><x-button style="margin:50px" class="dark:bg-gray-600">
-                        {{ __('User_Register') }}
-                    </x-button></a>
+        @csrf
+        <div class="flex items-center justify-end mt-4">
+            <a href="{{ route('user-register') }}">
+                <x-button style="margin:50px" class="dark:bg-gray-600">
+                    {{ __('User_Register') }}
+                </x-button>
+            </a>
 
-                    <a href="{{ route('seller-register') }}"><x-button style="margin:10px" class="dark:bg-gray-600">
-                        {{ __('Seller_Register') }}
-                    </x-button></a>
-                </div>
-            </div>
+            <a href="{{ route('seller-register') }}">
+                <x-button style="margin:10px" class="dark:bg-gray-600">
+                    {{ __('Seller_Register') }}
+                </x-button>
+            </a>
+        </div>
+        </div>
     </x-authentication-card>
 </x-guest-layout>
+@include('layouts.footer')

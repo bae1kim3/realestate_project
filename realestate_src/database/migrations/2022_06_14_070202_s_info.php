@@ -29,8 +29,6 @@ return new class extends Migration
             $table->enum('animal_size', ['0','1']); // add 0618 jy
             $table->timestamps();
             $table->softDeletes();
-
-
         });
     }
 

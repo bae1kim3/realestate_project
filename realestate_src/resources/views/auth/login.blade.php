@@ -28,27 +28,31 @@
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <div>
-                        <x-label for="u_id" value="{{ __('User ID') }}" class="dark:text-gray-100"/>
-                        <x-input id="u_id" class="block mt-1 w-full dark:bg-gray-700 dark:text-white" type="text" name="u_id" :value="old('u_id')" required autofocus />
+                        <x-label for="u_id" value="{{ __('User ID') }}" class="dark:text-gray-100" />
+                        <x-input id="u_id" class="block mt-1 w-full dark:bg-gray-700 dark:text-white" type="text"
+                            name="u_id" :value="old('u_id')" required autofocus />
                     </div>
 
                     <div class="mt-4">
-                        <x-label for="password" value="{{ __('Password') }}" class="dark:text-gray-100"/>
-                        <x-input id="password" class="block mt-1 w-full dark:bg-gray-700 dark:text-white" type="password" name="password" required autocomplete="current-password" />
+                        <x-label for="password" value="{{ __('Password') }}" class="dark:text-gray-100" />
+                        <x-input id="password" class="block mt-1 w-full dark:bg-gray-700 dark:text-white"
+                            type="password" name="password" required autocomplete="current-password" />
                     </div>
 
                     <div class="block mt-4">
                         <label for="remember_me" class="flex items-center">
-                            <x-checkbox id="remember_me" name="remember" class="dark:bg-gray-700"/>
+                            <x-checkbox id="remember_me" name="remember" class="dark:bg-gray-700" />
                             <span class="dark:text-gray-100">{{ __('Remember me') }}</span>
                         </label>
                     </div>
 
                     <p class="text-right mt-2">
-                        <a class="underline text-sm text-gray-600 hover:text-gray-900 dark:text-gray-100" href="{{ route('find-username') }}">
+                        <a class="underline text-sm text-gray-600 hover:text-gray-900 dark:text-gray-100"
+                            href="{{ route('find-username') }}">
                             {{ __('아이디를 잊었나요?') }}
                         </a>
-                        <a class="underline text-sm text-gray-600 hover:text-gray-900 dark:text-gray-100" href="{{ route('find-userpassinput') }}">
+                        <a class="underline text-sm text-gray-600 hover:text-gray-900 dark:text-gray-100"
+                            href="{{ route('find-userpassinput') }}">
                             {{ __('비밀번호를 잊었나요?') }}
                         </a>
                     </p>
@@ -62,3 +66,4 @@
             </div>
         </x-authentication-card>
     </x-guest-layout>
+    @include('layouts.footer')

@@ -81,7 +81,7 @@
                 </div>
             @endif --}}
 
-                @foreach($errors->all() as $error) 
+                @foreach($errors->all() as $error)
                 <div class="alert alert-success" role="alert" style="color:red">
                     {{ $error }}
                 </div>
@@ -130,7 +130,7 @@
                 <x-input id="s_lat" name="s_lat" type="hidden" class="mt-1 block w-full dark:bg-gray-700 dark:text-white"  />
                 <x-input id="s_log" name="s_log" type="hidden" class="mt-1 block w-full dark:bg-gray-700 dark:text-white"   />
             </div>
-            
+
             @if(Illuminate\Support\Facades\Auth::user()->seller_license)
             {{-- seller license --}}
                 <div class="col-span-6 sm:col-span-4">
@@ -176,7 +176,7 @@
 
 
 
-    
+
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="{{asset('addr.js')}}"></script>
     <script src="{{asset('tab_menu.js')}}"></script>

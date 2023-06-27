@@ -8,16 +8,17 @@
         </x-slot>
 
         <div class="mb-4">
-            @if(isset($message))
+            @if (isset($message))
                 <div>{{ $message }}</div>
-                    <x-button id="btn3">이 ID 사용</x-button>
+                <x-button id="btn3">이 ID 사용</x-button>
             @elseif(isset($error_message))
                 <div class="text-red-500">{{ $error_message }}</div>
-                    <x-button id="btn3">다른 ID 사용</x-button>
+                <x-button id="btn3">다른 ID 사용</x-button>
             @endif
         </div>
     </x-authentication-card>
 </x-guest-layout>
+@include('layouts.footer')
 
 <script>
     const btn3 = document.getElementById("btn3");
@@ -25,6 +26,3 @@
         window.close();
     });
 </script>
-
-
-

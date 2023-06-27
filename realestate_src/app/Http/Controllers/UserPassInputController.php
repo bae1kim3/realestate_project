@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class UserPassInpuController extends Controller
+class UserPassInputController extends Controller
 {
     public function userpassinput(Request $request)
     {

@@ -21,18 +21,18 @@ class CreateNewUser implements CreatesNewUsers
     public function create(array $input): User
     {
         Validator::make($input, [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'regex:/^[가-힣]+$/u', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => $this->passwordRules(),
+            'password' => ['required', 'string', 'min:8', 'confirmed', 'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,20}$/'], // Updated password rules
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
             'seller_license' => ['string'],
-            'u_id' => ['required', 'string', 'unique:users'],
-            'phone_no' => ['required', 'string'],
+            'u_id' => ['required', 'string', 'unique:users', 'regex:/^[a-zA-Z0-9]{5,12}$/'],
+            'phone_no' => ['required', 'string', 'size:11'],
             'u_addr' => ['required', 'string'],
             'animal_size' => ['nullable', Rule::in(['0', '1'])],
             'pw_question' => ['nullable', Rule::in(['0', '1', '2', '3', '4'])],
-            'pw_answer' => ['required', 'string'],
-            'b_name' => ['string'],
+            'pw_answer' => ['required', 'string', 'max:10', 'regex:/^[가-힣]+$/u'],
+            'b_name' => ['nullable', 'string'],
         ])->validate();
 
         $animalSize = isset($input['animal_size']) ? '1' : '0';

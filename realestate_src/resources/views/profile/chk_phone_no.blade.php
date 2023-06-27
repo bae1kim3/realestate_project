@@ -16,9 +16,9 @@
                         <button type="submit">Check</button>
                     </form>
                     @if ($errors->has('phone_no'))
-                    <div class="text-red-500">
-                        {{ $errors->first('phone_no') }}
-                    </div>
+                        <div class="text-red-500">
+                            {{ $errors->first('phone_no') }}
+                        </div>
                     @endif
                 </div>
                 <x-section-border />

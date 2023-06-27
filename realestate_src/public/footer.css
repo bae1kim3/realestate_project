@@ -1,0 +1,32 @@
+footer{
+    width: 100%;
+    height: 150px;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    color: white;
+    background-color: #215083;
+}
+footer>h4{
+    text-align: center;
+    margin-top: 70px;
+}
+#top{
+    font-weight: bold;
+}
+footer>ul{
+    margin-top: 25px;
+    text-align: center;
+}
+#copyright{
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    color: white;
+    background-color: rgb(6, 56, 67);
+}
+#copyright>p{
+    padding: 15px;
+}
+ul{
+    list-style: none;
+}

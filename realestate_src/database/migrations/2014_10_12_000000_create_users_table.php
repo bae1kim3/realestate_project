@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('seller_license_nos', function (Blueprint $table) {
+        Schema::create('seller_license_no', function (Blueprint $table) {
             $table->unsignedInteger('license_no')->primary();
             $table->softDeletes();
         });
@@ -38,7 +38,7 @@ return new class extends Migration
 
             $table->foreign('seller_license')
                 ->references('license_no')
-                ->on('seller_license_nos')
+                ->on('seller_license_no')
                 ->onDelete('set null');
         });
     }
@@ -49,6 +49,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('users');
-        Schema::dropIfExists('seller_license_nos');
+        Schema::dropIfExists('seller_license_no');
     }
 };

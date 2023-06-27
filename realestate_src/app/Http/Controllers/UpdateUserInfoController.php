@@ -15,7 +15,7 @@ class UpdateUserInfoController extends Controller
         $id = Auth::user()->id;
         $user_seller = Auth::user()->seller_license;
         $user = User::find($id); // user find
-        
+
         if($user_seller){
             $updateData = [];
 
@@ -86,7 +86,7 @@ class UpdateUserInfoController extends Controller
                 $updateData['animal_size'] = 'animal_size';
             }
 
-            
+
             $validator = Validator::make($req->all(), [
                 'name' => ['required', 'string', 'max:20'], // add 0624 jy 수정 안되게(같은값 넣어야 수정되게) TODO : 한글만 추가!!
                 'email' => ['required', 'email', 'max:30',  Rule::unique('users')->ignore($user->id)],

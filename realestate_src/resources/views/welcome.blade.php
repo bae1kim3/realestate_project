@@ -50,6 +50,7 @@
 
     <div id="scroll-container" class="scroll-item">
         @foreach ($photos as $photo)
+        <a href="{{ route('struct.detail', ['s_no' => $photo->s_no]) }}">
         <div class="photo-item" style="background-image: url('{{ asset($photo->url) }}');">
             <span class="photo-info">
                 <span class="info-text">{{ $photo->s_add }}</span><br>
@@ -129,7 +130,7 @@
             <p class="dark:text-white">주소 : 대구광역시 북구 대현동 340-15</p>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-title font-bold cursor-pointer dark:text-white">서구</div>
           <div class="accordion-content">
