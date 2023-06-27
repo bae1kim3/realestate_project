@@ -52,9 +52,9 @@
               <div class="photo-item" style="background-image: url('{{ asset($photo->url) }}');">
                   <span class="photo-info">
                       <span class="info-text">{{ $photo->s_add }}</span><br>
-                      <span class="info-text">{{ $photo->p_deposit }}</span>
+                      <span class="info-text">{{ number_format($photo->p_deposit) }}</span>
                       @if($photo->s_type === '월세')
-                          <span class="info-text"> / {{ $photo->p_month }}</span>
+                          <span class="info-text"> / {{ number_format($photo->p_month) }}</span>
                       @endif
                       <br><span class="info-text">{{ substr($photo->updated_at, 0, 10) }}</span>
                   </span>
