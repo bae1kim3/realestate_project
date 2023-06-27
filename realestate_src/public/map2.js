@@ -8,6 +8,7 @@ const scheckboxes = document.querySelectorAll(
 );
 const getpark = document.getElementById("getpark");
 const container = document.getElementById("sidebar");
+let cardId;
 let selectValues = [];
 let soptionValues = [];
 let level = 8;
@@ -31,10 +32,19 @@ function addlist(data, i) {
     infowindow[i] = new kakao.maps.InfoWindow({
         content: iwContent[i],
     });
-
     kakao.maps.event.addListener(marker, "click", function () {
-        alert("marker click!");
+        // 마커 클릭 시 URL로 이동
+        window.location.href = `#${data["sinfo"][i].s_no}`;
+        cardId = document.getElementById(`${data["sinfo"][i].s_no}`);
+        console.log(cardId);
+        cardId.classList.add("aaaa");
+        setTimeout(() => {
+            cardId.classList.remove("aaaa");
+        }, 1000);
     });
+    // kakao.maps.event.addListener(marker, "click", function () {
+    //     data["sinfo"][i].s_no == marker;
+    // });
 
     kakao.maps.event.addListener(markers[i], "mouseover", function () {
         // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
@@ -48,13 +58,13 @@ function addlist(data, i) {
     });
 }
 // 마커를 생성하고 지도위에 표시하는 함수입니다
-function addMarker(position) {
+function addMarker(position, data, i) {
     // 마커를 생성합니다
     marker = new kakao.maps.Marker({
         position: position,
         image: markerImage,
     });
-
+    marker.id = data["sinfo"][i].s_no;
     // 마커가 지도 위에 표시되도록 설정합니다
     marker.setMap(map);
 
@@ -84,18 +94,6 @@ function addfetch(url, selectedOption) {
 
             markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
             map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-
-            for (let i = 0; i < data["sinfo"].length; i++) {
-                // 마커 하나를 지도위에 표시합니다
-                addMarker(
-                    new kakao.maps.LatLng(
-                        data["sinfo"][i].s_log,
-                        data["sinfo"][i].s_lat
-                    )
-                );
-                // 마커에 커서가 오버됐을 때 마커 위에 표시할 인포윈도우를 생성합니다
-                addlist(data, i);
-            }
 
             let ssum = 0;
             for (let i = 0; i < data["savg"].length; i++) {
@@ -155,7 +153,14 @@ function addfetch(url, selectedOption) {
             container.appendChild(accordion);
             for (let i = 0; i < data["sinfo"].length; i++) {
                 // 카드 요소 생성
+                let atag = document.createElement("a");
+                atag.setAttribute(
+                    "href",
+                    `http://127.0.0.1:8000/sDetail/${data["sinfo"][0].s_no}`
+                );
                 var card = document.createElement("div");
+                card.style.border = "2px solid black";
+                card.id = `${data["sinfo"][i].s_no}`;
                 card.className = "card";
                 card.style.width = "18rem";
 
@@ -182,9 +187,22 @@ function addfetch(url, selectedOption) {
                 cardBody.appendChild(cardText);
                 card.appendChild(image);
                 card.appendChild(cardBody);
-
+                atag.appendChild(card);
                 // 생성한 카드를 원하는 위치에 추가
-                container.appendChild(card);
+                container.appendChild(atag);
+            }
+            for (let i = 0; i < data["sinfo"].length; i++) {
+                // 마커 하나를 지도위에 표시합니다
+                addMarker(
+                    new kakao.maps.LatLng(
+                        data["sinfo"][i].s_log,
+                        data["sinfo"][i].s_lat
+                    ),
+                    data,
+                    i
+                );
+                // 마커에 커서가 오버됐을 때 마커 위에 표시할 인포윈도우를 생성합니다
+                addlist(data, i);
             }
         });
 }
