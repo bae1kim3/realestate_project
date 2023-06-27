@@ -159,7 +159,7 @@ function addfetch(url, selectedOption) {
                 let atag = document.createElement("a");
                 atag.setAttribute(
                     "href",
-                    `http://127.0.0.1:8000/sDetail/${data["sinfo"][0].s_no}`
+                    `http://127.0.0.1:8000/sDetail/${data["sinfo"][i].s_no}`
                 );
                 var card = document.createElement("div");
                 card.style.border = "2px solid black";
