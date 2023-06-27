@@ -93,7 +93,6 @@ class UpdateUserInfoController extends Controller
                 'u_id' =>['required', 'min:6','max:20', 'string',  Rule::unique('users')->ignore($user->id)],
                 'phone_no' => ['required', 'string', 'min:10', 'max:11'],
                 'u_addr' => ['required', 'string'],
-                'seller_license' => ['nullable', 'integer', 'max:9999999999'],
                 'animal_size' => ['nullable', 'in:0,1']
             ]);
 
