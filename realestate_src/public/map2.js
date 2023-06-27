@@ -106,6 +106,7 @@ function addfetch(url, selectedOption) {
             // 부모 요소 생성
             var accordion = document.createElement("div");
             accordion.className = "accordion";
+            accordion.id = "accordionExample";
 
             // 아코디언 아이템 생성
             var accordionItem = document.createElement("div");
@@ -114,6 +115,7 @@ function addfetch(url, selectedOption) {
             // 아코디언 헤더 생성
             var accordionHeader = document.createElement("h2");
             accordionHeader.className = "accordion-header";
+            accordionHeader.id = "headingOne";
 
             // 아코디언 버튼 생성
             var accordionButton = document.createElement("button");
@@ -129,6 +131,7 @@ function addfetch(url, selectedOption) {
 
             // 아코디언 컨텐츠 생성
             var accordionCollapse = document.createElement("div");
+            accordionCollapse.id = "collapseOne";
             accordionCollapse.className = "accordion-collapse collapse";
             accordionCollapse.setAttribute("aria-labelledby", "headingOne");
             accordionCollapse.setAttribute(

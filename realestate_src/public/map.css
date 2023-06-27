@@ -82,7 +82,7 @@
     box-sizing: border-box;
 }
 
-#u_id {
+/* #u_id {
     text-align: center;
     width: 4vw;
     height: 100%;
@@ -92,7 +92,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
 a,
 .a_uid,
 a:hover {
@@ -112,7 +112,7 @@ a:hover {
     border-radius: 20%;
     border-top: none;
     background-color: #ece6cc;
-    margin-left: 10%;
+    margin-left: 12%;
     width: 6vw;
     min-width: 5rem;
     display: inline-block;
