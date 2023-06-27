@@ -39,12 +39,12 @@
                                 <br><br>
                                 <x-label for="sell_cat" style="font-size:20px" class="dark:text-white">매매 유형</x-label>
                                 <br>
-                                <x-label for="sell_cat_month" class="dark:text-white">월세</x-label>
-                                <x-input type="radio" name="sell_cat_info" value="월세" id="sell_cat_month" value="{{old('sell_cat_info')}}" class="dark:text-white"/>
-                                <x-label for="sell_cat_jeon" class="dark:text-white">전세</x-label>
-                                <x-input type="radio" name="sell_cat_info" value="전세" id="sell_cat_jeon" value="{{old('sell_cat_info')}}" class="dark:text-white"/>
-                                <x-label for="sell_cat_buy" class="dark:text-white">매매</x-label>
-                                <x-input type="radio" name="sell_cat_info" value="매매" id="sell_cat_buy" value="{{old('sell_cat_info')}}" class="dark:text-white"/>
+                                <label for="sell_cat_month" class="dark:text-white">월세</label>
+                                <input type="radio" name="sell_cat_info" value="월세" id="sell_cat_month" value="{{old('sell_cat_info')}}" class="dark:text-white"/>
+                                <label for="sell_cat_jeon" class="dark:text-white">전세</-label>
+                                <input type="radio" name="sell_cat_info" value="전세" id="sell_cat_jeon" value="{{old('sell_cat_info')}}" class="dark:text-white"/>
+                                <label for="sell_cat_buy" class="dark:text-white">매매</-label>
+                                <input type="radio" name="sell_cat_info" value="매매" id="sell_cat_buy" value="{{old('sell_cat_info')}}" class="dark:text-white"/>
                                 <br><br>
                                 <x-label for="s_size" style="font-size:20px" class="dark:text-white">방 면적</x-label>
                                 <x-input type="text" name="s_size" id="s_size" value="{{old('s_size')}}" class="dark:bg-gray-700 dark:text-white"/>m²

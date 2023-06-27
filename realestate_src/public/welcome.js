@@ -1,3 +1,18 @@
+// 아코디언
+const accordionItems = document.querySelectorAll('.accordion-item');
+
+accordionItems.forEach(item => {
+  const title = item.querySelector('.accordion-title');
+  title.addEventListener('click', () => {
+    const isActive = item.classList.contains('active');
+    accordionItems.forEach(item => item.classList.remove('active'));
+    if (!isActive) {
+      item.classList.add('active');
+    }
+  });
+});
+
+// 가로스크롤 부동산 정보 갱신
 var loadingPhotos = false;
 var lastPhotoId = document.querySelector('#lastPhotoItem').dataset.id;
 
