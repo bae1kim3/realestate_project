@@ -28,13 +28,13 @@
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <div>
-                        <x-label for="u_id" value="{{ __('User ID') }}" class="dark:text-gray-100" />
+                        <x-label for="u_id" value="{{ __('아이디') }}" class="dark:text-gray-100" />
                         <x-input id="u_id" class="block mt-1 w-full dark:bg-gray-700 dark:text-white" type="text"
                             name="u_id" :value="old('u_id')" required autofocus />
                     </div>
 
                     <div class="mt-4">
-                        <x-label for="password" value="{{ __('Password') }}" class="dark:text-gray-100" />
+                        <x-label for="password" value="{{ __('비밀번호') }}" class="dark:text-gray-100" />
                         <x-input id="password" class="block mt-1 w-full dark:bg-gray-700 dark:text-white"
                             type="password" name="password" required autocomplete="current-password" />
                     </div>
@@ -60,7 +60,7 @@
 
                     <div class="flex items-center justify-end mt-4">
                         <x-button class="dark:bg-gray-400">
-                            {{ __('Log in') }}
+                            {{ __('로그인') }}
                         </x-button>
                     </div>
                 </form>

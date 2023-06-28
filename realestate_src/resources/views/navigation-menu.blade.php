@@ -15,7 +15,7 @@
                             x-on:click="darkMode = !darkMode"
                             class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                             role="switch" aria-checked="false">
-                            <span class="sr-only">Dark mode toggle</span>
+                            <span class="sr-only">다크모드</span>
                             <span x-bind:class="darkMode ? 'translate-x-5 bg-gray-700' : 'translate-x-0 bg-white'"
                                 class="pointer-events-none relative inline-block h-5 w-5 transform rounded-full shadow ring-0 transition duration-200 ease-in-out">
                                 <span
@@ -47,7 +47,7 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')">
                         <h2 class="dark:text-gray-100">
-                            {{ __('HOME') }}
+                            {{ __('홈') }}
                         </h2>
                     </x-nav-link>
                 </div>
@@ -63,7 +63,7 @@
                         <x-slot name="trigger">
                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                                 <button>
-                                    <img class="h-8 w-8 rounded-full object-cover"
+                                    <img class="h-8 w-8 rounded-full object-cover" id="img"
                                         src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                                 </button>
                             @else
@@ -87,7 +87,7 @@
                             <!-- Account Management -->
 
                             <x-dropdown-link :href="route('profile.com')">
-                                {{ __('Profile') }}
+                                {{ __('프로필') }}
                             </x-dropdown-link>
 
                             <div class="border-t border-gray-200"></div>
@@ -97,7 +97,7 @@
                                 @csrf
 
                                 <x-dropdown-link :href="route('logout')" @click.prevent="$root.submit();">
-                                    {{ __('Log Out') }}
+                                    {{ __('로그아웃') }}
                                 </x-dropdown-link>
                             </form>
                         </x-slot>
@@ -110,17 +110,15 @@
                             @auth
                                 <a href="{{ url('/dashboard') }}"
                                     class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">매물올리기</a>
-                                    <a href="{{ route('map.map') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">MAP</a>
+                                    <a href="{{ route('map.map') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">지도</a>
                             @else
                                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                    <a href="{{ route('map.map') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 dark:text-white">MAP</a>
+                                    <a href="{{ route('map.map') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 dark:text-white">지도</a>
                                     <a href="{{ route('login') }}"
-                                        class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 dark:text-white">Log
-                                        in</a>
+                                        class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 dark:text-white">로그인</a>
                                     @if (Route::has('register'))
                                         <a href="{{ route('register') }}"
-                                            class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 dark:text-white">Select
-                                            Register</a>
+                                            class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 dark:text-white">회원가입</a>
                                     @endif
                                 </div>
                             @endauth
@@ -149,19 +147,19 @@
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link class="dark:text-white" :href="route('welcome')" :active="request()->routeIs('welcome')">
-                {{ __('HOME') }}
+                {{ __('홈') }}
             </x-responsive-nav-link>
         </div>
 
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link class="dark:text-white" :href="route('map.map')" :active="request()->routeIs('map.map')">
-                {{ __('Map') }}
+                {{ __('지도') }}
             </x-responsive-nav-link>
         </div>
         @if (!session('u_id'))
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link class="dark:text-white" :href="route('login')" :active="request()->routeIs('login')">
-                {{ __('login') }}
+                {{ __('로그인') }}
             </x-responsive-nav-link>
         </div>
         @endif
@@ -177,7 +175,7 @@
         <div class="pt-2 pb-3 space-y-1">
             @if (!session('u_id'))
                 <x-responsive-nav-link class="dark:text-white" :href="route('register')" :active="request()->routeIs('register')">
-                    {{ __('register') }}
+                    {{ __('회원가입') }}
                 </x-responsive-nav-link>
             @endif
         </div>
@@ -203,7 +201,7 @@
                     <x-responsive-nav-link class="dark:text-white" :href="route('logout')"
                         onclick="event.preventDefault();
                                             this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                        {{ __('로그아웃') }}
                     </x-responsive-nav-link>
                 </form>
                 </div>

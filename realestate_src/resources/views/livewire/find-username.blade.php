@@ -1,7 +1,7 @@
 <x-authentication-card>
     <x-slot name="logo">
         <h1 class="font-semibold text-xl text-gray-800 leading-tight dark:text-gray-100">
-            {{ __('Find Name') }}
+            {{ __('아이디 찾기') }}
         </h1>
     </x-slot>
 

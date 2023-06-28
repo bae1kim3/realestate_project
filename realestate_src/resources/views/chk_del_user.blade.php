@@ -23,7 +23,6 @@
         </div>
         @endif
     </form>
-    {{-- <button type="button" onclick="withdrawal()" id="confirmBtn" >탈퇴</button> --}}
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
     탈퇴
     </button>
@@ -42,8 +41,8 @@
         정말로 탈퇴하시겠습니까? 모든 정보가 지워집니다.
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="confirmBtn" onclick="withdrawal()">Understood</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+        <button type="button" class="btn btn-primary" id="confirmBtn" onclick="withdrawal()">이해했습니다</button>
       </div>
     </div>
   </div>
