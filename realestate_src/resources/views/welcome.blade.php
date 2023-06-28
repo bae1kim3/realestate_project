@@ -11,8 +11,7 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('nav.css') }}">
     <link rel="stylesheet" href="{{asset('welcome.css')}}">
-    <!-- favicon -->
-    <link rel="icon" href="{{asset('house-solid.png')}}">
+    
     <!-- Styles -->
     <style>
       /* ! tailwindcss v3.2.4 | MIT License | https://tailwindcss.com */
@@ -256,6 +255,7 @@
 
     </div>
   </div>
+  @include('layouts.footer')
 <script src="{{asset('welcome.js')}}"></script>
 </body>
 </x-app-layout>
