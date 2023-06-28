@@ -24,19 +24,17 @@ class PhotoLoadController extends Controller
     {
         $lastPhotoId = $request->lastPhotoId;
         $updatePhoto = 3;
-        $searchQuery = $request->input('search');
+        $search = $request->input('search');
 
         $query = Photo::join('s_infos', 's_infos.s_no', 'photos.s_no')
             ->where('mvp_photo', '1')
             ->orderBy('photos.updated_at', 'desc');
 
         // 검색기능
-        if (!empty($searchQuery)) {
-            $query->where(function ($q) use ($searchQuery) {
-                $q->where('s_infos.s_stai', 'LIKE', "%{$searchQuery}%") // 도로명 주소 검색 조건 추가
-                    ->orWhere('s_infos.s_add', 'LIKE', "%{$searchQuery}%"); // 주소 검색 조건 추가
-            });
-        }
+        if (!empty($search)) {
+            $query->where('s_infos.s_stai', 'LIKE', "%{$search}%") //  지하철역 검색
+                    ->orWhere('s_infos.s_add', 'LIKE', "%{$search}%"); // 도로명 주소 검색
+            };
 
         $photos = $query->skip($lastPhotoId)
             ->take($updatePhoto)

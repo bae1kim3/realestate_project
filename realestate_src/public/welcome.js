@@ -49,18 +49,19 @@ function loadMorePhotos() {
 
 function generatePhotoHtml(photo, lastPhotoId) {
     var deposit = photo.p_deposit.toLocaleString();
-    var month = photo.p_month.toLocaleString();
-    var html = '<div class="photo-item" style="background-image: url(\'' + photo.url + '\');">' +
+    var html =  '<a href="/sDetail/' + photo.s_no + '">' +
+        '<div class="photo-item" style="background-image: url(\'' + photo.url + '\');">' +
         '<span class="photo-info">' +
         '<span class="info-text">' + photo.s_add + '</span><br>' +
         '<span class="info-text">' + deposit + '</span>';
 
     if (photo.s_type === '월세') {
-        html += '<span class="info-text"> / ' + month + '</span>';
+        html += '<span class="info-text"> / ' + photo.p_month.toLocaleString() + '</span>';
     }
     html += '<br><span class="info-text">' + photo.updated_at.substr(0, 10) + '</span>' +
         '</span>' +
-        '</div>';
+        '</div>' +
+        '</a>';
 
     html += '<input type="hidden" id="lastPhotoItem" data-id="' + lastPhotoId + '">';
 
@@ -69,7 +70,7 @@ function generatePhotoHtml(photo, lastPhotoId) {
 
 var scrollContainer = document.getElementById('scroll-container');
 var scrollHandler = function () {
-    if (scrollContainer.scrollLeft + scrollContainer.clientWidth >= scrollContainer.scrollWidth) {
+    if (scrollContainer.scrollLeft + scrollContainer.clientWidth >= scrollContainer.scrollWidth - 1) {
         loadMorePhotos();
     }
 };
