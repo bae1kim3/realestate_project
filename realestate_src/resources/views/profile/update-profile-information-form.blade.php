@@ -124,7 +124,7 @@
             <div class="col-span-6 sm:col-span-4">
                 <x-label for="u_addr" value="{{ __('Address') }}" class="mt-3"/>
                 <x-input id="sample6_address" type="text" name="u_addr" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" readonly value="{{Auth::user()->u_addr}}"  />
-                <x-button type="button" onclick="sample6_execDaumPostcode()" value="주소 검색" class="a_btn">주소 검색</x-button>
+                <x-button type="button" onclick="sample6_execDaumPostcode()" value="주소 검색" class="a_btn mb-4">주소 검색</x-button>
 
             </div>
 
