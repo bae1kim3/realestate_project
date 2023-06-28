@@ -40,7 +40,7 @@ function addlist(data, i) {
         cardId.classList.add("aaaa");
         setTimeout(() => {
             cardId.classList.remove("aaaa");
-        }, 1000);
+        }, 1500);
     });
     // kakao.maps.event.addListener(marker, "click", function () {
     //     data["sinfo"][i].s_no == marker;
@@ -196,7 +196,7 @@ function addfetch(url, selectedOption) {
                     `http://127.0.0.1:8000/sDetail/${data["sinfo"][i].s_no}`
                 );
                 var card = document.createElement("div");
-                card.style.border = "2px solid black";
+                card.style.border = "3px solid black";
                 card.id = `${data["sinfo"][i].s_no}`;
                 card.className = "card";
                 card.style.width = "18rem";
