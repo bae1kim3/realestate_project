@@ -110,10 +110,10 @@
                             @auth
                                 <a href="{{ url('/dashboard') }}"
                                     class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">매물올리기</a>
-                                    <a href="{{ route('map.map') }}">MAP</a>
+                                    <a href="{{ route('map.map') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">MAP</a>
                             @else
                                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                    <a href="{{ route('map.map') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">MAP</a>
+                                    <a href="{{ route('map.map') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 dark:text-white">MAP</a>
                                     <a href="{{ route('login') }}"
                                         class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 dark:text-white">Log
                                         in</a>
@@ -193,7 +193,7 @@
 
             </div>
 
-            
+
                 <!-- Authentication -->
                 @if(session('u_id'))
                 <div class="mt-3 space-y-1">
@@ -208,7 +208,7 @@
                 </form>
                 </div>
                 @endif
-            
+
         </div>
     </div>
 </nav>

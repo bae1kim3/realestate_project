@@ -99,41 +99,41 @@
         {{-- <x-button type="button" id="btn4">찜하기</x-button> --}}
         <br>
         <br>
-        <h1>건물 정보</h1>
+        <h1 class="dark:text-white">건물 정보</h1>
         <div style="margin-left: 30px">
-            <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose dark:text-white"
+            <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose dark:text-white dark:bg-gray-700"
                 style="text-align: left">
                 건물 이름 : {{ $s_info->s_name }}
             </div>
-            <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose dark:text-white"
+            <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose dark:text-white dark:bg-gray-700"
                 style="text-align: left">
                 건물 주소 : {{ $s_info->s_add }}
             </div>
-            <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose dark:text-white"
+            <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose dark:text-white dark:bg-gray-700"
                 style="text-align: left">
                 판매 유형 : {{ $s_info->s_type }}
             </div>
-            <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose dark:text-white"
+            <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose dark:text-white dark:bg-gray-700"
                 style="text-align: left">
                 평수 : {{ $s_info->s_size }}
             </div>
-            <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose dark:text-white"
+            <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose dark:text-white dark:bg-gray-700"
                 style="text-align: left">
                 층수 : {{ $s_info->s_fl }}
             </div>
-            <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose dark:text-white"
+            <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose dark:text-white dark:bg-gray-700"
                 style="text-align: left">
                 근처역 : {{ $s_info->s_stai }}
             </div>
-            <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose dark:text-white"
+            <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose dark:text-white dark:bg-gray-700"
                 style="text-align: left">
                 보증금 or 매매가: {{ $s_info->p_deposit }}
             </div>
-            <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose dark:text-white"
+            <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose dark:text-white dark:bg-gray-700"
                 style="text-align: left">
                 월세 or 관리비: {{ $s_info->p_month }}
             </div>
-            <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose dark:text-white"
+            <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose dark:text-white dark:bg-gray-700"
                 style="text-align: left">
                 대형동물 가능 여부 :
                 @if ($s_info->animal_size == 0)
