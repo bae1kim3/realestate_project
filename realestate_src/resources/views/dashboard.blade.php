@@ -88,7 +88,7 @@
                                 <x-label for="s_fl" class="dark:text-white">층수</x-label>
                                 <x-input type="text" name="s_fl" id="s_fl" required maxlength="3"/><p class="dark:text-white">층</p>
                                 <hr><br><br>
-                                <h3 class="dark:text-white">건물 옵션</h3>
+                                <x-label class="dark:text-white">건물 옵션</x-label>
                                 <x-label for="s_parking" class="dark:text-white">주차 가능 여부</x-label>
                                 <input type="radio" name="s_parking" value="1" id="y_parking" />
                                 <x-label for="y_parking" class="dark:text-white">가능</x-label>

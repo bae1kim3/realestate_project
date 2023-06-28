@@ -186,10 +186,10 @@
 {{-- 이하 비밀번호 변경, 탈퇴 --}}
 @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
                 <div class="mt-10 sm:mt-0 dark:text-white">
-                    <h1 style="margin-left:40%">비밀번호를 변경하고 싶으신가요?</h1>
+                    <h1>비밀번호를 변경하고 싶으신가요?</h1>
                     <br>
                     <a href="{{ route('profile.chk_phone_no') }}">
-                    <x-button style="margin-left:40%">비밀번호 변경</x-button>
+                    <x-button>비밀번호 변경</x-button>
                     </a>
                 </div>
 
@@ -201,10 +201,10 @@
 
                 <div class="mt-10 sm:mt-0">
                 {{--@livewire('profile.delete-user-form')--}}
-                    <h1 style="margin-left:40%">계정을 삭제하시겠습니까?</h1>
+                    <h1>계정을 삭제하시겠습니까?</h1>
                     <br>
                         <a href="{{ route('profile.chk_del_user') }}">
-                    <x-danger-button style="margin-left:40%">회원 탈퇴
+                    <x-danger-button>회원 탈퇴
                     </x-danger-button>
                     </a>
                 </div>
