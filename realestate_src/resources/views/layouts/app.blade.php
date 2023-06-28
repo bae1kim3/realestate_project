@@ -12,7 +12,7 @@
     <link rel="icon" href="{{asset('house-solid.png')}}">
     <script src="{{ asset('js/app.js') }}" defer></script>
 
-    <title>{{ __('펫방') }}</title>
+    <title>{{ __('펫 방') }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">

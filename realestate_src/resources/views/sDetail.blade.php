@@ -49,14 +49,13 @@
         #btn3 {
             float: right;
             position: fixed;
-            background-color: black;
             width: 30px;
             height: 30px;
             margin-top: 200px;
         }
 
         #btn3 {
-            margin-top: 250px;
+            margin-top: 500px;
         }
 
         html {
@@ -88,8 +87,9 @@
     </style>
     <div>
         <div id="scroll-container" class="scroll-item">
-            <button type="button" id="btn1" style="z-index:10"></button>
-            <button type="button" id="btn3" style="z-index:10"></button>
+            <button type="button" style="z-index:10"><img id="btn1" src="{{asset('arrow-up-solid.png')}}"></button>
+            <br>
+            <button type="button" style="z-index:10"><img id="btn3" src="{{asset('arrow-down-solid.png')}}"></button>
             <div id="photo">
                 @foreach ($photos as $photo)
                     <img class="photo-item" src="{{ asset($photo->url) }}" alt="{{ $photo->url }}">
