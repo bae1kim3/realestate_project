@@ -2,8 +2,9 @@
 <link rel="stylesheet" href="{{asset('tab_menu.css')}}">
 <link rel="stylesheet" href="{{asset('mypagelist.css')}}">
 
+<div class="wrap">
 @if(Illuminate\Support\Facades\Auth::user()->seller_license)
-        <h2 class="dark:text-white">
+        <h2 class="dark:text-white font-bold text-2xl mt-10">
         {{ __('Seller Profile Information') }}
         </h2>
 @else
@@ -35,7 +36,7 @@
     </div>
 </div>
 <div class='content'>
-    <div id='tab1' data-tab-content class='items active'>
+    <div id='tab1' data-tab-content class='items active mx-8'>
         <div>
             <form action="{{ route('update.userinfo.post') }}" id="frm" method="post" >
         @csrf
@@ -99,21 +100,21 @@
 
             {{-- id --}}
             <div class="col-span-6 sm:col-span-4">
-                <x-label for="id" value="{{ __('ID') }}" />
+                <x-label for="id" value="{{ __('ID') }}" class="mt-3"/>
                 <x-input id="id" name="u_id" type="text" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" value="{{Auth::user()->u_id}}" readonly  />
 
             </div>
 
             <!-- Email -->
             <div class="col-span-6 sm:col-span-4">
-                <x-label for="email" value="{{ __('Email') }}" />
+                <x-label for="email" value="{{ __('Email') }}" class="mt-3"/>
                 <x-input id="email" name="email" maxlength="30"  type="email" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" value="{{Auth::user()->email}}"  />
 
             </div>
 
             {{-- phone number --}}
             <div class="col-span-6 sm:col-span-4">
-                <x-label for="phone_no" value="{{ __('Phone number') }}" />
+                <x-label for="phone_no" value="{{ __('Phone number') }}" class="mt-3"/>
                 <x-input id="phone_no" name="phone_no" minlength="10" maxlength="11" type="text" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" value="{{Auth::user()->phone_no}}"  />
 
             </div>
@@ -121,9 +122,9 @@
 
             {{-- user address --}}
             <div class="col-span-6 sm:col-span-4">
-                <x-label for="u_addr" value="{{ __('Address') }}" />
+                <x-label for="u_addr" value="{{ __('Address') }}" class="mt-3"/>
                 <x-input id="sample6_address" type="text" name="u_addr" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" readonly value="{{Auth::user()->u_addr}}"  />
-                <x-button type="button" onclick="sample6_execDaumPostcode()" value="주소 검색">주소 검색</x-button>
+                <x-button type="button" onclick="sample6_execDaumPostcode()" value="주소 검색" class="a_btn">주소 검색</x-button>
 
             </div>
 
@@ -136,14 +137,14 @@
             @if(Illuminate\Support\Facades\Auth::user()->seller_license)
             {{-- seller license --}}
                 <div class="col-span-6 sm:col-span-4">
-                <x-label for="seller_license" value="{{ __('Seller license') }}" />
+                <x-label for="seller_license" value="{{ __('Seller license') }}" class="mt-3"/>
                 <x-input id="seller_license" name="seller_license" maxlength="10" type="text" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" value="{{Auth::user()->seller_license}}" readonly  />
 
             </div>
 
             {{-- business name --}}
                 <div class="col-span-6 sm:col-span-4">
-                <x-label for="b_name" value="{{ __('Business name') }}" />
+                <x-label for="b_name" value="{{ __('Business name') }}" class="mt-3"/>
                 <x-input id="b_name" type="text" name="b_name" maxlength="20" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" value="{{Auth::user()->b_name}}"  />
 
             </div>
@@ -162,7 +163,7 @@
             @endif
 
 
-            <x-button wire:loading.attr="disabled" id="submit_btn">
+            <x-button wire:loading.attr="disabled" id="submit_btn" class="s_btn">
                 {{ __('Save') }}
             </x-button>
 
@@ -170,7 +171,7 @@
         </div>
     </div>
     <div id='tab2' data-tab-content class='items'>
-        <div>
+        <div class="list">
             @foreach($user as $val)
                 <a href="{{ route('struct.detail', ['s_no' => $val->s_no]) }}">
                 <div class="photo-item" style="background-image: url('{{ asset($val->url) }}');">
@@ -181,11 +182,11 @@
                 </div>
                 </a>
             @endforeach
-    {{ $user->links() }}
         </div>
     </div>
 </div>
 
+{{-- 이하 비밀번호 변경, 탈퇴 --}}
 @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
                 <div class="mt-10 sm:mt-0 dark:text-white">
                     <h1 style="margin-left:40%">If you wannt change password?</h1>
@@ -215,10 +216,59 @@
                 </div>
             @endif
 
+
+<script src="{{asset('tab_menu.js')}}"></script>
+{{-- <script src="{{asset('mybuilding.js')}}"></script> --}}
+
+
+{{-- <script>
+var isLoading = false;
+var loadedItems = 0; // 이미 로드된 아이템 수
+
+document.addEventListener('scroll', function() {
+    console.log('Scroll event');
+    if (!isLoading && isScrolledToBottom()) {
+        loadNextPage();
+    }
+});
+
+function isScrolledToBottom() {
+    return (window.innerHeight + window.scrollY) >= document.body.offsetHeight;
+}
+
+function loadNextPage() {
+    var page = {{ $user_info->currentPage() }};
+    if (isLoading) return;
+    isLoading = true;
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/user/profile?page=' + (page + 1));
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            var photoItems = document.querySelector('#tab2 > div');
+
+            // 새로운 아이템을 4개씩 추가
+            var fragment = document.createDocumentFragment();
+            for (var i = 0; i < 4; i++) {
+                if (loadedItems < response.length) {
+                    var newElement = document.createElement('div');
+                    newElement.innerHTML = response[loadedItems];
+                    fragment.appendChild(newElement);
+                    loadedItems++;
+                }
+            }
+            photoItems.appendChild(fragment);
+
+            page++; // 페이지 번호 증가
+            isLoading = false;
+        } else {
+            console.log('Request failed. Status: ' + xhr.status);
+        }
+    };
+    xhr.send();
+}
+</script> --}}
+</div>
 </x-app-layout>
-
-
-
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script src="{{asset('addr.js')}}"></script>
-    <script src="{{asset('tab_menu.js')}}"></script>

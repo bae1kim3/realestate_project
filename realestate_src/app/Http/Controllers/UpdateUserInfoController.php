@@ -43,7 +43,7 @@ class UpdateUserInfoController extends Controller
                 $updateData['b_name'] = 'b_name';
             }
             $validator = Validator::make($req->all(), [
-                'name' => ['required', 'string', 'max:20'], // add 0624 jy 수정 안되게(같은값 넣어야 수정되게)
+                'name' => ['required', 'string', 'regex:/^[가-힣]+$/u', 'max:20'], // add 0624
                 'email' => ['required', 'email', 'max:30',  Rule::unique('users')->ignore($user->id)],
                 'u_id' =>['required', 'min:6','max:20', 'string', 'regex:/^[a-zA-Z0-9]+$/', Rule::unique('users')->ignore($user->id)],
                 'phone_no' => ['required', 'string', 'min:10', 'max:11'],
@@ -90,7 +90,7 @@ class UpdateUserInfoController extends Controller
 
             
             $validator = Validator::make($req->all(), [
-                'name' => ['required', 'string', 'regex:/^[가-힣]+$/u', 'max:20'], // add 0624 jy 수정 안되게(같은값 넣어야 수정되게) 
+                'name' => ['required', 'string', 'regex:/^[가-힣]+$/u', 'max:20'], // add 0624 
                 'email' => ['required', 'email', 'max:30',  Rule::unique('users')->ignore($user->id)],
                 'u_id' =>['required', 'min:6','max:20', 'string',  'regex:/^[a-zA-Z0-9]+$/', Rule::unique('users')->ignore($user->id)],
                 'phone_no' => ['required', 'string', 'min:10', 'max:11'],
