@@ -1,32 +1,12 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<x-app-layout>
 
-    <title>펫방</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="{{ asset('nav.css') }}">
+  <link rel="stylesheet" href="{{asset('welcome.css')}}">
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="{{ asset('nav.css') }}">
-    <link rel="stylesheet" href="{{asset('welcome.css')}}">
-    
-    <!-- Styles -->
-    <style>
-      /* ! tailwindcss v3.2.4 | MIT License | https://tailwindcss.com */
-      </style>
-  </head>
-
-    <x-app-layout>
-        <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-gray-100">
-                {{ __('Main') }}
-            </h2>
-        </x-slot>
     <body class="antialiased">
         <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-            @if (Route::has('login')&&session('seller_license'))
+            @if (session('seller_license'))
                 <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                     @auth
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex justify-center">
@@ -36,7 +16,7 @@
                         @else
                         <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a>
 
-                        @if (Route::has('register'))
+                        @if (Auth::user())
                             <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Select Register</a>
                         @endif
                     @endauth
@@ -47,7 +27,7 @@
     <div style="text-align: center;">
       <label for="search" class="text-black dark:text-white">매물 검색</label>
       <input type="text" class="rounded-lg px-2 py-1 dark:bg-gray-800 dark:text-white" name="search" id="search" placeholder="역이름, 주소로 검색해 주세요">
-      <button onclick="searchProperties()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">검색</button>
+      <button onclick="searchProperties()" class="py-2 px-4 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 dark:bg-gray-400">검색</button>
     </div>
   <br>
   <br>

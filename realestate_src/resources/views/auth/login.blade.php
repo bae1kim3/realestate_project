@@ -39,21 +39,22 @@
                             type="password" name="password" required autocomplete="current-password" />
                     </div>
 
-                    <div class="block mt-4">
+                    {{-- <div class="block mt-4">
                         <label for="remember_me" class="flex items-center">
                             <x-checkbox id="remember_me" name="remember" class="dark:bg-gray-700" />
                             <span class="dark:text-gray-100">{{ __('Remember me') }}</span>
                         </label>
-                    </div>
+                    </div> --}}
 
                     <p class="text-right mt-2">
                         <a class="underline text-sm text-gray-600 hover:text-gray-900 dark:text-gray-100"
                             href="{{ route('find-username') }}">
-                            {{ __('아이디를 잊었나요?') }}
+                            {{ __('아이디를 잊으셨나요?') }}
                         </a>
+                        <br>
                         <a class="underline text-sm text-gray-600 hover:text-gray-900 dark:text-gray-100"
                             href="{{ route('find-userpassinput') }}">
-                            {{ __('비밀번호를 잊었나요?') }}
+                            {{ __('비밀번호를 잊으셨나요?') }}
                         </a>
                     </p>
 

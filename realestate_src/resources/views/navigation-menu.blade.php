@@ -90,12 +90,6 @@
                                 {{ __('Profile') }}
                             </x-dropdown-link>
 
-                            {{-- @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                                    <x-dropdown-link :href="route('api-tokens.index')">
-                                        {{ __('API Tokens') }}
-                                    </x-dropdown-link>
-                                @endif --}}
-
                             <div class="border-t border-gray-200"></div>
 
                             <!-- Authentication -->
@@ -172,7 +166,7 @@
         </div>
         @endif
 
-        @if (session('seller_lisence'))
+        @if (session('seller_license'))
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link class="dark:text-white" :href="url(url('/dashboard'))" :active="request()->routeIs('dashborad')">
                 {{ __('매물올리기') }}
@@ -181,7 +175,7 @@
         @endif
 
         <div class="pt-2 pb-3 space-y-1">
-            @if (Route::has('register'))
+            @if (!session('u_id'))
                 <x-responsive-nav-link class="dark:text-white" :href="route('register')" :active="request()->routeIs('register')">
                     {{ __('register') }}
                 </x-responsive-nav-link>
