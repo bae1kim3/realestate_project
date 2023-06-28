@@ -48,7 +48,7 @@ class UpdateUserInfoController extends Controller
                 'u_id' =>['required', 'min:6','max:20', 'string', 'regex:/^[a-zA-Z0-9]+$/', Rule::unique('users')->ignore($user->id)],
                 'phone_no' => ['required', 'string', 'min:10', 'max:11'],
                 'u_addr' => ['required', 'string'],
-                'seller_license' => ['nullable', 'integer'],
+                'seller_license' => ['nullable', 'integer', 'size:10'],
                 'b_name' => ['required', 'string', 'max:20']
             ]);
 

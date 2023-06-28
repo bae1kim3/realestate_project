@@ -38,7 +38,7 @@ return new class extends Migration
 
             $table->foreign('seller_license')
                 ->references('license_no')
-                ->on('seller_license_no')
+                ->on('seller_license_nos')
                 ->onDelete('set null');
         });
     }

@@ -25,7 +25,7 @@ class CreateNewUser implements CreatesNewUsers
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed', 'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,20}$/'], // Updated password rules
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
-            'seller_license' => ['string'],
+            'seller_license' => ['string', 'size:10'],
             'u_id' => ['required', 'string', 'unique:users', 'regex:/^[a-zA-Z0-9]{5,12}$/'],
             'phone_no' => ['required', 'string', 'size:11'],
             'u_addr' => ['required', 'string'],
