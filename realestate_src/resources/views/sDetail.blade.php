@@ -147,8 +147,8 @@
             <div id="proimg"><img
                     src="https://search.pstatic.net/sunny/?src=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F92%2Faf%2F2f%2F92af2fec0dfc6e661ee8a2cdd114e14b.jpg&type=a340"
                     alt="중개인 얼굴"></div>
-            <div class="dark:text-white">판매자 : {{ $user->name }}</div>
-            <div class="dark:text-white">부동산 : {{ $user->b_name }}</div>
+            <div class="font-bold">판매자 : {{ $user->name }}</div>
+            <div class="font-bold">부동산 : {{ $user->b_name }}</div>
             <x-button type="button" id="btn2" class="dark:text-white">연락처 보기</x-button>
         </div>
         <br>
@@ -194,7 +194,7 @@
 
             btn2.addEventListener("click", () => {
                 newWindow = window.open("{{ route('sellerPhone', ['s_no' => $photo->s_no]) }}", "find",
-                    "width=550,height=100");
+                    "width=550,height=200");
             });
 
             const btn1 = document.getElementById("btn1");
