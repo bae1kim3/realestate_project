@@ -1,134 +1,141 @@
-<style>
+{{-- <style>
     p{
         color: gray;
     }
-</style>
+</style> --}}
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-gray-100">
-            {{ __('매물올리기') }}
-        </h2>
-    </x-slot>
 
-<div class="wrap">
+    <div class="wrap">
+        <x-slot name="header">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-gray-100">
+                {{ __('매물올리기') }}
+            </h2>
+        </x-slot>
 
-@if(Illuminate\Support\Facades\Auth::user()->seller_license)
-        <h2 class="dark:text-white font-bold text-2xl mt-10">
-        {{ __('공인중개사 회원 정보') }}
-        </h2>
-@endif
 
-    <div class="py-12 h-screen">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-                <h1 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white">
-                    이미지 업로드
-                    <br>
-                </h1>
-                
+        @if(Illuminate\Support\Facades\Auth::user()->seller_license)
+                <h2 class="dark:text-white font-bold text-2xl mt-10" style="padding-left:100px">
+                {{ __('매물 작성') }}
+                </h2>
+        @endif
 
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4 offset-md-4">
-                            <form action="{{ route('struct.insert.post') }}" id="frm" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <x-input type="file" name="photo[]" class="form-control-file" multiple />
-                                @if(session('status'))
-                                    <div class="alert alert-success" role="alert">
-                                        {{ session('status') }}
+        <div class="py-10 h-screen" >
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="p-10 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700" style="padding:40px">
+                    <h1 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white" >
+                        이미지 업로드
+                        <br>
+                    </h1>
+                    
+
+                    <div class="container" style=" padding-top:10px">
+                        <div class="row">
+                            <div class="col-md-4 offset-md-4">
+                                <form action="{{ route('struct.insert.post') }}" id="frm" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <x-input type="file" name="photo[]" class="form-control-file" multiple />
+                                    @if(session('status'))
+                                        <div class="alert alert-success" role="alert">
+                                            {{ session('status') }}
+                                        </div>
+                                    @endif
+                                    @foreach($errors->all() as $error)
+                                        <div class="mt-3 alert text-red-600 " role="alert">
+                                            {{ $error }}
+                                        </div>
+                                    @endforeach
+                                    <div class="mt-5 text-red-600" role="alert" style="display: none" id="err_up"></div>
+                                    <x-label for="s_name" class="mt-5 font-semibold text-xl dark:text-white">건물 이름</x-label>
+                                    <x-input type="text" placeholder="건물 이름" name="s_name" id="s_name" required class="mt-2 dark:bg-gray-700; dark:text-white"/>
+                                    <br>
+                                    <x-label for="sell_cat" class="mt-5 font-semibold text-xl dark:text-white">매매 유형</x-label>
+                                    <div class="mt-2">
+                                        <label for="sell_cat_month" class="dark:text-white">월세</label>
+                                        <input type="radio" name="sell_cat_info" value="월세" id="sell_cat_month"  class="dark:text-white"/>
+                                        <label for="sell_cat_jeon" class="dark:text-white">전세</-label>
+                                        <input type="radio" name="sell_cat_info" value="전세" id="sell_cat_jeon"  class="dark:text-white"/>
+                                        <label for="sell_cat_buy" class="dark:text-white">매매</-label>
+                                        <input type="radio" name="sell_cat_info" value="매매" id="sell_cat_buy"  class="dark:text-white"/>
                                     </div>
-                                @endif
-                                @foreach($errors->all() as $error)
-                                    <div class="alert text-red-600 " role="alert">
-                                        {{ $error }}
+                                    <x-label for="s_size"  class="mt-5 font-semibold text-xl dark:text-white">방 면적</x-label>
+                                    <x-input type="text" name="s_size" id="s_size" required maxlength="11" class="mt-2 dark:bg-gray-700 dark:text-white"/><span class="dark:text-white">m²</span>
+                                    <br>
+                                    <x-label for="s_addr"  class="mt-5 font-semibold text-xl dark:text-white">주소</x-label>
+                                    <x-input type="text" id="sample6_address" name="s_addr" placeholder="대구 지역 내 도로명 주소" readonly required class="block w-full mt-1 dark:bg-gray-700 dark:text-white"/>
+                                    <x-button type="button"  class="mt-3 dark:text-white" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">우편번호 찾기</x-button>
+                                    <br>
+
+                                    {{-- @if(session()->has('addr_err'))
+                                        <div>{{session()->get('addr_err')}}</div>
+                                    @endif
+                                    @if(session()->has('gu_err'))
+                                        <div>{{session()->get('gu_err')}}</div>
+                                    @endif --}}
+                                    <x-input type="hidden" name="s_lat" id="s_lat" />
+                                    <x-input type="hidden" name="s_log" id="s_log" />
+                                    <br>
+                                    <x-label for="sub_name" class="font-semibold text-xl dark:text-white">건물과 제일 가까운 역</x-label>
+                                    <x-input type="text" name="sub_name" maxlength="11" id="sub_name" required class="mt-2 dark:text-white"/><span class="dark:text-white">역</span>
+                                    {{-- @if(session()->has('sub_err'))
+                                        <div>{{session()->get('sub_err')}}</div>
+                                    @endif --}}
+                                    <br>
+                                    <x-label for="p_deposit" class="mt-5 font-semibold text-xl dark:text-white">보증금/매매가/전세가</x-label>
+                                    <x-input type="text" name="p_deposit" id="p_deposit" class="mt-2" required maxlength="11"/><span class="dark:text-white">만원</span><br>
+                                    <x-label for="p_month" class="mt-5 font-semibold text-xl dark:text-white">월세</x-label>
+                                    <x-input type="text" name="p_month" id="p_month" class="mt-2" maxlength="11"/><span class="dark:text-white">만원</span>
+                                    <br>
+                                    <x-label for="s_fl" class="mt-5 font-semibold text-xl dark:text-white">층수</x-label>
+                                    <x-input type="text" name="s_fl" id="s_fl" class="mt-2" required maxlength="3" style="margin-bottom:40px"/><span class="dark:text-white">층</span>
+                                    <hr><br><br>
+                                    <x-label for="s_parking" class="font-semibold text-xl dark:text-white">주차 가능 여부</x-label>
+                                    <div class="mt-2">
+                                        <label for="y_parking" class="dark:text-white">가능</label>
+                                        <input type="radio" name="s_parking" value="1" id="y_parking" />
+                                        <label for="n_parking" id="n_parking" class="dark:text-white">불가능</label>
+                                        <input type="radio" name="s_parking" value="0" id="n_parking" />
                                     </div>
-                                @endforeach
-                                <div class="text-red-600" role="alert" style="display: none" id="err_up"></div>
-                                <x-label for="s_name" class="dark:text-white">건물 이름</x-label>
-                                <x-input type="text" placeholder="건물 이름" name="s_name" id="s_name" required class="dark:bg-gray-700; dark:text-white"/>
-                                <br><br>
-                                <x-label for="sell_cat" style="font-size:20px" class="dark:text-white">매매 유형</x-label>
-                                <br>
-                                <label for="sell_cat_month" class="dark:text-white">월세</label>
-                                <input type="radio" name="sell_cat_info" value="월세" id="sell_cat_month"  class="dark:text-white"/>
-                                <label for="sell_cat_jeon" class="dark:text-white">전세</-label>
-                                <input type="radio" name="sell_cat_info" value="전세" id="sell_cat_jeon"  class="dark:text-white"/>
-                                <label for="sell_cat_buy" class="dark:text-white">매매</-label>
-                                <input type="radio" name="sell_cat_info" value="매매" id="sell_cat_buy"  class="dark:text-white"/>
-                                <br><br>
-                                <x-label for="s_size" style="font-size:20px" class="dark:text-white">방 면적</x-label>
-                                <x-input type="text" name="s_size" id="s_size" required maxlength="11" class="dark:bg-gray-700 dark:text-white"/>m²
-                                <br><br>
-                                <x-label for="s_addr" style="font-size:20px" class="dark:text-white">주소</x-label>
-                                <x-input type="text" id="sample6_address" name="s_addr" placeholder="대구 지역 내 도로명 주소" readonly required class="block mt-1 w-full dark:bg-gray-700 dark:text-white"/>
-                                <br>
-                                <x-button type="button"><x-input type="button"  class="dark:text-white" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"/></x-button>
-                                <br>
-
-                                {{-- @if(session()->has('addr_err'))
-                                    <div>{{session()->get('addr_err')}}</div>
-                                @endif
-                                @if(session()->has('gu_err'))
-                                    <div>{{session()->get('gu_err')}}</div>
-                                @endif --}}
-                                <x-input type="hidden" name="s_lat" id="s_lat" />
-                                <x-input type="hidden" name="s_log" id="s_log" />
-                                <br>
-                                <x-label for="sub_name" class="dark:text-white">건물과 제일 가까운 역</x-label>
-                                <x-input type="text" name="sub_name" maxlength="11" id="sub_name" required class="dark:text-white"/><p class="dark:text-white">역</p>
-                                {{-- @if(session()->has('sub_err'))
-                                    <div>{{session()->get('sub_err')}}</div>
-                                @endif --}}
-                                <br>
-                                <x-label for="p_deposit" class="dark:text-white">보증금/매매가/전세가</x-label>
-                                <x-input type="text" name="p_deposit" id="p_deposit" required maxlength="11"/><p class="dark:text-white">만원</p><br>
-                                <x-label for="p_month" class="dark:text-white">월세</x-label>
-                                <x-input type="text" name="p_month" id="p_month" maxlength="11"/><p class="dark:text-white">만원</p>
-                                <br>
-                                <x-label for="s_fl" class="dark:text-white">층수</x-label>
-                                <x-input type="text" name="s_fl" id="s_fl" required maxlength="3"/><p class="dark:text-white">층</p>
-                                <hr><br><br>
-                                <x-label class="dark:text-white">건물 옵션</x-label>
-                                <x-label for="s_parking" class="dark:text-white">주차 가능 여부</x-label>
-                                <input type="radio" name="s_parking" value="1" id="y_parking" />
-                                <x-label for="y_parking" class="dark:text-white">가능</x-label>
-                                <input type="radio" name="s_parking" value="0" id="n_parking" />
-                                <x-label for="n_parking" id="n_parking" class="dark:text-white">불가능</x-label>
-                                <br>
-                                <x-label for="s_ele" class="dark:text-white">엘레베이터 유무</x-label>
-                                <input type="radio" name="s_ele" value="1" id="y_ele" />
-                                <x-label for="y_ele" class="dark:text-white">있음</x-label>
-                                <input type="radio" name="s_ele" value="0" id="n_ele" />
-                                <x-label for="n_ele" class="dark:text-white">없음</x-label>
-                                <br>
-                                <x-label for="animal_size" class="dark:text-white">대형 동물 허용(25kg 이상)</x-label>
-                                <input type="radio" name="animal_size" value="1" id="y_animal_size" />
-                                <x-label for="y_animal_size" class="dark:text-white">가능</x-label>
-                                <input type="radio" value="0" name="animal_size" id="n_animal_size" />
-                                <x-label for="n_animal_size" class="dark:text-white">불가능</x-label>
-                                <br>
-
-                                {{-- @if(session('sys_error'))
-                                    <div class="alert alert-success" role="alert">
-                                        {{ session('sys_error') }}
+                                    <br>
+                                    <x-label for="s_ele" class="font-semibold text-xl dark:text-white">엘레베이터 유무</x-label>
+                                    <div class="mt-2">
+                                        <label for="y_ele" class="dark:text-white">있음</label>
+                                        <input type="radio" name="s_ele" value="1" id="y_ele" />
+                                        <label for="n_ele" class="dark:text-white">없음</label>
+                                        <input type="radio" name="s_ele" value="0" id="n_ele" />
                                     </div>
-                                @endif --}}
-                                <x-button type="button" id="submit_btn" class="dark:bg-gray-600 dark:text-white">방 올리기</x-button>
-                                <x-button type="button" onclick="location.href='{{url('/')}}'" class="dark:bg-gray-600 dark:text-white">취소</x-button>
-                            </form>
-                            
+                                    <br>
+                                    <x-label for="animal_size" class="font-semibold text-xl dark:text-white">대형 동물 허용(25kg 이상)</x-label>
+                                    <div class="mt-2">
+                                    <label for="y_animal_size" class="dark:text-white">가능</label>
+                                    <input type="radio" name="animal_size" value="1" id="y_animal_size" />
+                                    <label for="n_animal_size" class="dark:text-white">불가능</label>
+                                    <input type="radio" value="0" name="animal_size" id="n_animal_size" />
+                                    </div>
+                                    <br>
 
-                            <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1def08893c26998733c374c40b12ac42&libraries=services,clusterer,drawing"></script>
-                            <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-                            <script src="{{asset('addr.js')}}"></script>
-                            <script src="{{asset('geo.js')}}"></script>
+                                    {{-- @if(session('sys_error'))
+                                        <div class="alert alert-success" role="alert">
+                                            {{ session('sys_error') }}
+                                        </div>
+                                    @endif --}}
+                                    <div class="mt-5">
+                                    <x-button type="button" id="submit_btn" class="dark:bg-gray-600 dark:text-white">방 올리기</x-button>
+                                    <x-button type="button" onclick="location.href='{{url('/')}}'" class="dark:bg-gray-600 dark:text-white">취소</x-button>
+                                    </div>
+                                </form>
+                                
+
+                                <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1def08893c26998733c374c40b12ac42&libraries=services,clusterer,drawing"></script>
+                                <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+                                <script src="{{asset('addr.js')}}"></script>
+                                <script src="{{asset('geo.js')}}"></script>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+                @include('layouts.footer')
         </div>
-        @include('layouts.footer')
-    </div>
     </div>
 </x-app-layout>
 

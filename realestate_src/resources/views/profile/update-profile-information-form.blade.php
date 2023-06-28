@@ -32,7 +32,7 @@
         </div>
     </div>
 </div>
-<div class='content'>
+<div class='content' style="position:relative">
     <div id='tab1' data-tab-content class='items active mx-8'>
         <div>
             <form action="{{ route('update.userinfo.post') }}" id="frm" method="post" >
@@ -185,7 +185,7 @@
 
 {{-- 이하 비밀번호 변경, 탈퇴 --}}
 @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
-                <div class="mt-10 sm:mt-0 dark:text-white">
+                <div class="mt-10 sm:mt-0 dark:text-white" style="margin-top:20px; margin-left:20px;">
                     <h1>비밀번호를 변경하고 싶으신가요?</h1>
                     <br>
                     <a href="{{ route('profile.chk_phone_no') }}">
@@ -193,13 +193,12 @@
                     </a>
                 </div>
 
-                <x-section-border />
             @endif
-
+<x-section-border />
 @if (Laravel\Jetstream\Jetstream::hasAccountDeletionFeatures())
-                <x-section-border />
 
-                <div class="mt-10 sm:mt-0">
+
+                <div class="mt-10 sm:mt-0" style="margin-left:20px;">
                 {{--@livewire('profile.delete-user-form')--}}
                     <h1>계정을 삭제하시겠습니까?</h1>
                     <br>
