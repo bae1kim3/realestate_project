@@ -1,22 +1,12 @@
 <?php
-
 namespace App\Http\Controllers;
-
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
 class MapController extends Controller
 {
     function map(){
-        if(!empty(session('u_id'))) {
-            $u_info = User::where('u_id',(session()->get('u_id') ))->first();
-            return view('map')->with('u_info',$u_info);
-        }else{
-            return view('map');
-        }
+        return view('map');
     }
-
     function getopt($opt,$gu,$sopt)
     {
         $lat = 0;
@@ -64,7 +54,6 @@ class MapController extends Controller
                 $lng = 0;
                 break;
         }
-
         $info['latlng']=['lat'=>$lat,'lng'=>$lng];
         $array = explode(',', $opt);
         $soptarray = explode(',', $sopt);
@@ -78,45 +67,156 @@ class MapController extends Controller
             ->get();
             // '구 선택'이 아닐 때 '월세', '전세', '매매' 중에서 하나만 넘어왔을 때
             if(count($array)==1 && $array[0] != 1){
-                $info['sinfo'] =DB::table('s_infos AS sinfo')
-                ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
-                ->select('sinfo.*', 'phot.url')
-                ->where('sinfo.s_add', 'LIKE', $gu.'%')
-                ->whereIn('sinfo.s_type', [$array[0]])
-                ->where('phot.mvp_photo', '1')
-                ->get();
-            return $info;
+                if((count($soptarray)==1 && $soptarray[0] != 1) && $soptarray[0] == 's_parking' || $soptarray[0] == 's_ele'){
+                    $info['sinfo'] =DB::table('s_infos AS sinfo')
+                    ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
+                    ->join('state_options AS sopt','sinfo.s_no', '=', 'sopt.s_no')
+                    ->select('sinfo.*', 'phot.url','sopt.s_parking', 'sopt.s_ele')
+                    ->where('sinfo.s_add', 'LIKE', $gu.'%')
+                    ->whereIn('sinfo.s_type', [$array[0]])
+                    ->where($soptarray[0],'1')
+                    ->where('phot.mvp_photo', '1')
+                    ->orderByDesc('sinfo.s_type')
+                    ->get();
+                    return $info;
+                }else if((count($soptarray)==2 && $soptarray[0] != 1) && in_array("s_parking", $soptarray) && in_array("s_ele", $soptarray)){
+                    $info['sinfo'] =DB::table('s_infos AS sinfo')
+                    ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
+                    ->join('state_options AS sopt','sinfo.s_no', '=', 'sopt.s_no')
+                    ->select('sinfo.*', 'phot.url','sopt.s_parking', 'sopt.s_ele')
+                    ->where('sinfo.s_add', 'LIKE', $gu.'%')
+                    ->whereIn('sinfo.s_type', [$array[0]])
+                    ->where($soptarray[0],'1')
+                    ->where($soptarray[1],'1')
+                    ->where('phot.mvp_photo', '1')
+                    ->orderByDesc('sinfo.s_type')
+                    ->get();
+                    return $info;
+                }else if($soptarray[0] == 1){
+                    $info['sinfo'] =DB::table('s_infos AS sinfo')
+                    ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
+                    ->select('sinfo.*', 'phot.url')
+                    ->where('sinfo.s_add', 'LIKE', $gu.'%')
+                    ->whereIn('sinfo.s_type', [$array[0]])
+                    ->where('phot.mvp_photo', '1')
+                    ->orderByDesc('sinfo.s_type')
+                    ->get();
+                    return $info;
+                }
             }
             // '구 선택'이 아닐 때 '월세', '전세', '매매' 중에서 두개가 넘어왔을 때
             else if(count($array)==2){
-                $info['sinfo'] =DB::table('s_infos AS sinfo')
-                ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
-                ->select('sinfo.*', 'phot.url')
-                ->where('sinfo.s_add', 'LIKE', $gu.'%')
-                ->whereIn('sinfo.s_type', [$array[0], $array[1]])
-                ->where('phot.mvp_photo', '1')
-                ->get();
-            return $info;
+                if((count($soptarray)==1 && $soptarray[0] != 1) && $soptarray[0] == 's_parking' || $soptarray[0] == 's_ele'){
+                    $info['sinfo'] =DB::table('s_infos AS sinfo')
+                    ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
+                    ->join('state_options AS sopt','sinfo.s_no', '=', 'sopt.s_no')
+                    ->select('sinfo.*', 'phot.url','sopt.s_parking', 'sopt.s_ele')
+                    ->where('sinfo.s_add', 'LIKE', $gu.'%')
+                    ->whereIn('sinfo.s_type', [$array[0], $array[1]])
+                    ->where($soptarray[0],'1')
+                    ->where('phot.mvp_photo', '1')
+                    ->orderByDesc('sinfo.s_type')
+                    ->get();
+                    return $info;
+                }else if((count($soptarray)==2 && $soptarray[0] != 1) && in_array("s_parking", $soptarray) && in_array("s_ele", $soptarray)){
+                    $info['sinfo'] =DB::table('s_infos AS sinfo')
+                    ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
+                    ->join('state_options AS sopt','sinfo.s_no', '=', 'sopt.s_no')
+                    ->select('sinfo.*', 'phot.url','sopt.s_parking', 'sopt.s_ele')
+                    ->where('sinfo.s_add', 'LIKE', $gu.'%')
+                    ->whereIn('sinfo.s_type', [$array[0], $array[1]])
+                    ->where($soptarray[0],'1')
+                    ->where($soptarray[1],'1')
+                    ->where('phot.mvp_photo', '1')
+                    ->orderByDesc('sinfo.s_type')
+                    ->get();
+                    return $info;
+                }else if($soptarray[0] == 1){
+                    $info['sinfo'] =DB::table('s_infos AS sinfo')
+                    ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
+                    ->select('sinfo.*', 'phot.url')
+                    ->where('sinfo.s_add', 'LIKE', $gu.'%')
+                    ->whereIn('sinfo.s_type', [$array[0], $array[1]])
+                    ->where('phot.mvp_photo', '1')
+                    ->orderByDesc('sinfo.s_type')
+                    ->get();
+                    return $info;
+                }
             }
             // '구 선택'이 아닐 때 '월세', '전세', '매매' 중에서 세개가 넘어왔을 때
             else if(count($array)==3){
-                $info['sinfo'] =DB::table('s_infos AS sinfo')
-                ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
-                ->select('sinfo.*', 'phot.url')
-                ->where('sinfo.s_add', 'LIKE', $gu.'%')
-                ->whereIn('sinfo.s_type', [$array[0], $array[1], $array[2]])
-                ->where('phot.mvp_photo', '1')
-                ->get();
-            return $info;
+                if((count($soptarray)==1 && $soptarray[0] != 1) && $soptarray[0] == 's_parking' || $soptarray[0] == 's_ele'){
+                    $info['sinfo'] =DB::table('s_infos AS sinfo')
+                    ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
+                    ->join('state_options AS sopt','sinfo.s_no', '=', 'sopt.s_no')
+                    ->select('sinfo.*', 'phot.url','sopt.s_parking', 'sopt.s_ele')
+                    ->where('sinfo.s_add', 'LIKE', $gu.'%')
+                    ->whereIn('sinfo.s_type', [$array[0], $array[1], $array[2]])
+                    ->where($soptarray[0],'1')
+                    ->where('phot.mvp_photo', '1')
+                    ->orderByDesc('sinfo.s_type')
+                    ->get();
+                    return $info;
+                }else if((count($soptarray)==2 && $soptarray[0] != 1) && in_array("s_parking", $soptarray) && in_array("s_ele", $soptarray)){
+                    $info['sinfo'] =DB::table('s_infos AS sinfo')
+                    ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
+                    ->join('state_options AS sopt','sinfo.s_no', '=', 'sopt.s_no')
+                    ->select('sinfo.*', 'phot.url','sopt.s_parking', 'sopt.s_ele')
+                    ->where('sinfo.s_add', 'LIKE', $gu.'%')
+                    ->whereIn('sinfo.s_type', [$array[0], $array[1], $array[2]])
+                    ->where($soptarray[0],'1')
+                    ->where($soptarray[1],'1')
+                    ->where('phot.mvp_photo', '1')
+                    ->orderByDesc('sinfo.s_type')
+                    ->get();
+                    return $info;
+                }else if($soptarray[0] == 1){
+                    $info['sinfo'] =DB::table('s_infos AS sinfo')
+                    ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
+                    ->select('sinfo.*', 'phot.url')
+                    ->where('sinfo.s_add', 'LIKE', $gu.'%')
+                    ->whereIn('sinfo.s_type', [$array[0], $array[1], $array[2]])
+                    ->where('phot.mvp_photo', '1')
+                    ->orderByDesc('sinfo.s_type')
+                    ->get();
+                    return $info;
+                }
             // '구 선택'이 아닐 때 '월세', '전세', '매매' 중에서 아무것도 넘어오지 않았을 때( 구 만 검색)
             }else if($array[0] == 1){
-                $info['sinfo'] =DB::table('s_infos AS sinfo')
-                ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
-                ->select('sinfo.*', 'phot.url')
-                ->where('sinfo.s_add', 'LIKE', $gu.'%')
-                ->where('phot.mvp_photo', '1')
-                ->get();
-                return $info;
+                if((count($soptarray)==1 && $soptarray[0] != 1) && $soptarray[0] == 's_parking' || $soptarray[0] == 's_ele'){
+                    $info['sinfo'] =DB::table('s_infos AS sinfo')
+                    ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
+                    ->join('state_options AS sopt','sinfo.s_no', '=', 'sopt.s_no')
+                    ->select('sinfo.*', 'phot.url','sopt.s_parking', 'sopt.s_ele')
+                    ->where('sinfo.s_add', 'LIKE', $gu.'%')
+                    ->where($soptarray[0],'1')
+                    ->where('phot.mvp_photo', '1')
+                    ->orderByDesc('sinfo.s_type')
+                    ->get();
+                    return $info;
+                }else if((count($soptarray)==2 && $soptarray[0] != 1) && in_array("s_parking", $soptarray) && in_array("s_ele", $soptarray)){
+                    $info['sinfo'] =DB::table('s_infos AS sinfo')
+                    ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
+                    ->join('state_options AS sopt','sinfo.s_no', '=', 'sopt.s_no')
+                    ->select('sinfo.*', 'phot.url','sopt.s_parking', 'sopt.s_ele')
+                    ->where('sinfo.s_add', 'LIKE', $gu.'%')
+                    ->where($soptarray[0],'1')
+                    ->where($soptarray[1],'1')
+                    ->where('phot.mvp_photo', '1')
+                    ->orderByDesc('sinfo.s_type')
+                    ->get();
+                    return $info;
+                }else if($soptarray[0] == 1){
+                    $info['sinfo'] =DB::table('s_infos AS sinfo')
+                    ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
+                    ->join('state_options AS sopt','sinfo.s_no', '=', 'sopt.s_no')
+                    ->select('sinfo.*', 'phot.url')
+                    ->where('sinfo.s_add', 'LIKE', $gu.'%')
+                    ->where('phot.mvp_photo', '1')
+                    ->orderByDesc('sinfo.s_type')
+                    ->get();
+                    return $info;
+                }
             }
     // "구 선택"일 때
         } else {
@@ -126,41 +226,142 @@ class MapController extends Controller
             ->get();
             // "구 선택"일 때 '월세', '전세', '매매' 중에서 하나만 넘어왔을 때
             if(count($array)==1 && $array[0] != 1){
-                $info['sinfo'] =DB::table('s_infos AS sinfo')
-                ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
-                ->select('sinfo.*', 'phot.url')
-                ->whereIn('sinfo.s_type', [$array[0]])
-                ->where('phot.mvp_photo', '1')
-                ->get();
-            return $info;
+                if((count($soptarray)==1 && $soptarray[0] != 1) && $soptarray[0] == 's_parking' || $soptarray[0] == 's_ele'){
+                    $info['sinfo'] =DB::table('s_infos AS sinfo')
+                    ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
+                    ->join('state_options AS sopt','sinfo.s_no', '=', 'sopt.s_no')
+                    ->select('sinfo.*', 'phot.url','sopt.s_parking', 'sopt.s_ele')
+                    ->whereIn('sinfo.s_type', [$array[0]])
+                    ->where($soptarray[0],'1')
+                    ->where('phot.mvp_photo', '1')
+                    ->orderByDesc('sinfo.s_type')
+                    ->get();
+                    return $info;
+                }else if((count($soptarray)==2 && $soptarray[0] != 1) && in_array("s_parking", $soptarray) && in_array("s_ele", $soptarray)){
+                    $info['sinfo'] =DB::table('s_infos AS sinfo')
+                    ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
+                    ->join('state_options AS sopt','sinfo.s_no', '=', 'sopt.s_no')
+                    ->select('sinfo.*', 'phot.url','sopt.s_parking', 'sopt.s_ele')
+                    ->whereIn('sinfo.s_type', [$array[0]])
+                    ->where($soptarray[0],'1')
+                    ->where($soptarray[1],'1')
+                    ->where('phot.mvp_photo', '1')
+                    ->orderByDesc('sinfo.s_type')
+                    ->get();
+                    return $info;
+                }else if($soptarray[0] == 1){
+                    $info['sinfo'] =DB::table('s_infos AS sinfo')
+                    ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
+                    ->select('sinfo.*', 'phot.url')
+                    ->whereIn('sinfo.s_type', [$array[0]])
+                    ->where('phot.mvp_photo', '1')
+                    ->orderByDesc('sinfo.s_type')
+                    ->get();
+                    return $info;
+                }
             }
             // "구 선택"일 때 '월세', '전세', '매매' 중에서 두개가 넘어왔을 때
             else if(count($array)==2){
-                $info['sinfo'] =DB::table('s_infos AS sinfo')
-                ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
-                ->select('sinfo.*', 'phot.url')
-                ->whereIn('sinfo.s_type', [$array[0], $array[1]])
-                ->where('phot.mvp_photo', '1')
-                ->get();
-            return $info;
+                if((count($soptarray)==1 && $soptarray[0] != 1) && $soptarray[0] == 's_parking' || $soptarray[0] == 's_ele'){
+                    $info['sinfo'] =DB::table('s_infos AS sinfo')
+                    ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
+                    ->join('state_options AS sopt','sinfo.s_no', '=', 'sopt.s_no')
+                    ->select('sinfo.*', 'phot.url','sopt.s_parking', 'sopt.s_ele')
+                    ->whereIn('sinfo.s_type', [$array[0], $array[1]])
+                    ->where($soptarray[0],'1')
+                    ->where('phot.mvp_photo', '1')
+                    ->orderByDesc('sinfo.s_type')
+                    ->get();
+                    return $info;
+                }else if((count($soptarray)==2 && $soptarray[0] != 1) && in_array("s_parking", $soptarray) && in_array("s_ele", $soptarray)){
+                    $info['sinfo'] =DB::table('s_infos AS sinfo')
+                    ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
+                    ->join('state_options AS sopt','sinfo.s_no', '=', 'sopt.s_no')
+                    ->select('sinfo.*', 'phot.url','sopt.s_parking', 'sopt.s_ele')
+                    ->whereIn('sinfo.s_type', [$array[0], $array[1]])
+                    ->where($soptarray[0],'1')
+                    ->where($soptarray[1],'1')
+                    ->where('phot.mvp_photo', '1')
+                    ->orderByDesc('sinfo.s_type')
+                    ->get();
+                    return $info;
+                }else if($soptarray[0] == 1){
+                    $info['sinfo'] =DB::table('s_infos AS sinfo')
+                    ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
+                    ->select('sinfo.*', 'phot.url')
+                    ->whereIn('sinfo.s_type', [$array[0], $array[1]])
+                    ->where('phot.mvp_photo', '1')
+                    ->orderByDesc('sinfo.s_type')
+                    ->get();
+                    return $info;
+                }
             }
             // "구 선택"일 때 '월세', '전세', '매매' 중에서 세개가 넘어왔을 때
             else if(count($array)==3){
-                $info['sinfo'] =DB::table('s_infos AS sinfo')
-                ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
-                ->select('sinfo.*', 'phot.url')
-                ->whereIn('sinfo.s_type', [$array[0], $array[1], $array[2]])
-                ->where('phot.mvp_photo', '1')
-                ->get();
-            return $info;
+                if((count($soptarray)==1 && $soptarray[0] != 1) && $soptarray[0] == 's_parking' || $soptarray[0] == 's_ele'){
+                    $info['sinfo'] =DB::table('s_infos AS sinfo')
+                    ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
+                    ->join('state_options AS sopt','sinfo.s_no', '=', 'sopt.s_no')
+                    ->select('sinfo.*', 'phot.url','sopt.s_parking', 'sopt.s_ele')
+                    ->whereIn('sinfo.s_type', [$array[0], $array[1], $array[2]])
+                    ->where($soptarray[0],'1')
+                    ->where('phot.mvp_photo', '1')
+                    ->orderByDesc('sinfo.s_type')
+                    ->get();
+                    return $info;
+                }else if((count($soptarray)==2 && $soptarray[0] != 1) && in_array("s_parking", $soptarray) && in_array("s_ele", $soptarray)){
+                    $info['sinfo'] =DB::table('s_infos AS sinfo')
+                    ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
+                    ->join('state_options AS sopt','sinfo.s_no', '=', 'sopt.s_no')
+                    ->select('sinfo.*', 'phot.url','sopt.s_parking', 'sopt.s_ele')
+                    ->whereIn('sinfo.s_type', [$array[0], $array[1], $array[2]])
+                    ->where($soptarray[0],'1')
+                    ->where($soptarray[1],'1')
+                    ->where('phot.mvp_photo', '1')
+                    ->orderByDesc('sinfo.s_type')
+                    ->get();
+                    return $info;
+                }else if($soptarray[0] == 1){
+                    $info['sinfo'] =DB::table('s_infos AS sinfo')
+                    ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
+                    ->select('sinfo.*', 'phot.url')
+                    ->whereIn('sinfo.s_type', [$array[0], $array[1], $array[2]])
+                    ->where('phot.mvp_photo', '1')
+                    ->orderByDesc('sinfo.s_type')
+                    ->get();
+                    return $info;
+                }
             // "구 선택"일 때 '월세', '전세', '매매' 중에서 아무것도 넘어오지 않았을 때(구 선택일 때는 아무 값도 설정하지 않았기 때문에 전체값을 넘겨준다.)
             } else if($array[0] == 1){
-                $info['sinfo'] =DB::table('s_infos AS sinfo')
-                ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
-                ->select('sinfo.*', 'phot.url')
-                ->where('phot.mvp_photo', '1')
-                ->get();
-            return $info;
+                if((count($soptarray)==1 && $soptarray[0] != 1) && $soptarray[0] == 's_parking' || $soptarray[0] == 's_ele'){
+                    $info['sinfo'] =DB::table('s_infos AS sinfo')
+                    ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
+                    ->join('state_options AS sopt','sinfo.s_no', '=', 'sopt.s_no')
+                    ->select('sinfo.*', 'phot.url','sopt.s_parking', 'sopt.s_ele')
+                    ->where($soptarray[0],'1')
+                    ->where('phot.mvp_photo', '1')
+                    ->orderByDesc('sinfo.s_type')
+                    ->get();
+                    return $info;
+                }else if((count($soptarray)==2 && $soptarray[0] != 1) && in_array("s_parking", $soptarray) && in_array("s_ele", $soptarray)){
+                    $info['sinfo'] =DB::table('s_infos AS sinfo')
+                    ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
+                    ->join('state_options AS sopt','sinfo.s_no', '=', 'sopt.s_no')
+                    ->select('sinfo.*', 'phot.url','sopt.s_parking', 'sopt.s_ele')
+                    ->where($soptarray[0],'1')
+                    ->where($soptarray[1],'1')
+                    ->where('phot.mvp_photo', '1')
+                    ->orderByDesc('sinfo.s_type')
+                    ->get();
+                    return $info;
+                }else if($soptarray[0] == 1){
+                    $info['sinfo'] =DB::table('s_infos AS sinfo')
+                    ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
+                    ->where('phot.mvp_photo', '1')
+                    ->orderByDesc('sinfo.s_type')
+                    ->get();
+                    return $info;
+                }
             }
         }
     }
