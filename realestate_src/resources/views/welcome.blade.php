@@ -25,7 +25,7 @@
 
   <div class="max-w-7xl mx-auto p-6 lg:p-8">
     <div style="text-align: center;">
-      <label for="search" class="text-black dark:text-white">매물 검색123</label>
+      <label for="search" class="text-black dark:text-white">매물 검색</label>
       <input type="text" class="rounded-lg px-2 py-1 dark:bg-gray-800 dark:text-white" name="search" id="search" placeholder="역이름, 주소로 검색해 주세요">
       <button onclick="searchProperties()" class="py-2 px-4 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 dark:bg-gray-400">검색</button>
     </div>
@@ -109,7 +109,7 @@
             <p class="dark:text-white">주소 : 대구광역시 북구 대현동 340-15</p>
           </div>
         </div>
-        
+
         <div class="accordion-item">
           <div class="accordion-title font-bold cursor-pointer dark:text-white">서구</div>
           <div class="accordion-content">
