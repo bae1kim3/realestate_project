@@ -1,24 +1,22 @@
-.item {
-    overflow-x: auto;
-    white-space: nowrap;
-    width: 100%;
-    height: 20rem;
-  }
-  
+
   .photo-item {
     display: inline-flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-right: 10px;
+    margin-right: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     min-width: 250px;
     max-width: 400px;
     height: 250px;
     border: 1px solid black;
+    border-radius: 10px;
     background-size: cover;
     background-position: center;
     position: relative;
   }
+
   
   .photo-info {
     position: absolute;
@@ -28,8 +26,19 @@
     padding: 5px;
     color: white;
     background-color: rgba(0, 0, 0, 0.7);
+    border-radius:0 0 10px 10px;
     text-align: center;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+
+  .a_btn {
+    margin-top: 10px;
+  }
+
+  .s_btn {
+    margin-top: 20px;
+
+  }
+

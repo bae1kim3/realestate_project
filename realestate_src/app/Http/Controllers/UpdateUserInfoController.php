@@ -133,8 +133,8 @@ class UpdateUserInfoController extends Controller
                 ->join('photos', 's_infos.s_no', '=', 'photos.s_no')
                 ->where('s_infos.u_no', '=', $id)
                 ->where('mvp_photo', '1')
-                // ->get();
-                ->paginate(4);
+                ->get();
+                // ->paginate(4);
                 
             // collection에서 s_no만 뽑아서 array에 담음
             // $s_no = $s_info->pluck('s_no')->toArray();
@@ -146,5 +146,26 @@ class UpdateUserInfoController extends Controller
             // return view('profile.update-profile-information-form')->with('s_info', $s_info); // with으로 못들고옴
             return view('profile.update-profile-information-form')->with('user', $user_info);
         }
+
+//     public function printMyBuilding(Request $request)
+// { 
+//     $id = auth()->user()->id;
+//     $user_info = User::join('s_infos', 'users.id', '=', 's_infos.u_no')
+//         ->join('photos', 's_infos.s_no', '=', 'photos.s_no')
+//         ->where('s_infos.u_no', '=', $id)
+//         ->where('mvp_photo', '1')
+//         ->paginate(4, ['*'], 'page', $request->input('page'));
+
+//     if ($request->ajax()) {
+//         // AJAX 요청의 경우 JSON 응답 반환
+//         return response()->json([
+//             'html' => view('profile.update-profile-information-form', compact('user_info'))->render(),
+//         ]);
+//     }
+
+//     return view('profile.update-profile-information-form', compact('user_info'));
+// }
+
+        
     }
 
