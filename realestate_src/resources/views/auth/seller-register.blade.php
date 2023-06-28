@@ -168,7 +168,7 @@
         var userli = document.getElementById('seller_license').value; // Corrected spelling
         if (userli) {
             url = "{{ route('checkLicense') }}" + "?seller_license=" + userli;;
-            window.open(url, "chkid", "width=700,height=500");
+            window.open(url, "chkid", "width=700,height=400");
         } else {
             alert('라이센스 번호를 입력하세요');
         }
@@ -178,7 +178,7 @@
         var userid = document.getElementById('u_id').value;
         if (userid) {
             url = "{{ route('check-id') }}" + "?u_id=" + userid;
-            window.open(url, "chkid", "width=700,height=500");
+            window.open(url, "chkid", "width=700,height=400");
         } else {
             alert('아이디를 입력하세요');
         }
