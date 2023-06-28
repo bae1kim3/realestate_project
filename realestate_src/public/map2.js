@@ -91,17 +91,45 @@ function addfetch(url, selectedOption) {
                 ), // 지도의 중심좌표
                 level: level, // 지도의 확대 레벨
             };
-
             markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
             map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
-            let ssum = 0;
-            for (let i = 0; i < data["savg"].length; i++) {
-                ssum += data["savg"][i].p_deposit;
+            let smothb = 0;
+            for (let i = 0; i < data["monthly"].length; i++) {
+                smothb += data["monthly"][i].p_deposit;
             }
-            let savg1 = ssum / data["savg"].length;
-            let savg = isNaN(savg1) ? "0" : savg1;
-            console.log(savg);
+            console.log(smothb);
+            let mtsavg = smothb / data["monthly"].length;
+            let monthbavg = Math.ceil(isNaN(mtsavg) ? "0" : mtsavg);
+            console.log(monthbavg);
+
+            let smothm = 0;
+            for (let i = 0; i < data["monthly"].length; i++) {
+                smothm += data["monthly"][i].p_month;
+            }
+            console.log(smothm);
+            let mtmsavg = smothm / data["monthly"].length;
+            let monthmavg = Math.ceil(isNaN(mtmsavg) ? "0" : mtmsavg);
+            console.log(monthmavg);
+
+            let jeonsep = 0;
+            for (let i = 0; i < data["jeonse"].length; i++) {
+                jeonsep += data["jeonse"][i].p_deposit;
+            }
+            console.log(jeonsep);
+            let jeonsavg = jeonsep / data["jeonse"].length;
+            let jeonpavg = Math.ceil(isNaN(jeonsavg) ? "0" : jeonsavg);
+            console.log(jeonpavg);
+
+            let trade = 0;
+            for (let i = 0; i < data["trade"].length; i++) {
+                trade += data["trade"][i].p_deposit;
+            }
+            console.log(trade);
+            let tradeavg = trade / data["trade"].length;
+            let tradepavg = Math.ceil(isNaN(tradeavg) ? "0" : tradeavg);
+            console.log(tradepavg);
+
             container.innerText = "";
             // 부모 요소 생성
             var accordion = document.createElement("div");
@@ -127,7 +155,7 @@ function addfetch(url, selectedOption) {
             accordionButton.setAttribute("aria-controls", "collapseOne");
             accordionButton.textContent = `${
                 selectedOption == "구 선택" ? "전체 구" : selectedOption
-            }의평균매매가`;
+            }의 평균가`;
 
             // 아코디언 컨텐츠 생성
             var accordionCollapse = document.createElement("div");
@@ -141,9 +169,15 @@ function addfetch(url, selectedOption) {
 
             var accordionBody = document.createElement("div");
             accordionBody.className = "accordion-body";
-            accordionBody.innerHTML = `${
-                selectedOption == "구 선택" ? "전체 구" : selectedOption
-            }의 평균 : ${savg.toLocaleString("ko-KR")}만원`;
+            accordionBody.innerHTML = `<b>보증금/월세</b><br> ${monthbavg.toLocaleString(
+                "ko-KR"
+            )}/${monthmavg.toLocaleString(
+                "ko-KR"
+            )}만원 <br> <b>전세</b><br> ${jeonpavg.toLocaleString(
+                "ko-KR"
+            )}만원 <br> <b>매매</b><br> ${tradepavg.toLocaleString(
+                "ko-KR"
+            )}만원`;
 
             // 요소들을 구조에 맞게 추가
             accordionHeader.appendChild(accordionButton);

@@ -1,11 +1,18 @@
 <?php
 namespace App\Http\Controllers;
+
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 class MapController extends Controller
 {
     function map(){
-        return view('map');
+        if(!empty(session('u_id'))) {
+            $u_info = User::where('u_id',(session()->get('u_id') ))->first();
+            return view('map')->with('u_info',$u_info);
+        }else{
+            return view('map');
+        }
     }
     function getopt($opt,$gu,$sopt)
     {
@@ -60,10 +67,20 @@ class MapController extends Controller
          // '구 선택'이 아닐 때
         if($gu != '구 선택'){
             // 매매가 평균 구하는 쿼리
-            $info['savg']=DB::table('s_infos')
-            ->select('p_deposit')
+            $info['trade']=DB::table('s_infos')
+            ->select('p_deposit', 's_type')
             ->where('s_add', 'LIKE', $gu.'%')
             ->where('s_type','매매')
+            ->get();
+            $info['jeonse']=DB::table('s_infos')
+            ->select('p_deposit', 's_type')
+            ->where('s_add', 'LIKE', $gu.'%')
+            ->where('s_type','전세')
+            ->get();
+            $info['monthly']=DB::table('s_infos')
+            ->select('p_deposit', 's_type', 'p_month')
+            ->where('s_add', 'LIKE', $gu.'%')
+            ->where('s_type','월세')
             ->get();
             // '구 선택'이 아닐 때 '월세', '전세', '매매' 중에서 하나만 넘어왔을 때
             if(count($array)==1 && $array[0] != 1){
@@ -220,9 +237,17 @@ class MapController extends Controller
             }
     // "구 선택"일 때
         } else {
-            $info['savg']=DB::table('s_infos')
-            ->select('p_deposit')
+            $info['trade']=DB::table('s_infos')
+            ->select('p_deposit', 's_type')
             ->where('s_type','매매')
+            ->get();
+            $info['jeonse']=DB::table('s_infos')
+            ->select('p_deposit', 's_type')
+            ->where('s_type','전세')
+            ->get();
+            $info['monthly']=DB::table('s_infos')
+            ->select('p_deposit', 's_type', 'p_month')
+            ->where('s_type','월세')
             ->get();
             // "구 선택"일 때 '월세', '전세', '매매' 중에서 하나만 넘어왔을 때
             if(count($array)==1 && $array[0] != 1){

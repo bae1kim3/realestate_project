@@ -65,7 +65,7 @@
                 {{$u_info->u_id}}
                 </div>
                 <div class="dropdown-menu ">
-                <a href="{{route('profile.show')}}">
+                <a href="{{route('profile.com')}}">
                     <div>마이페이지</div>
                 </a>
                 <a href="{{route('user.logout')}}">
