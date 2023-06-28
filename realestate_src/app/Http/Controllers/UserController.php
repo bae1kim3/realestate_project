@@ -32,7 +32,7 @@ class UserController extends Controller
             $id = Auth::user()->id; // 유저 넘버 pk
             $user = User::find($id); //유저 정보 가져옴
             $validator = Validator::make($req->all(), [
-                'password' => 'required|regex:/^(?=.*[a-z])(?=.*[!@#$%^&*])(?=.*[0-9]).{8,20}$/'
+                'password' => 'required|regex:/^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])(?=.*[0-9]).{8,20}$/'
             ]);
             if ($validator->fails()) {
                 return redirect()
