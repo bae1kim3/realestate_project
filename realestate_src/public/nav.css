@@ -1,9 +1,5 @@
-img{
-    margin-top: 85px;
-}
-
 @media screen and (max-width: 700px) {
     .profile-img {
-    display: none;
+        display: none;
     }
 }

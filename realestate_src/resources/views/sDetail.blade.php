@@ -165,30 +165,29 @@
             var container = document.getElementById('map');
             var options = {
                 center: new kakao.maps.LatLng({{ $s_info->s_log }}, {{ $s_info->s_lat }}),
-                level: 3
+                level: 5
             };
 
             var map = new kakao.maps.Map(container, options);
 
-            var locPosition = new kakao.maps.LatLng({{ $s_info->s_log }}, {{ $s_info->s_lat }}); // 마커가 표시될 위치를 설정합니다
-            var message = '<div style="padding: 5px;"><p style="text-align:center">건물 위치</p></div>'; // 인포윈도우에 표시될 내용입니다
+            var position = new kakao.maps.LatLng({{ $s_info->s_log }}, {{ $s_info->s_lat }}); // 마커가 표시될 위치를 설정합니다
+            var iwContent = '<div style="padding: 5px;">{{ $s_info->s_name }}</div>'; // 인포윈도우에 표시될 내용입니다
 
             // 마커를 생성합니다
             var marker = new kakao.maps.Marker({
                 map: map,
-                position: locPosition
+                position: position
             });
 
             // 인포윈도우를 생성합니다
             var infowindow = new kakao.maps.InfoWindow({
-                content: message
+                content: iwContent
             });
-
             // 인포윈도우를 마커 위에 표시합니다
             infowindow.open(map, marker);
-        </script>
 
-        <script>
+
+
             const btn2 = document.getElementById("btn2");
             let newWindow = null;
 

@@ -108,7 +108,7 @@ a:hover {
 }
 
 #loginuser {
-    background-color: #ece6cc;
+    background-color: #fffced;
     margin-left: 10%;
     border-radius: 30px;
     text-align: center;
@@ -118,7 +118,7 @@ a:hover {
     margin-top: 5px;
     border-radius: 20%;
     border-top: none;
-    background-color: #ece6cc;
+    background-color: #fffced;
     margin-left: 10%;
     width: 6vw;
     min-width: 5rem;
