@@ -22,6 +22,9 @@ let infowindow = [];
 let markerImage;
 let imageSrc = "maphome.png";
 let imageSize = new kakao.maps.Size(24, 35);
+let pageno = 0;
+let numofrows = 0;
+let radius = "";
 
 function addlist(data, i) {
     iwContent[
@@ -46,13 +49,13 @@ function addlist(data, i) {
     //     data["sinfo"][i].s_no == marker;
     // });
 
-    kakao.maps.event.addListener(markers[i], "mouseover", function () {
+    kakao.maps.event.addListener(markers[i], "mouseenter", function () {
         // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
         infowindow[i].open(map, markers[i]);
     });
 
     // 마커에 마우스아웃 이벤트를 등록합니다
-    kakao.maps.event.addListener(markers[i], "mouseout", function () {
+    kakao.maps.event.addListener(markers[i], "mouseleave", function () {
         // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
         infowindow[i].close();
     });
@@ -214,11 +217,33 @@ function addfetch(url, selectedOption) {
                 // 카드 내용 생성
                 var cardText = document.createElement("p");
                 cardText.className = "card-text";
-                cardText.innerHTML =
-                    "매매유형 : " +
-                    data["sinfo"][i].s_type +
-                    "<br>주소 : " +
-                    data["sinfo"][i].s_add;
+                if (data["sinfo"][i].s_type == "월세") {
+                    cardText.innerHTML =
+                        "<b>매매유형</b> : " +
+                        data["sinfo"][i].s_type +
+                        "<br><b>가격</b> : " +
+                        data["sinfo"][i].p_deposit.toLocaleString("ko-KR") +
+                        "만원/" +
+                        data["sinfo"][i].p_month.toLocaleString("ko-KR") +
+                        "만원<br><b>층수</b> : " +
+                        data["sinfo"][i].s_fl +
+                        "<br><b>평수</b> : " +
+                        data["sinfo"][i].s_size +
+                        "<br><b>주소</b> : " +
+                        data["sinfo"][i].s_add;
+                } else {
+                    cardText.innerHTML =
+                        "<b>매매유형</b> : " +
+                        data["sinfo"][i].s_type +
+                        "<br><b>가격</b> : " +
+                        data["sinfo"][i].p_deposit.toLocaleString("ko-KR") +
+                        "만원<br><b>층수</b> : " +
+                        data["sinfo"][i].s_fl +
+                        "<br><b>평수</b> : " +
+                        data["sinfo"][i].s_size +
+                        "<br><b>주소</b> : " +
+                        data["sinfo"][i].s_add;
+                }
 
                 // 요소들을 조합하여 구조 생성
                 cardBody.appendChild(cardText);
@@ -339,9 +364,15 @@ getpark.addEventListener("click", function (checkbox) {
                 console.log(data);
                 const servicekey =
                     "cHVjVjglbOBfaJaLkhiSbBrRU2U3MkuefQS0rxexSVZcSA8vF6zeNrhf7LmjNlJGibN%2BM%2BPpK9GGjbmpsfD7FA%3D%3D";
-                let pageno = 0;
-                let numofrows = 10;
-                let radius = "3";
+                if (selectedOption == "구 선택") {
+                    pageno = 0;
+                    numofrows = 20;
+                    radius = "4";
+                } else {
+                    pageno = 0;
+                    numofrows = 10;
+                    radius = "3";
+                }
 
                 const url =
                     "https://apis.data.go.kr/6270000/dgInParkwalk/getDgWalkParkList?serviceKey=" +
