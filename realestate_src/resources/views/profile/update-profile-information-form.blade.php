@@ -5,16 +5,13 @@
 <div class="wrap">
 @if(Illuminate\Support\Facades\Auth::user()->seller_license)
         <h2 class="dark:text-white font-bold text-2xl mt-10">
-        {{ __('Seller Profile Information') }}
+        {{ __('공인중개사 회원 정보') }}
         </h2>
 @else
         <h2 class="dark:text-white">
-        {{ __('Private Profile Information') }}
+        {{ __('회원정보') }}
         </h2>
 @endif
-        <h4 class="dark:text-white">
-        {{ __('Update your account\'s profile information and email address etc.') }}
-        </h4>
 
 
 <div class='main'>
@@ -93,36 +90,36 @@
 
             <!-- Name -->
             <div class="col-span-6 sm:col-span-4">
-                <x-label for="name" value="{{ __('Name') }}"/>
+                <x-label for="name" value="{{ __('이름') }}"/>
                 <x-input id="name" name="name" maxlength="20" type="text" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" value="{{Auth::user()->name}}" readonly  />
 
             </div>
 
             {{-- id --}}
             <div class="col-span-6 sm:col-span-4">
-                <x-label for="id" value="{{ __('ID') }}" class="mt-3"/>
+                <x-label for="id" value="{{ __('아이디') }}" class="mt-3"/>
                 <x-input id="id" name="u_id" type="text" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" value="{{Auth::user()->u_id}}" readonly  />
 
             </div>
 
             <!-- Email -->
             <div class="col-span-6 sm:col-span-4">
-                <x-label for="email" value="{{ __('Email') }}" class="mt-3"/>
+                <x-label for="email" value="{{ __('이메일') }}" class="mt-3"/>
                 <x-input id="email" name="email" maxlength="30"  type="email" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" value="{{Auth::user()->email}}"  />
 
             </div>
 
             {{-- phone number --}}
-            <div class="col-span-6 sm:col-span-4">
-                <x-label for="phone_no" value="{{ __('Phone number') }}" class="mt-3"/>
+            {{-- <div class="col-span-6 sm:col-span-4">
+                <x-label for="phone_no" value="{{ __('전화번호') }}" class="mt-3"/>
                 <x-input id="phone_no" name="phone_no" minlength="10" maxlength="11" type="text" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" value="{{Auth::user()->phone_no}}"  />
 
-            </div>
+            </div> --}}
 
 
             {{-- user address --}}
             <div class="col-span-6 sm:col-span-4">
-                <x-label for="u_addr" value="{{ __('Address') }}" class="mt-3"/>
+                <x-label for="u_addr" value="{{ __('주소') }}" class="mt-3"/>
                 <x-input id="sample6_address" type="text" name="u_addr" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" readonly value="{{Auth::user()->u_addr}}"  />
                 <x-button type="button" onclick="sample6_execDaumPostcode()" value="주소 검색" class="a_btn mb-4">주소 검색</x-button>
 
@@ -137,14 +134,14 @@
             @if(Illuminate\Support\Facades\Auth::user()->seller_license)
             {{-- seller license --}}
                 <div class="col-span-6 sm:col-span-4">
-                <x-label for="seller_license" value="{{ __('Seller license') }}" class="mt-3"/>
+                <x-label for="seller_license" value="{{ __('공인중개사 라이센스') }}" class="mt-3"/>
                 <x-input id="seller_license" name="seller_license" maxlength="10" type="text" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" value="{{Auth::user()->seller_license}}" readonly  />
 
             </div>
 
             {{-- business name --}}
                 <div class="col-span-6 sm:col-span-4">
-                <x-label for="b_name" value="{{ __('Business name') }}" class="mt-3"/>
+                <x-label for="b_name" value="{{ __('상호명') }}" class="mt-3"/>
                 <x-input id="b_name" type="text" name="b_name" maxlength="20" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" value="{{Auth::user()->b_name}}"  />
 
             </div>
@@ -153,7 +150,7 @@
             @if(!(Illuminate\Support\Facades\Auth::user()->seller_license))
                 {{-- animal size --}}
                 <div class="col-span-6 sm:col-span-4">
-                <x-label for="animal_size" value="{{ __('Animal size') }}" />
+                <x-label for="animal_size" value="{{ __('동물크기') }}" />
                 {{-- <x-input id="animal_size" type="text" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" wire:model.defer="state.animal_size" autocomplete="animal_size" /> --}}
                 <x-label for="animal_size" value="{{ __('대형 동물') }}" class="dark:text-white"/>
                 <input type="radio" name="animal_size" id="animal_size_sm" @if(Illuminate\Support\Facades\Auth::user()->animal_size === "1") checked @endif value="1" name="animal_size" class="dark:bg-gray-700">
@@ -164,7 +161,7 @@
 
 
             <x-button wire:loading.attr="disabled" id="submit_btn" class="s_btn">
-                {{ __('Save') }}
+                {{ __('저장') }}
             </x-button>
 
             </form>
@@ -189,10 +186,10 @@
 {{-- 이하 비밀번호 변경, 탈퇴 --}}
 @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
                 <div class="mt-10 sm:mt-0 dark:text-white">
-                    <h1 style="margin-left:40%">If you wannt change password?</h1>
+                    <h1 style="margin-left:40%">비밀번호를 변경하고 싶으신가요?</h1>
                     <br>
                     <a href="{{ route('profile.chk_phone_no') }}">
-                    <x-button style="margin-left:40%">Update Password</x-button>
+                    <x-button style="margin-left:40%">비밀번호 변경</x-button>
                     </a>
                 </div>
 
@@ -204,13 +201,10 @@
 
                 <div class="mt-10 sm:mt-0">
                 {{--@livewire('profile.delete-user-form')--}}
-                    <h1 style="margin-left:40%">Delete account</h1>
-                    <p style="margin-left:40%">
-                        Permanently delete your account.
-                    <p>
+                    <h1 style="margin-left:40%">계정을 삭제하시겠습니까?</h1>
                     <br>
                         <a href="{{ route('profile.chk_del_user') }}">
-                    <x-danger-button style="margin-left:40%">Delete account
+                    <x-danger-button style="margin-left:40%">회원 탈퇴
                     </x-danger-button>
                     </a>
                 </div>

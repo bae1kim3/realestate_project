@@ -10,6 +10,13 @@
         </h2>
     </x-slot>
 
+<div class="wrap">
+
+@if(Illuminate\Support\Facades\Auth::user()->seller_license)
+        <h2 class="dark:text-white font-bold text-2xl mt-10">
+        {{ __('공인중개사 회원 정보') }}
+        </h2>
+@endif
 
     <div class="py-12 h-screen">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -121,6 +128,7 @@
             </div>
         </div>
         @include('layouts.footer')
+    </div>
     </div>
 </x-app-layout>
 
