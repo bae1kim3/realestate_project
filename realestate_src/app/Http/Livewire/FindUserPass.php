@@ -31,7 +31,6 @@ class FindUserPass extends Component
                 return redirect()->route('password-reset');
             }
             else {
-                Session::flush();
                 Session::flash('error_message', '입력한 답변이 일치하지 않습니다.');
                 $this->pw_answer = '';
             }

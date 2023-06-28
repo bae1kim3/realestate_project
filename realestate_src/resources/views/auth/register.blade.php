@@ -5,7 +5,7 @@
         </x-slot>
         <x-slot name="logo">
             <h1 class="font-semibold text-xl text-gray-800 leading-tight dark:text-gray-100">
-                {{ __('Select Register') }}
+                {{ __('회원유형 선택') }}
             </h1>
         </x-slot>
 
@@ -18,19 +18,19 @@
         @endif
 
         @csrf
-        <div class="flex items-center justify-end mt-4">
-            <a href="{{ route('user-register') }}">
-                <x-button style="margin:50px" class="dark:bg-gray-600">
-                    {{ __('User_Register') }}
-                </x-button>
-            </a>
+        <div class="flex items-center justify-center mt-4">
+    <a href="{{ route('user-register') }}">
+        <x-button style="margin:30px" class="dark:bg-gray-600">
+            {{ __('일반 회원') }}
+        </x-button>
+    </a>
 
-            <a href="{{ route('seller-register') }}">
-                <x-button style="margin:10px" class="dark:bg-gray-600">
-                    {{ __('Seller_Register') }}
-                </x-button>
-            </a>
-        </div>
+    <a href="{{ route('seller-register') }}">
+        <x-button style="margin:30px" class="dark:bg-gray-600">
+            {{ __('공인중개사 회원') }}
+        </x-button>
+    </a>
+</div>
         </div>
     </x-authentication-card>
 </x-guest-layout>
