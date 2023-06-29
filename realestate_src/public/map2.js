@@ -207,6 +207,7 @@ function addfetch(url, selectedOption) {
                 // 이미지 요소 생성
                 var image = document.createElement("img");
                 image.src = data["sinfo"][i].url; // 이미지 소스를 설정해주세요
+                image.style.height = "200px";
                 image.className = "card-img-top";
                 image.alt = "메인이미지"; // 대체 텍스트를 설정해주세요
 
