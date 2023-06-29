@@ -44,6 +44,7 @@ function addlist(data, i) {
             cardId.classList.remove("aaaa");
         }, 1500);
     });
+    markers[i].removeEventListener();
 
     kakao.maps.event.addListener(markers[i], "mouseover", function () {
         // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
