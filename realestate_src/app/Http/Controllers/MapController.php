@@ -96,7 +96,7 @@ class MapController extends Controller
                     ->whereIn('sinfo.s_type', [$array[0]])
                     ->where($soptarray[0],'1')
                     ->where('phot.mvp_photo', '1')
-                    ->where('deleted_at', 'null')
+                    ->where('sinfo.deleted_at', 'null')
                     ->orderByDesc('sinfo.s_type')
                     ->get();
                     return $info;
@@ -110,7 +110,7 @@ class MapController extends Controller
                     ->where($soptarray[0],'1')
                     ->where($soptarray[1],'1')
                     ->where('phot.mvp_photo', '1')
-                    ->where('deleted_at', 'null')
+                    ->where('sinfo.deleted_at', 'null')
                     ->orderByDesc('sinfo.s_type')
                     ->get();
                     return $info;
@@ -121,7 +121,7 @@ class MapController extends Controller
                     ->where('sinfo.s_add', 'LIKE', $gu.'%')
                     ->whereIn('sinfo.s_type', [$array[0]])
                     ->where('phot.mvp_photo', '1')
-                    ->where('deleted_at', 'null')
+                    ->where('sinfo.deleted_at', 'null')
                     ->orderByDesc('sinfo.s_type')
                     ->get();
                     return $info;
@@ -138,7 +138,7 @@ class MapController extends Controller
                     ->whereIn('sinfo.s_type', [$array[0], $array[1]])
                     ->where($soptarray[0],'1')
                     ->where('phot.mvp_photo', '1')
-                    ->where('deleted_at', 'null')
+                    ->where('sinfo.deleted_at', 'null')
                     ->orderByDesc('sinfo.s_type')
                     ->get();
                     return $info;
@@ -152,7 +152,7 @@ class MapController extends Controller
                     ->where($soptarray[0],'1')
                     ->where($soptarray[1],'1')
                     ->where('phot.mvp_photo', '1')
-                    ->where('deleted_at', 'null')
+                    ->where('sinfo.deleted_at', 'null')
                     ->orderByDesc('sinfo.s_type')
                     ->get();
                     return $info;
@@ -163,7 +163,7 @@ class MapController extends Controller
                     ->where('sinfo.s_add', 'LIKE', $gu.'%')
                     ->whereIn('sinfo.s_type', [$array[0], $array[1]])
                     ->where('phot.mvp_photo', '1')
-                    ->where('deleted_at', 'null')
+                    ->where('sinfo.deleted_at', 'null')
                     ->orderByDesc('sinfo.s_type')
                     ->get();
                     return $info;
@@ -180,7 +180,7 @@ class MapController extends Controller
                     ->whereIn('sinfo.s_type', [$array[0], $array[1], $array[2]])
                     ->where($soptarray[0],'1')
                     ->where('phot.mvp_photo', '1')
-                    ->where('deleted_at', 'null')
+                    ->where('sinfo.deleted_at', 'null')
                     ->orderByDesc('sinfo.s_type')
                     ->get();
                     return $info;
@@ -194,7 +194,7 @@ class MapController extends Controller
                     ->where($soptarray[0],'1')
                     ->where($soptarray[1],'1')
                     ->where('phot.mvp_photo', '1')
-                    ->where('deleted_at', 'null')
+                    ->where('sinfo.deleted_at', 'null')
                     ->orderByDesc('sinfo.s_type')
                     ->get();
                     return $info;
@@ -205,7 +205,7 @@ class MapController extends Controller
                     ->where('sinfo.s_add', 'LIKE', $gu.'%')
                     ->whereIn('sinfo.s_type', [$array[0], $array[1], $array[2]])
                     ->where('phot.mvp_photo', '1')
-                    ->where('deleted_at', 'null')
+                    ->where('sinfo.deleted_at', 'null')
                     ->orderByDesc('sinfo.s_type')
                     ->get();
                     return $info;
@@ -220,7 +220,7 @@ class MapController extends Controller
                     ->where('sinfo.s_add', 'LIKE', $gu.'%')
                     ->where($soptarray[0],'1')
                     ->where('phot.mvp_photo', '1')
-                    ->where('deleted_at', 'null')
+                    ->where('sinfo.deleted_at', 'null')
                     ->orderByDesc('sinfo.s_type')
                     ->get();
                     return $info;
@@ -233,7 +233,7 @@ class MapController extends Controller
                     ->where($soptarray[0],'1')
                     ->where($soptarray[1],'1')
                     ->where('phot.mvp_photo', '1')
-                    ->where('deleted_at', 'null')
+                    ->where('sinfo.deleted_at', 'null')
                     ->orderByDesc('sinfo.s_type')
                     ->get();
                     return $info;
@@ -244,7 +244,7 @@ class MapController extends Controller
                     ->select('sinfo.*', 'phot.url')
                     ->where('sinfo.s_add', 'LIKE', $gu.'%')
                     ->where('phot.mvp_photo', '1')
-                    ->where('deleted_at', 'null')
+                    ->where('sinfo.deleted_at', 'null')
                     ->orderByDesc('sinfo.s_type')
                     ->get();
                     return $info;
@@ -274,7 +274,7 @@ class MapController extends Controller
                     ->whereIn('sinfo.s_type', [$array[0]])
                     ->where($soptarray[0],'1')
                     ->where('phot.mvp_photo', '1')
-                    ->where('deleted_at', 'null')
+                    ->where('sinfo.deleted_at', 'null')
                     ->orderByDesc('sinfo.s_type')
                     ->get();
                     return $info;
@@ -287,7 +287,7 @@ class MapController extends Controller
                     ->where($soptarray[0],'1')
                     ->where($soptarray[1],'1')
                     ->where('phot.mvp_photo', '1')
-                    ->where('deleted_at', 'null')
+                    ->where('sinfo.deleted_at', 'null')
                     ->orderByDesc('sinfo.s_type')
                     ->get();
                     return $info;
@@ -297,7 +297,7 @@ class MapController extends Controller
                     ->select('sinfo.*', 'phot.url')
                     ->whereIn('sinfo.s_type', [$array[0]])
                     ->where('phot.mvp_photo', '1')
-                    ->where('deleted_at', 'null')
+                    ->where('sinfo.deleted_at', 'null')
                     ->orderByDesc('sinfo.s_type')
                     ->get();
                     return $info;
@@ -313,7 +313,7 @@ class MapController extends Controller
                     ->whereIn('sinfo.s_type', [$array[0], $array[1]])
                     ->where($soptarray[0],'1')
                     ->where('phot.mvp_photo', '1')
-                    ->where('deleted_at', 'null')
+                    ->where('sinfo.deleted_at', 'null')
                     ->orderByDesc('sinfo.s_type')
                     ->get();
                     return $info;
@@ -326,7 +326,7 @@ class MapController extends Controller
                     ->where($soptarray[0],'1')
                     ->where($soptarray[1],'1')
                     ->where('phot.mvp_photo', '1')
-                    ->where('deleted_at', 'null')
+                    ->where('sinfo.deleted_at', 'null')
                     ->orderByDesc('sinfo.s_type')
                     ->get();
                     return $info;
@@ -336,7 +336,7 @@ class MapController extends Controller
                     ->select('sinfo.*', 'phot.url')
                     ->whereIn('sinfo.s_type', [$array[0], $array[1]])
                     ->where('phot.mvp_photo', '1')
-                    ->where('deleted_at', 'null')
+                    ->where('sinfo.deleted_at', 'null')
                     ->orderByDesc('sinfo.s_type')
                     ->get();
                     return $info;
@@ -352,7 +352,7 @@ class MapController extends Controller
                     ->whereIn('sinfo.s_type', [$array[0], $array[1], $array[2]])
                     ->where($soptarray[0],'1')
                     ->where('phot.mvp_photo', '1')
-                    ->where('deleted_at', 'null')
+                    ->where('sinfo.deleted_at', 'null')
                     ->orderByDesc('sinfo.s_type')
                     ->get();
                     return $info;
@@ -365,7 +365,7 @@ class MapController extends Controller
                     ->where($soptarray[0],'1')
                     ->where($soptarray[1],'1')
                     ->where('phot.mvp_photo', '1')
-                    ->where('deleted_at', 'null')
+                    ->where('sinfo.deleted_at', 'null')
                     ->orderByDesc('sinfo.s_type')
                     ->get();
                     return $info;
@@ -375,7 +375,7 @@ class MapController extends Controller
                     ->select('sinfo.*', 'phot.url')
                     ->whereIn('sinfo.s_type', [$array[0], $array[1], $array[2]])
                     ->where('phot.mvp_photo', '1')
-                    ->where('deleted_at', 'null')
+                    ->where('sinfo.deleted_at', 'null')
                     ->orderByDesc('sinfo.s_type')
                     ->get();
                     return $info;
@@ -389,7 +389,7 @@ class MapController extends Controller
                     ->select('sinfo.*', 'phot.url','sopt.s_parking', 'sopt.s_ele')
                     ->where($soptarray[0],'1')
                     ->where('phot.mvp_photo', '1')
-                    ->where('deleted_at', 'null')
+                    ->where('sinfo.deleted_at', 'null')
                     ->orderByDesc('sinfo.s_type')
                     ->get();
                     return $info;
@@ -401,7 +401,7 @@ class MapController extends Controller
                     ->where($soptarray[0],'1')
                     ->where($soptarray[1],'1')
                     ->where('phot.mvp_photo', '1')
-                    ->where('deleted_at', 'null')
+                    ->where('sinfo.deleted_at', 'null')
                     ->orderByDesc('sinfo.s_type')
                     ->get();
                     return $info;
@@ -409,7 +409,7 @@ class MapController extends Controller
                     $info['sinfo'] =DB::table('s_infos AS sinfo')
                     ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
                     ->where('phot.mvp_photo', '1')
-                    ->where('deleted_at', 'null')
+                    ->where('sinfo.deleted_at', 'null')
                     ->orderByDesc('sinfo.s_type')
                     ->get();
                     return $info;
