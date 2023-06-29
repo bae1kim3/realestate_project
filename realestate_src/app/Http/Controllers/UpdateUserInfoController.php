@@ -30,9 +30,9 @@ class UpdateUserInfoController extends Controller
             if ($req->u_id !== $user->u_id) {
                 $updateData['u_id'] = 'u_id';
             }
-            if ($req->phone_no !== $user->phone_no) {
-                $updateData['phone_no'] = 'phone_no';
-            }
+            // if ($req->phone_no !== $user->phone_no) {
+            //     $updateData['phone_no'] = 'phone_no';
+            // }
             if ($req->u_addr !== $user->u_addr) {
                 $updateData['u_addr'] = 'u_addr';
             }
@@ -46,9 +46,9 @@ class UpdateUserInfoController extends Controller
                 'name' => ['required', 'string', 'regex:/^[가-힣]+$/u', 'max:20'], // add 0624
                 'email' => ['required', 'email', 'max:30',  Rule::unique('users')->ignore($user->id)],
                 'u_id' =>['required', 'min:6','max:20', 'string', 'regex:/^[a-zA-Z0-9]+$/', Rule::unique('users')->ignore($user->id)],
-                'phone_no' => ['required', 'string', 'min:10', 'max:11'],
+                // 'phone_no' => ['required', 'string', 'size:11'],
                 'u_addr' => ['required', 'string'],
-                'seller_license' => ['nullable', 'integer', 'size:10'],
+                'seller_license' => ['nullable', 'integer', 'size:9999999999'],
                 'b_name' => ['required', 'string', 'max:20']
             ]);
 
@@ -78,8 +78,8 @@ class UpdateUserInfoController extends Controller
             if ($req->u_id !== $user->u_id) {
                 $updateData['u_id'] = 'u_id';
             }
-            if ($req->phone_no !== $user->phone_no) {
-                $updateData['phone_no'] = 'phone_no';
+            // if ($req->phone_no !== $user->phone_no) {
+            //     $updateData['phone_no'] = 'phone_no';
             }
             if ($req->u_addr !== $user->u_addr) {
                 $updateData['u_addr'] = 'u_addr';
@@ -93,7 +93,7 @@ class UpdateUserInfoController extends Controller
                 'name' => ['required', 'string', 'regex:/^[가-힣]+$/u', 'max:20'], // add 0624 
                 'email' => ['required', 'email', 'max:30',  Rule::unique('users')->ignore($user->id)],
                 'u_id' =>['required', 'min:6','max:20', 'string',  'regex:/^[a-zA-Z0-9]+$/', Rule::unique('users')->ignore($user->id)],
-                'phone_no' => ['required', 'string', 'min:10', 'max:11'],
+                // 'phone_no' => ['required', 'string', 'size:11',],
                 'u_addr' => ['required', 'string'],
                 'animal_size' => ['nullable', Rule::in(['0', '1'])]
             ]);
@@ -112,7 +112,7 @@ class UpdateUserInfoController extends Controller
             $user->save(); // update
             return redirect()->back();
         }
-    }
+    
 
     public function printMyBuilding() {
 
@@ -165,7 +165,6 @@ class UpdateUserInfoController extends Controller
 
 //     return view('profile.update-profile-information-form', compact('user_info'));
 // }
-
-        
-    }
-
+ 
+    
+}

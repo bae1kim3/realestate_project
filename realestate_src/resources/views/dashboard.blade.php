@@ -1,10 +1,13 @@
-{{-- <style>
-    p{
-        color: gray;
+<style>
+    html {
+        height:100%;
     }
-</style> --}}
+</style>
 <x-app-layout>
-
+    {{-- <x-authentication-card> --}}
+<x-slot name="logo">
+        <img src="{{ asset('logo.jpg') }}" alt="" style="width: 150px; height:150px">
+    </x-slot>
     <div class="wrap">
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-gray-100">
@@ -12,15 +15,15 @@
             </h2>
         </x-slot>
 
+        <div class="py-10 h-screen" >
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
         @if(Illuminate\Support\Facades\Auth::user()->seller_license)
-                <h2 class="dark:text-white font-bold text-2xl mt-10" style="padding-left:100px">
+                <h2 class="dark:text-white font-bold text-2xl mt-10">
                 {{ __('매물 작성') }}
                 </h2>
         @endif
 
-        <div class="py-10 h-screen" >
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="p-10 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700" style="padding:40px">
                     <h1 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white" >
                         이미지 업로드
@@ -58,7 +61,7 @@
                                         <input type="radio" name="sell_cat_info" value="매매" id="sell_cat_buy"  class="dark:text-white"/>
                                     </div>
                                     <x-label for="s_size"  class="mt-5 font-semibold text-xl dark:text-white">방 면적</x-label>
-                                    <x-input type="text" name="s_size" id="s_size" required maxlength="11" class="mt-2 dark:bg-gray-700 dark:text-white"/><span class="dark:text-white">m²</span>
+                                    <x-input type="text" name="s_size" id="s_size" required maxlength="11" class="mt-2 dark:bg-gray-700 dark:text-white"/><span class="dark:text-white">평</span>
                                     <br>
                                     <x-label for="s_addr"  class="mt-5 font-semibold text-xl dark:text-white">주소</x-label>
                                     <x-input type="text" id="sample6_address" name="s_addr" placeholder="대구 지역 내 도로명 주소" readonly required class="block w-full mt-1 dark:bg-gray-700 dark:text-white"/>
@@ -133,10 +136,12 @@
                         </div>
                     </div>
                 </div>
+        {{-- </x-authentication-card> --}}
             </div>
                 @include('layouts.footer')
         </div>
     </div>
+
 </x-app-layout>
 
 

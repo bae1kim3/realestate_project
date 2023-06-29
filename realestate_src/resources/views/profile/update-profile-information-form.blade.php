@@ -211,6 +211,8 @@
 
 
 <script src="{{asset('tab_menu.js')}}"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="{{asset('addr.js')}}"></script>
 {{-- <script src="{{asset('mybuilding.js')}}"></script> --}}
 
 
