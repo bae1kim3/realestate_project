@@ -23,7 +23,7 @@ class PhotoLoadController extends Controller
     public function loadMorePhotos(Request $request)
     {
         $lastPhotoId = $request->lastPhotoId;
-        $updatePhoto = 3;
+        $updatePhoto = 5;
         $search = $request->input('search');
 
         $query = Photo::join('s_infos', 's_infos.s_no', 'photos.s_no')
@@ -32,9 +32,12 @@ class PhotoLoadController extends Controller
 
         // 검색기능
         if (!empty($search)) {
-            $query->where('s_infos.s_stai', 'LIKE', "%{$search}%") //  지하철역 검색
+            $query->where(function ($query) use ($search) {
+                $query->where('s_infos.s_stai', 'LIKE', "%{$search}%") //  지하철역 검색
                     ->orWhere('s_infos.s_add', 'LIKE', "%{$search}%"); // 도로명 주소 검색
-            };
+            $lastPhotoId = 0;
+            });
+        }
 
         $photos = $query->skip($lastPhotoId)
             ->take($updatePhoto)

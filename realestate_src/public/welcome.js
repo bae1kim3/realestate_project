@@ -21,6 +21,9 @@ function loadMorePhotos() {
     loadingPhotos = true;
     var url = '/photos/more/' + lastPhotoId;
 
+    var searchQuery = document.getElementById('search').value;
+    url += '?search=' + searchQuery;
+
     var xhr = new XMLHttpRequest();
     xhr.open('GET', url);
     xhr.onload = function () {
