@@ -39,15 +39,11 @@ function addlist(data, i) {
         // 마커 클릭 시 URL로 이동
         window.location.href = `#${data["sinfo"][i].s_no}`;
         cardId = document.getElementById(`${data["sinfo"][i].s_no}`);
-        console.log(cardId);
         cardId.classList.add("aaaa");
         setTimeout(() => {
             cardId.classList.remove("aaaa");
         }, 1500);
     });
-    // kakao.maps.event.addListener(marker, "click", function () {
-    //     data["sinfo"][i].s_no == marker;
-    // });
 
     kakao.maps.event.addListener(markers[i], "mouseover", function () {
         // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
@@ -85,7 +81,6 @@ function addfetch(url, selectedOption) {
     fetch(url)
         .then((response) => response.json())
         .then((data) => {
-            console.log(data);
             // var mapContainer = document.getElementById('map'), // 지도를 표시할 div
             mapOption = {
                 center: new kakao.maps.LatLng(
@@ -101,37 +96,29 @@ function addfetch(url, selectedOption) {
             for (let i = 0; i < data["monthly"].length; i++) {
                 smothb += data["monthly"][i].p_deposit;
             }
-            console.log(smothb);
             let mtsavg = smothb / data["monthly"].length;
             let monthbavg = Math.ceil(isNaN(mtsavg) ? "0" : mtsavg);
-            console.log(monthbavg);
 
             let smothm = 0;
             for (let i = 0; i < data["monthly"].length; i++) {
                 smothm += data["monthly"][i].p_month;
             }
-            console.log(smothm);
             let mtmsavg = smothm / data["monthly"].length;
             let monthmavg = Math.ceil(isNaN(mtmsavg) ? "0" : mtmsavg);
-            console.log(monthmavg);
 
             let jeonsep = 0;
             for (let i = 0; i < data["jeonse"].length; i++) {
                 jeonsep += data["jeonse"][i].p_deposit;
             }
-            console.log(jeonsep);
             let jeonsavg = jeonsep / data["jeonse"].length;
             let jeonpavg = Math.ceil(isNaN(jeonsavg) ? "0" : jeonsavg);
-            console.log(jeonpavg);
 
             let trade = 0;
             for (let i = 0; i < data["trade"].length; i++) {
                 trade += data["trade"][i].p_deposit;
             }
-            console.log(trade);
             let tradeavg = trade / data["trade"].length;
             let tradepavg = Math.ceil(isNaN(tradeavg) ? "0" : tradeavg);
-            console.log(tradepavg);
 
             container.innerText = "";
             // 부모 요소 생성
@@ -346,7 +333,6 @@ getpark.addEventListener("click", function (checkbox) {
                 selectValues.splice(index, 1);
             }
         }
-        console.log(value);
         let url =
             "http://192.168.0.129/api/mapopt/" +
             (selectValues.length ? selectValues.join(",") : "1") +
@@ -354,15 +340,11 @@ getpark.addEventListener("click", function (checkbox) {
             selectedOption +
             "/" +
             (soptionValues.length ? soptionValues.join(",") : "1");
-        console.log(url);
-        console.log(selectValues);
-        console.log(selectedOption);
         // AJAX 요청 보내기
 
         fetch(url)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 const servicekey =
                     "cHVjVjglbOBfaJaLkhiSbBrRU2U3MkuefQS0rxexSVZcSA8vF6zeNrhf7LmjNlJGibN%2BM%2BPpK9GGjbmpsfD7FA%3D%3D";
                 if (selectedOption == "구 선택") {
@@ -388,12 +370,9 @@ getpark.addEventListener("click", function (checkbox) {
                     data["latlng"].lng +
                     "&radius=" +
                     radius;
-                console.log(url);
                 fetch(url)
                     .then((response) => response.json())
                     .then((data1) => {
-                        console.log(data1.body.items.item);
-                        console.log(data1);
                         let getdata = data1.body.items.item;
                         var imageSrc = "mapp.png";
                         markerImage = new kakao.maps.MarkerImage(
@@ -401,7 +380,6 @@ getpark.addEventListener("click", function (checkbox) {
                             imageSize
                         );
                         for (let i = 0; i < getdata.length; i++) {
-                            console.log(getdata[i].lat, getdata[i].lot);
                             let markerPosition = new kakao.maps.LatLng(
                                 getdata[i].lat,
                                 getdata[i].lot
@@ -415,7 +393,6 @@ getpark.addEventListener("click", function (checkbox) {
                             marker.setMap(map);
                             // 생성된 마커를 배열에 추가합니다
                             pmarkers.push(marker);
-                            console.log(pmarkers);
                         }
                     });
             });
