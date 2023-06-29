@@ -27,7 +27,7 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
 
         <header class="bg-white shadow dark:bg-gray-800">
             <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8 dark:text-gray-100 dark:text-white">
-                {{ __('펫 방') }}
+                <img src="{{ asset('logo.jpg') }}" alt="" style="width: 50px; height:50px">
             </div>
         </header>
 
