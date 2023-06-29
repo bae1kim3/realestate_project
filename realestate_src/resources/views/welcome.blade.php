@@ -13,13 +13,14 @@
 </div>
         <div
             class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-            @if (session('seller_license'))
                 <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                     @auth
                         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex justify-center">
                             <a class="dark:text-white" href="{{ route('map.map') }}" style="margin-right: 20px;">지도</a>
+            @if (session('seller_license'))
                             <a href="{{ url('/dashboard') }}"
                                 class="font-semibold text-gray-600 hover:text-gray-900 dark:text-white dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">매물올리기</a>
+            @endif
                         </div>
                     @else
                         <a href="{{ route('login') }}"
@@ -30,7 +31,6 @@
                         @endif
                     @endauth
                 </div>
-            @endif
 
             <div class="max-w-7xl mx-auto p-6 lg:p-8">
             <br>
