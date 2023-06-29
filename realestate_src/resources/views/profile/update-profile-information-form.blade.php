@@ -185,7 +185,7 @@
 
 {{-- 이하 비밀번호 변경, 탈퇴 --}}
 @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
-                <div class="mt-10 sm:mt-0 dark:text-white" style="margin-top:20px; margin-left:20px;">
+                <div class="mt-10 sm:mt-0 dark:text-white" style="margin-top:20px; margin-left:40px;">
                     <h1>비밀번호를 변경하고 싶으신가요?</h1>
                     <br>
                     <a href="{{ route('profile.chk_phone_no') }}">
@@ -198,7 +198,7 @@
 @if (Laravel\Jetstream\Jetstream::hasAccountDeletionFeatures())
 
 
-                <div class="mt-10 sm:mt-0" style="margin-left:20px;">
+                <div class="mt-10 sm:mt-0" style="margin-left:40px;">
                 {{--@livewire('profile.delete-user-form')--}}
                     <h1>계정을 삭제하시겠습니까?</h1>
                     <br>

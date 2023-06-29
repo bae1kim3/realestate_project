@@ -1,10 +1,11 @@
-*{
+* {
     margin: 0;
     padding: 0;
 }
 .wrap {
     width: 80%;
     margin: 0 auto;
+    padding-bottom: 40px;
 }
 .main {
     display: flex;
@@ -32,7 +33,7 @@
     border-radius: 10px;
 }
 .items::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -55,6 +56,6 @@
 #tab2 {
     width: 100%;
 }
-.list { 
+.list {
     padding: 0 auto;
 }
