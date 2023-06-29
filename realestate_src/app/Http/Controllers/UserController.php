@@ -14,6 +14,10 @@ use App\Models\State_option;
 
 class UserController extends Controller
 {
+
+    //TODO 대문자 유효성 검사!!!!!!!!!!!!!!!!
+    //TODO 게시글 안쓴 판매자 탈퇴 오류
+    // 'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,20}$/'
     public function chk_phone_no()
     {
         return view('profile.chk_phone_no');
@@ -32,7 +36,7 @@ class UserController extends Controller
             $id = Auth::user()->id; // 유저 넘버 pk
             $user = User::find($id); //유저 정보 가져옴
             $validator = Validator::make($req->all(), [
-                'password' => 'required|regex:/^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])(?=.*[0-9]).{8,20}$/'
+                'password' => 'required|regex:/^(?=.*[a-z])(?=.*[!@#$%^&*])(?=.*[0-9]).{8,20}$/'
             ]);
             if ($validator->fails()) {
                 return redirect()
@@ -102,7 +106,7 @@ class UserController extends Controller
 
 
             // user가 올린 매물이 없을때 => 바로 탈퇴
-            if(empty($s_info_u_no)) {
+            if(!$s_info_u_no) {
 
                 $user->delete();
                 Session::flush();
@@ -124,13 +128,13 @@ class UserController extends Controller
                             //user 삭제
                             $user->delete();
                         }
-                        else {$error = "다시 시도해주세요";
+                        else {$error = "다시 시도해주세요1";
                             return redirect()->back()->with('error', $error);}
                     }
-                    else {$error = "다시 시도해주세요";
+                    else {$error = "다시 시도해주세요2";
                         return redirect()->back()->with('error', $error);}
                 }
-                else {$error = "다시 시도해주세요";
+                else {$error = "다시 시도해주세요3";
                     return redirect()->back()->with('error', $error);}
 
                 // users에 있는 id랑 s_infos에 있는 u_id 매치해서 같을 때 s_infos 삭제
