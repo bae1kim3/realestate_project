@@ -22,7 +22,7 @@ class StructureController extends Controller
         // TODO :'한글' 유효성검사
         $validator = Validator::make(
             $req->all(), [
-                's_name' => 'required|regex:/^[가-힣0-9]+$/u|max:30'
+                's_name' => 'required|regex:/^[가-힣0-9\s]+$/|max:30'
                 // 's_name' => 'required|alpha_dash|max:30'
                 // alpha_dash : 한글 영문 숫자 - _ 다 되는데 ㄱㄱ 이런 글자도 통과됨..
                 ,'sell_cat_info' => 'required|in:월세,전세,매매'

@@ -8,8 +8,8 @@
         {{ __('공인중개사 회원 정보') }}
         </h2>
 @else
-        <h2 class="dark:text-white">
-        {{ __('회원정보') }}
+        <h2 class="dark:text-white font-bold text-2xl mt-10" style="padding-left:20px">
+        {{ __('개인 회원정보') }}
         </h2>
 @endif
 
