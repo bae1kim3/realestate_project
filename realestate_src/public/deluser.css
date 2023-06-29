@@ -1,5 +1,4 @@
-.del_border{
-
+.del_border {
     width: 500px;
     height: 300px;
     border: 1px solid rgb(207, 206, 206);
@@ -11,6 +10,11 @@
     height: 100vh;
 }
 
-/* .con {
-    background-color: #F5F5F5;
-} */
+.input_pw {
+    text-align: center;
+}
+
+#deleteForm {
+    text-align: center;
+    display: inline-block;
+}

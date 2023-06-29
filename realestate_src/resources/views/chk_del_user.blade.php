@@ -5,10 +5,11 @@
 <div class="con">
     <div class="del_box">
       <div class="del_border">
+        <div class="content">
         <form action="{{route('profile.chk_del_user.post')}}" method="post" id="deleteForm">
         @csrf
         {{-- @method('delete') --}}
-            <input type="password" name="password" placeholder="비밀번호 입력">
+            <input class="input_pw" type="password" name="password" placeholder="비밀번호 입력">
             {{-- 유효성 검사 --}}
             @foreach($errors->all() as $error)
               <div class="alert alert-success" role="alert">
@@ -22,9 +23,10 @@
             </div>
             @endif
         </form>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="background-color:red!important;">
         탈퇴
         </button>
+        </div>
     </div>
   </div>
 
@@ -54,4 +56,3 @@
 <script src="{{asset('del_user.js')}}"></script>
 </div>
 </x-app-layout>
-
