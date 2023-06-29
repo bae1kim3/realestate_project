@@ -44,8 +44,16 @@ function addlist(data, i) {
             cardId.classList.remove("aaaa");
         }, 1500);
     });
-    markers[i].removeEventListener();
+    kakao.maps.event.removeListener(markers[i], "mouseover", function () {
+        // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+        infowindow[i].open(map, markers[i]);
+    });
 
+    // 마커에 마우스아웃 이벤트를 등록합니다
+    kakao.maps.event.removeListener(markers[i], "mouseout", function () {
+        // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+        infowindow[i].close();
+    });
     kakao.maps.event.addListener(markers[i], "mouseover", function () {
         // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
         infowindow[i].open(map, markers[i]);
