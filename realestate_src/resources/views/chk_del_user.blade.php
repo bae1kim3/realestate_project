@@ -9,7 +9,7 @@
         <form action="{{route('profile.chk_del_user.post')}}" method="post" id="deleteForm">
         @csrf
         {{-- @method('delete') --}}
-            <input class="input_pw" type="password" name="password" placeholder="비밀번호 입력">
+            <input class="input_pw" class="inp" type="password" name="password" placeholder="비밀번호 입력">
             {{-- 유효성 검사 --}}
             @foreach($errors->all() as $error)
               <div class="alert alert-success" role="alert">
@@ -45,7 +45,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-        <button type="button" class="btn btn-primary" id="confirmBtn" onclick="withdrawal()">이해했습니다</button>
+        <button type="button" class="btn btn-danger" id="confirmBtn" onclick="withdrawal()">이해했습니다</button>
       </div>
     </div>
   </div>

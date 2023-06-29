@@ -18,3 +18,12 @@
     text-align: center;
     display: inline-block;
 }
+
+.content {
+    text-align: center;
+    margin-top: 20%;
+}
+
+.inp {
+    border-radius: 5px;
+}
