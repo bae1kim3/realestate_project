@@ -78,7 +78,11 @@ var scrollHandler = function () {
     }
 };
 
-scrollContainer.addEventListener('scroll', scrollHandler);
+function attachScrollHandler() {
+    scrollContainer.addEventListener('scroll', scrollHandler);
+  }
+
+attachScrollHandler();
 
 function searchProperties() {
     var searchQuery = document.getElementById('search').value;
@@ -99,6 +103,7 @@ function searchProperties() {
                 scrollContainer.removeEventListener('scroll', scrollHandler);
             }
             lastPhotoId = response.lastPhotoId;
+            attachScrollHandler();
         } else {
             console.error('Error: ' + xhr.status);
         }
