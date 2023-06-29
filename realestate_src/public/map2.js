@@ -196,7 +196,7 @@ function addfetch(url, selectedOption) {
                 let atag = document.createElement("a");
                 atag.setAttribute(
                     "href",
-                    `http://127.0.0.1:8000/sDetail/${data["sinfo"][i].s_no}`
+                    `http://192.168.0.129/sDetail/${data["sinfo"][i].s_no}`
                 );
                 var card = document.createElement("div");
                 card.style.border = "3px solid black";
@@ -273,7 +273,7 @@ function addfetch(url, selectedOption) {
 document.addEventListener("DOMContentLoaded", function () {
     var selectedOption = selectBox.value;
     let url =
-        "http://127.0.0.1:8000/api/mapopt/" +
+        "http://192.168.0.129/api/mapopt/" +
         (selectValues.length ? selectValues.join(",") : "1") +
         "/" +
         selectedOption +
@@ -285,7 +285,7 @@ document.addEventListener("DOMContentLoaded", function () {
 selectBox.addEventListener("change", function () {
     var selectedOption = selectBox.value;
     let url =
-        "http://127.0.0.1:8000/api/mapopt/" +
+        "http://192.168.0.129/api/mapopt/" +
         (selectValues.length ? selectValues.join(",") : "1") +
         "/" +
         selectedOption +
@@ -323,7 +323,7 @@ checkboxes.forEach(function (checkbox) {
             }
         }
         let url =
-            "http://127.0.0.1:8000/api/mapopt/" +
+            "http://192.168.0.129/api/mapopt/" +
             (selectValues.length ? selectValues.join(",") : "1") +
             "/" +
             selectedOption +
@@ -347,7 +347,7 @@ getpark.addEventListener("click", function (checkbox) {
         }
         console.log(value);
         let url =
-            "http://127.0.0.1:8000/api/mapopt/" +
+            "http://192.168.0.129/api/mapopt/" +
             (selectValues.length ? selectValues.join(",") : "1") +
             "/" +
             selectedOption +
@@ -439,7 +439,7 @@ scheckboxes.forEach(function (checkbox) {
             }
         }
         let url =
-            "http://127.0.0.1:8000/api/mapopt/" +
+            "http://192.168.0.129/api/mapopt/" +
             (selectValues.length ? selectValues.join(",") : "1") +
             "/" +
             selectedOption +
