@@ -14,7 +14,8 @@
 {{-- <x-guest-layout> --}}
 <div class="contents">
     <nav class="nav sticky-top justify-content-end p-3" style="background-color: #1f2937;">
-        <a class="nav-link active link-light position-absolute top-50 start-0 translate-middle-y ms-4" aria-current="page" href="{{route('welcome')}}">로고</a>
+        <a class="nav-link active link-light position-absolute top-50 start-0 translate-middle-y ms-4" aria-current="page" href="{{route('welcome')}}"><img src="{{ asset('logo.jpg') }}" alt="" style="width: 50px; height:50px">
+        </a>
         @if(!empty($u_info->seller_license))
             <a class="nav-link link-light" href="{{route('dashboard')}}" id="aa">매물 올리기</a>
             @endif

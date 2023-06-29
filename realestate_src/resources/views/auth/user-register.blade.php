@@ -6,7 +6,7 @@
         </x-slot>
         <x-slot name="logo">
             <h1 class="font-semibold text-xl text-gray-800 leading-tight dark:text-gray-100" style="margin-top: 10%">
-                {{ __('User Register') }}
+                <img src="{{ asset('logo.jpg') }}" alt="" style="width: 150px; height:150px">
             </h1>
         </x-slot>
 

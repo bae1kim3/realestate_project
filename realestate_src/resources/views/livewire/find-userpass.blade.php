@@ -4,7 +4,7 @@
 
     <x-slot name="logo">
         <h1 class="font-semibold text-xl text-gray-800 leading-tight dark:text-gray-100">
-            {{ __('비밀번호 찾기') }}
+            <img src="{{ asset('logo.jpg') }}" alt="" style="width: 150px; height:150px">
         </h1>
     </x-slot>
 
