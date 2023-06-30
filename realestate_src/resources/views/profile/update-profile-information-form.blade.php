@@ -114,9 +114,6 @@
                 </div>
 
 
-
-
-
                 @if(!(Illuminate\Support\Facades\Auth::user()->seller_license))
                     {{-- animal size --}}
                     <div class="col-span-6 sm:col-span-4 mt-3">
@@ -165,8 +162,8 @@
                         <div class="col-span-6 sm:col-span-4">
                         <x-label for="b_name" value="{{ __('상호명') }}" class="mt-3" style="font-weight:700"/>
                         <x-input id="b_name" type="text" name="b_name" maxlength="20" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" value="{{Auth::user()->b_name}}" placeholder="상호명 작성"/>
+                        </div>
                     @endif
-            </div>
         </div>
     </div>
     {{-- 내가 올린 매물 --}}
