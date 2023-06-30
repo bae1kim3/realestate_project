@@ -35,7 +35,7 @@
 
 
     <div class='content' style="position:relative">
-        <div id='tab1' data-tab-content class='items active mx-8'>
+        <div id='tab1' data-tab-content class='items active mx-8 dark:bg-gray-700'>
 
                 <form action="{{ route('update.userinfo.post') }}" id="frm" method="post" >
                 @csrf
@@ -87,7 +87,7 @@
                 <!-- Name -->
                 <div class="col-span-6 sm:col-span-4">
                     <x-label for="name" value="{{ __('이름') }}" class="mt-3" style="font-weight:700"/>
-                    <x-input id="name" name="name" maxlength="20" type="text" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" value="{{Auth::user()->name}}" placeholder="한글 이름으로 작성" />
+                    <x-input id="name" name="name" maxlength="20" type="text" class="mt-1 block w-full dark:bg-gray-600 dark:text-white" value="{{Auth::user()->name}}" placeholder="한글 이름으로 작성" />
 
                 </div>
 
@@ -103,14 +103,14 @@
                 {{-- user address --}}
                 <div class="col-span-6 sm:col-span-4">
                     <x-label for="u_addr" value="{{ __('주소') }}" class="mt-3" style="font-weight:700"/>
-                    <x-input id="sample6_address" type="text" name="u_addr" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" readonly value="{{Auth::user()->u_addr}}"  />
-                    <x-button type="button" onclick="sample6_execDaumPostcode()" value="주소 검색" class="a_btn">주소 검색</x-button>
+                    <x-input id="sample6_address" type="text" name="u_addr" class="mt-1 block w-full dark:bg-gray-600 dark:text-white" readonly value="{{Auth::user()->u_addr}}"  />
+                    <x-button type="button" onclick="sample6_execDaumPostcode()" value="주소 검색" class="a_btn ">주소 검색</x-button>
                 </div>
 
                 {{-- hidden 값 x,y --}}
                 <div class="col-span-6 sm:col-span-4">
-                    <x-input id="s_lat" name="s_lat" type="hidden" class=" block w-full dark:bg-gray-700 dark:text-white"  />
-                    <x-input id="s_log" name="s_log" type="hidden" class=" block w-full dark:bg-gray-700 dark:text-white"   />
+                    <x-input id="s_lat" name="s_lat" type="hidden" class=" block w-full dark:bg-gray-600 dark:text-white"  />
+                    <x-input id="s_log" name="s_log" type="hidden" class=" block w-full dark:bg-gray-600 dark:text-white"   />
                 </div>
 
 
@@ -147,24 +147,24 @@
                     {{-- id input--}}
                     <div class="col-span-6 sm:col-span-4">
                         <x-label for="id" value="{{ __('아이디') }}" class="mt-6" style="font-weight:700"/>
-                        <x-input id="id" name="u_id" type="text" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" value="{{Auth::user()->u_id}}" readonly  />
+                        <x-input id="id" name="u_id" type="text" class="mt-1 block w-full dark:bg-gray-600 dark:text-white" value="{{Auth::user()->u_id}}" readonly  />
                     </div>
 
                     <!-- Email input -->
                     <div class="col-span-6 sm:col-span-4">
                         <x-label for="email" value="{{ __('이메일') }}" class="mt-3" style="font-weight:700"/>
-                        <x-input id="email" name="email" maxlength="30"  readonly type="email" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" value="{{Auth::user()->email}}"  />
+                        <x-input id="email" name="email" maxlength="30"  readonly type="email" class="mt-1 block w-full dark:bg-gray-600 dark:text-white" value="{{Auth::user()->email}}"  />
                     </div>
                     @if(Illuminate\Support\Facades\Auth::user()->seller_license)
                     {{-- seller license --}}
                         <div class="col-span-6 sm:col-span-4">
                             <x-label for="seller_license" value="{{ __('공인중개사 라이센스') }}" class="mt-4" style="font-weight:700"/>
-                            <x-input id="seller_license" name="seller_license" maxlength="10" type="text" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" value="{{Auth::user()->seller_license}}" readonly  />
+                            <x-input id="seller_license" name="seller_license" maxlength="10" type="text" class="mt-1 block w-full dark:bg-gray-600 dark:text-white" value="{{Auth::user()->seller_license}}" readonly  />
                         </div>
                     {{-- business name --}}
                         <div class="col-span-6 sm:col-span-4">
                         <x-label for="b_name" value="{{ __('상호명') }}" class="mt-3" style="font-weight:700"/>
-                        <x-input id="b_name" type="text" name="b_name" maxlength="20" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" value="{{Auth::user()->b_name}}" placeholder="상호명 작성"/>
+                        <x-input id="b_name" type="text" name="b_name" maxlength="20" class="mt-1 block w-full dark:bg-gray-600 dark:text-white" value="{{Auth::user()->b_name}}" placeholder="상호명 작성"/>
                     @endif
             </div>
         </div>
