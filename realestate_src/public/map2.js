@@ -29,7 +29,7 @@ let radius = "";
 function addlist(data, i) {
     iwContent[
         i
-    ] = `<div style="padding:5px;"><b>${data["sinfo"][i].s_name}</b>(${data["sinfo"][i].s_type})</div>`; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+    ] = `<div style="padding:4px"><b>${data["sinfo"][i].s_name}</b>(${data["sinfo"][i].s_type})</div>`; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
     // 인포윈도우를 생성합니다
     infowindow[i] = new kakao.maps.InfoWindow({
         content: iwContent[i],
@@ -78,7 +78,6 @@ function addfetch(url, selectedOption) {
     fetch(url)
         .then((response) => response.json())
         .then((data) => {
-            // var mapContainer = document.getElementById('map'), // 지도를 표시할 div
             mapOption = {
                 center: new kakao.maps.LatLng(
                     data["latlng"].lat,
@@ -182,6 +181,7 @@ function addfetch(url, selectedOption) {
                     "href",
                     `http://192.168.0.129/sDetail/${data["sinfo"][i].s_no}`
                 );
+                atag.setAttribute("target", `_blank`);
                 var card = document.createElement("div");
                 card.style.border = "3px solid black";
                 card.id = `${data["sinfo"][i].s_no}`;
