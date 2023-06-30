@@ -30,7 +30,6 @@ function addlist(data, i) {
     iwContent[
         i
     ] = `<div style="padding:5px;"><b>${data["sinfo"][i].s_name}</b>(${data["sinfo"][i].s_type})</div>`; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-
     // 인포윈도우를 생성합니다
     infowindow[i] = new kakao.maps.InfoWindow({
         content: iwContent[i],
@@ -44,23 +43,10 @@ function addlist(data, i) {
             cardId.classList.remove("aaaa");
         }, 1500);
     });
-
-    // kakao.maps.event.removeListener(markers[i], "mouseenter", function () {
-    //     // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
-    //     infowindow[i].open(map, markers[i]);
-    // });
-
-    // // 마커에 마우스아웃 이벤트를 등록합니다
-    // kakao.maps.event.removeListener(markers[i], "mouseleave", function () {
-    //     // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
-    //     infowindow[i].close();
-    // });
-
     kakao.maps.event.addListener(markers[i], "mouseover", function () {
         // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
         infowindow[i].open(map, markers[i]);
     });
-
     // 마커에 마우스아웃 이벤트를 등록합니다
     kakao.maps.event.addListener(markers[i], "mouseout", function () {
         // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
@@ -226,9 +212,9 @@ function addfetch(url, selectedOption) {
                         data["sinfo"][i].p_month.toLocaleString("ko-KR") +
                         "만원<br><b>층수</b> : " +
                         data["sinfo"][i].s_fl +
-                        "<br><b>평수</b> : " +
+                        " <b>층</b><br><b>평수</b> : " +
                         data["sinfo"][i].s_size +
-                        "<br><b>주소</b> : " +
+                        " <b>평</b><br><b>주소</b> : " +
                         data["sinfo"][i].s_add;
                 } else {
                     cardText.innerHTML =
@@ -238,9 +224,9 @@ function addfetch(url, selectedOption) {
                         data["sinfo"][i].p_deposit.toLocaleString("ko-KR") +
                         "만원<br><b>층수</b> : " +
                         data["sinfo"][i].s_fl +
-                        "<br><b>평수</b> : " +
+                        " <b>층</b><br><b>평수</b> : " +
                         data["sinfo"][i].s_size +
-                        "<br><b>주소</b> : " +
+                        " <b>평</b><br><b>주소</b> : " +
                         data["sinfo"][i].s_add;
                 }
 
@@ -252,6 +238,7 @@ function addfetch(url, selectedOption) {
                 // 생성한 카드를 원하는 위치에 추가
                 container.appendChild(atag);
             }
+            markers = [];
             for (let i = 0; i < data["sinfo"].length; i++) {
                 // 마커 하나를 지도위에 표시합니다
                 addMarker(
@@ -262,6 +249,7 @@ function addfetch(url, selectedOption) {
                     data,
                     i
                 );
+                console.log(markers);
                 // 마커에 커서가 오버됐을 때 마커 위에 표시할 인포윈도우를 생성합니다
                 addlist(data, i);
             }
@@ -282,7 +270,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 selectBox.addEventListener("change", function () {
-    setMarkers();
     var selectedOption = selectBox.value;
     let url =
         "http://192.168.0.129/api/mapopt/" +
@@ -312,7 +299,6 @@ document.addEventListener("click", function (event) {
 
 checkboxes.forEach(function (checkbox) {
     checkbox.addEventListener("change", function () {
-        setMarkers();
         var selectedOption = selectBox.value;
         let value = checkbox.value;
         if (checkbox.checked) {
@@ -419,7 +405,6 @@ getpark.addEventListener("click", function (checkbox) {
 
 scheckboxes.forEach(function (checkbox) {
     checkbox.addEventListener("change", function () {
-        setMarkers();
         var selectedOption = selectBox.value;
         let value = checkbox.value;
         if (checkbox.checked) {
