@@ -32,11 +32,13 @@
         </div>
     </div>
 </div>
+
+
 <div class='content' style="position:relative">
     <div id='tab1' data-tab-content class='items active mx-8'>
-        <div>
+
             <form action="{{ route('update.userinfo.post') }}" id="frm" method="post" >
-        @csrf
+            @csrf
             {{-- <!-- Profile Photo -->
             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                 <div x-data="{photoName: null, photoPreview: null}" class="col-span-6 sm:col-span-4">
@@ -81,33 +83,14 @@
                 </div>
             @endif --}}
 
-                @foreach($errors->all() as $error)
-                <div class="alert alert-success" role="alert" style="color:red">
-                    {{ $error }}
-                </div>
-                @endforeach
-                <div class="alert alert-success" role="alert" style="display: none" id="err_up"></div>
 
             <!-- Name -->
             <div class="col-span-6 sm:col-span-4">
-                <x-label for="name" value="{{ __('이름') }}"/>
-                <x-input id="name" name="name" maxlength="20" type="text" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" value="{{Auth::user()->name}}" readonly  />
+                <x-label for="name" value="{{ __('이름') }}" class="mt-3" style="font-weight:700"/>
+                <x-input id="name" name="name" maxlength="20" type="text" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" value="{{Auth::user()->name}}" placeholder="한글 이름으로 작성" />
 
             </div>
 
-            {{-- id --}}
-            <div class="col-span-6 sm:col-span-4">
-                <x-label for="id" value="{{ __('아이디') }}" class="mt-3"/>
-                <x-input id="id" name="u_id" type="text" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" value="{{Auth::user()->u_id}}" readonly  />
-
-            </div>
-
-            <!-- Email -->
-            <div class="col-span-6 sm:col-span-4">
-                <x-label for="email" value="{{ __('이메일') }}" class="mt-3"/>
-                <x-input id="email" name="email" maxlength="30"  type="email" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" value="{{Auth::user()->email}}"  />
-
-            </div>
 
             {{-- phone number --}}
             {{-- <div class="col-span-6 sm:col-span-4">
@@ -119,44 +102,31 @@
 
             {{-- user address --}}
             <div class="col-span-6 sm:col-span-4">
-                <x-label for="u_addr" value="{{ __('주소') }}" class="mt-3"/>
+                <x-label for="u_addr" value="{{ __('주소') }}" class="mt-3" style="font-weight:700"/>
                 <x-input id="sample6_address" type="text" name="u_addr" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" readonly value="{{Auth::user()->u_addr}}"  />
-                <x-button type="button" onclick="sample6_execDaumPostcode()" value="주소 검색" class="a_btn mb-4">주소 검색</x-button>
-
+                <x-button type="button" onclick="sample6_execDaumPostcode()" value="주소 검색" class="a_btn">주소 검색</x-button>
             </div>
 
             {{-- hidden 값 x,y --}}
             <div class="col-span-6 sm:col-span-4">
-                <x-input id="s_lat" name="s_lat" type="hidden" class="mt-1 block w-full dark:bg-gray-700 dark:text-white"  />
-                <x-input id="s_log" name="s_log" type="hidden" class="mt-1 block w-full dark:bg-gray-700 dark:text-white"   />
+                <x-input id="s_lat" name="s_lat" type="hidden" class=" block w-full dark:bg-gray-700 dark:text-white"  />
+                <x-input id="s_log" name="s_log" type="hidden" class=" block w-full dark:bg-gray-700 dark:text-white"   />
             </div>
 
-            @if(Illuminate\Support\Facades\Auth::user()->seller_license)
-            {{-- seller license --}}
-                <div class="col-span-6 sm:col-span-4">
-                <x-label for="seller_license" value="{{ __('공인중개사 라이센스') }}" class="mt-3"/>
-                <x-input id="seller_license" name="seller_license" maxlength="10" type="text" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" value="{{Auth::user()->seller_license}}" readonly  />
 
-            </div>
 
-            {{-- business name --}}
-                <div class="col-span-6 sm:col-span-4">
-                <x-label for="b_name" value="{{ __('상호명') }}" class="mt-3"/>
-                <x-input id="b_name" type="text" name="b_name" maxlength="20" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" value="{{Auth::user()->b_name}}"  />
 
-            </div>
-            @endif
 
             @if(!(Illuminate\Support\Facades\Auth::user()->seller_license))
                 {{-- animal size --}}
-                <div class="col-span-6 sm:col-span-4">
-                <x-label for="animal_size" value="{{ __('동물크기') }}" />
-                {{-- <x-input id="animal_size" type="text" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" wire:model.defer="state.animal_size" autocomplete="animal_size" /> --}}
-                <x-label for="animal_size" value="{{ __('대형 동물') }}" class="dark:text-white"/>
-                <input type="radio" name="animal_size" id="animal_size_sm" @if(Illuminate\Support\Facades\Auth::user()->animal_size === "1") checked @endif value="1" name="animal_size" class="dark:bg-gray-700">
-                <x-label for="animal_size" value="{{ __('중소형 동물') }}" class="dark:text-white"/>
-                <input type="radio" name="animal_size" id="animal_size_lg" @if(Illuminate\Support\Facades\Auth::user()->animal_size === "0") checked @endif value="0" name="animal_size" class="dark:bg-gray-700">
-            </div>
+                <div class="col-span-6 sm:col-span-4 mt-3">
+                    <x-label for="animal_size" value="{{ __('동물크기') }}" style="font-weight:700"/>
+                    {{-- <x-input id="animal_size" type="text" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" wire:model.defer="state.animal_size" autocomplete="animal_size" /> --}}
+                    <label for="animal_size" class="dark:text-white">대형</label>
+                    <input type="radio" name="animal_size" id="animal_size_sm" @if(Illuminate\Support\Facades\Auth::user()->animal_size === "1") checked @endif value="1" name="animal_size" class="dark:bg-gray-700">
+                    <label for="animal_size"  class="dark:text-white">중소형</label>
+                    <input type="radio" name="animal_size" id="animal_size_lg" @if(Illuminate\Support\Facades\Auth::user()->animal_size === "0") checked @endif value="0" name="animal_size" class="dark:bg-gray-700">
+                </div>
             @endif
 
 
@@ -164,9 +134,41 @@
                 {{ __('저장') }}
             </x-button>
 
-            </form>
-        </div>
+        </form>
+        <div>
+                    <hr class="mt-8">
+                    @foreach($errors->all() as $error)
+                    <div class="alert alert-success" role="alert" style="color:red">
+                        {{ $error }}
+                    </div>
+                    @endforeach
+                    <div class="alert alert-success" role="alert" style="display: none" id="err_up"></div>
+
+                    {{-- id input--}}
+                    <div class="col-span-6 sm:col-span-4">
+                        <x-label for="id" value="{{ __('아이디') }}" class="mt-6" style="font-weight:700"/>
+                        <x-input id="id" name="u_id" type="text" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" value="{{Auth::user()->u_id}}" readonly  />
+                    </div>
+
+                    <!-- Email input -->
+                    <div class="col-span-6 sm:col-span-4">
+                        <x-label for="email" value="{{ __('이메일') }}" class="mt-3" style="font-weight:700"/>
+                        <x-input id="email" name="email" maxlength="30"  readonly type="email" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" value="{{Auth::user()->email}}"  />
+                    </div>
+                    @if(Illuminate\Support\Facades\Auth::user()->seller_license)
+                    {{-- seller license --}}
+                        <div class="col-span-6 sm:col-span-4">
+                            <x-label for="seller_license" value="{{ __('공인중개사 라이센스') }}" class="mt-4" style="font-weight:700"/>
+                            <x-input id="seller_license" name="seller_license" maxlength="10" type="text" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" value="{{Auth::user()->seller_license}}" readonly  />
+                        </div>
+                    {{-- business name --}}
+                        <div class="col-span-6 sm:col-span-4">
+                        <x-label for="b_name" value="{{ __('상호명') }}" class="mt-3" style="font-weight:700"/>
+                        <x-input id="b_name" type="text" name="b_name" maxlength="20" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" value="{{Auth::user()->b_name}}" placeholder="상호명 작성"/>
+                    @endif
+            </div>
     </div>
+</div>
     <div id='tab2' data-tab-content class='items'>
         <div class="list">
             @foreach($user as $val)

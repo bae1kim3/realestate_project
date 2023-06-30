@@ -12,43 +12,47 @@ use App\Models\S_info;
 
 class UpdateUserInfoController extends Controller
 {
-    // name, id, seller_license 변경 불가
+    
     public function updateUserInfo (Request $req) {
+
         $id = Auth::user()->id;
         $user_seller = Auth::user()->seller_license;
         $user = User::find($id); // user find
         
+        // 셀러일때 :name, u_addr, b_name 수정가능
         if($user_seller){
             $updateData = [];
 
             if ($req->name !== $user->name) {
                 $updateData['name'] = 'name';
             }
-            if ($req->email !== $user->email) {
-                $updateData['email'] = 'email';
-            }
-            if ($req->u_id !== $user->u_id) {
-                $updateData['u_id'] = 'u_id';
-            }
-            // if ($req->phone_no !== $user->phone_no) {
-            //     $updateData['phone_no'] = 'phone_no';
-            // }
+            
             if ($req->u_addr !== $user->u_addr) {
                 $updateData['u_addr'] = 'u_addr';
-            }
-            if ($req->seller_license !== $user->seller_license) {
-                $updateData['seller_license'] = 'seller_license';
             }
             if ($req->b_name !== $user->b_name) {
                 $updateData['b_name'] = 'b_name';
             }
+            // if ($req->email !== $user->email) {
+            //     $updateData['email'] = 'email';
+            // }
+            // if ($req->u_id !== $user->u_id) {
+            //     $updateData['u_id'] = 'u_id';
+            //}
+            // if ($req->phone_no !== $user->phone_no) {
+            //     $updateData['phone_no'] = 'phone_no';
+            // }
+
+            // if ($req->seller_license !== $user->seller_license) {
+            //     $updateData['seller_license'] = 'seller_license';
+            // }
+            // dd($req);
             $validator = Validator::make($req->all(), [
+                // 'email' => ['required', 'email', 'max:30',  Rule::unique('users')->ignore($user->id),  'same:'.$user->email],
+                // 'u_id' =>['required', 'min:6','max:20', 'string', 'regex:/^[a-zA-Z0-9]+$/', Rule::unique('users')->ignore($user->id)],
+                // 'seller_license' => ['nullable', 'integer', 'max:9999999999'],
                 'name' => ['required', 'string', 'regex:/^[가-힣]+$/u', 'max:20'], // add 0624
-                'email' => ['required', 'email', 'max:30',  Rule::unique('users')->ignore($user->id)],
-                'u_id' =>['required', 'min:6','max:20', 'string', 'regex:/^[a-zA-Z0-9]+$/', Rule::unique('users')->ignore($user->id)],
-                // 'phone_no' => ['required', 'string', 'size:11'],
                 'u_addr' => ['required', 'string'],
-                'seller_license' => ['nullable', 'integer', 'size:9999999999'],
                 'b_name' => ['required', 'string', 'max:20']
             ]);
 
@@ -66,20 +70,22 @@ class UpdateUserInfoController extends Controller
             $user->save(); // update
             return redirect()->back();
         }
+
+        // 개인일때 : name, u_addr, animal_size 수정가능
         else {
             $updateData = [];
 
-            if ($req->name !== $user->name) {
-                $updateData['name'] = 'name';
-            }
-            if ($req->email !== $user->email) {
-                $updateData['email'] = 'email';
-            }
-            if ($req->u_id !== $user->u_id) {
-                $updateData['u_id'] = 'u_id';
-            }
+            //     $updateData['email'] = 'email';
+            // }
+            // if ($req->u_id !== $user->u_id) {
+            //     $updateData['u_id'] = 'u_id';
+            // }
             // if ($req->phone_no !== $user->phone_no) {
             //     $updateData['phone_no'] = 'phone_no';
+            // if ($req->email !== $user->email) {
+            //}
+            if ($req->name !== $user->name) {
+                $updateData['name'] = 'name';
             }
             if ($req->u_addr !== $user->u_addr) {
                 $updateData['u_addr'] = 'u_addr';
@@ -90,10 +96,9 @@ class UpdateUserInfoController extends Controller
 
             
             $validator = Validator::make($req->all(), [
+                // 'email' => ['required', 'email', 'max:30',  Rule::unique('users')->ignore($user->id)],
+                // 'u_id' =>['required', 'min:6','max:20', 'string',  'regex:/^[a-zA-Z0-9]+$/', Rule::unique('users')->ignore($user->id)],
                 'name' => ['required', 'string', 'regex:/^[가-힣]+$/u', 'max:20'], // add 0624 
-                'email' => ['required', 'email', 'max:30',  Rule::unique('users')->ignore($user->id)],
-                'u_id' =>['required', 'min:6','max:20', 'string',  'regex:/^[a-zA-Z0-9]+$/', Rule::unique('users')->ignore($user->id)],
-                // 'phone_no' => ['required', 'string', 'size:11',],
                 'u_addr' => ['required', 'string'],
                 'animal_size' => ['nullable', Rule::in(['0', '1'])]
             ]);
@@ -112,6 +117,7 @@ class UpdateUserInfoController extends Controller
             $user->save(); // update
             return redirect()->back();
         }
+    }
     
 
     public function printMyBuilding() {
@@ -125,10 +131,6 @@ class UpdateUserInfoController extends Controller
             
 
             $id = Auth::user()->id;
-            // s_info u_no, user id로 이너조인-> $id랑 같은거 중에 s_no select함
-            // $s_info = S_info::join('users', 's_infos.u_no', '=', 'users.id')
-            //         ->where('s_infos.u_no', '=', $id)
-            //         ->get();
             $user_info = User::join('s_infos', 'users.id', '=', 's_infos.u_no')
                 ->join('photos', 's_infos.s_no', '=', 'photos.s_no')
                 ->where('s_infos.u_no', '=', $id)
@@ -136,6 +138,8 @@ class UpdateUserInfoController extends Controller
                 ->get();
                 // ->paginate(4);
                 
+            return view('profile.update-profile-information-form')->with('user', $user_info);
+
             // collection에서 s_no만 뽑아서 array에 담음
             // $s_no = $s_info->pluck('s_no')->toArray();
             // url 배열
@@ -144,8 +148,8 @@ class UpdateUserInfoController extends Controller
 
             // $url = $user_info->pluck('url')->toArray();
             // return view('profile.update-profile-information-form')->with('s_info', $s_info); // with으로 못들고옴
-            return view('profile.update-profile-information-form')->with('user', $user_info);
         }
+}
 
 //     public function printMyBuilding(Request $request)
 // { 
@@ -165,6 +169,6 @@ class UpdateUserInfoController extends Controller
 
 //     return view('profile.update-profile-information-form', compact('user_info'));
 // }
- 
+
     
-}
+
