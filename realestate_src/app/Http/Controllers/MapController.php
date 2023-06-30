@@ -67,26 +67,26 @@ class MapController extends Controller
          // '구 선택'이 아닐 때
         if($gu != '구 선택'){
             // 매매가 평균 구하는 쿼리
-            $info['trade']=DB::table('s_infos')
+            $info['trade']=DB::table('s_infos AS sinfo')
             ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
             ->select('p_deposit', 's_type')
-            ->whereNull('phot.deleted_at')
             ->where('s_add', 'LIKE', $gu.'%')
             ->where('s_type','매매')
+            ->whereNull('phot.deleted_at')
             ->get();
-            $info['jeonse']=DB::table('s_infos')
+            $info['jeonse']=DB::table('s_infos AS sinfo')
             ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
             ->select('p_deposit', 's_type')
-            ->whereNull('phot.deleted_at')
             ->where('s_add', 'LIKE', $gu.'%')
             ->where('s_type','전세')
+            ->whereNull('phot.deleted_at')
             ->get();
-            $info['monthly']=DB::table('s_infos')
+            $info['monthly']=DB::table('s_infos AS sinfo')
             ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
             ->select('p_deposit', 's_type', 'p_month')
-            ->whereNull('phot.deleted_at')
             ->where('s_add', 'LIKE', $gu.'%')
             ->where('s_type','월세')
+            ->whereNull('phot.deleted_at')
             ->get();
             // '구 선택'이 아닐 때 '월세', '전세', '매매' 중에서 하나만 넘어왔을 때
             if(count($array)==1 && $array[0] != 1){
@@ -255,23 +255,23 @@ class MapController extends Controller
             }
     // "구 선택"일 때
         } else {
-            $info['trade']=DB::table('s_infos')
+            $info['trade']=DB::table('s_infos AS sinfo')
             ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
             ->select('p_deposit', 's_type')
-            ->whereNull('phot.deleted_at')
             ->where('s_type','매매')
+            ->whereNull('phot.deleted_at')
             ->get();
-            $info['jeonse']=DB::table('s_infos')
+            $info['jeonse']=DB::table('s_infos AS sinfo')
             ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
             ->select('p_deposit', 's_type')
-            ->whereNull('phot.deleted_at')
             ->where('s_type','전세')
+            ->whereNull('phot.deleted_at')
             ->get();
-            $info['monthly']=DB::table('s_infos')
+            $info['monthly']=DB::table('s_infos AS sinfo')
             ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
             ->select('p_deposit', 's_type', 'p_month')
-            ->whereNull('phot.deleted_at')
             ->where('s_type','월세')
+            ->whereNull('phot.deleted_at')
             ->get();
             // "구 선택"일 때 '월세', '전세', '매매' 중에서 하나만 넘어왔을 때
             if(count($array)==1 && $array[0] != 1){
