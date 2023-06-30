@@ -45,24 +45,24 @@ function addlist(data, i) {
         }, 1500);
     });
 
-    kakao.maps.event.removeListener(markers[i], "mouseover", function () {
+    kakao.maps.event.removeListener(markers[i], "mouseenter", function () {
         // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
         infowindow[i].open(map, markers[i]);
     });
 
     // 마커에 마우스아웃 이벤트를 등록합니다
-    kakao.maps.event.removeListener(markers[i], "mouseout", function () {
+    kakao.maps.event.removeListener(markers[i], "mouseleave", function () {
         // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
         infowindow[i].close();
     });
 
-    kakao.maps.event.addListener(markers[i], "mouseover", function () {
+    kakao.maps.event.addListener(markers[i], "mouseenter", function () {
         // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
         infowindow[i].open(map, markers[i]);
     });
 
     // 마커에 마우스아웃 이벤트를 등록합니다
-    kakao.maps.event.addListener(markers[i], "mouseout", function () {
+    kakao.maps.event.addListener(markers[i], "mouseleave", function () {
         // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
         infowindow[i].close();
     });
@@ -70,9 +70,6 @@ function addlist(data, i) {
 // 마커를 생성하고 지도위에 표시하는 함수입니다
 function addMarker(position, data, i) {
     // 마커를 생성합니다
-    for (let i = 0; i < markers.length; i++) {
-        markers[i].setMap(null);
-    }
     marker = new kakao.maps.Marker({
         position: position,
         image: markerImage,
@@ -85,11 +82,11 @@ function addMarker(position, data, i) {
     markers.push(marker);
 }
 
-// function setMarkers() {
-//     for (let i = 0; i < markers.length; i++) {
-//         markers[i].setMap(null);
-//     }
-// }
+function setMarkers() {
+    for (let i = 0; i < markers.length; i++) {
+        markers[i].setMap(null);
+    }
+}
 
 function addfetch(url, selectedOption) {
     fetch(url)
