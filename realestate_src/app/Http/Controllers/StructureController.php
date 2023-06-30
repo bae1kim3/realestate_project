@@ -22,15 +22,15 @@ class StructureController extends Controller
         // TODO :'한글' 유효성검사
         $validator = Validator::make(
             $req->all(), [
-                's_name' => 'required|regex:/^[가-힣0-9\s]+$/|max:30'
+                's_name' => 'required|regex:/^[가-힣0-9\s]+$/u|max:30'
                 // 's_name' => 'required|alpha_dash|max:30'
                 // alpha_dash : 한글 영문 숫자 - _ 다 되는데 ㄱㄱ 이런 글자도 통과됨..
                 ,'sell_cat_info' => 'required|in:월세,전세,매매'
                 ,'s_size' => 'required|integer|max:99999999999'
                 ,'p_deposit' => 'required|integer|max:99999999999'
                 ,'p_month' => 'nullable|integer|max:99999999999'
-                ,'sub_name' => 'required|string'
-                ,'s_fl' => 'required|integer|max:999'
+                ,'sub_name' => 'required|string||regex:/^[가-힣\s]+$/u'
+                ,'s_fl' => 'required|integer|max:500'
                 ,'s_parking' => 'required|in:0,1'
                 ,'s_ele' => 'required|in:0,1'
                 ,'s_addr' => 'required|string' 
@@ -39,8 +39,8 @@ class StructureController extends Controller
         if ($validator->fails()) {
                 return redirect()
                         ->back()
-                        ->withErrors($validator)
-                        ->withInput($req->all());
+                        ->withInput()
+                        ->withErrors($validator);
         }
 
         
@@ -127,7 +127,8 @@ class StructureController extends Controller
                 // $data01['s_ele'] = $req->s_ele;
 
                 $s_info_result = S_info::create($data); // 건물 정보 insert
-                $req->session()->put('result',$s_info_result); // add 0625 jy : view에서 submit 버튼 if 조건문 주는거 때문에 session에 값 넣어줬음
+
+                // $req->session()->put('result',$s_info_result); // del 0630 jy/ add 0625 jy : view에서 submit 버튼 if 조건문 주는거 때문에 session에 값 넣어줬음
 
                 // State_option::create($data01); // del 0625 jy : s_info db에 넘겨주고 그 다음에 다른 컨트롤러에서 db로 넘겨줌 // del : 이 방법 안씀
                 // $s_no = $s_info->id; // del 0625 jy

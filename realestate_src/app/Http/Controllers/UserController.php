@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Photo;
 use App\Models\State_option;
+use phpDocumentor\Reflection\Types\Null_;
 
 class UserController extends Controller
 {
@@ -36,7 +37,7 @@ class UserController extends Controller
             $id = Auth::user()->id; // 유저 넘버 pk
             $user = User::find($id); //유저 정보 가져옴
             $validator = Validator::make($req->all(), [
-                'password' => 'required|regex:/^(?=.*[a-z])(?=.*[!@#$%^&*])(?=.*[0-9]).{8,20}$/'
+                'password' => 'required|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,20}$/'
             ]);
             if ($validator->fails()) {
                 return redirect()
@@ -63,7 +64,7 @@ class UserController extends Controller
             $id = Auth::user()->id; // 유저 넘버 pk
             $user = User::find($id); //유저 정보 가져옴
             $validator = Validator::make($req->all(), [
-                'password' => 'required|regex:/^(?=.*[a-z])(?=.*[!@#$%^&*])(?=.*[0-9]).{8,20}$/'
+                'password' => 'required|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,20}$/'
             ]);
             if ($validator->fails()) {
                 return redirect()
@@ -78,9 +79,7 @@ class UserController extends Controller
                 //                 ->where('si.u_no', '=', $id)
                 //                 ->select('si.u_no')
                 //                 ->get(); // del 0625 jy
-            $s_info_u_no = S_info::join('users', 's_infos.u_no', '=', 'users.id')
-                    ->where('s_infos.u_no', '=', $id)
-                    ->select('s_infos.u_no')
+            $s_info_u_no = S_info::where('u_no', '=', $id)
                     ->get();
 
             // s_infos.s_no = stat_option.s_no 이너조인 stat_option u_no에 해당하는 s_no 다 불러옴(배열)
@@ -106,25 +105,18 @@ class UserController extends Controller
 
 
             // user가 올린 매물이 없을때 => 바로 탈퇴
-            if(!$s_info_u_no) {
-
-                $user->delete();
-                Session::flush();
-                Auth::logout();
-                return redirect()->route('welcome');
-            }
-            else
-            { // user가 올린 매물이 있을 때 => 포토 삭제 -> 건물옵션 삭제-> 건물 삭제 -> user 삭제
+             // user가 올린 매물이 있을 때 => 포토 삭제 -> 건물옵션 삭제-> 건물 삭제 -> user 삭제
+            if($s_info_u_no != null){
                 
                 // Photos 삭제
                 $photo_deleted_rows = Photo::whereIn('p_no', $photo_p_no_list)->delete();
-                if($photo_deleted_rows > 0) {
+                if($photo_deleted_rows) {
                     // state_option 삭제
                     $stat_deleted_rows = State_option::whereIn('s_no', $s_no_list)->delete();
-                    if($stat_deleted_rows>0) {
+                    if($stat_deleted_rows) {
                         // s_info 삭제
                         $sinfo_deleted_rows = S_info::where('u_no', $id)->delete();
-                        if($sinfo_deleted_rows>0) {
+                        if($sinfo_deleted_rows) {
                             //user 삭제
                             $user->delete();
                         }
@@ -146,13 +138,19 @@ class UserController extends Controller
                 // $u_no_find->save();
 
                 //탈퇴
-                // $user->delete();
+                $user->delete();
                 Session::flush();
                 Auth::logout();
                 return redirect()->route('welcome');
             }
+        else {
+            $user->delete();
+            Session::flush();
+            Auth::logout();
+            return redirect()->route('welcome');
         }
     }
+}
 
     public function sellerPhone($s_no){
         $s_info = S_info::where('s_no', $s_no)->first();

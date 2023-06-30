@@ -8,7 +8,8 @@
         <form action="{{route('profile.chk_del_user.post')}}" method="post" id="deleteForm">
         @csrf
         {{-- @method('delete') --}}
-            <input class="input_pw" type="password" name="password" placeholder="비밀번호 입력">
+            <div>아이디 : {{Auth::user()->u_id}}</div>
+            <input class="input_pw mt-3" type="password" name="password" placeholder="비밀번호 입력">
             {{-- 유효성 검사 --}}
             @foreach($errors->all() as $error)
               <div class="alert alert-success" role="alert">
