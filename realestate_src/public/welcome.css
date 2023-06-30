@@ -41,6 +41,10 @@
   border-bottom: 1px solid #e2e8f0;
 }
 
+.accordion .accordion-item2:not(:last-child) {
+  border-bottom: 1px solid #e2e8f0;
+}
+
 .accordion .accordion-title {
   cursor: pointer;
 }
@@ -52,6 +56,11 @@
 }
 
 .accordion .accordion-item.active .accordion-content {
+  max-height: 1000px;
+  transition: max-height 0.35s ease-in-out;
+}
+
+.accordion .accordion-item2.active2 .accordion-content {
   max-height: 1000px;
   transition: max-height 0.35s ease-in-out;
 }

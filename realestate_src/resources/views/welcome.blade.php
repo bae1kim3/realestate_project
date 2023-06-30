@@ -93,7 +93,7 @@
                     <div class="w-1/2">
                         <h2 class="text-2xl font-bold mb-4 dark:text-white">응급동물병원</h2>
                         <div class="accordion">
-                            <div class="accordion-item">
+                            <div class="accordion-item2">
                                 <div class="accordion-title font-bold cursor-pointer dark:text-white">북구</div>
                                 <div class="accordion-content">
                                     <p class="dark:text-white">플러스동물의료센터</p>
@@ -109,7 +109,7 @@
                                     <p class="dark:text-white">주소 : 대구광역시 북구 대현동 340-15</p>
                                 </div>
                             </div>
-                            <div class="accordion-item">
+                            <div class="accordion-item2">
                                 <div class="accordion-title font-bold cursor-pointer dark:text-white">서구</div>
                                 <div class="accordion-content">
                                     <p class="dark:text-white">삼성동물병원</p>
@@ -125,7 +125,7 @@
                                     <p class="dark:text-white">주소 : 대구광역시 서구 평리동 1522-3</p>
                                 </div>
                             </div>
-                            <div class="accordion-item">
+                            <div class="accordion-item2">
                                 <div class="accordion-title font-bold cursor-pointer dark:text-white">중구</div>
                                 <div class="accordion-content">
                                     <p class="dark:text-white">센트럴동물병원</p>
@@ -141,7 +141,7 @@
                                     <p class="dark:text-white">주소 : 대구광역시 중구 봉산동 53-2</p>
                                 </div>
                             </div>
-                            <div class="accordion-item">
+                            <div class="accordion-item2">
                                 <div class="accordion-title font-bold cursor-pointer dark:text-white">남구</div>
                                 <div class="accordion-content">
                                     <p class="dark:text-white">박순석동물메디컬센터</p>
@@ -157,7 +157,7 @@
                                     <p class="dark:text-white">주소 : 대구광역시 남구 대명6동 1111</p>
                                 </div>
                             </div>
-                            <div class="accordion-item">
+                            <div class="accordion-item2">
                                 <div class="accordion-title font-bold cursor-pointer dark:text-white">수성구</div>
                                 <div class="accordion-content">
                                     <p class="dark:text-white">24시범어동물의료센터</p>
@@ -173,7 +173,7 @@
                                     <p class="dark:text-white">주소 : 대구광역시 수성구 만촌동 달구벌대로 2562</p>
                                 </div>
                             </div>
-                            <div class="accordion-item">
+                            <div class="accordion-item2">
                                 <div class="accordion-title font-bold cursor-pointer dark:text-white">동구</div>
                                 <div class="accordion-content">
                                     <p class="dark:text-white">봄이온동물병원</p>
@@ -189,7 +189,7 @@
                                     <p class="dark:text-white">주소 : 대구광역시 동구 검사동 957-41</p>
                                 </div>
                             </div>
-                            <div class="accordion-item">
+                            <div class="accordion-item2">
                                 <div class="accordion-title font-bold cursor-pointer dark:text-white">달서구</div>
                                 <div class="accordion-content">
                                     <p class="dark:text-white">대구24시바른동물의료센터</p>
@@ -205,7 +205,7 @@
                                     <p class="dark:text-white">주소 : 대구광역시 달서구 상인2동 월배로 166</p>
                                 </div>
                             </div>
-                            <div class="accordion-item">
+                            <div class="accordion-item2">
                                 <div class="accordion-title font-bold cursor-pointer dark:text-white">달성군</div>
                                 <div class="accordion-content">
                                     <p class="dark:text-white">화원연합동물병원</p>

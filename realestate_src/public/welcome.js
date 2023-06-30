@@ -12,6 +12,19 @@ accordionItems.forEach(item => {
   });
 });
 
+const accordionItems2 = document.querySelectorAll('.accordion-item2');
+
+accordionItems2.forEach(item => {
+  const title = item.querySelector('.accordion-title');
+  title.addEventListener('click', () => {
+    const isActive = item.classList.contains('active2');
+    accordionItems2.forEach(item => item.classList.remove('active2'));
+    if (!isActive) {
+      item.classList.add('active2');
+    }
+  });
+});
+
 // 가로스크롤 부동산 정보 갱신
 var loadingPhotos = false;
 var lastPhotoId = document.querySelector('#lastPhotoItem').dataset.id;
