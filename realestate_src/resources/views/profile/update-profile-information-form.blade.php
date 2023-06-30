@@ -4,18 +4,18 @@
 
 <div class="wrap">
     @if(Illuminate\Support\Facades\Auth::user()->seller_license)
-            <h2 class="dark:text-white font-bold text-2xl mt-10">
+            <h2 class="dark:text-white font-bold text-2xl pt-6">
             {{ __('공인중개사 회원 정보') }}
             </h2>
     @else
-            <h2 class="dark:text-white font-bold text-2xl mt-10" style="padding-left:20px">
+            <h2 class="dark:text-white font-bold text-2xl pt-6" style="padding-left:20px">
             {{ __('개인 회원정보') }}
             </h2>
     @endif
 
 
     <div class='main'>
-        <div class='tabs'>
+        <div class='tabs text-bold dark:text-white'>
             <div class='tab' data-tab-target='#tab1'>
             @if(Auth::user()->seller_license)
                 <p>공인중개사 마이페이지</p>
@@ -193,14 +193,14 @@
             <h1>비밀번호를 변경하고 싶으신가요?</h1>
             <br>
             <a href="{{ route('profile.chk_phone_no') }}">
-            <x-button>비밀번호 변경</x-button>
+            <x-button class="dark:bg-gray-600">비밀번호 변경</x-button>
             </a>
         </div>
 
     @endif
     <x-section-border />
     @if (Laravel\Jetstream\Jetstream::hasAccountDeletionFeatures())
-        <div class="mt-10 sm:mt-0" style="margin-left:40px;">
+        <div class="mt-10 sm:mt-0 dark:text-white" style="margin-left:40px;">
         {{--@livewire('profile.delete-user-form')--}}
             <h1>계정을 삭제하시겠습니까?</h1>
             <br>
