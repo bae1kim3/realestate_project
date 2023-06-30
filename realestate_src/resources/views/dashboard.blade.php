@@ -15,7 +15,7 @@
             </h2>
         </x-slot>
 
-        <div class="py-10 h-screen" >
+        <div class="py-10" >
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
         @if(Illuminate\Support\Facades\Auth::user()->seller_license)
@@ -29,7 +29,7 @@
                         이미지 업로드
                         <br>
                     </h1>
-                    
+
 
                     <div class="container" style=" padding-top:10px">
                         <div class="row">
@@ -49,7 +49,7 @@
                                     @endforeach
                                     <div class="mt-5 text-red-600" role="alert" style="display: none" id="err_up"></div>
                                     <x-label for="s_name" class="mt-5 font-semibold text-xl dark:text-white">건물 이름</x-label>
-                                    <x-input type="text" placeholder="건물 이름" name="s_name" id="s_name" required class="mt-2 dark:bg-gray-700; dark:text-white"/>
+                                    <x-input type="text" placeholder="건물 이름" name="s_name" id="s_name" required class="mt-2 dark:bg-gray-700; dark:text-white dark:bg-gray-700"/>
                                     <br>
                                     <x-label for="sell_cat" class="mt-5 font-semibold text-xl dark:text-white">매매 유형</x-label>
                                     <div class="mt-2">
@@ -78,18 +78,18 @@
                                     <x-input type="hidden" name="s_log" id="s_log" />
                                     <br>
                                     <x-label for="sub_name" class="font-semibold text-xl dark:text-white">건물과 제일 가까운 역</x-label>
-                                    <x-input type="text" name="sub_name" maxlength="11" id="sub_name" required class="mt-2 dark:text-white"/><span class="dark:text-white">역</span>
+                                    <x-input type="text" name="sub_name" maxlength="11" id="sub_name" required class="mt-2 dark:bg-gray-700 dark:text-white"/><span class="dark:text-white">역</span>
                                     {{-- @if(session()->has('sub_err'))
                                         <div>{{session()->get('sub_err')}}</div>
                                     @endif --}}
                                     <br>
-                                    <x-label for="p_deposit" class="mt-5 font-semibold text-xl dark:text-white">보증금/매매가/전세가</x-label>
-                                    <x-input type="text" name="p_deposit" id="p_deposit" class="mt-2" required maxlength="11"/><span class="dark:text-white">만원</span><br>
+                                    <x-label for="p_deposit" class="mt-5 font-semibold text-xl dark:bg-gray-700 dark:text-white">보증금/매매가/전세가</x-label>
+                                    <x-input type="text" name="p_deposit" id="p_deposit" class="mt-2 dark:bg-gray-700 dark:text-white" required maxlength="11"/><span class="dark:text-white">만원</span><br>
                                     <x-label for="p_month" class="mt-5 font-semibold text-xl dark:text-white">월세</x-label>
-                                    <x-input type="text" name="p_month" id="p_month" class="mt-2" maxlength="11"/><span class="dark:text-white">만원</span>
+                                    <x-input type="text" name="p_month" id="p_month" class="mt-2 dark:bg-gray-700 dark:text-white" maxlength="11"/><span class="dark:text-white">만원</span>
                                     <br>
                                     <x-label for="s_fl" class="mt-5 font-semibold text-xl dark:text-white">층수</x-label>
-                                    <x-input type="text" name="s_fl" id="s_fl" class="mt-2" required maxlength="3" style="margin-bottom:40px"/><span class="dark:text-white">층</span>
+                                    <x-input type="text" name="s_fl" id="s_fl" class="mt-2 dark:bg-gray-700 dark:text-white" required maxlength="3" style="margin-bottom:40px"/><span class="dark:text-white">층</span>
                                     <hr><br><br>
                                     <x-label for="s_parking" class="font-semibold text-xl dark:text-white">주차 가능 여부</x-label>
                                     <div class="mt-2">
@@ -126,7 +126,7 @@
                                     <x-button type="button" onclick="location.href='{{url('/')}}'" class="dark:bg-gray-600 dark:text-white">취소</x-button>
                                     </div>
                                 </form>
-                                
+
 
                                 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1def08893c26998733c374c40b12ac42&libraries=services,clusterer,drawing"></script>
                                 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
