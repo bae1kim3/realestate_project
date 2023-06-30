@@ -249,7 +249,6 @@ function addfetch(url, selectedOption) {
                     data,
                     i
                 );
-                console.log(markers);
                 // 마커에 커서가 오버됐을 때 마커 위에 표시할 인포윈도우를 생성합니다
                 addlist(data, i);
             }
