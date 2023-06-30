@@ -49,23 +49,23 @@
                                     @endforeach
                                     <div class="mt-5 text-red-600" role="alert" style="display: none" id="err_up"></div>
                                     <x-label for="s_name" class="mt-5 font-semibold text-xl dark:text-white">건물 이름</x-label>
-                                    <x-input type="text" placeholder="건물 이름" name="s_name" id="s_name" required class="mt-2 dark:bg-gray-700; dark:text-white"/>
+                                    <x-input type="text" placeholder="건물 이름" name="s_name" id="s_name" value="{{old('s_name')}}" required class="mt-2 dark:bg-gray-700; dark:text-white"/>
                                     <br>
                                     <x-label for="sell_cat" class="mt-5 font-semibold text-xl dark:text-white">매매 유형</x-label>
                                     <div class="mt-2">
                                         <label for="sell_cat_month" class="dark:text-white">월세</label>
-                                        <input type="radio" name="sell_cat_info" value="월세" id="sell_cat_month"  class="dark:text-white"/>
+                                        <input type="radio" name="sell_cat_info" value="월세" id="sell_cat_month" {{old('sell_cat_info') === '월세'? 'checked' : ''}} class="dark:text-white"/>
                                         <label for="sell_cat_jeon" class="dark:text-white">전세</-label>
-                                        <input type="radio" name="sell_cat_info" value="전세" id="sell_cat_jeon"  class="dark:text-white"/>
+                                        <input type="radio" name="sell_cat_info" value="전세" id="sell_cat_jeon" {{old('sell_cat_info') === '전세'? 'checked' : ''}} class="dark:text-white"/>
                                         <label for="sell_cat_buy" class="dark:text-white">매매</-label>
-                                        <input type="radio" name="sell_cat_info" value="매매" id="sell_cat_buy"  class="dark:text-white"/>
+                                        <input type="radio" name="sell_cat_info" value="매매" id="sell_cat_buy" {{old('sell_cat_info') === '매매'? 'checked' : ''}} class="dark:text-white"/>
                                     </div>
                                     <x-label for="s_size"  class="mt-5 font-semibold text-xl dark:text-white">방 면적</x-label>
-                                    <x-input type="text" name="s_size" id="s_size" required maxlength="11" class="mt-2 dark:bg-gray-700 dark:text-white"/><span class="dark:text-white">평</span>
+                                    <x-input type="text" name="s_size" id="s_size" required maxlength="11" value="{{old('s_size')}}" class="mt-2 dark:bg-gray-700 dark:text-white"/><span class="dark:text-white">평</span>
                                     <br>
                                     <x-label for="s_addr"  class="mt-5 font-semibold text-xl dark:text-white">주소</x-label>
-                                    <x-input type="text" id="sample6_address" name="s_addr" placeholder="대구 지역 내 도로명 주소" readonly required class="block w-full mt-1 dark:bg-gray-700 dark:text-white"/>
-                                    <x-button type="button"  class="mt-3 dark:text-white" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">우편번호 찾기</x-button>
+                                    <x-input type="text" id="sample6_address" name="s_addr" placeholder="대구 지역 내 도로명 주소" readonly required value="{{old('s_addr')}}" class="block w-full mt-1 dark:bg-gray-700 dark:text-white"/>
+                                    <x-button type="button"  class="mt-3 dark:text-white" onclick="sample6_execDaumPostcode()" >우편번호 찾기</x-button>
                                     <br>
 
                                     {{-- @if(session()->has('addr_err'))
@@ -78,41 +78,41 @@
                                     <x-input type="hidden" name="s_log" id="s_log" />
                                     <br>
                                     <x-label for="sub_name" class="font-semibold text-xl dark:text-white">건물과 제일 가까운 역</x-label>
-                                    <x-input type="text" name="sub_name" maxlength="11" id="sub_name" required class="mt-2 dark:text-white"/><span class="dark:text-white">역</span>
+                                    <x-input type="text" name="sub_name" maxlength="11" id="sub_name" required value="{{old('sub_name')}}" class="mt-2 dark:text-white"/><span class="dark:text-white">역</span>
                                     {{-- @if(session()->has('sub_err'))
                                         <div>{{session()->get('sub_err')}}</div>
                                     @endif --}}
                                     <br>
                                     <x-label for="p_deposit" class="mt-5 font-semibold text-xl dark:text-white">보증금/매매가/전세가</x-label>
-                                    <x-input type="text" name="p_deposit" id="p_deposit" class="mt-2" required maxlength="11"/><span class="dark:text-white">만원</span><br>
+                                    <x-input type="text" name="p_deposit" id="p_deposit" class="mt-2" required value="{{old('p_deposit')}}" maxlength="11"/><span class="dark:text-white">만원</span><br>
                                     <x-label for="p_month" class="mt-5 font-semibold text-xl dark:text-white">월세</x-label>
-                                    <x-input type="text" name="p_month" id="p_month" class="mt-2" maxlength="11"/><span class="dark:text-white">만원</span>
+                                    <x-input type="text" name="p_month" id="p_month" class="mt-2" value="{{old('p_month')}}" maxlength="11"/><span class="dark:text-white">만원</span>
                                     <br>
                                     <x-label for="s_fl" class="mt-5 font-semibold text-xl dark:text-white">층수</x-label>
-                                    <x-input type="text" name="s_fl" id="s_fl" class="mt-2" required maxlength="3" style="margin-bottom:40px"/><span class="dark:text-white">층</span>
+                                    <x-input type="text" name="s_fl" id="s_fl" class="mt-2" required value="{{old('s_fl')}}" maxlength="3" style="margin-bottom:40px"/><span class="dark:text-white">층</span>
                                     <hr><br><br>
                                     <x-label for="s_parking" class="font-semibold text-xl dark:text-white">주차 가능 여부</x-label>
                                     <div class="mt-2">
                                         <label for="y_parking" class="dark:text-white">가능</label>
-                                        <input type="radio" name="s_parking" value="1" id="y_parking" />
+                                        <input type="radio" name="s_parking" value="1" id="y_parking" {{old('s_parking') === '1'? 'checked' : ''}}/>
                                         <label for="n_parking" id="n_parking" class="dark:text-white">불가능</label>
-                                        <input type="radio" name="s_parking" value="0" id="n_parking" />
+                                        <input type="radio" name="s_parking" value="0" id="n_parking" {{old('s_parking') === '0'? 'checked' : ''}}/>
                                     </div>
                                     <br>
                                     <x-label for="s_ele" class="font-semibold text-xl dark:text-white">엘레베이터 유무</x-label>
                                     <div class="mt-2">
                                         <label for="y_ele" class="dark:text-white">있음</label>
-                                        <input type="radio" name="s_ele" value="1" id="y_ele" />
+                                        <input type="radio" name="s_ele" value="1" id="y_ele" {{old('s_ele') === '1'? 'checked' : ''}} />
                                         <label for="n_ele" class="dark:text-white">없음</label>
-                                        <input type="radio" name="s_ele" value="0" id="n_ele" />
+                                        <input type="radio" name="s_ele" value="0" id="n_ele" {{old('s_ele') === '0'? 'checked' : ''}}/>
                                     </div>
                                     <br>
                                     <x-label for="animal_size" class="font-semibold text-xl dark:text-white">대형 동물 허용(25kg 이상)</x-label>
                                     <div class="mt-2">
                                     <label for="y_animal_size" class="dark:text-white">가능</label>
-                                    <input type="radio" name="animal_size" value="1" id="y_animal_size" />
+                                    <input type="radio" name="animal_size" value="1" id="y_animal_size" {{old('animal_size') === '1'? 'checked' : ''}}/>
                                     <label for="n_animal_size" class="dark:text-white">불가능</label>
-                                    <input type="radio" value="0" name="animal_size" id="n_animal_size" />
+                                    <input type="radio" value="0" name="animal_size" id="n_animal_size" {{old('sell_cat_info') === '0'? 'checked' : ''}}/>
                                     </div>
                                     <br>
 
