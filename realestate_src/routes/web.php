@@ -6,15 +6,15 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Livewire\FindUsername;
-use App\Http\Livewire\NoticeUsername;
+// use App\Http\Livewire\FindUsername;
+// use App\Http\Livewire\NoticeUsername;
 use App\Http\Controllers\CheckController;
+use App\Http\Controllers\FindUsernameController;
 use App\Http\Controllers\UserPassController;
 use App\Http\Livewire\FindUserPass;
 use App\Http\Livewire\UserPassInput;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\PhotoLoadController;
-use App\Http\Controllers\SearchController;
 use App\Http\Controllers\StructureController;
 use App\Http\Controllers\StructureDetailController;
 use App\Http\Controllers\MapController;
@@ -61,8 +61,11 @@ Route::post('/toggle-dark-mode', [DarkModeController::class, 'toggleDarkMode'])-
 Route::get('u_register',[RegisterController::class, 'u_register'])->name('user-register');
 Route::get('sell_register',[RegisterController::class, 'seller_register'])->name('seller-register');
 
-Route::get('/find-username', [FindUsername::class, '__invoke'])->name('find-username');
-Route::get('/notice-username', [NoticeUsername::class, '__invoke'])->name('notice-username');
+// Route::get('/find-username', [FindUsername::class, '__invoke'])->name('find-username');
+// Route::get('/notice-username', [NoticeUsername::class, '__invoke'])->name('notice-username');
+
+Route::get('/find-username', [FindUsernameController::class, 'index'])->name('find-username');
+Route::post('/find-username', [FindUsernameController::class, 'findUsername'])->name('find-username.submit');
 
 Route::get('/find-userpass', [FindUserPass::class, '__invoke'])
     ->name('find-userpass')
