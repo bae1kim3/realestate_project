@@ -65,7 +65,7 @@
                                     <br>
                                     <x-label for="s_addr"  class="mt-5 font-semibold text-xl dark:text-white">주소</x-label>
                                     <x-input type="text" id="sample6_address" name="s_addr" placeholder="대구 지역 내 도로명 주소" readonly required class="block w-full mt-1 dark:bg-gray-700 dark:text-white"/>
-                                    <x-button type="button"  class="mt-3 dark:text-white" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">우편번호 찾기</x-button>
+                                    <x-button type="button"  class="mt-3 dark:text-white dark:bg-gray-600" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">우편번호 찾기</x-button>
                                     <br>
 
                                     {{-- @if(session()->has('addr_err'))
@@ -83,7 +83,8 @@
                                         <div>{{session()->get('sub_err')}}</div>
                                     @endif --}}
                                     <br>
-                                    <x-label for="p_deposit" class="mt-5 font-semibold text-xl dark:bg-gray-700 dark:text-white">보증금/매매가/전세가</x-label>
+                                    <br>
+                                    <x-label for="p_deposit" class="block font-medium text-sm text-gray-700 font-semibold text-xl dark:text-white">보증금/매매가/전세가</x-label>
                                     <x-input type="text" name="p_deposit" id="p_deposit" class="mt-2 dark:bg-gray-700 dark:text-white" required maxlength="11"/><span class="dark:text-white">만원</span><br>
                                     <x-label for="p_month" class="mt-5 font-semibold text-xl dark:text-white">월세</x-label>
                                     <x-input type="text" name="p_month" id="p_month" class="mt-2 dark:bg-gray-700 dark:text-white" maxlength="11"/><span class="dark:text-white">만원</span>
