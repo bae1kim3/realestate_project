@@ -15,7 +15,7 @@
             </h2>
         </x-slot>
 
-        <div class="py-10 h-screen" >
+        <div class="py-10" >
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
         @if(Illuminate\Support\Facades\Auth::user()->seller_license)
@@ -65,7 +65,7 @@
                                     <br>
                                     <x-label for="s_addr"  class="mt-5 font-semibold text-xl dark:text-white">주소</x-label>
                                     <x-input type="text" id="sample6_address" name="s_addr" placeholder="대구 지역 내 도로명 주소" readonly required value="{{old('s_addr')}}" class="block w-full mt-1 dark:bg-gray-700 dark:text-white"/>
-                                    <x-button type="button"  class="mt-3 dark:text-white" onclick="sample6_execDaumPostcode()" >우편번호 찾기</x-button>
+                                    <x-button type="button"  class="mt-3 dark:text-white dark:bg-gray-600" onclick="sample6_execDaumPostcode()" >우편번호 찾기</x-button>
                                     <br>
 
                                     {{-- @if(session()->has('addr_err'))
