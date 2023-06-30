@@ -68,17 +68,23 @@ class MapController extends Controller
         if($gu != '구 선택'){
             // 매매가 평균 구하는 쿼리
             $info['trade']=DB::table('s_infos')
+            ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
             ->select('p_deposit', 's_type')
+            ->whereNull('phot.deleted_at')
             ->where('s_add', 'LIKE', $gu.'%')
             ->where('s_type','매매')
             ->get();
             $info['jeonse']=DB::table('s_infos')
+            ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
             ->select('p_deposit', 's_type')
+            ->whereNull('phot.deleted_at')
             ->where('s_add', 'LIKE', $gu.'%')
             ->where('s_type','전세')
             ->get();
             $info['monthly']=DB::table('s_infos')
+            ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
             ->select('p_deposit', 's_type', 'p_month')
+            ->whereNull('phot.deleted_at')
             ->where('s_add', 'LIKE', $gu.'%')
             ->where('s_type','월세')
             ->get();
@@ -250,15 +256,21 @@ class MapController extends Controller
     // "구 선택"일 때
         } else {
             $info['trade']=DB::table('s_infos')
+            ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
             ->select('p_deposit', 's_type')
+            ->whereNull('phot.deleted_at')
             ->where('s_type','매매')
             ->get();
             $info['jeonse']=DB::table('s_infos')
+            ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
             ->select('p_deposit', 's_type')
+            ->whereNull('phot.deleted_at')
             ->where('s_type','전세')
             ->get();
             $info['monthly']=DB::table('s_infos')
+            ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
             ->select('p_deposit', 's_type', 'p_month')
+            ->whereNull('phot.deleted_at')
             ->where('s_type','월세')
             ->get();
             // "구 선택"일 때 '월세', '전세', '매매' 중에서 하나만 넘어왔을 때
