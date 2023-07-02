@@ -43,13 +43,13 @@ function addlist(data, i) {
         window.location.href = `#${markers[i].id}`;
         cardId = document.getElementById(markers[i].id);
         if (selectedCard == 0) {
-            document.getElementById(markers[i].id).classList.add("aaaa");
+            document.getElementById(markers[i].id).classList.add("selected");
             selectedCard = markers[i].id;
             console.log(selectedCard);
         } else if (selectedCard != markers[i].id) {
-            document.getElementById(selectedCard).classList.remove("aaaa");
+            document.getElementById(selectedCard).classList.remove("selected");
             selectedCard = 0;
-            document.getElementById(markers[i].id).classList.add("aaaa");
+            document.getElementById(markers[i].id).classList.add("selected");
             selectedCard = markers[i].id;
         }
 
@@ -366,7 +366,6 @@ getpark.addEventListener("click", function (checkbox) {
             "/" +
             (soptionValues.length ? soptionValues.join(",") : "1");
         // AJAX 요청 보내기
-
         fetch(url)
             .then((response) => response.json())
             .then((data) => {
@@ -427,6 +426,7 @@ getpark.addEventListener("click", function (checkbox) {
         }
         pmarkers = [];
     }
+    getpark.classList.toggle("selectedpark");
 });
 
 scheckboxes.forEach(function (checkbox) {

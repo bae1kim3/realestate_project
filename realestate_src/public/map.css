@@ -84,9 +84,12 @@
     display: block;
     margin-bottom: 5px;
 }
-.aaaa {
+.selected {
     border: 3px solid yellowgreen !important;
     box-sizing: border-box;
+}
+.selectedpark {
+    background-color: yellowgreen !important;
 }
 
 /* #u_id {
