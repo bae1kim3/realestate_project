@@ -93,7 +93,7 @@
 
 {{-- 탈퇴 모달 --}}
         <div id="modal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center">
-            <div id="modaldiv" style="border: 1px solid #89a5ea; background-color:#dadada;" class="rounded-lg p-6 shadow-md dark:bg-gray-800">
+            <div id="modaldiv" style="border: 1px solid #89a5ea; background-color:#a1a0a0;" class="dark:bg-gray-900 rounded-lg p-6 shadow-md">
                 <h1 id="modalTitle" class="text-lg font-bold mb-4">회원 탈퇴</h1>
                 <p id="modalMessage">정말로 탈퇴하시겠습니까? 모든 정보가 지워집니다.</p>
                 <button id="modalCloseBtn" onclick="closeModal()" class="mt-6 bg-gray-500 hover:bg-gray-700 text-white py-2 px-4 rounded">

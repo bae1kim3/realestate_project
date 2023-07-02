@@ -100,7 +100,7 @@ class StructureController extends Controller
 
         if (!empty($error)) {
             // 리다이렉트 해서 에러 세션에 담음
-            return redirect()->back()->withErrors($error);
+            return redirect()->back()->withInput()->withErrors($error);
         } else {
 
             // if($error) {
