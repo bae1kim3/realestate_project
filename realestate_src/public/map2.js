@@ -28,6 +28,7 @@ let pageno = 0;
 let numofrows = 0;
 let radius = "";
 let clickmarkerImage;
+let selectedCard = 0;
 
 function addlist(data, i) {
     iwContent[
@@ -37,14 +38,20 @@ function addlist(data, i) {
     infowindow[i] = new kakao.maps.InfoWindow({
         content: iwContent[i],
     });
-    kakao.maps.event.addListener(marker, "click", function () {
+    kakao.maps.event.addListener(markers[i], "click", function () {
         // 마커 클릭 시 URL로 이동
-        window.location.href = `#${data["sinfo"][i].s_no}`;
-        cardId = document.getElementById(`${data["sinfo"][i].s_no}`);
-        // cardId.classList.add("aaaa");
-        // setTimeout(() => {
-        //     cardId.classList.remove("aaaa");
-        // }, 1500);
+        window.location.href = `#${markers[i].id}`;
+        cardId = document.getElementById(markers[i].id);
+        if (selectedCard == 0) {
+            document.getElementById(markers[i].id).classList.add("aaaa");
+            selectedCard = markers[i].id;
+            console.log(selectedCard);
+        } else if (selectedCard != markers[i].id) {
+            document.getElementById(selectedCard).classList.remove("aaaa");
+            selectedCard = 0;
+            document.getElementById(markers[i].id).classList.add("aaaa");
+            selectedCard = markers[i].id;
+        }
 
         clickmarkerImage = new kakao.maps.MarkerImage(imageSrc, clickimageSize);
         if (!selectedMarker || selectedMarker !== markers[i]) {
@@ -58,6 +65,9 @@ function addlist(data, i) {
 
         // 클릭된 마커를 현재 클릭된 마커 객체로 설정합니다
         selectedMarker = markers[i];
+        cardId = document.getElementById(selectedMarker.id);
+
+        // let clickclass = document.querySelectorAll('div [class="card"]');
     });
     kakao.maps.event.addListener(markers[i], "mouseover", function () {
         // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
@@ -202,7 +212,7 @@ function addfetch(url, selectedOption) {
                 var card = document.createElement("div");
                 card.style.border = "3px solid black";
                 card.id = `${data["sinfo"][i].s_no}`;
-                card.className = "card";
+                card.classList.add("card");
                 card.style.width = "18rem";
 
                 // 이미지 요소 생성
@@ -266,7 +276,6 @@ function addfetch(url, selectedOption) {
                     data,
                     i
                 );
-                // 마커에 커서가 오버됐을 때 마커 위에 표시할 인포윈도우를 생성합니다
                 addlist(data, i);
             }
         });
