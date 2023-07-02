@@ -265,6 +265,7 @@ function addfetch(url, selectedOption) {
                 // 생성한 카드를 원하는 위치에 추가
                 container.appendChild(atag);
             }
+            selectedCard = 0;
             markers = [];
             for (let i = 0; i < data["sinfo"].length; i++) {
                 // 마커 하나를 지도위에 표시합니다
