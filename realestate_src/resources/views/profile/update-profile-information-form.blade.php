@@ -5,11 +5,11 @@
 <div class="wrap">
     <div class="in_wrap">
         @if(Illuminate\Support\Facades\Auth::user()->seller_license)
-                <h2 class="dark:text-white font-bold text-2xl pt-6">
+                <h2 class="dark:text-white font-bold text-2xl pt-6" style="padding-top:50px">
                 {{ __('공인중개사 회원 정보') }}
                 </h2>
         @else
-                <h2 class="dark:text-white font-bold text-2xl pt-6" style="padding-left:20px">
+                <h2 class="dark:text-white font-bold text-2xl pt-6" style="padding-left:20px; padding-top:50px">
                 {{ __('개인 회원정보') }}
                 </h2>
         @endif
