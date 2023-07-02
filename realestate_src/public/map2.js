@@ -22,7 +22,7 @@ let iwContent = [];
 let infowindow = [];
 let markerImage;
 let imageSrc = "maphome.png";
-let imageSize = new kakao.maps.Size(24, 35);
+let imageSize = new kakao.maps.Size(24, 30);
 let clickimageSize = new kakao.maps.Size(50, 60);
 let pageno = 0;
 let numofrows = 0;

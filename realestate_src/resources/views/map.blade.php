@@ -53,10 +53,10 @@
                 </div>
                 <div class="dropdown-menu">
                     <label class="custom-label">
-                    <input type="checkbox" class="sopt" id="optcheck4" value="s_parking" > 주차
+                    <input type="checkbox" class="sopt" id="optcheck4" value="s_parking" > 🅿️주차
                     </label>
                     <label class="custom-label">
-                    <input type="checkbox" class="sopt" id="optcheck5" value="s_ele" > 엘
+                    <input type="checkbox" class="sopt" id="optcheck5" value="s_ele" > 🛗엘베
                     </label>
                 </div>
             </div>
