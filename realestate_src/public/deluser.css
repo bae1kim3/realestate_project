@@ -1,13 +1,18 @@
+.del_box {
+    height: 100vh;
+    padding-top: 50px;
+}
 .del_border {
     width: 500px;
-    height: 300px;
+    /* height: 300px; */
     border: 1px solid rgb(207, 206, 206);
     border-radius: 10px;
     background-color: #fff;
-    margin: 50px auto;
-}
-.del_box {
-    height: 100vh;
+    margin: 0 auto;
+    padding: 50px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .input_pw {
@@ -19,11 +24,11 @@
     display: inline-block;
 }
 
-.content {
-    text-align: center;
-    margin-top: 18%;
-}
-
 .input_pw {
     border-radius: 5px;
+}
+
+.err {
+    color: red;
+    margin-top: 5px;
 }

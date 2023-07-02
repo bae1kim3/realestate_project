@@ -5,11 +5,15 @@
     <div class="del_box">
       <div class="del_border">
         <div class="content">
-        <form action="{{route('profile.chk_del_user.post')}}" method="post" id="deleteForm">
+        <form action="{{route('profile.chk_del_user.post')}}" method="post" id="deleteForm" onsubmit="return false;">
         @csrf
         {{-- @method('delete') --}}
             <div>아이디 : {{Auth::user()->u_id}}</div>
             <input class="input_pw mt-3" type="password" name="password" placeholder="비밀번호 입력">
+          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="background-color:red!important;">
+          탈퇴
+          </button>
+        </form>
             {{-- 유효성 검사 --}}
             @foreach($errors->all() as $error)
               <div class="alert alert-success" role="alert">
@@ -18,14 +22,10 @@
             @endforeach
             {{-- 비밀번호 db에 없을때 --}}
             @if(session()->has('error'))
-            <div>
+            <div class="err">
             {{session()->get('error')}}
-            </div>
             @endif
-        </form>
-        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="background-color:red!important;">
-        탈퇴
-        </button>
+            </div>
         </div>
     </div>
   </div>
@@ -51,8 +51,9 @@
   </div>
 </div>
 @include('layouts.footer')
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
 <script src="{{asset('del_user.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
 </div>
 </x-app-layout>
