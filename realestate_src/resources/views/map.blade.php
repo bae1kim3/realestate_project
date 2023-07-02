@@ -37,13 +37,13 @@
                 </div>
                 <div class="dropdown-menu">
                     <label class="custom-label" >
-                    <input type="checkbox" class="opt" id="optcheck1" value="월세" > 월세
+                    <input type="checkbox" class="opt" id="optcheck1" value="월세" > 🏠월세
                     </label>
                     <label class="custom-label">
-                    <input type="checkbox" class="opt" id="optcheck2" value="전세" > 전세
+                    <input type="checkbox" class="opt" id="optcheck2" value="전세" > 🏠전세
                     </label>
                     <label class="custom-label">
-                    <input type="checkbox" class="opt" id="optcheck3" value="매매" > 매매
+                    <input type="checkbox" class="opt" id="optcheck3" value="매매" > 🏠매매
                     </label>
                 </div>
             </div>
