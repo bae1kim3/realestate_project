@@ -125,10 +125,10 @@
                     <div class="col-span-6 sm:col-span-4 mt-3">
                         <x-label for="animal_size" value="{{ __('동물크기') }}" style="font-weight:700"/>
                         {{-- <x-input id="animal_size" type="text" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" wire:model.defer="state.animal_size" autocomplete="animal_size" /> --}}
-                        <label for="animal_size" class="dark:text-white">대형</label>
-                        <input type="radio" name="animal_size" id="animal_size_sm" @if(Illuminate\Support\Facades\Auth::user()->animal_size === "1") checked @endif value="1" name="animal_size" class="dark:bg-gray-700">
-                        <label for="animal_size"  class="dark:text-white">중소형</label>
-                        <input type="radio" name="animal_size" id="animal_size_lg" @if(Illuminate\Support\Facades\Auth::user()->animal_size === "0") checked @endif value="0" name="animal_size" class="dark:bg-gray-700">
+                        <label for="animal_size_lg" class="dark:text-white">대형</label>
+                        <input type="radio" name="animal_size" id="animal_size_lg" @if(Auth::user()->animal_size === "1") checked @endif value="1" name="animal_size" class="dark:bg-gray-700">
+                        <label for="animal_size_sm"  class="dark:text-white">중소형</label>
+                        <input type="radio" name="animal_size" id="animal_size_sm" @if(Auth::user()->animal_size === "0") checked @endif value="0" name="animal_size" class="dark:bg-gray-700">
                     </div>
                 @endif
 
@@ -168,9 +168,9 @@
                 </div>
             </div>
             {{-- 내가 올린 매물 --}}
-            @if((Illuminate\Support\Facades\Auth::user()->seller_license))
-                <div id='tab2' data-tab-content class='items'>
-                    <div class="list">
+            <div id='tab2' data-tab-content class='items'>
+                <div class="list">
+                    @if((Illuminate\Support\Facades\Auth::user()->seller_license))
                         @foreach($user as $val)
                             <a href="{{ route('struct.detail', ['s_no' => $val->s_no]) }}">
                             <div class="photo-item" style="background-image: url('{{ asset($val->url) }}');">
@@ -181,9 +181,12 @@
                             </div>
                             </a>
                         @endforeach
-                    </div>
+                    @else
+                    <div>찜 목록 추가할 것</div>
+                    @endif
+                    
                 </div>
-            @endif
+            </div>
         </div>
 
             {{-- 이하 비밀번호 변경, 탈퇴 --}}
