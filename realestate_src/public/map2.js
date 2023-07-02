@@ -8,6 +8,7 @@ const scheckboxes = document.querySelectorAll(
 );
 const getpark = document.getElementById("getpark");
 const container = document.getElementById("sidebar");
+let selectedMarker = null;
 let cardId;
 let selectValues = [];
 let soptionValues = [];
@@ -22,9 +23,11 @@ let infowindow = [];
 let markerImage;
 let imageSrc = "maphome.png";
 let imageSize = new kakao.maps.Size(24, 35);
+let clickimageSize = new kakao.maps.Size(50, 60);
 let pageno = 0;
 let numofrows = 0;
 let radius = "";
+let clickmarkerImage;
 
 function addlist(data, i) {
     iwContent[
@@ -38,10 +41,23 @@ function addlist(data, i) {
         // 마커 클릭 시 URL로 이동
         window.location.href = `#${data["sinfo"][i].s_no}`;
         cardId = document.getElementById(`${data["sinfo"][i].s_no}`);
-        cardId.classList.add("aaaa");
-        setTimeout(() => {
-            cardId.classList.remove("aaaa");
-        }, 1500);
+        // cardId.classList.add("aaaa");
+        // setTimeout(() => {
+        //     cardId.classList.remove("aaaa");
+        // }, 1500);
+
+        clickmarkerImage = new kakao.maps.MarkerImage(imageSrc, clickimageSize);
+        if (!selectedMarker || selectedMarker !== markers[i]) {
+            // 클릭된 마커 객체가 null이 아니면
+            // 클릭된 마커의 이미지를 기본 이미지로 변경하고
+            !!selectedMarker && selectedMarker.setImage(markerImage);
+
+            // 현재 클릭된 마커의 이미지는 클릭 이미지로 변경합니다
+            markers[i].setImage(clickmarkerImage);
+        }
+
+        // 클릭된 마커를 현재 클릭된 마커 객체로 설정합니다
+        selectedMarker = markers[i];
     });
     kakao.maps.event.addListener(markers[i], "mouseover", function () {
         // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
@@ -61,6 +77,7 @@ function addMarker(position, data, i) {
         image: markerImage,
     });
     marker.id = data["sinfo"][i].s_no;
+
     // 마커가 지도 위에 표시되도록 설정합니다
     marker.setMap(map);
 
@@ -259,7 +276,7 @@ function addfetch(url, selectedOption) {
 document.addEventListener("DOMContentLoaded", function () {
     var selectedOption = selectBox.value;
     let url =
-        "http://192.168.0.129/api/mapopt/" +
+        "http://127.0.0.1:8000/api/mapopt/" +
         (selectValues.length ? selectValues.join(",") : "1") +
         "/" +
         selectedOption +
@@ -271,7 +288,7 @@ document.addEventListener("DOMContentLoaded", function () {
 selectBox.addEventListener("change", function () {
     var selectedOption = selectBox.value;
     let url =
-        "http://192.168.0.129/api/mapopt/" +
+        "http://127.0.0.1:8000/api/mapopt/" +
         (selectValues.length ? selectValues.join(",") : "1") +
         "/" +
         selectedOption +
@@ -309,7 +326,7 @@ checkboxes.forEach(function (checkbox) {
             }
         }
         let url =
-            "http://192.168.0.129/api/mapopt/" +
+            "http://127.0.0.1:8000/api/mapopt/" +
             (selectValues.length ? selectValues.join(",") : "1") +
             "/" +
             selectedOption +
@@ -332,7 +349,7 @@ getpark.addEventListener("click", function (checkbox) {
             }
         }
         let url =
-            "http://192.168.0.129/api/mapopt/" +
+            "http://127.0.0.1:8000/api/mapopt/" +
             (selectValues.length ? selectValues.join(",") : "1") +
             "/" +
             selectedOption +
@@ -415,7 +432,7 @@ scheckboxes.forEach(function (checkbox) {
             }
         }
         let url =
-            "http://192.168.0.129/api/mapopt/" +
+            "http://127.0.0.1:8000/api/mapopt/" +
             (selectValues.length ? selectValues.join(",") : "1") +
             "/" +
             selectedOption +
