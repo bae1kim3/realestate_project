@@ -11,7 +11,7 @@
                         <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
                     </a>
                     <div class="ml-2">
-                        <button type="button" x-bind:class="darkMode ? 'bg-indigo-500' : 'bg-gray-200'"
+                        <button id="darkToggle" type="button" x-bind:class="darkMode ? 'bg-indigo-500' : 'bg-gray-200'"
                             x-on:click="darkMode = !darkMode"
                             class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                             role="switch" aria-checked="false">
@@ -51,9 +51,44 @@
                         </h2>
                     </x-nav-link>
                 </div>
+            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('map.map')" :active="request()->routeIs('map.map')">
+                        <h2 class="dark:text-gray-100">
+                            {{ __('지도') }}
+                        </h2>
+                    </x-nav-link>
+                </div>
+
+            @if(session('seller_license'))
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        <h2 class="dark:text-gray-100">
+                            {{ __('매물올리기') }}
+                        </h2>
+                    </x-nav-link>
+                </div>
+            @endif
+            
+            @if(!session('u_id'))
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                        <h2 class="dark:text-gray-100">
+                            {{ __('로그인') }}
+                        </h2>
+                    </x-nav-link>
             </div>
 
-            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex justify-center" style="margin-top:20px; margin-right:200px">
+            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
+                        <h2 class="dark:text-gray-100">
+                            {{ __('회원가입') }}
+                        </h2>
+                    </x-nav-link>
+                </div>
+            @endif
+            </div>
+
+            <div class="space-x-8 sm:-my-px sm:ml-10 sm:flex justify-center" style="margin-top:20px; margin-right:200px">
             </div>
 
             @if (isset(session()->all()['auth']))
@@ -104,7 +139,7 @@
                     </x-dropdown>
                 </div>
             @else
-                <div
+                {{-- <div
                     @if (Route::has('login'))
                         <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                             @auth
@@ -123,7 +158,7 @@
                                 </div>
                             @endauth
                         </div>
-                    @endif
+                    @endif --}}
             @endif
 
 
