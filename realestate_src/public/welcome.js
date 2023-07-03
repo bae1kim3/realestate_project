@@ -43,7 +43,7 @@ function loadMorePhotos() {
         if (xhr.status === 200) {
             var response = JSON.parse(xhr.responseText);
             var scrollContainer = document.getElementById('scroll-container');
-            var newPhotos = response.photos.slice(0, 3);
+            var newPhotos = response.photos.slice(0, 5);
             newPhotos.forEach(function (photo) {
                 var newPhotosHtml = generatePhotoHtml(photo, response.lastPhotoId);
                 scrollContainer.insertAdjacentHTML('beforeend', newPhotosHtml);
@@ -53,7 +53,7 @@ function loadMorePhotos() {
                 loadingPhotos = false;
                 return;
             }
-
+            
             loadingPhotos = false;
             lastPhotoId = response.lastPhotoId;
         } else {

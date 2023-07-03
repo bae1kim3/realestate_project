@@ -56,7 +56,7 @@
 
 </div>
 </x-app-layout> --}}
-
+<link rel="stylesheet" href="deluser.css">
 <x-app-layout>
   <x-authentication-card>
 
@@ -99,7 +99,7 @@
                 <button id="modalCloseBtn" onclick="closeModal()" class="mt-6 bg-gray-500 hover:bg-gray-700 text-white py-2 px-4 rounded">
                     닫기
                 </button>
-                <button type="button" class="mt-6 bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded" id="confirmBtn" onclick="withdrawal()" style="margin-left:10px">이해했습니다</button>            
+                <button type="button" class="mt-6 bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded" id="confirmBtn" onclick="withdrawal()" style="margin-left:10px;">이해했습니다</button>            
             </div>
         </div>
 

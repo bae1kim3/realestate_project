@@ -1,34 +1,6 @@
-.del_box {
-    height: 100vh;
-    padding-top: 50px;
+#confirmBtn {
+    background-color: rgb(212, 0, 0);
 }
-.del_border {
-    width: 500px;
-    /* height: 300px; */
-    border: 1px solid rgb(207, 206, 206);
-    border-radius: 10px;
-    background-color: #fff;
-    margin: 0 auto;
-    padding: 50px 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.input_pw {
-    text-align: center;
-}
-
-#deleteForm {
-    text-align: center;
-    display: inline-block;
-}
-
-.input_pw {
-    border-radius: 5px;
-}
-
-.err {
-    color: red;
-    margin-top: 5px;
+#confirmBtn:hover {
+    background-color: #b10000;
 }

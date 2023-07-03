@@ -21,7 +21,7 @@
                         @csrf
                         <label for="phone_no" class="block font-medium text-sm text-gray-700 mt-3 dark:text-white">전화번호 확인</label>
                         <x-input type="tel" class="block mt-1 w-full dark:bg-gray-700 dark:text-white" id="phone_no" name="phone_no"></x-input><br>
-                        <x-button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">확인</x-button>
+                        <x-button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 dark:bg-gray-600">확인</x-button>
                     </form>
                     </form>
                     @if ($errors->has('phone_no'))

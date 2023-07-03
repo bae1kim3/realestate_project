@@ -50,7 +50,7 @@
                 <x-input type="text" id="sample6_address" name="u_addr"
                     class="block mt-1 w-full dark:bg-gray-700 dark:text-white" placeholder="대구 지역 내 도로명 주소" readonly />
                 <br>
-                <x-button type="button" onclick="sample6_execDaumPostcode()">우편번호 찾기</x-button>
+                <x-button type="button" class="dark:bg-gray-600" onclick="sample6_execDaumPostcode()">우편번호 찾기</x-button>
                 <br>
                 @if (session()->has('addr_err'))
                     <div>{{ session()->get('addr_err') }}</div>
@@ -99,12 +99,12 @@
                         질문
                         <span class="arrow">&#9662;</span>
                     </button>
-                    <ul class="dropdown-menu" id="dropdownMenu">
-                        <li onclick="selectOption('0', '나의 어릴적 꿈은?')">나의 어릴적 꿈은?</li>
-                        <li onclick="selectOption('1', '나의 가장 소중한 보물은?')">나의 가장 소중한 보물은?</li>
-                        <li onclick="selectOption('2', '내가 가장 슬펐던 기억은?')">내가 가장 슬펐던 기억은?</li>
-                        <li onclick="selectOption('3', '나와 가장 친한 친구는?')">나와 가장 친한 친구는?</li>
-                        <li onclick="selectOption('4', '나의 첫번째 직장의 이름은?')">나의 첫번째 직장의 이름은?</li>
+                    <ul class="dropdown-menu" id="dropdownMenu" >
+                        <li onclick="selectOption('0', '나의 어릴적 꿈은?')" class="dark:bg-gray-600" style="color: yellowgreen;">나의 어릴적 꿈은?</li>
+                        <li onclick="selectOption('1', '나의 가장 소중한 보물은?')" class="dark:bg-gray-600" style="color: yellowgreen;">나의 가장 소중한 보물은?</li>
+                        <li onclick="selectOption('2', '내가 가장 슬펐던 기억은?')" class="dark:bg-gray-600" style="color: yellowgreen;">내가 가장 슬펐던 기억은?</li>
+                        <li onclick="selectOption('3', '나와 가장 친한 친구는?')" class="dark:bg-gray-600" style="color: yellowgreen;">나와 가장 친한 친구는?</li>
+                        <li onclick="selectOption('4', '나의 첫번째 직장의 이름은?')" class="dark:bg-gray-600" style="color: yellowgreen;">나의 첫번째 직장의 이름은?</li>
                     </ul>
                     <input type="hidden" id="selectedOption" name="pw_question" value="">
                 </div>
