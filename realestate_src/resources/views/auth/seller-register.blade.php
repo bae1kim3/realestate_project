@@ -50,7 +50,7 @@
                 <x-input type="text" id="sample6_address" name="u_addr"
                     class="block mt-1 w-full dark:bg-gray-700 dark:text-white" placeholder="대구 지역 내 도로명 주소" readonly />
                 <br>
-                <x-button type="button" onclick="sample6_execDaumPostcode()">우편번호 찾기</x-button>
+                <x-button type="button" class="dark:bg-gray-600" onclick="sample6_execDaumPostcode()">우편번호 찾기</x-button>
                 <br>
                 @if (session()->has('addr_err'))
                     <div>{{ session()->get('addr_err') }}</div>
