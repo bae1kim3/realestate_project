@@ -142,6 +142,24 @@
                     불가능
                 @endif
             </div>
+            <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose dark:text-white dark:bg-gray-700"
+                style="text-align: left">
+                주차가능 여부 :
+                @if ($data01->s_parking == 0)
+                    불가능
+                @else
+                    가능
+                @endif
+            </div>
+            <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose dark:text-white dark:bg-gray-700"
+                style="text-align: left">
+                엘레베이터 여부 :
+                @if ($data01->s_ele== 0)
+                    불가능
+                @else
+                    가능
+                @endif
+            </div>
         </div>
         <div id="detail">
             <div id="proimg"><img

@@ -202,7 +202,7 @@ class StructureController extends Controller
                     // return redirect()->back()->with(['status' => '매물 업로드 성공!']); // update 0625 jy
 
                     // *****************TODO : begin transaction create 밑에 다 몰아서하기
-                    return redirect()->route('struct.detail', ['s_no' => $s_no])->with('data',$data01);
+                    return redirect()->route('struct.detail', ['s_no' => $s_no])->with('data01',$data01);
                 }
             } else {
                 return redirect()->back()->with(['insert_err' => '정보 등록에 실패했습니다']);
