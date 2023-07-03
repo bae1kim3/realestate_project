@@ -410,7 +410,7 @@ getpark.addEventListener("click", function (checkbox) {
                                 position: markerPosition,
                                 image: markerImage,
                             });
-
+                            marker.setZIndex(-2);
                             marker.setMap(map);
                             // 생성된 마커를 배열에 추가합니다
                             pmarkers.push(marker);
