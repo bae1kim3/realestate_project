@@ -23,7 +23,7 @@ let infowindow = [];
 let markerImage;
 let imageSrc = "maphome.png";
 let imageSize = new kakao.maps.Size(24, 30);
-let clickimageSize = new kakao.maps.Size(50, 60);
+let clickimageSize = new kakao.maps.Size(35, 45);
 let pageno = 0;
 let numofrows = 0;
 let radius = "";
@@ -65,7 +65,6 @@ function addlist(data, i) {
 
         // 클릭된 마커를 현재 클릭된 마커 객체로 설정합니다
         selectedMarker = markers[i];
-        cardId = document.getElementById(selectedMarker.id);
     });
     kakao.maps.event.addListener(markers[i], "mouseover", function () {
         // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
