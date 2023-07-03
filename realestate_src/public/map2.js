@@ -29,11 +29,12 @@ let numofrows = 0;
 let radius = "";
 let clickmarkerImage;
 let selectedCard = 0;
+let num = 0;
 
 function addlist(data, i) {
     iwContent[
         i
-    ] = `<div style="padding:4px"><b>${data["sinfo"][i].s_name}</b>(${data["sinfo"][i].s_type})</div>`; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+    ] = `<div style="padding:4px z-index:10000;"><b>${data["sinfo"][i].s_name}</b>(${data["sinfo"][i].s_type})</div>`; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
     // 인포윈도우를 생성합니다
     infowindow[i] = new kakao.maps.InfoWindow({
         content: iwContent[i],
@@ -61,6 +62,9 @@ function addlist(data, i) {
 
             // 현재 클릭된 마커의 이미지는 클릭 이미지로 변경합니다
             markers[i].setImage(clickmarkerImage);
+
+            markers[i].setZIndex(num);
+            num++;
         }
 
         // 클릭된 마커를 현재 클릭된 마커 객체로 설정합니다
@@ -286,7 +290,7 @@ function addfetch(url, selectedOption) {
 document.addEventListener("DOMContentLoaded", function () {
     var selectedOption = selectBox.value;
     let url =
-        "http://127.0.0.1:8000/api/mapopt/" +
+        "http://192.168.0.129/api/mapopt/" +
         (selectValues.length ? selectValues.join(",") : "1") +
         "/" +
         selectedOption +
@@ -298,7 +302,7 @@ document.addEventListener("DOMContentLoaded", function () {
 selectBox.addEventListener("change", function () {
     var selectedOption = selectBox.value;
     let url =
-        "http://127.0.0.1:8000/api/mapopt/" +
+        "http://192.168.0.129/api/mapopt/" +
         (selectValues.length ? selectValues.join(",") : "1") +
         "/" +
         selectedOption +
@@ -336,7 +340,7 @@ checkboxes.forEach(function (checkbox) {
             }
         }
         let url =
-            "http://127.0.0.1:8000/api/mapopt/" +
+            "http://192.168.0.129/api/mapopt/" +
             (selectValues.length ? selectValues.join(",") : "1") +
             "/" +
             selectedOption +
@@ -359,7 +363,7 @@ getpark.addEventListener("click", function (checkbox) {
             }
         }
         let url =
-            "http://127.0.0.1:8000/api/mapopt/" +
+            "http://192.168.0.129/api/mapopt/" +
             (selectValues.length ? selectValues.join(",") : "1") +
             "/" +
             selectedOption +
@@ -442,7 +446,7 @@ scheckboxes.forEach(function (checkbox) {
             }
         }
         let url =
-            "http://127.0.0.1:8000/api/mapopt/" +
+            "http://192.168.0.129/api/mapopt/" +
             (selectValues.length ? selectValues.join(",") : "1") +
             "/" +
             selectedOption +
