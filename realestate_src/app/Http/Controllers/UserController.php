@@ -109,32 +109,32 @@ class UserController extends Controller
         }
     }
 
-    // public function sellerPhone($s_no)
-    // {
-    //     $s_info = S_info::where('s_no', $s_no)->first();
+    public function sellerPhone($s_no)
+    {
+        $s_info = S_info::where('s_no', $s_no)->first();
 
-    //     if ($s_info) {
-    //         $id = $s_info->u_no;
+        if ($s_info) {
+            $id = $s_info->u_no;
 
-    //         $user = User::where('id', $id)->first();
+            $user = User::where('id', $id)->first();
 
-    //         if ($user) {
-    //             $phone_no = $user->phone_no;
+            if ($user) {
+                $phone_no = $user->phone_no;
 
-    //             return view('sellerPhoneNo', ['s_no' => $s_no])->with('phone_no', $phone_no);
-    //         } else {
-    //             return "사용자 정보를 찾을 수 없습니다.";
-    //         }
-    //     } else {
-    //         return "판매자 정보를 찾을 수 없습니다.";
-    //     }
-    // }
-    // function logout()
-    // {
-    //     $id = session('id');
-    //     User::destroy($id);
-    //     Session::flush(); // 세션 파기
-    //     Auth::logout(); // 로그아웃
-    //     return redirect()->route('welcome');
-    // }
+                return view('sellerPhoneNo', ['s_no' => $s_no])->with('phone_no', $phone_no);
+            } else {
+                return "사용자 정보를 찾을 수 없습니다.";
+            }
+        } else {
+            return "판매자 정보를 찾을 수 없습니다.";
+        }
+    }
+    function logout()
+    {
+        $id = session('id');
+        User::destroy($id);
+        Session::flush(); // 세션 파기
+        Auth::logout(); // 로그아웃
+        return redirect()->route('welcome');
+    }
 }

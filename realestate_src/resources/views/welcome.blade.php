@@ -38,7 +38,7 @@
             <br>
                 <br>
                 <br>
-                <div id="scroll-container" class="scroll-item">
+                <div x-bind:class="{ 'scroll-container1': darkMode, 'scroll-container': !darkMode }" id="scroll-container" class="scroll-item">
                     @foreach ($photos as $photo)
                         <a href="{{ route('struct.detail', ['s_no' => $photo->s_no]) }}">
                             <div class="photo-item" style="background-image: url('{{ asset($photo->url) }}');">
