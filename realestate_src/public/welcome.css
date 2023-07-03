@@ -65,6 +65,7 @@
   transition: max-height 0.35s ease-in-out;
 }
 
+/* 다크모드 이미지 */
 .dark-bg-image-1 {
   height: 40vh;
   text-align: center;
