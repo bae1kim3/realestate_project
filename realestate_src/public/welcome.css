@@ -64,3 +64,17 @@
   max-height: 1000px;
   transition: max-height 0.35s ease-in-out;
 }
+
+.dark-bg-image-1 {
+  height: 40vh;
+  text-align: center;
+  background-image: url('/abcdf.png');
+  background-size: cover;
+}
+
+.dark-bg-image-2 {
+  height: 40vh;
+  text-align: center;
+  background-image: url('/abcd.png');
+  background-size: cover;
+}

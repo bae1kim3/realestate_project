@@ -2,15 +2,17 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
     <link rel="stylesheet" href="{{ asset('nav.css') }}">
     <link rel="stylesheet" href="{{ asset('welcome.css') }}">
-
     <body class="antialiased">
-     <div style="height: 40vh; text-align: center; background-image: url({{ asset('abcd.png') }}); background-size: cover;">
-     <div style="line-height: 40vh;">
-    <label for="search" style="font-size: 20px; "class="font-bold text-black dark:text-white">매물 검색</label>
-    <input type="text" style="height: 40px;" class="rounded-lg px-2 py-1 dark:bg-gray-800 dark:text-white" name="search" id="search" placeholder="역이름, 주소로 검색해 주세요">
-    <button onclick="searchProperties()" style="font-size: 15px; width: 80px; height: 40px;" class="py-2 px-4 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 dark:bg-gray-400">검색</button>
-    </div>
-</div>
+
+
+        <div x-bind:class="{ 'dark-bg-image-1': darkMode, 'dark-bg-image-2': !darkMode }">
+        <div style="line-height: 40vh;">
+            <label for="search" style="font-size: 20px; vertical-align:middle;" class="font-bold text-black dark:text-white">매물 검색</label>
+            <input type="text" style="height: 40px;" class="rounded-lg px-2 py-1 dark:bg-gray-800 dark:text-white" name="search" id="search" placeholder="역이름, 주소로 검색해 주세요">
+            <button onclick="searchProperties()" style="font-size: 15px; width: 80px; height: 40px;" class="py-2 px-4 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 dark:bg-gray-400">검색</button>
+        </div>
+        </div>
+
         <div
             class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
                 <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
