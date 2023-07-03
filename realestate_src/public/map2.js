@@ -1,5 +1,5 @@
 const selectBox = document.getElementById("option");
-const mapContainer = document.getElementById("map"); // 지도를 표시할 div
+const mapContainer = document.getElementById("map");
 const checkboxes = document.querySelectorAll(
     '.dropdown-menu input[class="opt"]'
 );
@@ -34,7 +34,7 @@ let num = 0;
 function addlist(data, i) {
     iwContent[
         i
-    ] = `<div style="padding:4px z-index:10000;"><b>${data["sinfo"][i].s_name}</b>(${data["sinfo"][i].s_type})</div>`; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+    ] = `<div style="padding:4px"><b>${data["sinfo"][i].s_name}</b>(${data["sinfo"][i].s_type})</div>`; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
     // 인포윈도우를 생성합니다
     infowindow[i] = new kakao.maps.InfoWindow({
         content: iwContent[i],
@@ -46,7 +46,6 @@ function addlist(data, i) {
         if (selectedCard == 0) {
             document.getElementById(markers[i].id).classList.add("selected");
             selectedCard = markers[i].id;
-            console.log(selectedCard);
         } else if (selectedCard != markers[i].id) {
             document.getElementById(selectedCard).classList.remove("selected");
             selectedCard = 0;
@@ -62,16 +61,11 @@ function addlist(data, i) {
 
             // 현재 클릭된 마커의 이미지는 클릭 이미지로 변경합니다
             markers[i].setImage(clickmarkerImage);
-
-            markers[i].setZIndex(num);
-            num++;
         }
 
         // 클릭된 마커를 현재 클릭된 마커 객체로 설정합니다
         selectedMarker = markers[i];
         cardId = document.getElementById(selectedMarker.id);
-
-        // let clickclass = document.querySelectorAll('div [class="card"]');
     });
     kakao.maps.event.addListener(markers[i], "mouseover", function () {
         // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
@@ -91,7 +85,6 @@ function addMarker(position, data, i) {
         image: markerImage,
     });
     marker.id = data["sinfo"][i].s_no;
-
     // 마커가 지도 위에 표시되도록 설정합니다
     marker.setMap(map);
 
