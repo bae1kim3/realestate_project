@@ -103,6 +103,7 @@ class UpdateUserInfoController extends Controller
                 'animal_size' => ['nullable', Rule::in(['0', '1'])]
             ]);
 
+            // 밖으로 뺴기 start
             if ($validator->fails()) {
                         return redirect()
                                 ->back()
@@ -116,6 +117,7 @@ class UpdateUserInfoController extends Controller
             }
             $user->save(); // update
             return redirect()->back();
+            // 밖으로 뺴기 end
         }
     }
     

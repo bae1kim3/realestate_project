@@ -1,7 +1,4 @@
 <style>
-    html {
-        height:100%;
-    }
     input {
         width: 100%;
     }

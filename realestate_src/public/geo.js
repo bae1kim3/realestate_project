@@ -10,7 +10,7 @@ submit_btn.addEventListener('click', () => {
         window.scrollTo(0,0);
         $err = document.getElementById('err_up').innerHTML = "주소를 입력하세요";
         err_up.style.display = 'block';
-        return
+        return;
     }
 
     var callback = function(result, status) {

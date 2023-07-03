@@ -1,10 +1,11 @@
+{{-- ******** save 됐다는 문구!!!!!!!! / 변경사항 안바뀌고 저장했을 때, 문구 뜨게 TODO --}}
 <x-app-layout>
 <link rel="stylesheet" href="{{asset('tab_menu.css')}}">
 <link rel="stylesheet" href="{{asset('mypagelist.css')}}">
 
 <div class="wrap">
     <div class="in_wrap">
-        @if(Illuminate\Support\Facades\Auth::user()->seller_license)
+        @if(Auth::user()->seller_license)
                 <h2 class="dark:text-white font-bold text-2xl pt-6" style="padding-top:50px">
                 {{ __('공인중개사 회원 정보') }}
                 </h2>
