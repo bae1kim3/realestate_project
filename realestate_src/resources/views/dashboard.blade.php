@@ -87,7 +87,7 @@
                                     <input type="radio" name="s_parking" value="0" id="n_parking" {{old('s_parking') === '0'? 'checked' : ''}}/>
                                 </div>
                                 <br>
-                                <x-label for="s_ele" class="font-semibold text-xl dark:text-white">엘레베이터 유무</x-label>
+                                <x-label for="s_ele" class="font-semibold text-xl dark:text-white">엘리베이터 유무</x-label>
                                 <div class="mt-2">
                                     <label for="y_ele" class="dark:text-white">있음</label>
                                     <input type="radio" name="s_ele" value="1" id="y_ele" {{old('s_ele') === '1'? 'checked' : ''}} />
