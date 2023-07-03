@@ -22,7 +22,7 @@ class FindUsernameController extends Controller
             return response()->json(['user' => $user]);
         } else {
             // 사용자를 찾을 수 없는 경우
-            return response()->json(['error' => '사용자를 찾을 수 없습니다.'], 404);
+            return response()->json(['error' => '사용자를 찾을 수 없습니다.']);
         }
     }
 }
