@@ -3,6 +3,7 @@
 namespace App\Actions\Fortify;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\UpdatesUserPasswords;
@@ -29,6 +30,8 @@ class UpdateUserPassword implements UpdatesUserPasswords
             'password' => Hash::make($input['password']),
         ])->save();
 
+        session()->put('success', '비밀번호 변경이 완료되었습니다. 로그인해주세요.');
+        
         return redirect()->route('login');
     }
 }
