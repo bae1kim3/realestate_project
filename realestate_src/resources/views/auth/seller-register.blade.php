@@ -65,7 +65,7 @@
             <div class="mt-4">
                 <x-label for="password" value="{{ __('비밀번호') }}" class="dark:text-white" />
                 <x-input id="password" class="block mt-1 w-full dark:bg-gray-700 dark:text-white" type="password"
-                    name="password" required autocomplete="new-password" />
+                    name="password" required autocomplete="new-password" placeholder="대문자, 소문자, 숫자, 특수문자를 포함한 8~20자" />
             </div>
 
             <div class="mt-4">
