@@ -35,6 +35,28 @@
   white-space: nowrap;
 }
 
+.scroll-container::-webkit-scrollbar {
+  width: 8px; /* 스크롤 막대의 너비 */
+  background-color: #ACBCFF; /* 스크롤 배경색 */
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  height: 30%; /* 스크롤바의 길이 */
+    background: #AEE2FF; /* 스크롤바의 색상 */
+    border-radius: 5px;
+}
+
+.scroll-container1::-webkit-scrollbar {
+  width: 8px; /* 스크롤 막대의 너비 */
+  background-color: #67676d; /* 스크롤 배경색 */
+}
+
+.scroll-container1::-webkit-scrollbar-thumb {
+  height: 30%; /* 스크롤바의 길이 */
+    background: #11264f; /* 스크롤바의 색상 */
+    border-radius: 5px;
+}
+
 
 /* 아코디언 */
 .accordion .accordion-item:not(:last-child) {

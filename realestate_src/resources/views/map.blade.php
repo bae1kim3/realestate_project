@@ -19,7 +19,7 @@
         @if(!empty($u_info->seller_license))
             <a class="nav-link link-light" href="{{route('dashboard')}}" id="aa">매물 올리기</a>
             @endif
-            <button id="getpark">주변 시설</button>
+            <button id="getpark">주변 공원</button>
                 <select id="option" name="gu" class="selectbox" >
                     <option>구 선택</option>
                     <option id="option" value="달서구">달서구</option>
@@ -33,7 +33,7 @@
                 </select>
             <div class="dropdown">
                 <div class="dropdown-toggle" data-toggle="dropdown">
-                    건물 유형
+                    거래 유형
                 </div>
                 <div class="dropdown-menu">
                     <label class="custom-label" >
