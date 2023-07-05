@@ -8,7 +8,7 @@ submit_btn.addEventListener('click', () => {
     var s_lat = document.getElementById('s_lat');
     if(!val) {
         window.scrollTo(0,0);
-        $err = document.getElementById('err_up').innerHTML = "주소를 입력하세요";
+        $err = document.getElementById('err_up').innerHTML = "정보를 입력하세요";
         err_up.style.display = 'block';
         return;
     }

@@ -27,7 +27,14 @@ class StructureController extends Controller
                 's_name' => 'required|regex:/^[가-힣0-9\s]+$/u|max:30'
                 // 's_name' => 'required|alpha_dash|max:30'
                 // alpha_dash : 한글 영문 숫자 - _ 다 되는데 ㄱㄱ 이런 글자도 통과됨..
-                , 'sell_cat_info' => 'required|in:월세,전세,매매', 's_size' => 'required|integer|max:99999999999', 'p_deposit' => 'required|integer|max:99999999999', 'p_month' => 'nullable|integer|max:99999999999', 'sub_name' => 'required|string||regex:/^[가-힣\s]+$/u', 's_fl' => 'required|integer|max:500', 's_parking' => 'required|in:0,1', 's_ele' => 'required|in:0,1', 's_addr' => 'required|string'
+                , 'sell_cat_info' => 'required|in:월세,전세,매매'
+                , 's_size' => 'required|integer|max:99999999999'
+                , 'p_deposit' => 'required|integer|max:99999999999'
+                , 'p_month' => 'nullable|integer|max:99999999999'
+                , 'sub_name' => 'required|string||regex:/^[가-힣\s]+$/u'
+                , 's_fl' => 'required|integer|max:500', 's_parking' => 'required|in:0,1'
+                , 's_ele' => 'required|in:0,1'
+                , 's_addr' => 'required|string'
                 // ********************* TODO : x,y 위경도 범위 유효성검사 넣기!!
 
             ]

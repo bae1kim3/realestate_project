@@ -69,7 +69,7 @@
 
 {{-- 회원탈퇴 --}}
         <div class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-    <form action="{{ route('profile.chk_del_user.post') }}" method="POST" id="deleteForm" onsubmit="return false;">
+    <form action="{{ route('profile.chk_del_user.post') }}" method="POST" id="deleteForm">
         @csrf
         <div>아이디 : {{Auth::user()->u_id}}</div>
         <x-input type="password" name="password" placeholder="비밀번호 입력"
