@@ -24,14 +24,14 @@ class UpdateUserInfoController extends Controller
             $updateData = [];
 
             if ($req->name !== $user->name) {
-                $updateData['name'] = 'name';
+                $updateData[] = 'name';
             }
             
             if ($req->u_addr !== $user->u_addr) {
-                $updateData['u_addr'] = 'u_addr';
+                $updateData[] = 'u_addr';
             }
             if ($req->b_name !== $user->b_name) {
-                $updateData['b_name'] = 'b_name';
+                $updateData[] = 'b_name';
             }
             // if ($req->email !== $user->email) {
             //     $updateData['email'] = 'email';
@@ -85,13 +85,13 @@ class UpdateUserInfoController extends Controller
             // if ($req->email !== $user->email) {
             //}
             if ($req->name !== $user->name) {
-                $updateData['name'] = 'name';
+                $updateData[] = 'name';
             }
             if ($req->u_addr !== $user->u_addr) {
-                $updateData['u_addr'] = 'u_addr';
+                $updateData[] = 'u_addr';
             }
             if ($req->animal_size !== $user->animal_size) {
-                $updateData['animal_size'] = 'animal_size';
+                $updateData[] = 'animal_size';
             }
 
             
