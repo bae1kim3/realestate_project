@@ -103,7 +103,7 @@
             </div>
         </div>
 
-<script src="{{asset('del_user.js')}}"></script>
 </x-authentication-card>
+<script src="{{asset('del_user.js')}}"></script>
 @include('layouts.footer')
 </x-app-layout>
