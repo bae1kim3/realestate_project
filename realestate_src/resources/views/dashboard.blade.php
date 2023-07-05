@@ -100,7 +100,7 @@
                                 <label for="y_animal_size" class="dark:text-white">가능</label>
                                 <input type="radio" name="animal_size" value="1" id="y_animal_size" {{old('animal_size') === '1'? 'checked' : ''}}/>
                                 <label for="n_animal_size" class="dark:text-white">불가능</label>
-                                <input type="radio" value="0" name="animal_size" id="n_animal_size" {{old('sell_cat_info') === '0'? 'checked' : ''}}/>
+                                <input type="radio" value="0" name="animal_size" id="n_animal_size" {{old('animal_size') === '0'? 'checked' : ''}}/>
                                 </div>
                                 <br>
 
