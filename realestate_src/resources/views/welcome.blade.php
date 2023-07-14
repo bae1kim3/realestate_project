@@ -1,236 +1,773 @@
-<x-app-layout>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
-    <link rel="stylesheet" href="{{ asset('nav.css') }}">
-    <link rel="stylesheet" href="{{ asset('welcome.css') }}">
-    <body class="antialiased">
+<!-- /*
+* Template Name: Property
+* Template Author: Untree.co
+* Template URI: https://untree.co/
+* License: https://creativecommons.org/licenses/by/3.0/
+*/ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Untree.co" />
+    <link rel="shortcut icon" href="favicon.png" />
+
+    <meta name="description" content="" />
+    <meta name="keywords" content="bootstrap, bootstrap5" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+     <link rel="stylesheet" href="{{asset('fonts/icomoon/style.css')}}" />
+    <link rel="stylesheet" href="{{asset('fonts/flaticon/font/flaticon.css')}}" />
+
+    <link rel="stylesheet" href="{{asset('tiny-slider.css')}}" />
+    <link rel="stylesheet" href="{{asset('aos.css')}}" />
+    <link rel="stylesheet" href="{{asset('style.css')}}" />
 
 
-        <div x-bind:class="{ 'dark-bg-image-1': darkMode, 'dark-bg-image-2': !darkMode }">
-        <div style="line-height: 40vh;">
-            <label for="search" style="font-size: 20px; vertical-align:middle;" class="font-bold text-black dark:text-white">매물 검색</label>
-            <input type="text" style="height: 40px;" class="rounded-lg px-2 py-1 dark:bg-gray-800 dark:text-white" name="search" id="search" placeholder="역이름, 주소로 검색해 주세요">
-            <button onclick="searchProperties()" style="font-size: 15px; width: 80px; height: 40px;" class="py-2 px-4 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 dark:bg-gray-400">검색</button>
+    <title>
+      펫방 &mdash; 집구하자
+    </title>
+  </head>
+  <body>
+    <div class="site-mobile-menu site-navbar-target">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close">
+          <span class="icofont-close js-menu-toggle"></span>
         </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div>
+
+    <nav class="site-nav">
+      <div class="container">
+        <div class="menu-bg-wrap">
+          <div class="site-navigation">
+            <a href="index.html" class="logo m-0 float-start">Property</a>
+
+            <ul
+              class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end"
+            >
+              <li class="active"><a href="index.html">Home</a></li>
+              <li class="has-children">
+                <a href="#">Properties</a>
+                <ul class="dropdown">
+                  <li><a href="#">Buy Property</a></li>
+                  <li><a href="#">Sell Property</a></li>
+                  <li class="has-children">
+                    <a href="#">Dropdown</a>
+                    <ul class="dropdown">
+                      <li><a href="#">Sub Menu One</a></li>
+                      <li><a href="#">Sub Menu Two</a></li>
+                      <li><a href="#">Sub Menu Three</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li><a href="services.html">Services</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+
+            <a
+              href="#"
+              class="burger light me-auto float-end mt-1 site-menu-toggle js-menu-toggle d-inline-block d-lg-none"
+              data-toggle="collapse"
+              data-target="#main-navbar"
+            >
+              <span></span>
+            </a>
+          </div>
         </div>
+      </div>
+    </nav>
 
-        {{-- <div
-            class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-                <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
-                    @auth
-                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex justify-center">
-                            <a class="dark:text-white" href="{{ route('map.map') }}" style="margin-right: 20px;">지도</a>
-            @if (session('seller_license'))
-                            <a href="{{ url('/dashboard') }}"
-                                class="font-semibold text-gray-600 hover:text-gray-900 dark:text-white dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">매물올리기</a>
-            @endif
-                        </div>
-                    @elseif(session('u_id'))
-                        <a href="{{ route('login') }}"
-                            class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">로그인</a>
-                        @if (Auth::user())
-                            <a href="{{ route('register') }}"
-                                class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">회원가입</a>
-                        @endif
-                    @endauth
-                </div> --}}
+    <div class="hero">
+      <div class="hero-slide">
+        <div
+          class="img overlay"
+          style="background-image: url('images/hero_bg_3.jpg')"
+        ></div>
+        <div
+          class="img overlay"
+          style="background-image: url('images/hero_bg_2.jpg')"
+        ></div>
+        <div
+          class="img overlay"
+          style="background-image: url('images/hero_bg_1.jpg')"
+        ></div>
+      </div>
 
-            <div class="max-w-7xl mx-auto p-6 lg:p-8">
-            <br>
-                <br>
-                <br>
-                <div x-bind:class="{ 'scroll-container1': darkMode, 'scroll-container': !darkMode }" id="scroll-container" class="scroll-item">
-                    @foreach ($photos as $photo)
-                        <a href="{{ route('struct.detail', ['s_no' => $photo->s_no]) }}">
-                            <div class="photo-item" style="background-image: url('{{ asset($photo->url) }}');">
-                                <span class="photo-info">
-                                    <span class="info-text">{{ $photo->s_add }}</span><br>
-                                    <span class="info-text">{{ number_format($photo->p_deposit) }}</span>
-                                    @if ($photo->s_type === '월세')
-                                        <span class="info-text"> / {{ number_format($photo->p_month) }}</span>
-                                    @endif
-                                    <br><span class="info-text">{{ substr($photo->updated_at, 0, 10) }}</span>
-                                </span>
-                            </div>
-                        </a>
-                        <input type="hidden" id="lastPhotoItem" data-id="{{ $lastPhotoId }}">
-                    @endforeach
-                </div>
-                <br>
-                <div class="flex items-start gap-8">
-                    <div class="w-1/2">
-                        <h2 class="text-2xl font-bold mb-4 dark:text-white">동물보호센터</h2>
-                        <div class="accordion">
-                            <div class="accordion-item">
-                                <div class="accordion-title font-bold cursor-pointer dark:text-white">대구유기동물보호협회</div>
-                                <div class="accordion-content">
-                                    <p class="dark:text-white">전화번호 : 053-964-6258</p>
-                                    <p class="dark:text-white">주소 : 대구광역시 동구 금강로 151-13 (금강동)</p>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <div class="accordion-title font-bold cursor-pointer dark:text-white">동행동물병원</div>
-                                <div class="accordion-content">
-                                    <p class="dark:text-white">전화번호 : 053-636-8720</p>
-                                    <p class="dark:text-white">주소 : 대구광역시 달서구 진천로 117 (대천동) 117,118 호</p>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <div class="accordion-title font-bold cursor-pointer dark:text-white">멘토동물병원</div>
-                                <div class="accordion-content">
-                                    <p class="dark:text-white">전화번호 : 053-291-7579</p>
-                                    <p class="dark:text-white">주소 : 대구광역시 수성구 용학로 294 (범물동) 2층</p>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <div class="accordion-title font-bold cursor-pointer dark:text-white dark:text-white">
-                                    세인트동물병원</div>
-                                <div class="accordion-content">
-                                    <p class="dark:text-white">전화번호 : 053-744-8285</p>
-                                    <p class="dark:text-white">주소 : 대구광역시 수성구 청호로 484 (만촌동)</p>
-                                </div>
-                            </div>
-                        </div>
+      <div class="container">
+        <div class="row justify-content-center align-items-center">
+          <div class="col-lg-9 text-center">
+            <h1 class="heading" data-aos="fade-up">
+              Easiest way to find your dream home
+            </h1>
+            <form
+              action="#"
+              class="narrow-w form-search d-flex align-items-stretch mb-3"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <input
+                type="text"
+                class="form-control px-4"
+                placeholder="Your ZIP code or City. e.g. New York"
+              />
+              <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="container">
+        <div class="row mb-5 align-items-center">
+          <div class="col-lg-6">
+            <h2 class="font-weight-bold text-primary heading">
+              Popular Properties
+            </h2>
+          </div>
+          <div class="col-lg-6 text-lg-end">
+            <p>
+              <a
+                href="#"
+                target="_blank"
+                class="btn btn-primary text-white py-3 px-4"
+                >View all properties</a
+              >
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          < class="col-12">
+            <div class="property-slider-wrap">
+              <div class="property-slider">
+                   @foreach($photos as $photo)
+                <div class="property-item">
+                  <a href="{{route('struct.detail',['s_no'=>$photo->s_no])}}" class="img">
+                    <img src="{{ asset('동물펜션.jpg') }}" alt="Image" class="img-fluid" />
+                  </a>
+
+                  <div class="property-content">
+                    <div class="price mb-2"><span>{{ $photo->s_add }}</span></div>
+                    <div>
+                      <span class="d-block mb-2 text-black-50"
+                        >5232 California Fake, Ave. 21BC</span
+                      >
+                      <span class="city d-block mb-3">California, USA</span>
+
+                      <div class="specs d-flex mb-4">
+                        <span class="d-block d-flex align-items-center me-3">
+                          <span class="icon-bed me-2"></span>
+                          <span class="caption">2 beds</span>
+                        </span>
+                        <span class="d-block d-flex align-items-center">
+                          <span class="icon-bath me-2"></span>
+                          <span class="caption">2 baths</span>
+                        </span>
+                      </div>
+
+                      <a
+                        href="property-single.html"
+                        class="btn btn-primary py-2 px-3"
+                        >See details</a
+                      >
                     </div>
-                    <hr class="my-8 border-gray-300">
-                    <div class="w-1/2">
-                        <h2 class="text-2xl font-bold mb-4 dark:text-white">응급동물병원</h2>
-                        <div class="accordion">
-                            <div class="accordion-item2">
-                                <div class="accordion-title font-bold cursor-pointer dark:text-white">북구</div>
-                                <div class="accordion-content">
-                                    <p class="dark:text-white">플러스동물의료센터</p>
-                                    <p class="dark:text-white">전화번호 : 053-424-2455</p>
-                                    <p class="dark:text-white">주소 : 대구광역시 북구 중앙대로 526</p>
-                                    <hr>
-                                    <p class="dark:text-white">가온동물병원</p>
-                                    <p class="dark:text-white">전화번호 : 053-958-0075</p>
-                                    <p class="dark:text-white">주소 : 대구광역시 북구 서변동 1746-9</p>
-                                    <hr>
-                                    <p class="dark:text-white">해솔동물병원</p>
-                                    <p class="dark:text-white">전화번호 : 053-959-7775</p>
-                                    <p class="dark:text-white">주소 : 대구광역시 북구 대현동 340-15</p>
-                                </div>
-                            </div>
-                            <div class="accordion-item2">
-                                <div class="accordion-title font-bold cursor-pointer dark:text-white">서구</div>
-                                <div class="accordion-content">
-                                    <p class="dark:text-white">삼성동물병원</p>
-                                    <p class="dark:text-white">전화번호 : 053-556-8575</p>
-                                    <p class="dark:text-white">주소 : 대구광역시 서구 내당4동 서대구로 37</p>
-                                    <hr>
-                                    <p class="dark:text-white">진동물병원</p>
-                                    <p class="dark:text-white">전화번호 : 053-554-3575</p>
-                                    <p class="dark:text-white">주소 : 대구광역시 서구 비산2.3동 국채보상로 407</p>
-                                    <hr>
-                                    <p class="dark:text-white">가야동물병원</p>
-                                    <p class="dark:text-white">전화번호 : 053-558-3037</p>
-                                    <p class="dark:text-white">주소 : 대구광역시 서구 평리동 1522-3</p>
-                                </div>
-                            </div>
-                            <div class="accordion-item2">
-                                <div class="accordion-title font-bold cursor-pointer dark:text-white">중구</div>
-                                <div class="accordion-content">
-                                    <p class="dark:text-white">센트럴동물병원</p>
-                                    <p class="dark:text-white">전화번호 : 053-214-5577</p>
-                                    <p class="dark:text-white">주소 : 대구광역시 중구 대신동 1424</p>
-                                    <hr>
-                                    <p class="dark:text-white">최우식동물병원</p>
-                                    <p class="dark:text-white">전화번호 : 053-767-1588</p>
-                                    <p class="dark:text-white">주소 : 대구광역시 중구 남산4동</p>
-                                    <hr>
-                                    <p class="dark:text-white">중부동물병원</p>
-                                    <p class="dark:text-white">전화번호 : 053-253-8278</p>
-                                    <p class="dark:text-white">주소 : 대구광역시 중구 봉산동 53-2</p>
-                                </div>
-                            </div>
-                            <div class="accordion-item2">
-                                <div class="accordion-title font-bold cursor-pointer dark:text-white">남구</div>
-                                <div class="accordion-content">
-                                    <p class="dark:text-white">박순석동물메디컬센터</p>
-                                    <p class="dark:text-white">전화번호 : 053-657-0959</p>
-                                    <p class="dark:text-white">주소 : 대구광역시 남구 대명로 72 더원빌딩 2층</p>
-                                    <hr>
-                                    <p class="dark:text-white">현대동물병원</p>
-                                    <p class="dark:text-white">전화번호 : 053-475-5259</p>
-                                    <p class="dark:text-white">주소 : 대구광역시 남구 봉덕로 89</p>
-                                    <hr>
-                                    <p class="dark:text-white">중앙동물병원</p>
-                                    <p class="dark:text-white">전화번호 : 053-625-9198</p>
-                                    <p class="dark:text-white">주소 : 대구광역시 남구 대명6동 1111</p>
-                                </div>
-                            </div>
-                            <div class="accordion-item2">
-                                <div class="accordion-title font-bold cursor-pointer dark:text-white">수성구</div>
-                                <div class="accordion-content">
-                                    <p class="dark:text-white">24시범어동물의료센터</p>
-                                    <p class="dark:text-white">전화번호 : 053-716-7585</p>
-                                    <p class="dark:text-white">주소 : 대구광역시 수성구 수성동3가 10</p>
-                                    <hr>
-                                    <p class="dark:text-white">대구시지동물병원</p>
-                                    <p class="dark:text-white">전화번호 : 070-8862-5945</p>
-                                    <p class="dark:text-white">주소 : 대구광역시 수성구 달구벌대로 3014</p>
-                                    <hr>
-                                    <p class="dark:text-white">조은동물병원</p>
-                                    <p class="dark:text-white">전화번호 : 053-742-0075</p>
-                                    <p class="dark:text-white">주소 : 대구광역시 수성구 만촌동 달구벌대로 2562</p>
-                                </div>
-                            </div>
-                            <div class="accordion-item2">
-                                <div class="accordion-title font-bold cursor-pointer dark:text-white">동구</div>
-                                <div class="accordion-content">
-                                    <p class="dark:text-white">봄이온동물병원</p>
-                                    <p class="dark:text-white">전화번호 : 053-962-3264</p>
-                                    <p class="dark:text-white">주소 : 대구광역시 동구 각산동 444-7번지 101호</p>
-                                    <hr>
-                                    <p class="dark:text-white">수호동물병원</p>
-                                    <p class="dark:text-white">전화번호 : 053-982-0275</p>
-                                    <p class="dark:text-white">주소 : 대구광역시 동구 봉무동 1539-3 이시아시티빌딩 205호</p>
-                                    <hr>
-                                    <p class="dark:text-white">변수의과동물병원</p>
-                                    <p class="dark:text-white">전화번호 : 053-983-2069</p>
-                                    <p class="dark:text-white">주소 : 대구광역시 동구 검사동 957-41</p>
-                                </div>
-                            </div>
-                            <div class="accordion-item2">
-                                <div class="accordion-title font-bold cursor-pointer dark:text-white">달서구</div>
-                                <div class="accordion-content">
-                                    <p class="dark:text-white">대구24시바른동물의료센터</p>
-                                    <p class="dark:text-white">전화번호 : 053-571-0075</p>
-                                    <p class="dark:text-white">주소 : 대구광역시 달서구 와룡로 142 2층</p>
-                                    <hr>
-                                    <p class="dark:text-white">24시라이프동물의료센터</p>
-                                    <p class="dark:text-white">전화번호 : 053-567-2475</p>
-                                    <p class="dark:text-white">주소 : 대구광역시 달서구 감삼동 69-1 1층</p>
-                                    <hr>
-                                    <p class="dark:text-white">대구탑스동물메디컬센터</p>
-                                    <p class="dark:text-white">전화번호 : 053-637-7501</p>
-                                    <p class="dark:text-white">주소 : 대구광역시 달서구 상인2동 월배로 166</p>
-                                </div>
-                            </div>
-                            <div class="accordion-item2">
-                                <div class="accordion-title font-bold cursor-pointer dark:text-white">달성군</div>
-                                <div class="accordion-content">
-                                    <p class="dark:text-white">화원연합동물병원</p>
-                                    <p class="dark:text-white">전화번호 : 053-634-7975</p>
-                                    <p class="dark:text-white">주소 : 대구광역시 달성군 화원읍 천내리 156-1</p>
-                                    <hr>
-                                    <p class="dark:text-white">현풍동물병원</p>
-                                    <p class="dark:text-white">전화번호 : 053-614-3570</p>
-                                    <p class="dark:text-white">주소 : 대구광역시 달성군 테크노공원로51 봉리타워 현풍동물병원 613 205호</p>
-                                    <hr>
-                                    <p class="dark:text-white">다사종합동물병원</p>
-                                    <p class="dark:text-white">전화번호 : 053-591-7581</p>
-                                    <p class="dark:text-white">주소 : 대구광역시 달성군 다사읍 죽곡리 23-6</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                  </div>
                 </div>
+                  @endforeach
+                <!-- .item -->
+              </div>
+
+              <div
+                id="property-nav"
+                class="controls"
+                tabindex="0"
+                aria-label="Carousel Navigation"
+              >
+                <span
+                  class="prev"
+                  data-controls="prev"
+                  aria-controls="property"
+                  tabindex="-1"
+                  >Prev</span
+                >
+                <span
+                  class="next"
+                  data-controls="next"
+                  aria-controls="property"
+                  tabindex="-1"
+                  >Next</span
+                >
+              </div>
             </div>
+          </div>
         </div>
-        @include('layouts.footer')
-        <script src="{{ asset('welcome.js') }}"></script>
-    </body>
-</x-app-layout>
+      </div>
 
+    <section class="features-1">
+      <div class="container">
+        <div class="row">
+          <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+            <div class="box-feature">
+              <span class="flaticon-house"></span>
+              <h3 class="mb-3">Our Properties</h3>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Voluptates, accusamus.
+              </p>
+              <p><a href="#" class="learn-more">Learn More</a></p>
+            </div>
+          </div>
+          <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="500">
+            <div class="box-feature">
+              <span class="flaticon-building"></span>
+              <h3 class="mb-3">Property for Sale</h3>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Voluptates, accusamus.
+              </p>
+              <p><a href="#" class="learn-more">Learn More</a></p>
+            </div>
+          </div>
+          <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+            <div class="box-feature">
+              <span class="flaticon-house-3"></span>
+              <h3 class="mb-3">Real Estate Agent</h3>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Voluptates, accusamus.
+              </p>
+              <p><a href="#" class="learn-more">Learn More</a></p>
+            </div>
+          </div>
+          <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="600">
+            <div class="box-feature">
+              <span class="flaticon-house-1"></span>
+              <h3 class="mb-3">House for Sale</h3>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Voluptates, accusamus.
+              </p>
+              <p><a href="#" class="learn-more">Learn More</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section sec-testimonials">
+      <div class="container">
+        <div class="row mb-5 align-items-center">
+          <div class="col-md-6">
+            <h2 class="font-weight-bold heading text-primary mb-4 mb-md-0">
+              Customer Says
+            </h2>
+          </div>
+          <div class="col-md-6 text-md-end">
+            <div id="testimonial-nav">
+              <span class="prev" data-controls="prev">Prev</span>
+
+              <span class="next" data-controls="next">Next</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4"></div>
+        </div>
+        <div class="testimonial-slider-wrap">
+          <div class="testimonial-slider">
+            <div class="item">
+              <div class="testimonial">
+                <img
+                  src="images/person_1-min.jpg"
+                  alt="Image"
+                  class="img-fluid rounded-circle w-25 mb-4"
+                />
+                <div class="rate">
+                  <span class="icon-star text-warning"></span>
+                  <span class="icon-star text-warning"></span>
+                  <span class="icon-star text-warning"></span>
+                  <span class="icon-star text-warning"></span>
+                  <span class="icon-star text-warning"></span>
+                </div>
+                <h3 class="h5 text-primary mb-4">James Smith</h3>
+                <blockquote>
+                  <p>
+                    &ldquo;Far far away, behind the word mountains, far from the
+                    countries Vokalia and Consonantia, there live the blind
+                    texts. Separated they live in Bookmarksgrove right at the
+                    coast of the Semantics, a large language ocean.&rdquo;
+                  </p>
+                </blockquote>
+                <p class="text-black-50">Designer, Co-founder</p>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="testimonial">
+                <img
+                  src="images/person_2-min.jpg"
+                  alt="Image"
+                  class="img-fluid rounded-circle w-25 mb-4"
+                />
+                <div class="rate">
+                  <span class="icon-star text-warning"></span>
+                  <span class="icon-star text-warning"></span>
+                  <span class="icon-star text-warning"></span>
+                  <span class="icon-star text-warning"></span>
+                  <span class="icon-star text-warning"></span>
+                </div>
+                <h3 class="h5 text-primary mb-4">Mike Houston</h3>
+                <blockquote>
+                  <p>
+                    &ldquo;Far far away, behind the word mountains, far from the
+                    countries Vokalia and Consonantia, there live the blind
+                    texts. Separated they live in Bookmarksgrove right at the
+                    coast of the Semantics, a large language ocean.&rdquo;
+                  </p>
+                </blockquote>
+                <p class="text-black-50">Designer, Co-founder</p>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="testimonial">
+                <img
+                  src="images/person_3-min.jpg"
+                  alt="Image"
+                  class="img-fluid rounded-circle w-25 mb-4"
+                />
+                <div class="rate">
+                  <span class="icon-star text-warning"></span>
+                  <span class="icon-star text-warning"></span>
+                  <span class="icon-star text-warning"></span>
+                  <span class="icon-star text-warning"></span>
+                  <span class="icon-star text-warning"></span>
+                </div>
+                <h3 class="h5 text-primary mb-4">Cameron Webster</h3>
+                <blockquote>
+                  <p>
+                    &ldquo;Far far away, behind the word mountains, far from the
+                    countries Vokalia and Consonantia, there live the blind
+                    texts. Separated they live in Bookmarksgrove right at the
+                    coast of the Semantics, a large language ocean.&rdquo;
+                  </p>
+                </blockquote>
+                <p class="text-black-50">Designer, Co-founder</p>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="testimonial">
+                <img
+                  src="images/person_4-min.jpg"
+                  alt="Image"
+                  class="img-fluid rounded-circle w-25 mb-4"
+                />
+                <div class="rate">
+                  <span class="icon-star text-warning"></span>
+                  <span class="icon-star text-warning"></span>
+                  <span class="icon-star text-warning"></span>
+                  <span class="icon-star text-warning"></span>
+                  <span class="icon-star text-warning"></span>
+                </div>
+                <h3 class="h5 text-primary mb-4">Dave Smith</h3>
+                <blockquote>
+                  <p>
+                    &ldquo;Far far away, behind the word mountains, far from the
+                    countries Vokalia and Consonantia, there live the blind
+                    texts. Separated they live in Bookmarksgrove right at the
+                    coast of the Semantics, a large language ocean.&rdquo;
+                  </p>
+                </blockquote>
+                <p class="text-black-50">Designer, Co-founder</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section section-4 bg-light">
+      <div class="container">
+        <div class="row justify-content-center text-center mb-5">
+          <div class="col-lg-5">
+            <h2 class="font-weight-bold heading text-primary mb-4">
+              Let's find home that's perfect for you
+            </h2>
+            <p class="text-black-50">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
+              enim pariatur similique debitis vel nisi qui reprehenderit.
+            </p>
+          </div>
+        </div>
+        <div class="row justify-content-between mb-5">
+          <div class="col-lg-7 mb-5 mb-lg-0 order-lg-2">
+            <div class="img-about dots">
+              <img src="images/hero_bg_3.jpg" alt="Image" class="img-fluid" />
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="d-flex feature-h">
+              <span class="wrap-icon me-3">
+                <span class="icon-home2"></span>
+              </span>
+              <div class="feature-text">
+                <h3 class="heading">2M Properties</h3>
+                <p class="text-black-50">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Nostrum iste.
+                </p>
+              </div>
+            </div>
+
+            <div class="d-flex feature-h">
+              <span class="wrap-icon me-3">
+                <span class="icon-person"></span>
+              </span>
+              <div class="feature-text">
+                <h3 class="heading">Top Rated Agents</h3>
+                <p class="text-black-50">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Nostrum iste.
+                </p>
+              </div>
+            </div>
+
+            <div class="d-flex feature-h">
+              <span class="wrap-icon me-3">
+                <span class="icon-security"></span>
+              </span>
+              <div class="feature-text">
+                <h3 class="heading">Legit Properties</h3>
+                <p class="text-black-50">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Nostrum iste.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row section-counter mt-5">
+          <div
+            class="col-6 col-sm-6 col-md-6 col-lg-3"
+            data-aos="fade-up"
+            data-aos-delay="300"
+          >
+            <div class="counter-wrap mb-5 mb-lg-0">
+              <span class="number"
+                ><span class="countup text-primary">3298</span></span
+              >
+              <span class="caption text-black-50"># of Buy Properties</span>
+            </div>
+          </div>
+          <div
+            class="col-6 col-sm-6 col-md-6 col-lg-3"
+            data-aos="fade-up"
+            data-aos-delay="400"
+          >
+            <div class="counter-wrap mb-5 mb-lg-0">
+              <span class="number"
+                ><span class="countup text-primary">2181</span></span
+              >
+              <span class="caption text-black-50"># of Sell Properties</span>
+            </div>
+          </div>
+          <div
+            class="col-6 col-sm-6 col-md-6 col-lg-3"
+            data-aos="fade-up"
+            data-aos-delay="500"
+          >
+            <div class="counter-wrap mb-5 mb-lg-0">
+              <span class="number"
+                ><span class="countup text-primary">9316</span></span
+              >
+              <span class="caption text-black-50"># of All Properties</span>
+            </div>
+          </div>
+          <div
+            class="col-6 col-sm-6 col-md-6 col-lg-3"
+            data-aos="fade-up"
+            data-aos-delay="600"
+          >
+            <div class="counter-wrap mb-5 mb-lg-0">
+              <span class="number"
+                ><span class="countup text-primary">7191</span></span
+              >
+              <span class="caption text-black-50"># of Agents</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="row justify-content-center footer-cta" data-aos="fade-up">
+        <div class="col-lg-7 mx-auto text-center">
+          <h2 class="mb-4">Be a part of our growing real state agents</h2>
+          <p>
+            <a
+              href="#"
+              target="_blank"
+              class="btn btn-primary text-white py-3 px-4"
+              >Apply for Real Estate agent</a
+            >
+          </p>
+        </div>
+        <!-- /.col-lg-7 -->
+      </div>
+      <!-- /.row -->
+    </div>
+
+    <div class="section section-5 bg-light">
+      <div class="container">
+        <div class="row justify-content-center text-center mb-5">
+          <div class="col-lg-6 mb-5">
+            <h2 class="font-weight-bold heading text-primary mb-4">
+              Our Agents
+            </h2>
+            <p class="text-black-50">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
+              enim pariatur similique debitis vel nisi qui reprehenderit totam?
+              Quod maiores.
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0">
+            <div class="h-100 person">
+              <img
+                src="images/person_1-min.jpg"
+                alt="Image"
+                class="img-fluid"
+              />
+
+              <div class="person-contents">
+                <h2 class="mb-0"><a href="#">James Doe</a></h2>
+                <span class="meta d-block mb-3">Real Estate Agent</span>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Facere officiis inventore cumque tenetur laboriosam, minus
+                  culpa doloremque odio, neque molestias?
+                </p>
+
+                <ul class="social list-unstyled list-inline dark-hover">
+                  <li class="list-inline-item">
+                    <a href="#"><span class="icon-twitter"></span></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="#"><span class="icon-facebook"></span></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="#"><span class="icon-linkedin"></span></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="#"><span class="icon-instagram"></span></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0">
+            <div class="h-100 person">
+              <img
+                src="images/person_2-min.jpg"
+                alt="Image"
+                class="img-fluid"
+              />
+
+              <div class="person-contents">
+                <h2 class="mb-0"><a href="#">Jean Smith</a></h2>
+                <span class="meta d-block mb-3">Real Estate Agent</span>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Facere officiis inventore cumque tenetur laboriosam, minus
+                  culpa doloremque odio, neque molestias?
+                </p>
+
+                <ul class="social list-unstyled list-inline dark-hover">
+                  <li class="list-inline-item">
+                    <a href="#"><span class="icon-twitter"></span></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="#"><span class="icon-facebook"></span></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="#"><span class="icon-linkedin"></span></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="#"><span class="icon-instagram"></span></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0">
+            <div class="h-100 person">
+              <img
+                src="images/person_3-min.jpg"
+                alt="Image"
+                class="img-fluid"
+              />
+
+              <div class="person-contents">
+                <h2 class="mb-0"><a href="#">Alicia Huston</a></h2>
+                <span class="meta d-block mb-3">Real Estate Agent</span>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Facere officiis inventore cumque tenetur laboriosam, minus
+                  culpa doloremque odio, neque molestias?
+                </p>
+
+                <ul class="social list-unstyled list-inline dark-hover">
+                  <li class="list-inline-item">
+                    <a href="#"><span class="icon-twitter"></span></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="#"><span class="icon-facebook"></span></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="#"><span class="icon-linkedin"></span></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="#"><span class="icon-instagram"></span></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="widget">
+              <h3>Contact</h3>
+              <address>43 Raymouth Rd. Baltemoer, London 3910</address>
+              <ul class="list-unstyled links">
+                <li><a href="tel://11234567890">+1(123)-456-7890</a></li>
+                <li><a href="tel://11234567890">+1(123)-456-7890</a></li>
+                <li>
+                  <a href="mailto:info@mydomain.com">info@mydomain.com</a>
+                </li>
+              </ul>
+            </div>
+            <!-- /.widget -->
+          </div>
+          <!-- /.col-lg-4 -->
+          <div class="col-lg-4">
+            <div class="widget">
+              <h3>Sources</h3>
+              <ul class="list-unstyled float-start links">
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Vision</a></li>
+                <li><a href="#">Mission</a></li>
+                <li><a href="#">Terms</a></li>
+                <li><a href="#">Privacy</a></li>
+              </ul>
+              <ul class="list-unstyled float-start links">
+                <li><a href="#">Partners</a></li>
+                <li><a href="#">Business</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Creative</a></li>
+              </ul>
+            </div>
+            <!-- /.widget -->
+          </div>
+          <!-- /.col-lg-4 -->
+          <div class="col-lg-4">
+            <div class="widget">
+              <h3>Links</h3>
+              <ul class="list-unstyled links">
+                <li><a href="#">Our Vision</a></li>
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Contact us</a></li>
+              </ul>
+
+              <ul class="list-unstyled social">
+                <li>
+                  <a href="#"><span class="icon-instagram"></span></a>
+                </li>
+                <li>
+                  <a href="#"><span class="icon-twitter"></span></a>
+                </li>
+                <li>
+                  <a href="#"><span class="icon-facebook"></span></a>
+                </li>
+                <li>
+                  <a href="#"><span class="icon-linkedin"></span></a>
+                </li>
+                <li>
+                  <a href="#"><span class="icon-pinterest"></span></a>
+                </li>
+                <li>
+                  <a href="#"><span class="icon-dribbble"></span></a>
+                </li>
+              </ul>
+            </div>
+            <!-- /.widget -->
+          </div>
+          <!-- /.col-lg-4 -->
+        </div>
+        <!-- /.row -->
+
+        <div class="row mt-5">
+          <div class="col-12 text-center">
+            <!-- 
+              **==========
+              NOTE: 
+              Please don't remove this copyright link unless you buy the license here https://untree.co/license/  
+              **==========
+            -->
+
+            <p>
+              Copyright &copy;
+              <script>
+                document.write(new Date().getFullYear());
+              </script>
+              . All Rights Reserved. &mdash; Designed with love by
+              Pet Bang</a>
+              <!-- License information: https://untree.co/license/ -->
+            </p>
+            <div>
+              Made by B1K3
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.container -->
+    </div>
+    <!-- /.site-footer -->
+
+    <!-- Preloader -->
+    <div id="overlayer"></div>
+    <div class="loader">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <script src="{{asset('bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('tiny-slider.js')}}"></script>
+    <script src="{{asset('aos.js')}}"></script>
+    <script src="{{asset('navbar.js')}}"></script>
+    <script src="{{asset('counter.js')}}"></script>
+    <script src="{{asset('custom.js')}}"></script>
+  </body>
 </html>

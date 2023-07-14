@@ -1,236 +1,923 @@
-<link rel="stylesheet" href="{{ asset('detail.css') }}">
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-gray-100">
-            {{ __('Main') }}
-        </h2>
-    </x-slot>
-    <style>
-        .scroll-item {
-            position: relative;
-            overflow-x: auto;
-            white-space: nowrap;
-            width: 100%;
-            z-index: 0;
-        }
+<!-- /*
+* Template Name: Property
+* Template Author: Untree.co
+* Template URI: https://untree.co/
+* License: https://creativecommons.org/licenses/by/3.0/
+*/ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Untree.co" />
+    <link rel="shortcut icon" href="favicon.png" />
 
-        .photo-item {
-            display: inline-block;
-            margin-right: 10px;
-            width: 30%;
-            height: 60%;
-            border: 1px solid black;
-        }
+    <meta name="description" content="" />
+    <meta name="keywords" content="bootstrap, bootstrap5" />
 
-        #detail {
-            position: fixed;
-            top: 250px;
-            right: 40px;
-            padding: 15px;
-            background-color: white;
-            margin: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            transition: top 0.3s ease-in-out;
-            z-index: 10;
-        }
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-        img {
-            margin-top: 0px auto;
-            width: 268px;
-            height: 150px;
-        }
+    <link rel="stylesheet" href="{{asset('fonts/icomoon/style.css')}}" />
+    <link rel="stylesheet" href="{{asset('fonts/flaticon/font/flaticon.css')}}" />
 
-        h1 {
-            font-size: 30px;
-            margin-left: 20px;
-        }
+    <link rel="stylesheet" href="{{asset('tiny-slider.css')}}" />
+    <link rel="stylesheet" href="{{asset('aos.css')}}" />
+    <link rel="stylesheet" href="{{asset('style.css')}}" />
 
-        #btn1,
-        #btn3 {
-            float: right;
-            position: fixed;
-            width: 30px;
-            height: 30px;
-            margin-top: 200px;
-        }
 
-        #btn3 {
-            margin-top: 500px;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        #photo {
-            padding: 20px;
-        }
-
-        #btn4 {
-            float: right;
-            margin-right: 20px;
-        }
-        @media screen and (max-width: 700px) {
-            #detail {
-                position: relative;
-                top: auto;
-                right: auto;
-                margin-top: 10px;
-                width: 93%;
-                padding: 15px;
-                background-color: white;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-                margin-left: 20px;
-            }
-
-        }
-    </style>
-    <div>
-        <div id="scroll-container" class="scroll-item">
-            <button type="button" style="z-index:10"><img id="btn1" src="{{asset('arrow-up-solid.png')}}"></button>
-            <br>
-            <button type="button" style="z-index:10"><img id="btn3" src="{{asset('arrow-down-solid.png')}}"></button>
-            <div id="photo">
-                @foreach ($photos as $photo)
-                    <img class="photo-item" src="{{ asset($photo->url) }}" alt="{{ $photo->url }}">
-                @endforeach
-            </div>
+    <title>
+      Property &mdash; Free Bootstrap 5 Website Template by Untree.co
+    </title>
+  </head>
+  <body>
+    <div class="site-mobile-menu site-navbar-target">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close">
+          <span class="icofont-close js-menu-toggle"></span>
         </div>
-        {{-- <x-button type="button" id="btn4">찜하기</x-button> --}}
-        <br>
-        <br>
-        <h1 class="dark:text-white">건물 정보</h1>
-        <div style="margin-left: 30px">
-        <div class="hits">조회수 {{$s_info->hits}}</div>
-            <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose dark:text-white dark:bg-gray-700"
-                style="text-align: left">
-                건물 이름 : {{ $s_info->s_name }}
-            </div>
-            <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose dark:text-white dark:bg-gray-700"
-                style="text-align: left">
-                건물 주소 : {{ $s_info->s_add }}
-            </div>
-            <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose dark:text-white dark:bg-gray-700"
-                style="text-align: left">
-                판매 유형 : {{ $s_info->s_type }}
-            </div>
-            <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose dark:text-white dark:bg-gray-700"
-                style="text-align: left">
-                평수 : {{ $s_info->s_size }}
-            </div>
-            <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose dark:text-white dark:bg-gray-700"
-                style="text-align: left">
-                층수 : {{ $s_info->s_fl }}
-            </div>
-            <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose dark:text-white dark:bg-gray-700"
-                style="text-align: left">
-                근처역 : {{ $s_info->s_stai }}
-            </div>
-            <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose dark:text-white dark:bg-gray-700"
-                style="text-align: left">
-                보증금 or 매매가: {{ $s_info->p_deposit }}
-            </div>
-            <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose dark:text-white dark:bg-gray-700"
-                style="text-align: left">
-                월세 or 관리비: {{ $s_info->p_month }}
-            </div>
-            <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose dark:text-white dark:bg-gray-700"
-                style="text-align: left">
-                대형동물 가능 여부 :
-                @if ($s_info->animal_size == 0)
-                    가능
-                @else
-                    불가능
-                @endif
-            </div>
-            <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose dark:text-white dark:bg-gray-700"
-                style="text-align: left">
-                주차가능 여부 :
-                @if ($data01->s_parking == 0)
-                    불가능
-                @else
-                    가능
-                @endif
-            </div>
-            <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose dark:text-white dark:bg-gray-700"
-                style="text-align: left">
-                엘레베이터 여부 :
-                @if ($data01->s_ele== 0)
-                    불가능
-                @else
-                    가능
-                @endif
-            </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div>
+
+    <nav class="site-nav">
+      <div class="container">
+        <div class="menu-bg-wrap">
+          <div class="site-navigation">
+            <a href="index.html" class="logo m-0 float-start">Property</a>
+
+            <ul
+              class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end"
+            >
+              <li><a href="{{route('welcome')}}">Home</a></li>
+              <li class="has-children active">
+                <a href="properties.html">Properties</a>
+                <ul class="dropdown">
+                  <li><a href="#">Buy Property</a></li>
+                  <li><a href="#">Sell Property</a></li>
+                  <li class="has-children">
+                    <a href="#">Dropdown</a>
+                    <ul class="dropdown">
+                      <li><a href="#">Sub Menu One</a></li>
+                      <li><a href="#">Sub Menu Two</a></li>
+                      <li><a href="#">Sub Menu Three</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li><a href="services.html">Services</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+
+            <a
+              href="#"
+              class="burger light me-auto float-end mt-1 site-menu-toggle js-menu-toggle d-inline-block d-lg-none"
+              data-toggle="collapse"
+              data-target="#main-navbar"
+            >
+              <span></span>
+            </a>
+          </div>
         </div>
-        <div id="detail">
-            <div id="proimg"><img
-                    src="https://search.pstatic.net/sunny/?src=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F92%2Faf%2F2f%2F92af2fec0dfc6e661ee8a2cdd114e14b.jpg&type=a340"
-                    alt="중개인 얼굴"></div>
-            <div class="font-bold">판매자 : {{ $user->name }}</div>
-            <div class="font-bold">부동산 : {{ $user->b_name }}</div>
-            <x-button type="button" id="btn2" class="dark:text-white">연락처 보기</x-button>
+      </div>
+    </nav>
+
+    <div
+      class="hero page-inner overlay"
+      style="background-image: url('{{asset('images/hero_bg_1.jpg')}}')"
+    >
+      <div class="container">
+        <div class="row justify-content-center align-items-center">
+          <div class="col-lg-9 text-center mt-5">
+            <h1 class="heading" data-aos="fade-up">Properties</h1>
+
+            <nav
+              aria-label="breadcrumb"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <ol class="breadcrumb text-center justify-content-center">
+                <li class="breadcrumb-item"><a href="{{route('welcome')}}">Home</a></li>
+                <li
+                  class="breadcrumb-item active text-white-50"
+                  aria-current="page"
+                >
+                  Properties
+                </li>
+              </ol>
+            </nav>
+          </div>
         </div>
-        <br>
-        <br>
-        <br>
-        <a id="bottom"></a>
-        <h1 class="dark:text-white">위치</h1>
-        <div id="map" style="width: 500px; height: 400px; margin-left:30px; margin-bottom:30px;"></div>
-        @include('layouts.footer')
+      </div>
+    </div>
 
-        <script type="text/javascript"
-            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9abea084b391e97658a9380c837b9608&libraries=services"></script>
-        <script>
-            var container = document.getElementById('map');
-            var options = {
-                center: new kakao.maps.LatLng({{ $s_info->s_log }}, {{ $s_info->s_lat }}),
-                level: 5
-            };
+    <div class="section">
+      <div class="container">
+        <div class="row mb-5 align-items-center">
+          <div class="col-lg-6 text-center mx-auto">
+            <h2 class="font-weight-bold text-primary heading">
+              Featured Properties
+            </h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="property-slider-wrap">
+              <div class="property-slider">
+                <div class="property-item">
+                  <a href="property-single.html" class="img">
+                    <img src="{{asset('images/img_1.jpg')}}" alt="Image" class="img-fluid" />
+                  </a>
 
-            var map = new kakao.maps.Map(container, options);
+                  <div class="property-content">
+                    <div class="price mb-2"><span>$1,291,000</span></div>
+                    <div>
+                      <span class="d-block mb-2 text-black-50"
+                        >5232 California Fake, Ave. 21BC</span
+                      >
+                      <span class="city d-block mb-3">California, USA</span>
 
-            var position = new kakao.maps.LatLng({{ $s_info->s_log }}, {{ $s_info->s_lat }}); // 마커가 표시될 위치를 설정합니다
-            var iwContent = '<div style="padding: 5px;">{{ $s_info->s_name }}</div>'; // 인포윈도우에 표시될 내용입니다
+                      <div class="specs d-flex mb-4">
+                        <span class="d-block d-flex align-items-center me-3">
+                          <span class="icon-bed me-2"></span>
+                          <span class="caption">2 beds</span>
+                        </span>
+                        <span class="d-block d-flex align-items-center">
+                          <span class="icon-bath me-2"></span>
+                          <span class="caption">2 baths</span>
+                        </span>
+                      </div>
 
-            // 마커를 생성합니다
-            var marker = new kakao.maps.Marker({
-                map: map,
-                position: position
-            });
+                      <a
+                        href="property-single.html"
+                        class="btn btn-primary py-2 px-3"
+                        >See details</a
+                      >
+                    </div>
+                  </div>
+                </div>
+                <!-- .item -->
 
-            // 인포윈도우를 생성합니다
-            var infowindow = new kakao.maps.InfoWindow({
-                content: iwContent
-            });
-            // 인포윈도우를 마커 위에 표시합니다
-            infowindow.open(map, marker);
+                <div class="property-item">
+                  <a href="property-single.html" class="img">
+                    <img src="{{asset('images/img_2.jpg')}}" alt="Image" class="img-fluid" />
+                  </a>
 
+                  <div class="property-content">
+                    <div class="price mb-2"><span>$1,291,000</span></div>
+                    <div>
+                      <span class="d-block mb-2 text-black-50"
+                        >5232 California Fake, Ave. 21BC</span
+                      >
+                      <span class="city d-block mb-3">California, USA</span>
 
+                      <div class="specs d-flex mb-4">
+                        <span class="d-block d-flex align-items-center me-3">
+                          <span class="icon-bed me-2"></span>
+                          <span class="caption">2 beds</span>
+                        </span>
+                        <span class="d-block d-flex align-items-center">
+                          <span class="icon-bath me-2"></span>
+                          <span class="caption">2 baths</span>
+                        </span>
+                      </div>
 
-            const btn2 = document.getElementById("btn2");
-            let newWindow = null;
+                      <a
+                        href="property-single.html"
+                        class="btn btn-primary py-2 px-3"
+                        >See details</a
+                      >
+                    </div>
+                  </div>
+                </div>
+                <!-- .item -->
 
-            btn2.addEventListener("click", () => {
-                newWindow = window.open("{{ route('sellerPhone', ['s_no' => $photo->s_no]) }}", "find",
-                    "width=550,height=200");
-            });
+                <div class="property-item">
+                  <a href="property-single.html" class="img">
+                    <img src="{{asset('images/img_3.jpg')}}" alt="Image" class="img-fluid" />
+                  </a>
 
-            const btn1 = document.getElementById("btn1");
-            const btn3 = document.getElementById("btn3");
+                  <div class="property-content">
+                    <div class="price mb-2"><span>$1,291,000</span></div>
+                    <div>
+                      <span class="d-block mb-2 text-black-50"
+                        >5232 California Fake, Ave. 21BC</span
+                      >
+                      <span class="city d-block mb-3">California, USA</span>
 
-            btn1.addEventListener("click", () => {
-                window.scrollTo(0, 0);
-            });
+                      <div class="specs d-flex mb-4">
+                        <span class="d-block d-flex align-items-center me-3">
+                          <span class="icon-bed me-2"></span>
+                          <span class="caption">2 beds</span>
+                        </span>
+                        <span class="d-block d-flex align-items-center">
+                          <span class="icon-bath me-2"></span>
+                          <span class="caption">2 baths</span>
+                        </span>
+                      </div>
 
-            btn3.addEventListener("click", () => {
-                window.scrollTo(0, document.body.scrollHeight);
-            });
-        </script>
+                      <a
+                        href="property-single.html"
+                        class="btn btn-primary py-2 px-3"
+                        >See details</a
+                      >
+                    </div>
+                  </div>
+                </div>
+                <!-- .item -->
 
-        {{-- <script>
-            document.getElementById('btn4').addEventListener('click', function() {
-                window.location.href = "{{ route('jjims.store') }}";
-            });
-        </script> --}}
+                <div class="property-item">
+                  <a href="property-single.html" class="img">
+                    <img src="{{asset('images/img_4.jpg')}}" alt="Image" class="img-fluid" />
+                  </a>
 
-</x-app-layout>
+                  <div class="property-content">
+                    <div class="price mb-2"><span>$1,291,000</span></div>
+                    <div>
+                      <span class="d-block mb-2 text-black-50"
+                        >5232 California Fake, Ave. 21BC</span
+                      >
+                      <span class="city d-block mb-3">California, USA</span>
+
+                      <div class="specs d-flex mb-4">
+                        <span class="d-block d-flex align-items-center me-3">
+                          <span class="icon-bed me-2"></span>
+                          <span class="caption">2 beds</span>
+                        </span>
+                        <span class="d-block d-flex align-items-center">
+                          <span class="icon-bath me-2"></span>
+                          <span class="caption">2 baths</span>
+                        </span>
+                      </div>
+
+                      <a
+                        href="property-single.html"
+                        class="btn btn-primary py-2 px-3"
+                        >See details</a
+                      >
+                    </div>
+                  </div>
+                </div>
+                <!-- .item -->
+
+                <div class="property-item">
+                  <a href="property-single.html" class="img">
+                    <img src="{{asset('images/img_5.jpg')}}" alt="Image" class="img-fluid" />
+                  </a>
+
+                  <div class="property-content">
+                    <div class="price mb-2"><span>$1,291,000</span></div>
+                    <div>
+                      <span class="d-block mb-2 text-black-50"
+                        >5232 California Fake, Ave. 21BC</span
+                      >
+                      <span class="city d-block mb-3">California, USA</span>
+
+                      <div class="specs d-flex mb-4">
+                        <span class="d-block d-flex align-items-center me-3">
+                          <span class="icon-bed me-2"></span>
+                          <span class="caption">2 beds</span>
+                        </span>
+                        <span class="d-block d-flex align-items-center">
+                          <span class="icon-bath me-2"></span>
+                          <span class="caption">2 baths</span>
+                        </span>
+                      </div>
+
+                      <a
+                        href="property-single.html"
+                        class="btn btn-primary py-2 px-3"
+                        >See details</a
+                      >
+                    </div>
+                  </div>
+                </div>
+                <!-- .item -->
+
+                <div class="property-item">
+                  <a href="property-single.html" class="img">
+                    <img src="{{asset('images/img_6.jpg')}}" alt="Image" class="img-fluid" />
+                  </a>
+
+                  <div class="property-content">
+                    <div class="price mb-2"><span>$1,291,000</span></div>
+                    <div>
+                      <span class="d-block mb-2 text-black-50"
+                        >5232 California Fake, Ave. 21BC</span
+                      >
+                      <span class="city d-block mb-3">California, USA</span>
+
+                      <div class="specs d-flex mb-4">
+                        <span class="d-block d-flex align-items-center me-3">
+                          <span class="icon-bed me-2"></span>
+                          <span class="caption">2 beds</span>
+                        </span>
+                        <span class="d-block d-flex align-items-center">
+                          <span class="icon-bath me-2"></span>
+                          <span class="caption">2 baths</span>
+                        </span>
+                      </div>
+
+                      <a
+                        href="property-single.html"
+                        class="btn btn-primary py-2 px-3"
+                        >See details</a
+                      >
+                    </div>
+                  </div>
+                </div>
+                <!-- .item -->
+
+                <div class="property-item">
+                  <a href="property-single.html" class="img">
+                    <img src="{{asset('images/img_7.jpg')}}" alt="Image" class="img-fluid" />
+                  </a>
+
+                  <div class="property-content">
+                    <div class="price mb-2"><span>$1,291,000</span></div>
+                    <div>
+                      <span class="d-block mb-2 text-black-50"
+                        >5232 California Fake, Ave. 21BC</span
+                      >
+                      <span class="city d-block mb-3">California, USA</span>
+
+                      <div class="specs d-flex mb-4">
+                        <span class="d-block d-flex align-items-center me-3">
+                          <span class="icon-bed me-2"></span>
+                          <span class="caption">2 beds</span>
+                        </span>
+                        <span class="d-block d-flex align-items-center">
+                          <span class="icon-bath me-2"></span>
+                          <span class="caption">2 baths</span>
+                        </span>
+                      </div>
+
+                      <a
+                        href="property-single.html"
+                        class="btn btn-primary py-2 px-3"
+                        >See details</a
+                      >
+                    </div>
+                  </div>
+                </div>
+                <!-- .item -->
+
+                <div class="property-item">
+                  <a href="property-single.html" class="img">
+                    <img src="{{asset('images/img_8.jpg')}}" alt="Image" class="img-fluid" />
+                  </a>
+
+                  <div class="property-content">
+                    <div class="price mb-2"><span>$1,291,000</span></div>
+                    <div>
+                      <span class="d-block mb-2 text-black-50"
+                        >5232 California Fake, Ave. 21BC</span
+                      >
+                      <span class="city d-block mb-3">California, USA</span>
+
+                      <div class="specs d-flex mb-4">
+                        <span class="d-block d-flex align-items-center me-3">
+                          <span class="icon-bed me-2"></span>
+                          <span class="caption">2 beds</span>
+                        </span>
+                        <span class="d-block d-flex align-items-center">
+                          <span class="icon-bath me-2"></span>
+                          <span class="caption">2 baths</span>
+                        </span>
+                      </div>
+
+                      <a
+                        href="property-single.html"
+                        class="btn btn-primary py-2 px-3"
+                        >See details</a
+                      >
+                    </div>
+                  </div>
+                </div>
+                <!-- .item -->
+
+                <div class="property-item">
+                  <a href="property-single.html" class="img">
+                    <img src="{{asset('images/img_1.jpg')}}" alt="Image" class="img-fluid" />
+                  </a>
+
+                  <div class="property-content">
+                    <div class="price mb-2"><span>$1,291,000</span></div>
+                    <div>
+                      <span class="d-block mb-2 text-black-50"
+                        >5232 California Fake, Ave. 21BC</span
+                      >
+                      <span class="city d-block mb-3">California, USA</span>
+
+                      <div class="specs d-flex mb-4">
+                        <span class="d-block d-flex align-items-center me-3">
+                          <span class="icon-bed me-2"></span>
+                          <span class="caption">2 beds</span>
+                        </span>
+                        <span class="d-block d-flex align-items-center">
+                          <span class="icon-bath me-2"></span>
+                          <span class="caption">2 baths</span>
+                        </span>
+                      </div>
+
+                      <a
+                        href="property-single.html"
+                        class="btn btn-primary py-2 px-3"
+                        >See details</a
+                      >
+                    </div>
+                  </div>
+                </div>
+                <!-- .item -->
+              </div>
+
+              <div
+                id="property-nav"
+                class="controls"
+                tabindex="0"
+                aria-label="Carousel Navigation"
+              >
+                <span
+                  class="prev"
+                  data-controls="prev"
+                  aria-controls="property"
+                  tabindex="-1"
+                  >Prev</span
+                >
+                <span
+                  class="next"
+                  data-controls="next"
+                  aria-controls="property"
+                  tabindex="-1"
+                  >Next</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section section-properties">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+            <div class="property-item mb-30">
+              <a href="property-single.html" class="img">
+                <img src="{{asset('images/img_1.jpg')}}" alt="Image" class="img-fluid" />
+              </a>
+
+              <div class="property-content">
+                <div class="price mb-2"><span>$1,291,000</span></div>
+                <div>
+                  <span class="d-block mb-2 text-black-50"
+                    >5232 California Fake, Ave. 21BC</span
+                  >
+                  <span class="city d-block mb-3">California, USA</span>
+
+                  <div class="specs d-flex mb-4">
+                    <span class="d-block d-flex align-items-center me-3">
+                      <span class="icon-bed me-2"></span>
+                      <span class="caption">2 beds</span>
+                    </span>
+                    <span class="d-block d-flex align-items-center">
+                      <span class="icon-bath me-2"></span>
+                      <span class="caption">2 baths</span>
+                    </span>
+                  </div>
+
+                  <a
+                    href="property-single.html"
+                    class="btn btn-primary py-2 px-3"
+                    >See details</a
+                  >
+                </div>
+              </div>
+            </div>
+            <!-- .item -->
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+            <div class="property-item mb-30">
+              <a href="property-single.html" class="img">
+                <img src="{{asset('images/img_1.jpg')}}" alt="Image" class="img-fluid" />
+              </a>
+
+              <div class="property-content">
+                <div class="price mb-2"><span>$1,291,000</span></div>
+                <div>
+                  <span class="d-block mb-2 text-black-50"
+                    >5232 California Fake, Ave. 21BC</span
+                  >
+                  <span class="city d-block mb-3">California, USA</span>
+
+                  <div class="specs d-flex mb-4">
+                    <span class="d-block d-flex align-items-center me-3">
+                      <span class="icon-bed me-2"></span>
+                      <span class="caption">2 beds</span>
+                    </span>
+                    <span class="d-block d-flex align-items-center">
+                      <span class="icon-bath me-2"></span>
+                      <span class="caption">2 baths</span>
+                    </span>
+                  </div>
+
+                  <a
+                    href="property-single.html"
+                    class="btn btn-primary py-2 px-3"
+                    >See details</a
+                  >
+                </div>
+              </div>
+            </div>
+            <!-- .item -->
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+            <div class="property-item mb-30">
+              <a href="property-single.html" class="img">
+                <img src="{{asset('images/img_1.jpg')}}" alt="Image" class="img-fluid" />
+              </a>
+
+              <div class="property-content">
+                <div class="price mb-2"><span>$1,291,000</span></div>
+                <div>
+                  <span class="d-block mb-2 text-black-50"
+                    >5232 California Fake, Ave. 21BC</span
+                  >
+                  <span class="city d-block mb-3">California, USA</span>
+
+                  <div class="specs d-flex mb-4">
+                    <span class="d-block d-flex align-items-center me-3">
+                      <span class="icon-bed me-2"></span>
+                      <span class="caption">2 beds</span>
+                    </span>
+                    <span class="d-block d-flex align-items-center">
+                      <span class="icon-bath me-2"></span>
+                      <span class="caption">2 baths</span>
+                    </span>
+                  </div>
+
+                  <a
+                    href="property-single.html"
+                    class="btn btn-primary py-2 px-3"
+                    >See details</a
+                  >
+                </div>
+              </div>
+            </div>
+            <!-- .item -->
+          </div>
+
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+            <div class="property-item mb-30">
+              <a href="property-single.html" class="img">
+                <img src="{{asset('images/img_1.jpg')}}" alt="Image" class="img-fluid" />
+              </a>
+
+              <div class="property-content">
+                <div class="price mb-2"><span>$1,291,000</span></div>
+                <div>
+                  <span class="d-block mb-2 text-black-50"
+                    >5232 California Fake, Ave. 21BC</span
+                  >
+                  <span class="city d-block mb-3">California, USA</span>
+
+                  <div class="specs d-flex mb-4">
+                    <span class="d-block d-flex align-items-center me-3">
+                      <span class="icon-bed me-2"></span>
+                      <span class="caption">2 beds</span>
+                    </span>
+                    <span class="d-block d-flex align-items-center">
+                      <span class="icon-bath me-2"></span>
+                      <span class="caption">2 baths</span>
+                    </span>
+                  </div>
+
+                  <a
+                    href="property-single.html"
+                    class="btn btn-primary py-2 px-3"
+                    >See details</a
+                  >
+                </div>
+              </div>
+            </div>
+            <!-- .item -->
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+            <div class="property-item mb-30">
+              <a href="property-single.html" class="img">
+                <img src="{{asset('images/img_6.jpg')}}" alt="Image" class="img-fluid" />
+              </a>
+
+              <div class="property-content">
+                <div class="price mb-2"><span>$1,291,000</span></div>
+                <div>
+                  <span class="d-block mb-2 text-black-50"
+                    >5232 California Fake, Ave. 21BC</span
+                  >
+                  <span class="city d-block mb-3">California, USA</span>
+
+                  <div class="specs d-flex mb-4">
+                    <span class="d-block d-flex align-items-center me-3">
+                      <span class="icon-bed me-2"></span>
+                      <span class="caption">2 beds</span>
+                    </span>
+                    <span class="d-block d-flex align-items-center">
+                      <span class="icon-bath me-2"></span>
+                      <span class="caption">2 baths</span>
+                    </span>
+                  </div>
+
+                  <a
+                    href="property-single.html"
+                    class="btn btn-primary py-2 px-3"
+                    >See details</a
+                  >
+                </div>
+              </div>
+            </div>
+            <!-- .item -->
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+            <div class="property-item mb-30">
+              <a href="property-single.html" class="img">
+                <img src="{{asset('images/img_5.jpg')}}" alt="Image" class="img-fluid" />
+              </a>
+
+              <div class="property-content">
+                <div class="price mb-2"><span>$1,291,000</span></div>
+                <div>
+                  <span class="d-block mb-2 text-black-50"
+                    >5232 California Fake, Ave. 21BC</span
+                  >
+                  <span class="city d-block mb-3">California, USA</span>
+
+                  <div class="specs d-flex mb-4">
+                    <span class="d-block d-flex align-items-center me-3">
+                      <span class="icon-bed me-2"></span>
+                      <span class="caption">2 beds</span>
+                    </span>
+                    <span class="d-block d-flex align-items-center">
+                      <span class="icon-bath me-2"></span>
+                      <span class="caption">2 baths</span>
+                    </span>
+                  </div>
+
+                  <a
+                    href="property-single.html"
+                    class="btn btn-primary py-2 px-3"
+                    >See details</a
+                  >
+                </div>
+              </div>
+            </div>
+            <!-- .item -->
+          </div>
+
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+            <div class="property-item mb-30">
+              <a href="property-single.html" class="img">
+                <img src="{{asset('images/img_7.jpg')}}" alt="Image" class="img-fluid" />
+              </a>
+
+              <div class="property-content">
+                <div class="price mb-2"><span>$1,291,000</span></div>
+                <div>
+                  <span class="d-block mb-2 text-black-50"
+                    >5232 California Fake, Ave. 21BC</span
+                  >
+                  <span class="city d-block mb-3">California, USA</span>
+
+                  <div class="specs d-flex mb-4">
+                    <span class="d-block d-flex align-items-center me-3">
+                      <span class="icon-bed me-2"></span>
+                      <span class="caption">2 beds</span>
+                    </span>
+                    <span class="d-block d-flex align-items-center">
+                      <span class="icon-bath me-2"></span>
+                      <span class="caption">2 baths</span>
+                    </span>
+                  </div>
+
+                  <a
+                    href="property-single.html"
+                    class="btn btn-primary py-2 px-3"
+                    >See details</a
+                  >
+                </div>
+              </div>
+            </div>
+            <!-- .item -->
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+            <div class="property-item mb-30">
+              <a href="property-single.html" class="img">
+                <img src="{{asset('images/img_8.jpg')}}" alt="Image" class="img-fluid" />
+              </a>
+
+              <div class="property-content">
+                <div class="price mb-2"><span>$1,291,000</span></div>
+                <div>
+                  <span class="d-block mb-2 text-black-50"
+                    >5232 California Fake, Ave. 21BC</span
+                  >
+                  <span class="city d-block mb-3">California, USA</span>
+
+                  <div class="specs d-flex mb-4">
+                    <span class="d-block d-flex align-items-center me-3">
+                      <span class="icon-bed me-2"></span>
+                      <span class="caption">2 beds</span>
+                    </span>
+                    <span class="d-block d-flex align-items-center">
+                      <span class="icon-bath me-2"></span>
+                      <span class="caption">2 baths</span>
+                    </span>
+                  </div>
+
+                  <a
+                    href="property-single.html"
+                    class="btn btn-primary py-2 px-3"
+                    >See details</a
+                  >
+                </div>
+              </div>
+            </div>
+            <!-- .item -->
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+            <div class="property-item mb-30">
+              <a href="property-single.html" class="img">
+                <img src="{{asset('images/img_1.jpg')}}" alt="Image" class="img-fluid" />
+              </a>
+
+              <div class="property-content">
+                <div class="price mb-2"><span>$1,291,000</span></div>
+                <div>
+                  <span class="d-block mb-2 text-black-50"
+                    >5232 California Fake, Ave. 21BC</span
+                  >
+                  <span class="city d-block mb-3">California, USA</span>
+
+                  <div class="specs d-flex mb-4">
+                    <span class="d-block d-flex align-items-center me-3">
+                      <span class="icon-bed me-2"></span>
+                      <span class="caption">2 beds</span>
+                    </span>
+                    <span class="d-block d-flex align-items-center">
+                      <span class="icon-bath me-2"></span>
+                      <span class="caption">2 baths</span>
+                    </span>
+                  </div>
+
+                  <a
+                    href="property-single.html"
+                    class="btn btn-primary py-2 px-3"
+                    >See details</a
+                  >
+                </div>
+              </div>
+            </div>
+            <!-- .item -->
+          </div>
+        </div>
+        <div class="row align-items-center py-5">
+          <div class="col-lg-3">Pagination (1 of 10)</div>
+          <div class="col-lg-6 text-center">
+            <div class="custom-pagination">
+              <a href="#">1</a>
+              <a href="#" class="active">2</a>
+              <a href="#">3</a>
+              <a href="#">4</a>
+              <a href="#">5</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="widget">
+              <h3>Contact</h3>
+              <address>43 Raymouth Rd. Baltemoer, London 3910</address>
+              <ul class="list-unstyled links">
+                <li><a href="tel://11234567890">+1(123)-456-7890</a></li>
+                <li><a href="tel://11234567890">+1(123)-456-7890</a></li>
+                <li>
+                  <a href="mailto:info@mydomain.com">info@mydomain.com</a>
+                </li>
+              </ul>
+            </div>
+            <!-- /.widget -->
+          </div>
+          <!-- /.col-lg-4 -->
+          <div class="col-lg-4">
+            <div class="widget">
+              <h3>Sources</h3>
+              <ul class="list-unstyled float-start links">
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Vision</a></li>
+                <li><a href="#">Mission</a></li>
+                <li><a href="#">Terms</a></li>
+                <li><a href="#">Privacy</a></li>
+              </ul>
+              <ul class="list-unstyled float-start links">
+                <li><a href="#">Partners</a></li>
+                <li><a href="#">Business</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Creative</a></li>
+              </ul>
+            </div>
+            <!-- /.widget -->
+          </div>
+          <!-- /.col-lg-4 -->
+          <div class="col-lg-4">
+            <div class="widget">
+              <h3>Links</h3>
+              <ul class="list-unstyled links">
+                <li><a href="#">Our Vision</a></li>
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Contact us</a></li>
+              </ul>
+
+              <ul class="list-unstyled social">
+                <li>
+                  <a href="#"><span class="icon-instagram"></span></a>
+                </li>
+                <li>
+                  <a href="#"><span class="icon-twitter"></span></a>
+                </li>
+                <li>
+                  <a href="#"><span class="icon-facebook"></span></a>
+                </li>
+                <li>
+                  <a href="#"><span class="icon-linkedin"></span></a>
+                </li>
+                <li>
+                  <a href="#"><span class="icon-pinterest"></span></a>
+                </li>
+                <li>
+                  <a href="#"><span class="icon-dribbble"></span></a>
+                </li>
+              </ul>
+            </div>
+            <!-- /.widget -->
+          </div>
+          <!-- /.col-lg-4 -->
+        </div>
+        <!-- /.row -->
+
+        <div class="row mt-5">
+          <div class="col-12 text-center">
+            <!-- 
+              **==========
+              NOTE: 
+              Please don't remove this copyright link unless you buy the license here https://untree.co/license/  
+              **==========
+            -->
+
+            <p>
+              Copyright &copy;
+              <script>
+                document.write(new Date().getFullYear());
+              </script>
+              . All Rights Reserved. &mdash; Designed with love by
+              <a href="https://untree.co">Untree.co</a>
+              <!-- License information: https://untree.co/license/ -->
+            </p>
+            <div>
+              Distributed by
+              <a href="https://themewagon.com/" target="_blank">themewagon</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.container -->
+    </div>
+    <!-- /.site-footer -->
+
+    <!-- Preloader -->
+    <div id="overlayer"></div>
+    <div class="loader">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+  <script src="{{asset('bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('tiny-slider.js')}}"></script>
+    <script src="{{asset('aos.js')}}"></script>
+    <script src="{{asset('navbar.js')}}"></script>
+    <script src="{{asset('counter.js')}}"></script>
+    <script src="{{asset('custom.js')}}"></script>
+  </body>
+</html>
