@@ -64,10 +64,10 @@
             <div class="property-slider-wrap">
               <div class="property-slider">
                    @foreach($photos as $photo)
-                <div class="property-item">
-                  <a href="{{route('struct.detail',['s_no'=>$photo->s_no])}}" class="img">
+                <div class="property-item" style="background-image: url('{{ asset($photo->url) }}');">
+                  {{-- <a href="{{route('struct.detail',['s_no'=>$photo->s_no])}}" class="img">
                     <img src="{{ $photo->url }}" alt="Image" class="img-fluid" />
-                  </a>
+                  </a> --}}
 
                   <div class="property-content">
                     <div class="price mb-2"><span>{{ $photo->s_name }}</span></div>
