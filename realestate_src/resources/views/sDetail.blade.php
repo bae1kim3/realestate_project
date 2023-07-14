@@ -101,6 +101,7 @@
         <br>
         <h1 class="dark:text-white">건물 정보</h1>
         <div style="margin-left: 30px">
+        <div class="hits">조회수 {{$s_info->hits}}</div>
             <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose dark:text-white dark:bg-gray-700"
                 style="text-align: left">
                 건물 이름 : {{ $s_info->s_name }}
