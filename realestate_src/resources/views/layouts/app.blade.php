@@ -53,5 +53,6 @@
     <script src="{{asset('navbar.js')}}"></script>
     <script src="{{asset('counter.js')}}"></script>
     <script src="{{asset('custom.js')}}"></script>
+    <script src="https://kit.fontawesome.com/e615ee2f7e.js" crossorigin="anonymous"></script>
 </body>
 </html>

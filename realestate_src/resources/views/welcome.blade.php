@@ -60,38 +60,42 @@
           </div>
         </div>
         <div class="row">
-          < class="col-12">
+          <div class="col-12">
             <div class="property-slider-wrap">
               <div class="property-slider">
                    @foreach($photos as $photo)
                 <div class="property-item">
                   <a href="{{route('struct.detail',['s_no'=>$photo->s_no])}}" class="img">
-                    <img src="{{ asset('동물펜션.jpg') }}" alt="Image" class="img-fluid" />
+                    <img src="{{ $photo->url }}" alt="Image" class="img-fluid" />
                   </a>
 
                   <div class="property-content">
-                    <div class="price mb-2"><span>{{ $photo->s_add }}</span></div>
+                    <div class="price mb-2"><span>{{ $photo->s_name }}</span></div>
                     <div>
                       <span class="d-block mb-2 text-black-50"
-                        >5232 California Fake, Ave. 21BC</span
+                        >{{ $photo->s_add }}</span
                       >
-                      <span class="city d-block mb-3">California, USA</span>
-
+                      <span class="city d-block mb-3">{{ $photo->p_deposit }}
+                      @if ($photo->s_type === '월세')
+                       / {{ number_format($photo->p_month) }}
+                      @endif
+                      </span>
+                      
                       <div class="specs d-flex mb-4">
                         <span class="d-block d-flex align-items-center me-3">
-                          <span class="icon-bed me-2"></span>
-                          <span class="caption">2 beds</span>
+                          <span class="icon-building me-2"></span>
+                          <span class="caption">건물형태 넣으셈</span>
                         </span>
                         <span class="d-block d-flex align-items-center">
-                          <span class="icon-bath me-2"></span>
-                          <span class="caption">2 baths</span>
+                          <span class="fa-solid fa-dog me-2"></span>
+                          <span class="caption"> 대형가능여부</span>
                         </span>
                       </div>
 
                       <a
-                        href="property-single.html"
+                        href="{{route('struct.detail',['s_no'=>$photo->s_no])}}"
                         class="btn btn-primary py-2 px-3"
-                        >See details</a
+                        >매물 보러가기</a
                       >
                     </div>
                   </div>
