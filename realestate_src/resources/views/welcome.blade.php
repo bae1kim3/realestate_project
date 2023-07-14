@@ -66,7 +66,7 @@
                    @foreach($photos as $photo)
                 <div class="property-item">
                   <a href="{{route('struct.detail',['s_no'=>$photo->s_no])}}" class="img">
-                    <img src="{{ $photo->url }}" alt="Image" class="img-fluid property-image" />
+                    <img src="{{ $photo->url }}" alt="Image" class="img-fluid property-image" style="width: 100%; height: auto;"/>
                   </a>
 
                   <div class="property-content">
