@@ -30,11 +30,6 @@ class StructureDetailController extends Controller
             DB::rollback();
             throw $e;
         }
-        // dd($hits);
-        // $boards->hits++;
-        // $boards->save();
-        
-        // return view('detail')->with('data', Boards::findOrFail($id));
         return view('sDetail')->with('photos', $photos)->with('user',$user)->with('s_info',$s_info)->with('data01',$data01);
     }
 }
