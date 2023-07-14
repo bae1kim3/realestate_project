@@ -9,6 +9,5 @@ class Jjim extends Model
 {
     use HasFactory;
 
-    protected $table = 'jjims';
     protected $fillable = ['s_no', 'u_no'];
 }

@@ -27,6 +27,8 @@ return new class extends Migration
             $table->integer('p_deposit'); // add 0617 jy
             $table->integer('p_month')->nullable(); // add 0617 jy
             $table->enum('animal_size', ['0','1']); // add 0618 jy
+            $table->integer('hits'); // add 0714 jy
+            $table->enum('s_option', ['0','1','2','3','4']); // add 0714 jy 아파트 0,단독주택 1, 오피스텔2, 빌라3, 원룸4
             $table->timestamps();
             $table->softDeletes();
         });
