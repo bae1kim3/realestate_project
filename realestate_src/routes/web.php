@@ -102,6 +102,8 @@ Route::get('/photos/more/{lastPhotoId}', [PhotoLoadController::class, 'loadMoreP
 
 Route::get('/sellerphone/{s_no}',[UserController::class, 'sellerPhone'])->name('sellerPhone');
 Route::get('/map', [MapController::class,'map'])->name('map.map');
+
+//찜
 Route::get('/jjims', [JjimController::class, 'store'])->name('jjims.store');
 
 

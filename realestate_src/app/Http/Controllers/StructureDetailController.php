@@ -13,6 +13,8 @@ class StructureDetailController extends Controller
 {
     public function stateInfo($s_no){
         $photos = Photo::where('s_no', $s_no)->get();
+        $mvp_photo = Photo::where('mvp_photo', '1')->where('s_no', $s_no)->first();
+        // dd($mvp_photo);
         $s_info = S_info::where('s_no', $s_no)->first();
         $data01 = State_option::where('s_no',$s_no)->first(); 
         $u_no = $s_info->u_no;
@@ -30,6 +32,6 @@ class StructureDetailController extends Controller
             DB::rollback();
             throw $e;
         }
-        return view('sDetail')->with('photos', $photos)->with('user',$user)->with('s_info',$s_info)->with('data01',$data01);
+        return view('sDetail')->with('photos', $photos)->with('user',$user)->with('s_info',$s_info)->with('data01',$data01)->with('mvp_photo', $mvp_photo);
     }
 }

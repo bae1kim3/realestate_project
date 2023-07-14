@@ -14,7 +14,7 @@
                     <a href="index.html" class="logo m-0 float-start">Property</a>
 
                     <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end">
-                        <li class="active"><a href="index.html">Home</a></li>
+                        <li class="active"><a href="{{route('welcome')}}">Home</a></li>
                         <li class="has-children">
                             <a href="#">Properties</a>
                             <ul class="dropdown">

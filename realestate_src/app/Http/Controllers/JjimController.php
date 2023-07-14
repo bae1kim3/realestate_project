@@ -15,7 +15,7 @@ class JjimController extends Controller
         $s_no = session('s_no');
 
         $existingJjim = Jjim::where('s_no', $s_no)
-            ->where('u_no', $u_no)
+            ->where('id', $u_no)
             ->first();
 
         if ($existingJjim) {
