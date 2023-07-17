@@ -32,7 +32,7 @@
                         </li>
                         <li><a href="services.html">Services</a></li>
                         <li><a href="about.html">About</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="{{ route('register') }}">회원가입</a></li>
                     </ul>
 
                     <a href="#" class="burger light me-auto float-end mt-1 site-menu-toggle js-menu-toggle d-inline-block d-lg-none" data-toggle="collapse" data-target="#main-navbar">
