@@ -134,7 +134,7 @@
                         <div class="address mt-2">
                             <i class="icon-room"></i>
                             <h4 class="mb-2">개발위치:</h4>
-                            <p>
+                            <p style="color:black">
                                 대구광역시 중구 동성로<br />
                                 그린컴퓨터 아트학원 5층
                             </p>
@@ -143,7 +143,7 @@
                         <div class="open-hours mt-4">
                             <i class="icon-clock-o"></i>
                             <h4 class="mb-2">연락가능 시간:</h4>
-                            <p>
+                            <p style="color:black">
                                 Sunday-Friday:<br />
                                 11:00 AM - 18:00 PM
                             </p>
@@ -152,13 +152,13 @@
                         <div class="email mt-4">
                             <i class="icon-envelope"></i>
                             <h4 class="mb-2">이메일:</h4>
-                            <p>faer9876@naver.com</p>
+                            <p style="color:black">faer9876@naver.com</p>
                         </div>
 
                         <div class="phone mt-4">
                             <i class="icon-phone"></i>
                             <h4 class="mb-2">전화번호:</h4>
-                            <p>+82 010 6625 6834</p>
+                            <p style="color:black">+82 010 6625 6834</p>
                         </div>
                     </div>
                 </div>

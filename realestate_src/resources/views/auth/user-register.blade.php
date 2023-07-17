@@ -140,6 +140,7 @@
                 <x-validation-errors class="mb-4" />
         <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
         <form method="POST" action="{{ route('register') }}">
+            <div class="row">
             @csrf
             <div class="col-6 mb-3">
                 <x-label for="name" value="{{ __('Name') }}"/>
@@ -178,7 +179,7 @@
                     type="password" name="password_confirmation" autocomplete="new-password" />
             </div>
 
-            <div class="col-12 mb-3">
+            <div class="col-6 mb-3">
                 <x-label for="password_confirmation" value="{{ __('Selete your PSQ') }}" class="dark:text-white" />
                 <div class="dropdown">
                     <button class="dropdown-toggle" onclick="toggleDropdown()" type="button" style="width: 400px">
@@ -202,7 +203,7 @@
                     name="pw_answer" :value="old('pw_answer')" autocomplete="pw_answer" />
             </div>
 
-            <div class="col-12 mb-3">
+            <div class="col-6 mb-3">
                 <label for="u_addr">address</label>
                 <br>
                 <x-input type="text" id="sample6_address" name="u_addr"
@@ -219,7 +220,6 @@
                 <input type="hidden" name="s_lat" id="s_lat">
                 <input type="hidden" name="s_log" id="s_log">
             </div>
-
 
             <div class="col-6 mb-3">
                 <x-label for="phone_no" value="{{ __('Phone Number') }}" class="dark:text-white" />
@@ -270,10 +270,15 @@
                 </x-button>
             </div>
             </div>
+            </div>
+            </div>
         </form>
     </div>
     </div>
-    </div>
+
+
+
+
         <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1def08893c26998733c374c40b12ac42&libraries=services,clusterer,drawing">
         </script>
@@ -362,7 +367,7 @@
                 <!-- /.row -->
 
                 <div class="row mt-5">
-                    <div class="col-12 text-center">
+                    <div class="col-6 text-center">
                         <!--
               **==========
               NOTE:
@@ -413,6 +418,7 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="{{ asset('addr.js') }}"></script>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     function checkid() {
         var userid = document.getElementById('u_id').value;
@@ -439,4 +445,31 @@
         var pwQuestionInput = document.querySelector('input[name="pw_question"]');
         pwQuestionInput.value = option;
     }
+
+    $(document).ready(function() {
+        // Input field change event handler
+        $('#u_id').on('input', function() {
+            var u_id = $(this).val();
+
+            // Perform AJAX request to check if the u_id is already taken
+            $.ajax({
+                url: '/check-uid', // Replace with the actual URL for checking duplicate u_id
+                method: 'POST',
+                data: {
+                    u_id: u_id
+                },
+                success: function(response) {
+                    if (response.exists) {
+                        // u_id is already taken
+                        $('#u_id').addClass('is-invalid');
+                        $('#u_id-error').html('This User ID is already taken.');
+                    } else {
+                        // u_id is available
+                        $('#u_id').removeClass('is-invalid');
+                        $('#u_id-error').html('');
+                    }
+                }
+            });
+        });
+    });
 </script>
