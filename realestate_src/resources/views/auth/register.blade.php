@@ -43,7 +43,7 @@
             color: gray;
         }
 
-        .test {
+        .displayNone {
             display: none;
         }
 
@@ -125,7 +125,7 @@
         </div>
     </div>
 
-    <div class="section test" id="user">
+    <div class="section displayNone" id="user">
         <div class="container">
             <div class="row text-left mb-5">
                 <div class="col-12">
@@ -173,7 +173,7 @@
         </div>
     </div>
 
-    <div class="section test" id="seller">
+    <div class="section displayNone" id="seller">
         <div class="container">
             <div class="row text-left mb-5">
                 <div class="col-12">
@@ -350,42 +350,44 @@
     const useButton = document.getElementById('use');
     const userDiv = document.getElementById('user');
     let useClicked = false;
-
-    useButton.addEventListener('click', function() {
-        if (!useClicked) {
-            useClicked = true;
-            userDiv.classList.toggle('test');
-            useButton.classList.toggle('color');
-        }
-    });
-
     const sellButton = document.getElementById('sell');
     const sellerDiv = document.getElementById('seller');
     let sellClicked = false;
 
-    sellButton.addEventListener('click', function() {
-        if (!sellClicked) {
-            sellClicked = true;
-            sellerDiv.classList.toggle('test');
-            sellButton.classList.toggle('color');
-        }
-    });
-
     useButton.addEventListener('click', function() {
-        if (sellClicked) {
-            sellerDiv.classList.remove('test');
-            sellButton.classList.remove('color');
-            sellClicked = false;
+        useButton.classList.add('color');
+        sellerDiv.classList.add('displayNone');
+        sellButton.classList.remove('color');
+        if (userDiv.classList.value.indexOf('displayNone')) {
+            userDiv.classList.remove('displayNone');
         }
     });
 
+
     sellButton.addEventListener('click', function() {
-        if (useClicked) {
-            userDiv.classList.remove('test');
-            useButton.classList.remove('color');
-            useClicked = false;
+        userDiv.classList.add('displayNone');
+        sellButton.classList.add('color');
+        useButton.classList.remove('color');
+        if (sellerDiv.classList.value.indexOf('displayNone')) {
+            sellerDiv.classList.remove('displayNone');
         }
     });
+
+    // useButton.addEventListener('click', function() {
+    //     if (sellClicked) {
+    //         sellerDiv.classList.remove('displayNone');
+    //         sellButton.classList.remove('color');
+    //         sellClicked = false;
+    //     }
+    // });
+
+    // sellButton.addEventListener('click', function() {
+    //     if (useClicked) {
+    //         userDiv.classList.remove('displayNone');
+    //         useButton.classList.remove('color');
+    //         useClicked = false;
+    //     }
+    // });
 
 
     const checkbox = document.getElementById('checkbox');
