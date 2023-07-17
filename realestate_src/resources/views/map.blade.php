@@ -86,6 +86,6 @@
 </div>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9abea084b391e97658a9380c837b9608&libraries=services,clusterer,drawing"></script>
     <script src="{{asset('map2.js')}}"></script>
-{{-- </x-guest-layout> --}}
+    
 </body>
 </html>
