@@ -1,7 +1,4 @@
 <x-app-layout>
-    <x-slot name="header">
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    </x-slot>
     <div class="hero">
         <div class="hero-slide">
             <div class="img overlay" style="background-image: url('images/hero_bg_3.jpg')"></div>

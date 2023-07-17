@@ -46,7 +46,7 @@
 </head>
 <body>
     {{-- 네비게이션 x-app-layout 시작할때 --}}
-    {{-- @include('navigation-menu') --}}
+    @include('navigation-menu')
 
     {{-- 컨텐츠 --}}
     <main>
@@ -54,7 +54,7 @@
     </main>
 
     {{-- 푸터 x-app-layout 마지막에 --}}
-    {{-- @include('layouts.footer') --}}
+    @include('layouts.footer')
 
     @livewireScripts
     <script src="{{asset('bootstrap.bundle.min.js')}}"></script>
