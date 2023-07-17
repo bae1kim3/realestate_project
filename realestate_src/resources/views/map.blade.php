@@ -34,6 +34,12 @@
     <title>
         펫 방 &mdash; 집구하자
     </title>
+    <style>
+    .site-footer {
+        height:100px;
+        border-top: 1px solid black;
+    }
+    </style>
 </head>
 <body>
     <div class="site-mobile-menu site-navbar-target">
@@ -45,7 +51,7 @@
         <div class="site-mobile-menu-body"></div>
     </div>
 
-    <nav class="site-nav justify-content-end p-3" style="z-index:11; background-image: url('images/hero_bg_2.jpg');">
+    <nav class="site-nav justify-content-end p-3" style="height: 12%; z-index:11; background-image: url('images/hero_bg_2.jpg');">
         {{-- 원래 container 들어가있었음 --}}
         <div class="">
             <div class="menu-bg-wrap">
@@ -94,7 +100,6 @@
         </div>
     </nav>
 
-    {{-- --}}
     <div class="contents">
 
         <div class="container1">
@@ -185,10 +190,42 @@
     </div>
     </div> --}}
 
+    {{-- 푸터 --}}
+    <div class="site-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <p>
+                            Copyright &copy;
+                            <script>
+                                document.write(new Date().getFullYear());
+
+                            </script>
+                            . All Rights Reserved. &mdash; Designed with love by
+                            Pet Bang</a>
+                            <!-- License information: https://untree.co/license/ -->
+                        </p>
+                        <div>
+                            Made by B1K3
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /.site-footer -->
+
+        <!-- Preloader -->
+        <div id="overlayer"></div>
+        <div class="loader">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
 
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9abea084b391e97658a9380c837b9608&libraries=services,clusterer,drawing"></script>
     <script src="{{asset('map2.js')}}"></script>
-    {{-- <script src="{{asset('bootstrap.bundle.min.js')}}"></script> --}}
+    <script src="{{asset('bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('tiny-slider.js')}}"></script>
     <script src="{{asset('aos.js')}}"></script>
     <script src="{{asset('navbar.js')}}"></script>

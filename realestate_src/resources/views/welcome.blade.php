@@ -1,4 +1,9 @@
 <x-app-layout>
+    <x-slot name="header">
+        <style>
+
+        </style>
+    </x-slot>
     <div class="hero">
         <div class="hero-slide">
             <div class="img overlay" style="background-image: url('images/hero_bg_3.jpg')"></div>
@@ -37,12 +42,12 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <div class="property-slider-wrap">` 
-                        <div class="property-slider">
+                    <div class="property-slider-wrap">`
+                        <div class="property-slider" style="max-width:8000px;">
                             @foreach($photos as $photo)
-                            <div class="property-item" style="width: 350px;" >
+                            <div class="property-item" style="width: 350px;">
                                 <a href="{{route('struct.detail',['s_no'=>$photo->s_no])}}" class="img">
-                                    <img src="{{asset($photo->url)}}" alt="Image" class="img-fluid" style="width: 350px; height: 300px; margin-bottom: 50px;"/>
+                                    <img src="{{asset($photo->url)}}" alt="Image" class="img-fluid" style="width: 350px; height: 300px; margin-bottom: 50px;" />
                                 </a>
 
                                 <div class="property-content">
@@ -463,5 +468,5 @@
             </div>
         </div>
 
-        
+
 </x-app-layout>

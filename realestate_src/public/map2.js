@@ -111,6 +111,13 @@ function addfetch(url, selectedOption) {
             markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
             map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
+
+            // 0717 김민규 지도에 확대, 거리 로드뷰 추가
+            var mapTypeControl = new kakao.maps.MapTypeControl();
+            map.addControl(mapTypeControl, kakao.maps.ControlPosition.BOTTOMRIGHT);
+            var zoomControl = new kakao.maps.ZoomControl();
+            map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
             let smothb = 0;
             for (let i = 0; i < data["monthly"].length; i++) {
                 smothb += data["monthly"][i].p_deposit;
