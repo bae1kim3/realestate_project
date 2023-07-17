@@ -126,6 +126,103 @@
     </div>
 
 
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
+                    <div class="contact-info">
+                        <div class="address mt-2">
+                            <i class="icon-room"></i>
+                            <h4 class="mb-2">개발위치:</h4>
+                            <p>
+                                대구광역시 중구 동성로<br />
+                                그린컴퓨터 아트학원 5층
+                            </p>
+                        </div>
+
+                        <div class="open-hours mt-4">
+                            <i class="icon-clock-o"></i>
+                            <h4 class="mb-2">연락가능 시간:</h4>
+                            <p>
+                                Sunday-Friday:<br />
+                                11:00 AM - 18:00 PM
+                            </p>
+                        </div>
+
+                        <div class="email mt-4">
+                            <i class="icon-envelope"></i>
+                            <h4 class="mb-2">이메일:</h4>
+                            <p>faer9876@naver.com</p>
+                        </div>
+
+                        <div class="phone mt-4">
+                            <i class="icon-phone"></i>
+                            <h4 class="mb-2">전화번호:</h4>
+                            <p>+82 010 6625 6834</p>
+                        </div>
+                    </div>
+                </div>
+
+    <x-slot name="logo">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-gray-100">
+            {{ __('Login') }}
+        </h2>
+    </x-slot>
+    <x-validation-errors class="mb-4" />
+
+    @if (session('status'))
+        <div class="mb-4 font-medium text-sm text-green-600">
+            {{ session('status') }}
+        </div>
+    @endif
+
+    @if (session('success'))
+        <?php session()->flush(); ?>
+        <script>
+            window.addEventListener('DOMContentLoaded', (event) => {
+                alert('비밀번호 변경 성공 로그인 해주세요');
+            });
+        </script>
+    @endif
+
+    <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
+            <div class="col-6 mb-3">
+                <x-label for="u_id" value="{{ __('User ID') }}" class="dark:text-gray-100" />
+                <x-input id="u_id" class="form-control" type="text"
+                    name="u_id" :value="old('u_id')" required autofocus />
+            </div>
+
+            <div class="col-6 mb-3">
+                <x-label for="password" value="{{ __('Password') }}" class="dark:text-gray-100" />
+                <x-input id="password" class="form-control"
+                    type="password" name="password" required autocomplete="current-password" />
+            </div>
+
+            <p class="text-right mt-2">
+                <a class="underline text-sm text-gray-600 hover:text-gray-900 dark:text-gray-100"
+                    href="{{ route('find-username') }}">
+                    {{ __('아이디를 잊었나요?') }}
+                </a>
+                <a class="underline text-sm text-gray-600 hover:text-gray-900 dark:text-gray-100"
+                    href="{{ route('find-userpassinput') }}">
+                    {{ __('비밀번호를 잊었나요?') }}
+                </a>
+            </p>
+
+            <div class="flex items-center justify-end mt-4">
+                <x-button class="dark:bg-gray-400">
+                    {{ __('Log in') }}
+                </x-button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+</div>
+
+
     <div class="site-footer">
         <div class="container">
             <div class="row">

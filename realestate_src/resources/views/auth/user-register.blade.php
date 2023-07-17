@@ -99,7 +99,7 @@
             </div>
         </div>
     </div>
-    @csrf
+
     <div class="section">
         <div class="container">
             <div class="row">
