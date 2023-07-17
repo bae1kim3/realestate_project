@@ -1,10 +1,4 @@
 <x-app-layout>
-<style>
-.property-item img {
-    width: 350px; /* 원하는 너비로 조정 */
-    height: auto; /* 높이는 자동으로 조정하여 비율 유지 */
-}
-</style>
     <div class="hero">
         <div class="hero-slide">
             <div class="img overlay" style="background-image: url('images/hero_bg_3.jpg')"></div>
@@ -46,9 +40,9 @@
                     <div class="property-slider-wrap">` 
                         <div class="property-slider">
                             @foreach($photos as $photo)
-                            <div class="property-item">
+                            <div class="property-item" style="width: 350px; height: 300px;" >
                                 <a href="{{route('struct.detail',['s_no'=>$photo->s_no])}}" class="img">
-                                    <img src="{{asset($photo->url)}}" alt="Image" class="img-fluid" />
+                                    <img src="{{asset($photo->url)}}" alt="Image" class="img-fluid" style="width: 350px; margin-bottom: 50px;"/>
                                 </a>
 
                                 <div class="property-content">
