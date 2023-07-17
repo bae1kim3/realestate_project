@@ -40,3 +40,16 @@
     font-size: 1rem !important;
 }
 
+.s-info{
+    font-size: 50px!important;
+}
+
+.map-btn > button {
+    display:flex; 
+    flex-direction: column;
+    justify-content: center; 
+    all:unset; 
+    cursor: pointer!important;
+    
+}
+
