@@ -37,7 +37,7 @@
     @endif
 
     <!-- Styles -->
-    @livewireStyles
+    {{-- @livewireStyles --}}
 
     <title>
         펫 방 &mdash; 집구하자
@@ -56,7 +56,7 @@
     {{-- 푸터 x-app-layout 마지막에 --}}
     @include('layouts.footer')
 
-    @livewireScripts
+    {{-- @livewireScripts --}}
     <script src="{{asset('bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('tiny-slider.js')}}"></script>
     <script src="{{asset('aos.js')}}"></script>

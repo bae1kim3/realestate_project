@@ -1,8 +1,42 @@
-#detail{
-    width: 300px;
-    height: 400px;
-    text-align: center;
-    border: 1px solid black;
-    position: fixed;
-    float: right;
+.seller-detail> p {
+    color:black!important;
 }
+
+#submit {
+    margin-top:20px;
+}
+
+.hits {
+    text-align: right;
+}
+
+.summary-block-s {
+    color:#005555!important;
+    
+}
+
+.price {
+    font-weight: bold;
+}
+
+.btn-up {
+    background-color: #005555!important;
+    color: white!important;
+    text-decoration: none !important;
+    border-radius: 30px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-width: 2px;
+    border-color: transparent;
+    border: none !important;
+    top: 0;
+    position: relative;
+    transition: .3s all ease;
+    display: inline-block;
+    font-weight: 900 !important;
+    line-height: 1.5 !important;
+    font-size: 1rem !important;
+}
+
