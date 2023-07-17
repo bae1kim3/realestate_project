@@ -279,171 +279,171 @@ function addfetch(url, selectedOption) {
 }
 
 // 처음 윈도우를 로드 했을 때 실행되는
-// document.addEventListener("DOMContentLoaded", function () {
-//     var selectedOption = selectBox.value;
-//     let url =
-//         "http://192.168.0.129/api/mapopt/" +
-//         (selectValues.length ? selectValues.join(",") : "1") +
-//         "/" +
-//         selectedOption +
-//         "/" +
-//         (soptionValues.length ? soptionValues.join(",") : "1");
-//     addfetch(url, selectedOption);
-// });
+document.addEventListener("DOMContentLoaded", function () {
+    var selectedOption = selectBox.value;
+    let url =
+        "http://192.168.0.129/api/mapopt/" +
+        (selectValues.length ? selectValues.join(",") : "1") +
+        "/" +
+        selectedOption +
+        "/" +
+        (soptionValues.length ? soptionValues.join(",") : "1");
+    addfetch(url, selectedOption);
+});
 
-// selectBox.addEventListener("change", function () {
-//     var selectedOption = selectBox.value;
-//     let url =
-//         "http://192.168.0.129/api/mapopt/" +
-//         (selectValues.length ? selectValues.join(",") : "1") +
-//         "/" +
-//         selectedOption +
-//         "/" +
-//         (soptionValues.length ? soptionValues.join(",") : "1");
-//     addfetch(url, selectedOption);
-// });
+selectBox.addEventListener("change", function () {
+    var selectedOption = selectBox.value;
+    let url =
+        "http://192.168.0.129/api/mapopt/" +
+        (selectValues.length ? selectValues.join(",") : "1") +
+        "/" +
+        selectedOption +
+        "/" +
+        (soptionValues.length ? soptionValues.join(",") : "1");
+    addfetch(url, selectedOption);
+});
 
 // 드롭다운 토글 버튼 클릭 이벤트 처리
-// document.addEventListener("click", function (event) {
-//     const dropdownToggle = event.target.closest(".dropdown-toggle");
-//     if (dropdownToggle) {
-//         const dropdownMenu = dropdownToggle.nextElementSibling;
-//         dropdownMenu.classList.toggle("open");
-//     }
-// });
-// document.addEventListener("click", function (event) {
-//     const dropdownToggle = event.target.closest(".dropdown-toggle1");
-//     if (dropdownToggle) {
-//         const dropdownMenu = dropdownToggle.nextElementSibling;
-//         dropdownMenu.classList.toggle("open1");
-//     }
-// });
+document.addEventListener("click", function (event) {
+    const dropdownToggle = event.target.closest(".dropdown-toggle");
+    if (dropdownToggle) {
+        const dropdownMenu = dropdownToggle.nextElementSibling;
+        dropdownMenu.classList.toggle("open");
+    }
+});
+document.addEventListener("click", function (event) {
+    const dropdownToggle = event.target.closest(".dropdown-toggle1");
+    if (dropdownToggle) {
+        const dropdownMenu = dropdownToggle.nextElementSibling;
+        dropdownMenu.classList.toggle("open1");
+    }
+});
 
-// checkboxes.forEach(function (checkbox) {
-//     checkbox.addEventListener("change", function () {
-//         var selectedOption = selectBox.value;
-//         let value = checkbox.value;
-//         if (checkbox.checked) {
-//             selectValues.push(value);
-//         } else {
-//             let index = selectValues.indexOf(value);
-//             if (index !== -1) {
-//                 selectValues.splice(index, 1);
-//             }
-//         }
-//         let url =
-//             "http://192.168.0.129/api/mapopt/" +
-//             (selectValues.length ? selectValues.join(",") : "1") +
-//             "/" +
-//             selectedOption +
-//             "/" +
-//             (soptionValues.length ? soptionValues.join(",") : "1");
-//         addfetch(url, selectedOption);
-//     });
-// });
+checkboxes.forEach(function (checkbox) {
+    checkbox.addEventListener("change", function () {
+        var selectedOption = selectBox.value;
+        let value = checkbox.value;
+        if (checkbox.checked) {
+            selectValues.push(value);
+        } else {
+            let index = selectValues.indexOf(value);
+            if (index !== -1) {
+                selectValues.splice(index, 1);
+            }
+        }
+        let url =
+            "http://192.168.0.129/api/mapopt/" +
+            (selectValues.length ? selectValues.join(",") : "1") +
+            "/" +
+            selectedOption +
+            "/" +
+            (soptionValues.length ? soptionValues.join(",") : "1");
+        addfetch(url, selectedOption);
+    });
+});
 
-// getpark.addEventListener("click", function (checkbox) {
-//     if (pmarkers.length == 0) {
-//         var selectedOption = selectBox.value;
-//         let value = checkbox.value;
-//         if (checkbox.checked) {
-//             selectValues.push(value);
-//         } else {
-//             let index = selectValues.indexOf(value);
-//             if (index !== -1) {
-//                 selectValues.splice(index, 1);
-//             }
-//         }
-//         let url =
-//             "http://192.168.0.129/api/mapopt/" +
-//             (selectValues.length ? selectValues.join(",") : "1") +
-//             "/" +
-//             selectedOption +
-//             "/" +
-//             (soptionValues.length ? soptionValues.join(",") : "1");
-//         // AJAX 요청 보내기
-//         fetch(url)
-//             .then((response) => response.json())
-//             .then((data) => {
-//                 const servicekey =
-//                     "cHVjVjglbOBfaJaLkhiSbBrRU2U3MkuefQS0rxexSVZcSA8vF6zeNrhf7LmjNlJGibN%2BM%2BPpK9GGjbmpsfD7FA%3D%3D";
-//                 if (selectedOption == "구 선택") {
-//                     pageno = 0;
-//                     numofrows = 20;
-//                     radius = "4";
-//                 } else {
-//                     pageno = 0;
-//                     numofrows = 10;
-//                     radius = "3";
-//                 }
+getpark.addEventListener("click", function (checkbox) {
+    if (pmarkers.length == 0) {
+        var selectedOption = selectBox.value;
+        let value = checkbox.value;
+        if (checkbox.checked) {
+            selectValues.push(value);
+        } else {
+            let index = selectValues.indexOf(value);
+            if (index !== -1) {
+                selectValues.splice(index, 1);
+            }
+        }
+        let url =
+            "http://192.168.0.129/api/mapopt/" +
+            (selectValues.length ? selectValues.join(",") : "1") +
+            "/" +
+            selectedOption +
+            "/" +
+            (soptionValues.length ? soptionValues.join(",") : "1");
+        // AJAX 요청 보내기
+        fetch(url)
+            .then((response) => response.json())
+            .then((data) => {
+                const servicekey =
+                    "cHVjVjglbOBfaJaLkhiSbBrRU2U3MkuefQS0rxexSVZcSA8vF6zeNrhf7LmjNlJGibN%2BM%2BPpK9GGjbmpsfD7FA%3D%3D";
+                if (selectedOption == "구 선택") {
+                    pageno = 0;
+                    numofrows = 20;
+                    radius = "4";
+                } else {
+                    pageno = 0;
+                    numofrows = 10;
+                    radius = "3";
+                }
 
-//                 const url =
-//                     "https://apis.data.go.kr/6270000/dgInParkwalk/getDgWalkParkList?serviceKey=" +
-//                     servicekey +
-//                     "&pageNo=" +
-//                     pageno +
-//                     "&numOfRows=" +
-//                     numofrows +
-//                     "&type=json&lat=" +
-//                     data["latlng"].lat +
-//                     "&lot=" +
-//                     data["latlng"].lng +
-//                     "&radius=" +
-//                     radius;
-//                 fetch(url)
-//                     .then((response) => response.json())
-//                     .then((data1) => {
-//                         let getdata = data1.body.items.item;
-//                         var imageSrc = "mapp.png";
-//                         markerImage = new kakao.maps.MarkerImage(
-//                             imageSrc,
-//                             imageSize
-//                         );
-//                         for (let i = 0; i < getdata.length; i++) {
-//                             let markerPosition = new kakao.maps.LatLng(
-//                                 getdata[i].lat,
-//                                 getdata[i].lot
-//                             );
+                const url =
+                    "https://apis.data.go.kr/6270000/dgInParkwalk/getDgWalkParkList?serviceKey=" +
+                    servicekey +
+                    "&pageNo=" +
+                    pageno +
+                    "&numOfRows=" +
+                    numofrows +
+                    "&type=json&lat=" +
+                    data["latlng"].lat +
+                    "&lot=" +
+                    data["latlng"].lng +
+                    "&radius=" +
+                    radius;
+                fetch(url)
+                    .then((response) => response.json())
+                    .then((data1) => {
+                        let getdata = data1.body.items.item;
+                        var imageSrc = "mapp.png";
+                        markerImage = new kakao.maps.MarkerImage(
+                            imageSrc,
+                            imageSize
+                        );
+                        for (let i = 0; i < getdata.length; i++) {
+                            let markerPosition = new kakao.maps.LatLng(
+                                getdata[i].lat,
+                                getdata[i].lot
+                            );
 
-//                             marker = new kakao.maps.Marker({
-//                                 position: markerPosition,
-//                                 image: markerImage,
-//                             });
-//                             marker.setZIndex(-2);
-//                             marker.setMap(map);
-//                             // 생성된 마커를 배열에 추가합니다
-//                             pmarkers.push(marker);
-//                         }
-//                     });
-//             });
-//     } else {
-//         for (var i = 0; i < pmarkers.length; i++) {
-//             pmarkers[i].setMap(null);
-//         }
-//         pmarkers = [];
-//     }
-//     getpark.classList.toggle("selectedpark");
-// });
+                            marker = new kakao.maps.Marker({
+                                position: markerPosition,
+                                image: markerImage,
+                            });
+                            marker.setZIndex(-2);
+                            marker.setMap(map);
+                            // 생성된 마커를 배열에 추가합니다
+                            pmarkers.push(marker);
+                        }
+                    });
+            });
+    } else {
+        for (var i = 0; i < pmarkers.length; i++) {
+            pmarkers[i].setMap(null);
+        }
+        pmarkers = [];
+    }
+    getpark.classList.toggle("selectedpark");
+});
 
-// scheckboxes.forEach(function (checkbox) {
-//     checkbox.addEventListener("change", function () {
-//         var selectedOption = selectBox.value;
-//         let value = checkbox.value;
-//         if (checkbox.checked) {
-//             soptionValues.push(value);
-//         } else {
-//             let index = soptionValues.indexOf(value);
-//             if (index !== -1) {
-//                 soptionValues.splice(index, 1);
-//             }
-//         }
-//         let url =
-//             "http://192.168.0.129/api/mapopt/" +
-//             (selectValues.length ? selectValues.join(",") : "1") +
-//             "/" +
-//             selectedOption +
-//             "/" +
-//             (soptionValues.length ? soptionValues.join(",") : "1");
-//         addfetch(url, selectedOption);
-//     });
-// });
+scheckboxes.forEach(function (checkbox) {
+    checkbox.addEventListener("change", function () {
+        var selectedOption = selectBox.value;
+        let value = checkbox.value;
+        if (checkbox.checked) {
+            soptionValues.push(value);
+        } else {
+            let index = soptionValues.indexOf(value);
+            if (index !== -1) {
+                soptionValues.splice(index, 1);
+            }
+        }
+        let url =
+            "http://192.168.0.129/api/mapopt/" +
+            (selectValues.length ? selectValues.join(",") : "1") +
+            "/" +
+            selectedOption +
+            "/" +
+            (soptionValues.length ? soptionValues.join(",") : "1");
+        addfetch(url, selectedOption);
+    });
+});
