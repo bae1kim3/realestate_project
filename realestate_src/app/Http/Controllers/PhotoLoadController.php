@@ -10,7 +10,7 @@ class PhotoLoadController extends Controller
     public function index()
     {
         // 처음 페이지 진입 했을 때 출력시킬 사진 갯수
-        $lastPhotoId = 5;
+        $lastPhotoId = 20;
         $photos = Photo::join('s_infos', 's_infos.s_no', 'photos.s_no')
             ->where('mvp_photo', '1')
             ->orderBy('photos.updated_at', 'desc')

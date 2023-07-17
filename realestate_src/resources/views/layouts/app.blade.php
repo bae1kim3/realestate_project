@@ -49,6 +49,9 @@
         {{ $slot }}
     </main>
 
+    {{-- 푸터 --}}
+    @include('layouts.footer')
+
     @livewireScripts
     <script src="{{asset('bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('tiny-slider.js')}}"></script>
