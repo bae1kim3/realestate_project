@@ -40,9 +40,9 @@
                     <div class="property-slider-wrap">` 
                         <div class="property-slider">
                             @foreach($photos as $photo)
-                            <div class="property-item" style="width: 350px; height: 300px;" >
+                            <div class="property-item" style="width: 350px;" >
                                 <a href="{{route('struct.detail',['s_no'=>$photo->s_no])}}" class="img">
-                                    <img src="{{asset($photo->url)}}" alt="Image" class="img-fluid" style="width: 350px; margin-bottom: 50px;"/>
+                                    <img src="{{asset($photo->url)}}" alt="Image" class="img-fluid" style="width: 350px; height: 300px; margin-bottom: 50px;"/>
                                 </a>
 
                                 <div class="property-content">
