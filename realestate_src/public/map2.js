@@ -115,8 +115,7 @@ function addfetch(url, selectedOption) {
             // 0717 김민규 지도에 확대, 거리 로드뷰 추가
             var mapTypeControl = new kakao.maps.MapTypeControl();
             map.addControl(mapTypeControl, kakao.maps.ControlPosition.BOTTOMRIGHT);
-            var zoomControl = new kakao.maps.ZoomControl();
-            map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+            
 
             let smothb = 0;
             for (let i = 0; i < data["monthly"].length; i++) {
@@ -169,9 +168,9 @@ function addfetch(url, selectedOption) {
             accordionButton.setAttribute("data-bs-target", "#collapseOne");
             accordionButton.setAttribute("aria-expanded", "true");
             accordionButton.setAttribute("aria-controls", "collapseOne");
-            accordionButton.textContent = `${
+            accordionButton.innerHTML = `<strong><span>${
                 selectedOption == "구 선택" ? "전체 구" : selectedOption
-            }의 평균가`;
+            }의 평균가</span></strong>`;
 
             // 아코디언 컨텐츠 생성
             var accordionCollapse = document.createElement("div");
@@ -232,32 +231,56 @@ function addfetch(url, selectedOption) {
                 // 카드 내용 생성
                 var cardText = document.createElement("p");
                 cardText.className = "card-text";
+
+                // s_option 번호로 되어있는거 텍스트로 변환
+                switch (data["sinfo"][i].s_option) {
+                    case "0":
+                        data["sinfo"][i].s_option = "아파트";
+                        break;
+                    case "1":
+                        data["sinfo"][i].s_option = "단독주택";
+                        break;
+                    case "2":
+                        data["sinfo"][i].s_option = "오피스텔";
+                        break;
+                    case "3":
+                        data["sinfo"][i].s_option = "빌라";
+                        break;
+                    case "4":
+                        data["sinfo"][i].s_option = "원룸";
+                        break;
+                    default:
+                        break;
+                }
                 if (data["sinfo"][i].s_type == "월세") {
                     cardText.innerHTML =
-                        "<b>매매유형</b> : " +
-                        data["sinfo"][i].s_type +
-                        "<br><b>가격</b> : " +
-                        data["sinfo"][i].p_deposit.toLocaleString("ko-KR") +
-                        "만원/" +
-                        data["sinfo"][i].p_month.toLocaleString("ko-KR") +
-                        "만원<br><b>층수</b> : " +
-                        data["sinfo"][i].s_fl +
-                        " <b>층</b><br><b>평수</b> : " +
-                        data["sinfo"][i].s_size +
-                        " <b>평</b><br><b>주소</b> : " +
-                        data["sinfo"][i].s_add;
+                        "<b>건물유형</b> : " 
+                        + data["sinfo"][i].s_option
+                        + "<br>"
+                        + "<b>매매유형</b> : " 
+                        + data["sinfo"][i].s_type
+                        + "<br><b>가격</b> : "
+                        + data["sinfo"][i].p_deposit.toLocaleString("ko-KR") 
+                        + "만원 / "
+                        + data["sinfo"][i].p_month.toLocaleString("ko-KR")
+                        + "만원<br><b>층수</b> : " 
+                        + data["sinfo"][i].s_fl 
+                        + " <b>층</b><br><b>평수</b> : " 
+                        + data["sinfo"][i].s_size 
+                        + " <b>평</b><br><b>주소</b> : " 
+                        + data["sinfo"][i].s_add;
                 } else {
                     cardText.innerHTML =
-                        "<b>매매유형</b> : " +
-                        data["sinfo"][i].s_type +
-                        "<br><b>가격</b> : " +
-                        data["sinfo"][i].p_deposit.toLocaleString("ko-KR") +
-                        "만원<br><b>층수</b> : " +
-                        data["sinfo"][i].s_fl +
-                        " <b>층</b><br><b>평수</b> : " +
-                        data["sinfo"][i].s_size +
-                        " <b>평</b><br><b>주소</b> : " +
-                        data["sinfo"][i].s_add;
+                        "<b>매매유형</b> : " 
+                        + data["sinfo"][i].s_type 
+                        + "<br><b>가격</b> : " 
+                        + data["sinfo"][i].p_deposit.toLocaleString("ko-KR") 
+                        + "만원<br><b>층수</b> : " 
+                        + data["sinfo"][i].s_fl 
+                        + " <b>층</b><br><b>평수</b> : " 
+                        + data["sinfo"][i].s_size 
+                        + " <b>평</b><br><b>주소</b> : " 
+                        + data["sinfo"][i].s_add;
                 }
 
                 // 요소들을 조합하여 구조 생성

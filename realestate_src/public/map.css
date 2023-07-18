@@ -14,8 +14,7 @@
 @media screen and (max-width: 990px) {
     /* 990px 이하일 때 .container1에 margin-top: 108px; 적용 */
     .contents {
-        height: 88%;
-        top: 108px;
+        top: 113px;
     }
 }
 

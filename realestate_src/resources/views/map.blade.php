@@ -35,10 +35,11 @@
         펫 방 &mdash; 집구하자
     </title>
     <style>
-    .site-footer {
-        height:100px;
-        border-top: 1px solid black;
-    }
+        .site-footer {
+            height: 100px;
+            border-top: 1px solid black;
+        }
+
     </style>
 </head>
 <body>
@@ -110,10 +111,12 @@
                 <div class="nav-container">
                     <nav class="nav justify-content-end p-3" style="background-color: #005555;">
 
-                        @if(!empty($u_info->seller_license))
-                        <a class="nav-link link-light" href="{{route('dashboard')}}" id="aa">매물 올리기</a>
-                        @endif
-                        <button id="getpark">주변 공원</button>
+                        <select id="option3" name="gu" class="selectbox">
+                            <option>주변 시설</option>
+                            <option id="option3" value="동물병원">동물병원</option>
+                            <option id="option3" value="주변 공원">공원</option>
+                        </select>
+                        {{-- <button id="getpark">주변 공원</button> --}}
                         <select id="option" name="gu" class="selectbox">
                             <option>구 선택</option>
                             <option id="option" value="달서구">달서구</option>
@@ -124,6 +127,14 @@
                             <option id="option" value="북구">북구</option>
                             <option id="option" value="수성구">수성구</option>
                             <option id="option" value="중구">중구</option>
+                        </select>
+                        <select id="option2" name="s_option" class="selectbox">
+                            <option>건물 형태</option>
+                            <option id="option2" value="아파트">아파트</option>
+                            <option id="option2" value="단독주택">단독주택</option>
+                            <option id="option2" value="오피스텔">오피스텔</option>
+                            <option id="option2" value="빌라">빌라</option>
+                            <option id="option2" value="원룸">원룸</option>
                         </select>
                         <div class="dropdown">
                             <div class="dropdown-toggle" data-toggle="dropdown">
@@ -159,69 +170,39 @@
             </div>
         </div>
     </div>
-    {{-- <div class="property-item">
-                                <a href="{{route('struct.detail',['s_no'=>$photo->s_no])}}" class="img">
-    <img src="{{ asset('동물펜션.jpg') }}" alt="Image" class="img-fluid" />
-    </a>
-
-    <div class="property-content">
-        <div class="price mb-2"><span>{{ $photo->s_name }}</span></div>
-        <div>
-            <span class="d-block mb-2 text-black-50">{{ $photo->s_add }}</span>
-            <span class="city d-block mb-3">{{ number_format($photo->p_deposit) }}
-                @if ($photo->s_type === '월세')
-                / {{ number_format($photo->p_month) }}
-                @endif
-            </span>
-
-            <div class="specs d-flex mb-4">
-                <span class="d-block d-flex align-items-center me-3">
-                    <span class="icon-building me-2"></span>
-                    <span class="caption">건물형태 넣으셈</span>
-                </span>
-                <span class="d-block d-flex align-items-center">
-                    <span class="fa-solid fa-dog me-2"></span>
-                    <span class="caption"> 대형가능여부</span>
-                </span>
-            </div>
-
-            <a href="{{route('struct.detail',['s_no'=>$photo->s_no])}}" class="btn btn-primary py-2 px-3">매물 보러가기</a>
-        </div>
-    </div>
-    </div> --}}
 
     {{-- 푸터 --}}
     <div class="site-footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <p>
-                            Copyright &copy;
-                            <script>
-                                document.write(new Date().getFullYear());
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p>
+                        Copyright &copy;
+                        <script>
+                            document.write(new Date().getFullYear());
 
-                            </script>
-                            . All Rights Reserved. &mdash; Designed with love by
-                            Pet Bang</a>
-                            <!-- License information: https://untree.co/license/ -->
-                        </p>
-                        <div>
-                            Made by B1K3
-                        </div>
+                        </script>
+                        . All Rights Reserved. &mdash; Designed with love by
+                        Pet Bang</a>
+                        <!-- License information: https://untree.co/license/ -->
+                    </p>
+                    <div>
+                        Made by B1K3
                     </div>
                 </div>
             </div>
-            <!-- /.container -->
         </div>
-        <!-- /.site-footer -->
+        <!-- /.container -->
+    </div>
+    <!-- /.site-footer -->
 
-        <!-- Preloader -->
-        <div id="overlayer"></div>
-        <div class="loader">
-            <div class="spinner-border" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
+    <!-- Preloader -->
+    <div id="overlayer"></div>
+    <div class="loader">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
         </div>
+    </div>
 
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9abea084b391e97658a9380c837b9608&libraries=services,clusterer,drawing"></script>
     <script src="{{asset('map2.js')}}"></script>
