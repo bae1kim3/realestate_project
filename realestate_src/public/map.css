@@ -6,17 +6,16 @@
     width: 99vw;
     height: 100vh;
     position: relative;
-    top: 113px; /* 네비게이션 높이만큼 아래로 이동 */
+    top: 121px; /* 네비게이션 높이만큼 아래로 이동 */
     display: flex;
     flex-wrap: wrap;
 }
 
-@media screen and (max-width: 990px) {
-    /* 990px 이하일 때 .container1에 margin-top: 108px; 적용 */
+/* @media screen and (max-width: 990px) {
     .contents {
         top: 113px;
     }
-}
+} */
 
 .sidebar {
     flex: 0 0 290px;
