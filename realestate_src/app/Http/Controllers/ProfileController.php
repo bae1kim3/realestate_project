@@ -36,7 +36,4 @@ class ProfileController extends Controller
         return back()->withErrors(['phone_no' => 'Phone number does not match.'])->withInput();
     }
     }
-    public function goPro(){
-        return view('profile.show');
-    }
 }
