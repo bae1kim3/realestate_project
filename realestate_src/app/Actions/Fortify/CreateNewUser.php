@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
 use Illuminate\Validation\Rule;
+use illuminate\Support\Facades\Log;
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -34,10 +35,11 @@ class CreateNewUser implements CreatesNewUsers
             'pw_answer' => ['required', 'string', 'max:10', 'regex:/^[가-힣]+$/u'],
             'b_name' => ['nullable', 'string'],
         ])->validate();
-
         $animalSize = isset($input['animal_size']) ? '1' : '0';
-        $pwQuestion = $input['pw_question'];
+        $pwQuestion = isset($input['pw_question']) ? $input['pw_question'] : null;
 
+        Log::debug("message", $input);
+        Log::debug("message", [$pwQuestion]);
         return User::create([
             'u_id' => $input['u_id'],
             'name' => $input['name'],

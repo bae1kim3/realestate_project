@@ -14,10 +14,11 @@
                 <a href="{{route('welcome')}}" class="logo m-0 float-start">Property</a>
                 <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end">
                     <li class="active"><a href="{{route('welcome')}}">Home</a></li>
+                    @if (isset(session()->all()['auth']))
                     <li class="has-children">
                         <a href="#">프로필</a>
                         <ul class="dropdown">
-                            <li><a href="#">Buy Property</a></li>
+                            <li><a href="{{ route('profile') }}">내 정보</a></li>
                             <li><a href="#">Sell Property</a></li>
                             <li class="has-children">
                                 <a href="#">Dropdown</a>
@@ -29,9 +30,11 @@
                             </li>
                         </ul>
                     </li>
+                    @endif
                     <li><a href="services.html">Services</a></li>
                     <li><a href="about.html">About</a></li>
                     @if (!session('u_id'))
+                    <li><a href="{{ route('login') }}">로그인</a></li>
                     <li><a href="{{ route('register') }}" class="active">회원가입</a></li>
                     @else
                     <li><form method="POST" action="{{ route('logout') }}">

@@ -180,9 +180,9 @@
             </div>
 
             <div class="col-6 mb-3">
-                <x-label for="password_confirmation" value="{{ __('Selete your PSQ') }}" class="dark:text-white" />
+                <x-label for="pw_question" value="{{ __('Selete your PSQ') }}" class="dark:text-white" />
                 <div class="dropdown">
-                    <button class="dropdown-toggle" onclick="toggleDropdown()" type="button" style="width: 400px">
+                    <button class="dropdown-toggle" onclick="toggleDropdown()" type="button" style="width: 60%">
                         비밀번호 질문
                         <span class="arrow">&#9662;</span>
                     </button>
@@ -443,7 +443,8 @@
         dropdownMenu.classList.remove('show');
 
         var pwQuestionInput = document.querySelector('input[name="pw_question"]');
-        pwQuestionInput.value = option;
+        pwQuestionInput.value = value;
+        console.log(pwQuestionInput);
     }
 
     $(document).ready(function() {
