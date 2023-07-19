@@ -16,8 +16,11 @@
                     <li class="active"><a href="{{route('welcome')}}">Home</a></li>
                     @if (isset(session()->all()['auth']))
                     <li class="has-children">
-                        <a href="#">프로필</a>
+                        <a href="#">추가메뉴</a>
                         <ul class="dropdown">
+                            @if (session('seller_license'))
+                            <li><a href={{ route('dashboard') }}>매물올리기</a></li>
+                            @endif
                             <li><a href="{{ route('profile') }}">내 정보</a></li>
                             <li><a href="#">Sell Property</a></li>
                             <li class="has-children">
