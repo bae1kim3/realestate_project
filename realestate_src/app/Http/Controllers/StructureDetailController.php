@@ -21,7 +21,11 @@ class StructureDetailController extends Controller
         $data01 = State_option::where('s_no',$s_no)->first(); 
         $u_no = $s_info->u_no;
         $user = User::find($u_no); 
-        session()->put('s_no', $s_info->s_no);
+        if( session('u_no') ){
+            $id = session('u_no');
+        } else {
+            $id = null;
+        }
 
         
         //0714 jy add
@@ -37,29 +41,20 @@ class StructureDetailController extends Controller
         }
         
         // 찜 flg 넘겨주기 0719 jy
-        $likedFlg = null;
         
+        if(session('u_no')) {
+            $userId = session('u_no');
 
-        if(isset(Auth::user()->id)) {
-            $userId = Auth::user()->id;
+        $liked = Jjim::where('id', $userId)
+                ->where('s_no', $s_info->s_no)
+                ->exists();
 
-            $likedQuery = 
-        " SELECT exists(
-        SELECT 1
-        FROM jjims
-        WHERE id = $userId
-        AND s_no =  $s_info->s_no ) as liked ";
-        $likedResult = DB::select($likedQuery);
-
-            if($likedResult[0]->liked === 0) {
+            if(!$liked) {
                 $likedFlg = 0;
-            }
-            else {
+            } else {
                 $likedFlg = 1;
             }
-
-        }
-        else {
+        } else {
             $likedFlg = 0;
         }
 
@@ -70,6 +65,7 @@ class StructureDetailController extends Controller
         ->with('s_info',$s_info)
         ->with('data01',$data01)
         ->with('mvp_photo', $mvp_photo)
-        ->with('likedFlg', $likedFlg);
+        ->with('likedFlg', $likedFlg)
+        ->with('id', $id);
     }
 }

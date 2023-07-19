@@ -27,7 +27,7 @@ function storeLiked () {
         credentials: "same-origin",
         body: JSON.stringify({
             id: id.value,
-            s_no: sNo.value
+            s_no: sNo.value,
         })
     }) // 여기까지 실행되고 backend로 넘어감
     .then(data=>{
@@ -62,7 +62,8 @@ function deleteLiked() {
         method: 'delete',
         body: JSON.stringify({
             id: id.value,
-            s_no: sNo.value
+            s_no: sNo.value,
+            liked_flg: likedFlg.value
         })
     })
     .then(data=>{

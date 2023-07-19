@@ -103,7 +103,21 @@
             <div class="row">
                 <div class="col-lg-8">
                 <a><button class="btn btn-primary btn-up">수정</button></a>
-                    <div>
+
+                    <div style="position:relative">
+                        {{-- 찜 --}}
+                            <input type="hidden" value="{{$s_info->s_no}}" id="s_no">
+                            <input type="hidden" value="{{$id}}" id="id">
+                            <input type="hidden" value="{{$likedFlg}}" id="likedFlg">
+
+                            @if(!session('seller_license'))
+                            {{-- <div style="position:absolute; z-index:100; right:10px; top:10px"> --}}
+                                <div style="position:absolute; z-index:100; right:10px; top:10px; background-color:white; width:3em; height:3em; border-radius:50%; "></div>
+                                    <span class="fa-regular fa-heart fa-2x emp-heart" id="emp_heart" onclick="storeLiked()" style="position:absolute; z-index:100; right:18px; top:20px;"></span>
+                                    <span class="fa-solid fa-heart fa-2x full-heart" id="full_heart" onclick="deleteLiked()" style="position:absolute; z-index:100; right:18px; top:20px;"></span>
+                                @endif
+                            {{-- </div> --}}
+                        {{-- 캐러셀 사진 --}}
                         <div class="slide-one-item home-slider owl-carousel">
                             @foreach ($photos as $photo)
                                     <img class="img-fluid" src="{{ asset($photo->url) }}" alt="img">
@@ -219,18 +233,9 @@
 
         {{-- 공인중개사 정보 --}}
         <div class="col-lg-4 seller-info">
-        {{-- 찜 --}}
-            <input type="hidden" value="{{$s_info->s_no}}" id="s_no">
-            <input type="hidden" value="{{$user->id}}" id="id">
-            <input type="hidden" value="{{$user->seller_license}}" id="selLicense">
-            <input type="hidden" value="{{$likedFlg}}" id="likedFlg">
+        
 
-
-            <span class="fa-regular fa-heart fa-2x emp-heart" id="emp_heart" onclick="storeLiked()"></span>
-            <span class="fa-solid fa-heart fa-2x full-heart" id="full_heart" onclick="deleteLiked()"></span>
-
-
-            <div class="bg-white widget border rounded seller-detail" style="margin-top:20px">
+            <div class="bg-white widget border rounded seller-detail" style="margin-top:50px">
                 <h3 class="h4 text-black widget-title mb-3">공인중개사 정보</h3>
                 <h3 class="h4 text-black widget-title mb-3">{{ $user->b_name }}</h3>
                 <h3 class="mb-3 fw-bold fs-5 seller-name">{{ $user->name }}</h3>
@@ -251,20 +256,22 @@
             </div>
             <h4 class="text-black widget-title mb-3">위치</h4>
             <p>{{ $s_info->s_add }}</p>
-                <div id="map" style="width: 100%; height: 400px; margin-bottom:30px;"></div>
+            <div id="map" style="width: 100%; height: 400px; margin-bottom:30px;"></div>
             <div class="map-btn">
-                <button class="shop-btn">
-                <i class="fa-solid fa-paw fa-2x"></i>
-                <p>동물 상점</p>
-                </button>
-                <button class="shop-btn">
-                <i class="fa-solid fa-house-chimney-medical fa-2x"></i>
-                <p>동물 병원</p>
-                </button>
-                <button class="shop-btn">
-                <i class="fa-solid fa-seedling fa-2x"></i>
-                <p>산책로</p>
-                </button>
+                <div class="map-btn-con">
+                    <button class="shop-btn">
+                        <i class="fa-solid fa-paw fa-2x"></i>
+                        <p>동물 상점</p>
+                    </button>
+                    <button class="hosp-btn">
+                        <i class="fa-solid fa-house-chimney-medical fa-2x"></i>
+                        <p>동물 병원</p>
+                    </button>
+                    <button class="walk-btn">
+                        <i class="fa-solid fa-seedling fa-2x"></i>
+                        <p>산책로</p>
+                    </button>
+                </div>
             </div>
         </div>
         </div>
