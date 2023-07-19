@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\EmailVerificationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\LoginController;
@@ -114,3 +115,5 @@ Route::post('/updateuserinfo', [UpdateUserInfoController::class, 'updateUserInfo
 Route::get('/logout', [UserController::class, 'logout'])->name('user.logout');
 
 Route::get('/user/profile', [UpdateUserInfoController::class, 'printMyBuilding'])->name('profile.com');
+
+Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])->name('verification.verify');
