@@ -6,6 +6,8 @@ use App\Models\Jjim;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ApiLikedController extends Controller
 {
@@ -30,15 +32,15 @@ class ApiLikedController extends Controller
      */
     public function store(Request $request)
     {
+        // Log::debug('apiLikedStore : Start', ['id' =>$request->id, 'license' => $request->seller_license]);
         $arr['errorcode'] = '0';
         $arr['msg'] = 'success';
         
-        if((Auth::user()->u_id) && !(Auth::user()->seller_license)) {
+        if($request->id && !($request->seller_license)) {
             Jjim::create([
                 's_no' => $request->s_no, 
-                'id' => Auth::user()->id
+                'id' => $request->id
             ]);
-
         return $arr;
 
         }
@@ -80,11 +82,12 @@ class ApiLikedController extends Controller
     {
         $arr['errorcode'] = '0';
         $arr['msg'] = 'success';
-
-        if((Auth::user()->u_id) && !(Auth::user()->seller_license)) {
-            $id = Auth::user()->id;
-            $jjim_id = Jjim::find()->$id;
-            $jjim_id->destroy();
+        if($request->id && !($request->seller_license)) {
+            // $query = " DELETE FROM jjims where s_no = $request->s_no AND id = $request->id ";
+            // DB::delete($query);
+            Jjim::where('s_no', $request->s_no)
+                ->where('id', $request->id)
+                ->delete();
 
         return $arr;
 

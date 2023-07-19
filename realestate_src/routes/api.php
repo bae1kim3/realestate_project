@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiLikedController;
 use App\Http\Controllers\MapController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,3 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::get('/mapopt/{opt}/{gu}/{sopt}', [MapController::class, 'getopt']);
 Route::get('/mapopt', [MapController::class, 'getpark']);
+
+// 찜
+Route::post('/liked/post/{s_no}', [ApiLikedController::class, 'store']);
+Route::delete('/liked/delete/{s_no}', [ApiLikedController::class, 'destroy']);
