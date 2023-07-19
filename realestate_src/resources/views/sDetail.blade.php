@@ -1,3 +1,11 @@
+<style>
+    .gal-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+</style>
 
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="{{asset('fonts/icomoon/style.css')}}">
@@ -12,14 +20,14 @@
     <link rel="stylesheet" href="{{asset('css/animate.css')}}">
     <link rel="stylesheet" href="{{asset('fonts/flaticon/font/flaticon.css')}}">
     <link rel="stylesheet" href="{{asset('css/fl-bigmug-line.css')}}">
-    
-    
+
+
     <link rel="stylesheet" href="{{asset('css/aos.css')}}">
 
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link rel="stylesheet" href="{{asset('detail.css')}}">
 
-    
+
     <div class="site-wrap">
         <div class="site-mobile-menu">
             <div class="site-mobile-menu-header">
@@ -80,7 +88,7 @@
                     </ul>
                 </nav>
                 </div>
-            
+
 
             </div>
             </div>
@@ -180,7 +188,7 @@
                         </div>
 
             {{-- 상세 정보 --}}
-                
+
                 <h2 class="h4 text-black">More Info</h2>
                 <div>
                     <div>
@@ -226,14 +234,14 @@
                     <a href="{{ asset($photo->url) }}" class="image-popup gal-item"><img src="{{ asset($photo->url) }}" alt="Image" class="img-fluid"></a>
                     </div>
                     @endforeach
-                    
+
                 </div>
             </div>
         </div>
 
         {{-- 공인중개사 정보 --}}
         <div class="col-lg-4 seller-info">
-        
+
 
             <div class="bg-white widget border rounded seller-detail" style="margin-top:50px">
                 <h3 class="h4 text-black widget-title mb-3">공인중개사 정보</h3>
@@ -381,13 +389,13 @@
 {{-- <script>
             function changeFullHeart() {
 
-        
+
             // 서버로 보낼 데이터 생성
                 var requestData = {
                     s_no: {{ session()->get('s_no') }},
                     id: {{ Auth::user()->id }}
                 };
-                
+
                 // Ajax 요청 설정
                 var url = '/like'; // 요청을 보낼 엔드포인트 URL
                 fetch(url, {
@@ -453,7 +461,7 @@
             infowindow.open(map, marker);
         </script>
 
-        
+
 
     <script src="https://kit.fontawesome.com/e615ee2f7e.js" crossorigin="anonymous"></script>
     <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
@@ -473,7 +481,7 @@
 
     <script src="{{asset('jjim.js')}}"></script>
 
-    
 
-        
+
+
 

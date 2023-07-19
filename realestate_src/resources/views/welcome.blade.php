@@ -98,7 +98,7 @@
                                                             <strong>O</strong>
                                                             @break
                                                         $@default
-                                                            
+
                                                     @endswitch
                                                 </span>
                                             </span>
@@ -137,7 +137,7 @@
                     </div>
                     <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="500">
                         <div class="box-feature">
-                            <span class="flaticon-building"></span>
+                            <span class="flaticon-house"></span>
                             <h3 class="mb-3">Property for Sale</h3>
                             <p>
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -148,7 +148,7 @@
                     </div>
                     <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
                         <div class="box-feature">
-                            <span class="flaticon-house-3"></span>
+                            <span class="flaticon-house"></span>
                             <h3 class="mb-3">Real Estate Agent</h3>
                             <p>
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.

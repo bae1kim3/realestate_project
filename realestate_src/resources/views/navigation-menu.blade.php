@@ -11,9 +11,9 @@
     <div class="container">
         <div class="menu-bg-wrap">
             <div class="site-navigation">
-                <a href="{{route('welcome')}}" class="logo m-0 float-start">Property</a>
+                <a href="{{route('welcome')}}" class="logo m-0 float-start">펫 방</a>
                 <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end">
-                    <li class="active"><a href="{{route('welcome')}}">Home</a></li>
+                    <li class="active"><a href="{{route('welcome')}}">메인</a></li>
                     @if (isset(session()->all()['auth']))
                     <li class="has-children">
                         <a href="#">추가메뉴</a>
@@ -34,8 +34,8 @@
                         </ul>
                     </li>
                     @endif
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="about.html">About</a></li>
+                    <li><a href="{{ route('sellers_info') }}">공인중개사 목록</a></li>
+                    <li><a href="{{ route('info') }}">공지사항</a></li>
                     @if (!session('u_id'))
                     <li><a href="{{ route('login') }}">로그인</a></li>
                     <li><a href="{{ route('register') }}" class="active">회원가입</a></li>
@@ -45,7 +45,7 @@
                             <a href="{{route('logout')}}" style="color: white"
                                 onclick="event.preventDefault();
                                                     this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                로그아웃
                             </a>
                             </li>
                         </form></div>

@@ -21,6 +21,7 @@ use App\Http\Controllers\StructureDetailController;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\JjimController;
 use App\Http\Controllers\UpdateUserInfoController;
+use App\Http\Controllers\NavController;
 
 /*
 |--------------------------------------------------------------------------
@@ -117,3 +118,8 @@ Route::get('/logout', [UserController::class, 'logout'])->name('user.logout');
 Route::get('/user/profile', [UpdateUserInfoController::class, 'printMyBuilding'])->name('profile.com');
 
 Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])->name('verification.verify');
+
+Route::get('/info',[NavController::class, 'info'])->name('info');
+
+Route::get('/sellers_info',[NavController::class, 'sellers_info'])->name('sellers_info');
+
