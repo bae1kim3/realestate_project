@@ -1,4 +1,14 @@
-
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
 
 
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -51,7 +61,7 @@
                         <li class="has-children">
                             <a href="properties.html">프로필</a>
                             <ul class="dropdown arrow-top">
-                            <li><a href="{{ route('profile') }}">내정보</a></li>
+                            <li><a href="#">내정보</a></li>
                             <li class="has-children">
                                 <a href="#">Sub Menu</a>
                                 <ul class="dropdown">
@@ -202,9 +212,15 @@
         {{-- 공인중개사 정보 --}}
         <div class="col-lg-4 seller-info" style=" margin-top: 50px!important;">
             <div class="bg-white widget border rounded seller-detail">
+
+                {{-- 찜 --}}
+                <input type="hidden" value="{{$s_info->s_no}}" id="s_no">
+                <i class="fa-solid fa-heart fa-2x full-heart none" id="full-heart" onclick="changeEmpHeart()"></i>
+                <i class="fa-regular fa-heart fa-2x emp-heart" id="emp-heart" onclick="changeFullHeart()"></i>
+
                 <h3 class="h4 text-black widget-title mb-3">공인중개사 정보</h3>
                 <h3 class="h4 text-black widget-title mb-3">{{ $user->b_name }}</h3>
-                <h3 class="mb-3 fw-bold fs-5 seller_name">{{ $user->name }}</h3>
+                <h3 class="mb-3 fw-bold fs-5 seller-name">{{ $user->name }}</h3>
                 <span>전화번호</span>
                 <p>
                 {{$user->phone_no}}
@@ -226,7 +242,7 @@
             <div class="map-btn">
                 <button class="shop-btn">
                 <i class="fa-solid fa-paw fa-2x"></i>
-                <p>반려동물 용품 상점</p>
+                <p>동물 상점</p>
                 </button>
                 <button class="shop-btn">
                 <i class="fa-solid fa-house-chimney-medical fa-2x"></i>
@@ -341,6 +357,50 @@
         </div>
         <!-- /.site-footer -->
 
+{{-- del jy 0718 --}}
+{{-- <script>
+            function changeFullHeart() {
+
+        
+            // 서버로 보낼 데이터 생성
+                var requestData = {
+                    s_no: {{ session()->get('s_no') }},
+                    id: {{ Auth::user()->id }}
+                };
+                
+                // Ajax 요청 설정
+                var url = '/like'; // 요청을 보낼 엔드포인트 URL
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                    'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestData)
+                })
+                .then(function(response) {
+                    if (response.ok) {
+                    return response.json();
+                    } else {
+                    throw new Error('Error: ' + response.status);
+                    }
+                })
+                .then(function(data) {
+                    // 성공적으로 요청을 처리한 후 수행할 동작을 작성합니다.
+                    console.log('찜하기 성공');
+                })
+                .catch(function(error) {
+                    // 요청 처리 중 에러가 발생한 경우 수행할 동작을 작성합니다.
+                    console.log('에러 발생: ' + error.message);
+                });
+            }
+
+
+            function changeEmpHeart() {
+                document.getElementById('emp-heart').classList.add('none');
+                document.getElementById('full-heart').classList.remove('none');
+
+            };
+        </script> --}}
 
 
 {{-- 지도 --}}
@@ -373,6 +433,8 @@
             infowindow.open(map, marker);
         </script>
 
+        
+
     <script src="https://kit.fontawesome.com/e615ee2f7e.js" crossorigin="anonymous"></script>
     <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
     <script src="{{asset('js/jquery-migrate-3.0.1.min.js')}}"></script>
@@ -388,6 +450,8 @@
     <script src="{{asset('js/aos.js')}}"></script>
     <script src="{{asset('js/circleaudioplayer.js')}}"></script>
     <script src="{{asset('js/main.js')}}"></script>
+
+    {{-- <script src="{{asset('jjim.js')}}"></script> --}}
 
     
 
