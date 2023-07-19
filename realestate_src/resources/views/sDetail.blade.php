@@ -1,15 +1,3 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
-
 
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="{{asset('fonts/icomoon/style.css')}}">
@@ -143,7 +131,27 @@
                             </div>
                             <div class="col-md-6 col-lg-4 text-center border-bottom border-top py-3">
                                 <span class="d-inline-block text-black mb-0 caption-text">건물 유형</span>
-                                <strong class="d-block summary-block-s">건물유형 넣기!!!!!!!!!!!</strong>
+                                <strong class="d-block summary-block-s">
+                                    @switch($s_info->s_option)
+                                                        @case(0)
+                                                            아파트
+                                                            @break
+                                                        @case(1)
+                                                            단독주택
+                                                            @break
+                                                        @case(2)
+                                                            오피스텔
+                                                            @break
+                                                        @case(3)
+                                                            빌라
+                                                            @break
+                                                        @case(4)
+                                                            원룸
+                                                            @break
+                                                        @default
+                                                            @break
+                                                    @endswitch
+                                </strong>
                             </div>
                             <div class="col-md-6 col-lg-4 text-center border-bottom border-top py-3">
                                 <span class="d-inline-block text-black mb-0 caption-text">대형견(25kg 이상) 입주</span>
@@ -210,14 +218,19 @@
         </div>
 
         {{-- 공인중개사 정보 --}}
-        <div class="col-lg-4 seller-info" style=" margin-top: 50px!important;">
-            <div class="bg-white widget border rounded seller-detail">
+        <div class="col-lg-4 seller-info">
+        {{-- 찜 --}}
+            <input type="hidden" value="{{$s_info->s_no}}" id="s_no">
+            <input type="hidden" value="{{$user->id}}" id="id">
+            <input type="hidden" value="{{$user->seller_license}}" id="selLicense">
+            <input type="hidden" value="{{$likedFlg}}" id="likedFlg">
 
-                {{-- 찜 --}}
-                <input type="hidden" value="{{$s_info->s_no}}" id="s_no">
-                <i class="fa-solid fa-heart fa-2x full-heart none" id="full-heart" onclick="changeEmpHeart()"></i>
-                <i class="fa-regular fa-heart fa-2x emp-heart" id="emp-heart" onclick="changeFullHeart()"></i>
 
+            <span class="fa-regular fa-heart fa-2x emp-heart" id="emp_heart" onclick="storeLiked()"></span>
+            <span class="fa-solid fa-heart fa-2x full-heart" id="full_heart" onclick="deleteLiked()"></span>
+
+
+            <div class="bg-white widget border rounded seller-detail" style="margin-top:20px">
                 <h3 class="h4 text-black widget-title mb-3">공인중개사 정보</h3>
                 <h3 class="h4 text-black widget-title mb-3">{{ $user->b_name }}</h3>
                 <h3 class="mb-3 fw-bold fs-5 seller-name">{{ $user->name }}</h3>
@@ -451,7 +464,7 @@
     <script src="{{asset('js/circleaudioplayer.js')}}"></script>
     <script src="{{asset('js/main.js')}}"></script>
 
-    {{-- <script src="{{asset('jjim.js')}}"></script> --}}
+    <script src="{{asset('jjim.js')}}"></script>
 
     
 
