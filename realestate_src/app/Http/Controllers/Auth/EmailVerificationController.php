@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Verified;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+
 
 class EmailVerificationController extends Controller
 {
@@ -18,7 +21,8 @@ class EmailVerificationController extends Controller
                 event(new Verified($user));
             }
         }
-
+        Auth::logout();
+        Session::forget('url');
         return redirect('/login');
     }
 }
