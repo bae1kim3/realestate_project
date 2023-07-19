@@ -1,7 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
         <style>
-
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&family=Orbit&family=Roboto+Mono:wght@600&display=swap" rel="stylesheet">
         </style>
     </x-slot>
     <div class="hero">
@@ -30,7 +32,7 @@
         <div class="container">
             <div class="row mb-5 align-items-center">
                 <div class="col-lg-6">
-                    <h2 class="font-weight-bold text-primary heading">
+                    <h2 class="text-primary heading" style="font-weight: 500;">
                         최근 등록된 매물
                     </h2>
                 </div>
@@ -63,11 +65,42 @@
                                         <div class="specs d-flex mb-4">
                                             <span class="d-block d-flex align-items-center me-3">
                                                 <span class="icon-building me-2"></span>
-                                                <span class="caption">건물형태 넣으셈</span>
+                                                <span class="caption">
+                                                    @switch($photo->s_option)
+                                                        @case(0)
+                                                            아파트
+                                                            @break
+                                                        @case(1)
+                                                            단독주택
+                                                            @break
+                                                        @case(2)
+                                                            오피스텔
+                                                            @break
+                                                        @case(3)
+                                                            빌라
+                                                            @break
+                                                        @case(4)
+                                                            원룸
+                                                            @break
+                                                        $@default
+                                                            @break
+                                                    @endswitch
+                                                </span>
                                             </span>
                                             <span class="d-block d-flex align-items-center">
                                                 <span class="fa-solid fa-dog me-2"></span>
-                                                <span class="caption"> 대형가능여부</span>
+                                                <span class="caption"> 대형동물
+                                                    @switch($photo->animal_size)
+                                                        @case(0)
+                                                            <strong>X</strong>
+                                                            @break
+                                                        @case(1)
+                                                            <strong>O</strong>
+                                                            @break
+                                                        $@default
+                                                            
+                                                    @endswitch
+                                                </span>
                                             </span>
                                         </div>
 

@@ -54,6 +54,9 @@ Route::get('/', function () {
     return redirect('welcome');
 })->name('welcome');
 
+Route::get('profileUp',[ProfileController::class, 'goPro'])->name('profile');
+
+
 Route::post('/UpdatePassPost', [ProfileController::class, 'UpdatePassPost'])->name('up_pass');
 
 Route::post('/toggle-dark-mode', [DarkModeController::class, 'toggleDarkMode'])->name('toggle-dark-mode');
