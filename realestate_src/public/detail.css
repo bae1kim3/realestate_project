@@ -53,3 +53,28 @@
     
 }
 
+.full-heart {
+    transition: all 0.3s;
+    cursor: pointer;
+    color: #e50b0b;
+}
+
+.full-heart:hover {
+    transform: scale(1.3);
+    transition-duration: 0.3s;
+}
+.emp-heart {
+    transition: all 0.3s;
+    cursor: pointer;
+    color: #2f0909;
+}
+
+
+.emp-heart:hover {
+    transform: scale(1.3);
+    transition-duration: 0.3s;
+}
+
+.none {
+    display: none!important;
+}
