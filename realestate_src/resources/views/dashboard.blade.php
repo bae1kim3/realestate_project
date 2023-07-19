@@ -109,7 +109,7 @@
                                 <x-button type="button" onclick="location.href='{{url('/')}}'" class="dark:bg-gray-600 dark:text-white">취소</x-button>
                                 </div>
                             </form>
-                            
+
 
                             <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1def08893c26998733c374c40b12ac42&libraries=services,clusterer,drawing"></script>
                             <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

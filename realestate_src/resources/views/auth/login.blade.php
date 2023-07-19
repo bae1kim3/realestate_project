@@ -212,9 +212,9 @@
             </p>
 
             <div class="flex items-center justify-end mt-4">
-                <x-button class="dark:bg-gray-400">
+                <button type="submit">
                     {{ __('Log in') }}
-                </x-button>
+                </button>
             </div>
         </form>
     </div>

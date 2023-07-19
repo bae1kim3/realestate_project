@@ -1,4 +1,3 @@
-<x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
             <img src="{{ asset('logo.jpg') }}" alt="" style="width: 150px; height:150px">
@@ -42,4 +41,3 @@
             </div>
         </div>
     </x-authentication-card>
-</x-guest-layout>
