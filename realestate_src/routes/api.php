@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\ApiLikedController;
+use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\MapController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes

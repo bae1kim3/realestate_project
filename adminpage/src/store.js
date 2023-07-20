@@ -45,7 +45,7 @@ const store = createStore({
   actions: {
     getUserStateList(context) {
       axios
-        .get("http://127.0.0.1:8000/api/admin", header)
+        .get("http://192.168.0.129:8000/api/admin", header)
         .then((res) => {
           context.commit("createUserList", res.data);
         })
@@ -54,7 +54,7 @@ const store = createStore({
     deleteUser(context) {
       if (context.state.userNumber.length != 0) {
         axios
-          .delete("http://127.0.0.1:8000/api/admin", {
+          .delete("http://192.168.0.129:8000/api/admin", {
             data: { usersNumber: context.state.userNumber },
             header,
           })
@@ -67,7 +67,7 @@ const store = createStore({
     deleteStateList(context) {
       if (context.state.stateNumber.length != 0) {
         axios
-          .delete("http://127.0.0.1:8000/api/admin", {
+          .delete("http://192.168.0.129:8000/api/admin", {
             data: { stateNumber: context.state.stateNumber },
             header,
           })
