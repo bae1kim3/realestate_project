@@ -1,3 +1,8 @@
+.inner-page-cover p {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.719) !important;
+}
+
 .seller-detail> p {
     color:black!important;
 }

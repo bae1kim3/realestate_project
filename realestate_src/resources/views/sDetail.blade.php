@@ -39,6 +39,7 @@
             <div class="row align-items-center justify-content-center text-center">
                 <div class="col-md-10">
                     <h1 class="mb-2">{{ $s_info->s_add }}</h1>
+                    <p>{{$s_info->s_name}}</p>
                 </div>
             </div>
         </div>
@@ -59,8 +60,8 @@
                             @if(!session('seller_license'))
                             {{-- <div style="position:absolute; z-index:100; right:10px; top:10px"> --}}
                                 <div style="position:absolute; z-index:100; right:10px; top:10px; background-color:white; width:3em; height:3em; border-radius:50%; "></div>
-                                    <span class="fa-regular fa-heart fa-2x emp-heart" id="emp_heart" onclick="storeLiked()" style="position:absolute; z-index:100; right:18px; top:20px;"></span>
-                                    <span class="fa-solid fa-heart fa-2x full-heart" id="full_heart" onclick="deleteLiked()" style="position:absolute; z-index:100; right:18px; top:20px;"></span>
+                                    <span class="fa-regular fa-heart fa-2x emp-heart" id="emp_heart" onclick="storeLiked()" style="position:absolute; z-index:100; right:17px; top:20px;"></span>
+                                    <span class="fa-solid fa-heart fa-2x full-heart" id="full_heart" onclick="deleteLiked()" style="position:absolute; z-index:100; right:17px; top:20px;"></span>
                                 @endif
                             {{-- </div> --}}
                         {{-- 캐러셀 사진 --}}
@@ -203,17 +204,20 @@
             <h4 class="text-black widget-title mb-3">위치</h4>
             <p>{{ $s_info->s_add }}</p>
             <div id="map" style="width: 100%; height: 400px; margin-bottom:30px;"></div>
+            <input type="hidden" value="{{ $s_info->s_name }}" id="s_name"/>
+            <input type="hidden" value="{{ $s_info->s_log }}" id="s_log"/>
+            <input type="hidden" value="{{ $s_info->s_lat }}" id="s_lat"/>
             <div class="map-btn">
                 <div class="map-btn-con">
-                    <button class="shop-btn">
+                    <button class="shop-btn" id="getshop">
                         <i class="fa-solid fa-paw fa-2x"></i>
                         <p>동물 상점</p>
                     </button>
-                    <button class="hosp-btn">
+                    <button class="hosp-btn" id="gethosp">
                         <i class="fa-solid fa-house-chimney-medical fa-2x"></i>
                         <p>동물 병원</p>
                     </button>
-                    <button class="walk-btn">
+                    <button class="walk-btn" id="getwalk">
                         <i class="fa-solid fa-seedling fa-2x"></i>
                         <p>산책로</p>
                     </button>
@@ -275,7 +279,7 @@
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9abea084b391e97658a9380c837b9608&libraries=services"></script>
 
 
-        <script>
+        {{-- <script>
             var container = document.getElementById('map');
             var options = {
                 center: new kakao.maps.LatLng({{ $s_info->s_log }}, {{ $s_info->s_lat }}),
@@ -299,10 +303,11 @@
             });
             // 인포윈도우를 마커 위에 표시합니다
             infowindow.open(map, marker);
-        </script>
+        </script> --}}
 
 
 
+    <script src="{{asset('detail_map.js')}}"></script>
     <script src="https://kit.fontawesome.com/e615ee2f7e.js" crossorigin="anonymous"></script>
     <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
     <script src="{{asset('js/jquery-migrate-3.0.1.min.js')}}"></script>
@@ -320,6 +325,7 @@
     <script src="{{asset('js/main.js')}}"></script>
 
     <script src="{{asset('jjim.js')}}"></script>
+
 
 
 
