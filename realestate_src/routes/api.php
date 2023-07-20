@@ -25,3 +25,7 @@ Route::get('/mapopt', [MapController::class, 'getpark']);
 // 찜
 Route::post('/liked/post/{s_no}', [ApiLikedController::class, 'store']);
 Route::delete('/liked/delete/{s_no}', [ApiLikedController::class, 'destroy']);
+
+
+Route::get('/admin',[ManagerController::class, 'getUser']);
+Route::delete('/admin',[ManagerController::class, 'deleteUser']);
