@@ -22,6 +22,7 @@ use App\Http\Controllers\MapController;
 use App\Http\Controllers\JjimController;
 use App\Http\Controllers\UpdateUserInfoController;
 use App\Http\Controllers\NavController;
+use App\Http\Controllers\FacebookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -123,3 +124,5 @@ Route::get('/info',[NavController::class, 'info'])->name('info');
 
 Route::get('/sellers_info',[NavController::class, 'sellers_info'])->name('sellers_info');
 
+Route::get('auth/facebook',[FacebookController::class, 'facebookpage']);;
+Route::get('auth/facebook/callback',[FacebookController::class, 'facebookredirect']);;

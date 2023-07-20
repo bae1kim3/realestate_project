@@ -40,7 +40,7 @@ function storeLiked () {
         console.log(apiData);
         if(apiData['errorcode'] === 'E01'){
             // return console.log(apiData['msg']);
-            return window.location.href = 'http://www.localhost/login';
+            return window.location.href = 'http://127.0.0.1:8000/login';
         }
 
         fullHeart.classList.remove('none');

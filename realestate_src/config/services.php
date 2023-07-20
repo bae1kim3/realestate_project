@@ -30,5 +30,25 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    'kakao' =>[
+        'client_id' => env('KAKAO_KEY'),
+        'client_secret' => env('KAKAO_SECRET'),
+        'redirect' => env('KAKAO_REDIRECT_URI')
+    ],
+    'google' => [
+        'client_id' => env('GOOGLE_CLIENT)ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect' => env('GOOGLE_REDIRECT'),
+    ],
+    'naver' => [
+        'client_id' => env('NAVER_KEY'),
+        'client_secret' => env('NAVER_SECRET'),
+        'redirect' => env('NAVER_REDIRECT_URI'),
+    ],
+    'facebook' => [
+        'client_id' => '592265133088040',
+        'client_secret' => '44a77a5aefeea9d0b817f2e1cfd03630',
+        'redirect' => 'http://localhost:8000/auth/facebook/callback',
+    ],
 
 ];

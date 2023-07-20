@@ -21,6 +21,8 @@
         }
     </style>
 <x-app-layout>
+    <div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v17.0&appId=673307384664484&autoLogAppEvents=1" nonce="NZqU5Vh2"></script>
     <div class="hero page-inner overlay" style="background-image: url('{{ asset('images/hero_bg_1.jpg') }}')">
         <div class="container">
             <div class="row justify-content-center align-items-center">
@@ -116,6 +118,9 @@
                     type="password" name="password" required autocomplete="current-password" />
             </div>
 
+
+  <div id="status">
+  </div>
             <p class="text-right mt-2">
                 <a class="underline text-sm text-gray-600 hover:text-gray-900 dark:text-gray-100"
                     href="{{ route('find-username') }}">
@@ -131,11 +136,14 @@
                 <button type="submit" class="btn btn-primary py-2 px-3">
                     {{ __('Log in') }}
                 </button>
+            <a href="{{ url('auth/facebook') }}"><img style="width:20%; height:15%" src="{{ asset('facebook.jpg') }}" alt="Facebook"></a>
+            </div>
+            <div style="text-align: center;">
+
             </div>
         </form>
     </div>
 </div>
 </div>
 </div>
-
 </x-app-layout>

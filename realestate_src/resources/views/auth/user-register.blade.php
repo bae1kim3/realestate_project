@@ -174,6 +174,7 @@
                                 </x-label>
                             </div>
                             @endif
+                            <div class="fb-login-button" data-width="" data-size="" data-button-type="" data-layout="" data-auto-logout-link="false" data-use-continue-as="false"><a href="{{ url('auth/facebook') }}">페이스북으로 시작하기</a></div>
 
                             <div class="flex items-center justify-end mt-4">
                                 <x-button class="ml-4 dark:bg-gray-600">
