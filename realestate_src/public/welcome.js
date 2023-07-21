@@ -103,11 +103,6 @@
             // attachScrollHandler();
             
 // html 생성 폼
-function generateitemContainerHtml() {
-    var html = '<div class="property-item" style="width: 350px;">'
-                +'</div>'
-    return html;
-}
 function generatePropertyItemHtml(photo) {
     var deposit = photo.p_deposit.toLocaleString();
     var html = 
@@ -189,8 +184,7 @@ function searchProperties() {
             var response = JSON.parse(xhr.responseText);
             var itemContainer = document.getElementById('itemContainer');
             itemContainer.innerHTML = '';
-            newContainer = itemContainer.generateitemContainerHtml();
-            insertAdjacentHTML('beforeend', newContainer);
+            itemContainer.insertAdjacentHTML('beforeend', '<div class="property-item" style="width: 350px;"></div>');
             let choiceDiv = document.getElementsByClassName('property-item');
             response.photos.forEach(function (photo) {
                 var newPhotosHtml = generatePropertyItemHtml(photo, 17);
