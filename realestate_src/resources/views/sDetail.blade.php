@@ -211,7 +211,7 @@
                 <div class="map-btn-con">
                     <button class="shop-btn" id="getshop">
                         <i class="fa-solid fa-paw fa-2x"></i>
-                        <p>동물 상점</p>
+                        <p>반려동물 용품점</p>
                     </button>
                     <button class="hosp-btn" id="gethosp">
                         <i class="fa-solid fa-house-chimney-medical fa-2x"></i>
@@ -276,34 +276,7 @@
 
 
 {{-- 지도 --}}
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9abea084b391e97658a9380c837b9608&libraries=services"></script>
-
-
-        {{-- <script>
-            var container = document.getElementById('map');
-            var options = {
-                center: new kakao.maps.LatLng({{ $s_info->s_log }}, {{ $s_info->s_lat }}),
-                level: 5
-            };
-
-            var map = new kakao.maps.Map(container, options);
-
-            var position = new kakao.maps.LatLng({{ $s_info->s_log }}, {{ $s_info->s_lat }}); // 마커가 표시될 위치를 설정합니다
-            var iwContent = '<div style="padding: 5px;">{{ $s_info->s_name }}</div>'; // 인포윈도우에 표시될 내용입니다
-
-            // 마커를 생성합니다
-            var marker = new kakao.maps.Marker({
-                map: map,
-                position: position
-            });
-
-            // 인포윈도우를 생성합니다
-            var infowindow = new kakao.maps.InfoWindow({
-                content: iwContent
-            });
-            // 인포윈도우를 마커 위에 표시합니다
-            infowindow.open(map, marker);
-        </script> --}}
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1def08893c26998733c374c40b12ac42&libraries=services"></script>
 
 
 
