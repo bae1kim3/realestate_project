@@ -7,8 +7,8 @@ const scheckboxes = document.querySelectorAll(
     '.dropdown-menu input[class="sopt"]'
 );
 const getpark = document.getElementById("getpark");
-const gethospital = document.getElementById("gethospital");
-// const selectBox3 = document.getElementById("option3");
+let getShop = document.getElementById('getshop');
+let getHosp = document.getElementById('gethosp');
 const container = document.getElementById("sidebar");
 let selectedMarker = null;
 let cardId;
@@ -32,6 +32,12 @@ let radius = "";
 let clickmarkerImage;
 let selectedCard = 0;
 let num = 0;
+let shopMarkers = [];
+let hospMarkers = [];
+let walkMarkers = [];
+let sName = document.getElementById('s_name');
+let defaultlng = '';
+let defaultlat = '';
 
 function addlist(data, i) {
     iwContent[
@@ -461,32 +467,22 @@ getpark.addEventListener("click", function (checkbox) {
     getpark.classList.toggle("selectedpark");
 });
 
-gethospital.addEventListener("click", function () {
-    if (pmarkers.length === 0) {
-        const selectedOption = selectBox.value;
-        let value = "동물 병원";
+//api 버튼 클릭시 마커 표시
 
-        // 초기 중심 좌표를 대구시청으로 설정
-        let centerLat = 35.8714;
-        let centerLng = 128.6014;
+// 동물 상점 마커
 
-        // 선택된 옵션에 따라 중심 좌표 및 키워드 설정
-        switch (selectedOption) {
-            case "달서구":
-                centerLat = 35.8214;
-                centerLng = 128.5287;
-                value = "대구 달서구 동물병원";
-                break;
-            case "달성군":
-                centerLat = 35.7052;
-                centerLng = 128.4275;
-                value = "대구 달성군 동물병원";
-                break;
-            // 다른 옵션들에 대한 처리도 추가 가능
-            default:
-                break;
+getShop.addEventListener("click", function (checkbox) {
+    if (pmarkers.length == 0) {
+        var selectedOption = selectBox.value;
+        let value = checkbox.value;
+        if (checkbox.checked) {
+            selectValues.push(value);
+        } else {
+            let index = selectValues.indexOf(value);
+            if (index !== -1) {
+                selectValues.splice(index, 1);
+            }
         }
-
         let url =
             "http://192.168.0.129/api/mapopt/" +
             (selectValues.length ? selectValues.join(",") : "1") +
@@ -494,154 +490,118 @@ gethospital.addEventListener("click", function () {
             selectedOption +
             "/" +
             (soptionValues.length ? soptionValues.join(",") : "1");
-
         // AJAX 요청 보내기
         fetch(url)
             .then((response) => response.json())
             .then((data) => {
-                mapOption = {
-                    center: new kakao.maps.LatLng(centerLat, centerLng), // 지도의 중심좌표
-                    level: 8, // 지도의 확대 레벨
+                defaultlat = data.latlng.lat;
+                defaultlng = data.latlng.lng;
+                let page = 1;
+                let size = 10;
+                const REST_API_KEY = 'dae00046c1734639efa0941b96eb225b';
+                const url = "https://dapi.kakao.com/v2/local/search/keyword.json?" +
+                    "page=" + page +
+                    "&size=" + size +
+                    "&sort=distance&query=반려동물용품점&x=" + defaultlat +
+                    "&y=" + defaultlng +
+                    "&radius=5000";
+                const options = {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `KakaoAK ${REST_API_KEY}`
+                    }
                 };
-                markerImage = new kakao.maps.MarkerImage(
-                    "vet.png",
-                    imageSize
-                );
-                map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-
-                for (let i = 0; i < data["sinfo"].length; i++) {
-                    // 마커 하나를 지도위에 표시합니다
-                    addMarker(
-                        new kakao.maps.LatLng(
-                            data["sinfo"][i].s_log,
-                            data["sinfo"][i].s_lat
-                        ),
-                        data,
-                        i
-                    );
-                    addlist(data, i);
-                }
             });
-    } else {
-        // 마커들을 지도에서 제거하고 배열 비우기
-        for (let i = 0; i < pmarkers.length; i++) {
-            pmarkers[i].setMap(null);
+                fetch(url, options)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        let getdata = data.documents;
+                        var imageSrc = 'https://cdn-icons-png.flaticon.com/128/2447/2447823.png';
+
+                        markerImage = new kakao.maps.MarkerImage(
+                            imageSrc,
+                            imageSize
+                        );
+
+                        for (let i = 0; i < getdata.length; i++) {
+                            let markerPosition = new kakao.maps.LatLng(
+                                getdata[i].y,
+                                getdata[i].x
+                            );
+                            console.log(getdata);
+                            marker = new kakao.maps.Marker({
+                                position: markerPosition,
+                                image: markerImage,
+                            });
+                            // console.log(data);
+                            marker.setZIndex(-2);
+                            marker.setMap(map);
+                            // 생성된 마커를 배열에 추가합니다
+                            shopMarkers.push(marker);
+                        }
+                    })
+                    .catch(() => { console.log('error') })
+            } else {
+                for(var i = 0; i<shopMarkers.length; i++) {
+            shopMarkers[i].setMap(null);
         }
-        pmarkers = [];
+        shopMarkers = [];
     }
-    gethospital.classList.toggle("selectedhospital");
+
 });
 
+// 동물병원 마커
+getHosp.addEventListener("click", function () {
+    if (hospMarkers.length == 0) {
+        let page = 1;
+        let size = 10;
+        const REST_API_KEY = 'dae00046c1734639efa0941b96eb225b';
+        const url = "https://dapi.kakao.com/v2/local/search/keyword.json?" +
+            "page=" + page +
+            "&size=" + size +
+            "&sort=distance&query=동물병원&x=" + sLat.value +
+            "&y=" + sLong.value +
+            "&radius=5000";
+        const options = {
+            method: 'GET',
+            headers: {
+                'Authorization': `KakaoAK ${REST_API_KEY}`
+            }
+        };
+        fetch(url, options)
+            .then((response) => response.json())
+            .then((data) => {
 
+                let getdata = data.documents;
+                var imageSrc = 'https://cdn-icons-png.flaticon.com/128/10887/10887257.png';
 
+                markerImage = new kakao.maps.MarkerImage(
+                    imageSrc,
+                    imageSize
+                );
 
-    
-    // 병원 마커 찍기(api 주소정보가 이상해서 폐기)
-    // gethospital.addEventListener("click", function (checkbox) {
-    //     if (pmarkers.length == 0) {
-    //         var selectedOption = selectBox.value;
-    //         let value = checkbox.value;
-    //         if (checkbox.checked) {
-    //             selectValues.push(value);
-    //         } else {
-    //             let index = selectValues.indexOf(value);
-    //             if (index !== -1) {
-    //                 selectValues.splice(index, 1);
-    //             }
-    //         }
-    //         let url =
-    //             "http://192.168.0.129/api/mapopt/" +
-    //             (selectValues.length ? selectValues.join(",") : "1") +
-    //             "/" +
-    //             selectedOption +
-    //             "/" +
-    //             (soptionValues.length ? soptionValues.join(",") : "1");
-    //         // AJAX 요청 보내기
-    //         fetch(url)
-    //             .then((response) => response.json())
-    //             .then((data) => {
-    //                 console.log(data);
-    //                 const servicekey =
-    //                     "F%2FjLtxig5HcJvegqePqAT1oDFKqrVB1Ps%2BBPvIYmEgqhnA4wZRPfXVyr%2BkjHkiTGbBQlXosdDQWN7XjknZtFjg%3D%3D";
-    //                 if (selectedOption == "구 선택") {
-    //                     page = 1;
-    //                     perPage = 20;
-    //                 } else {
-    //                     page = 1;
-    //                     perPage = 10;
-    //                 }
-    
-    //                 const url =
-    //                     "https://api.odcloud.kr/api/15010715/v1/uddi:3e37bd4a-2bd2-4875-b328-9e944701efcc"
-    //                     + "?page="
-    //                     + page
-    //                     + "perPage="
-    //                     + perPage
-    //                     + "&serviceKey="
-    //                     + servicekey;
-    
-    //                 fetch(url)
-    //                     .then((response) => response.json())
-    //                     .then((data1) => {
-    //                         // console.log(data1);
-    //                         // console.log(data1.data[0].소재지);
-    //                         let getdata = data1.data;
-    //                         console.log(getdata);
-    //                         var imageSrc = "vet.png";
-    //                         markerImage = new kakao.maps.MarkerImage(
-    //                             imageSrc,
-    //                             imageSize
-    //                         );
-    
-    //                         // const geocoder = new kakao.maps.services.Geocoder();
-    //                         // geocoder.addressSearch("대구광역시 중구 포정동 21", function (result, status) {
-    //                         //     if (status === kakao.maps.services.Status.OK) {
-    //                         //         const lat = result[0].y; // 위도
-    //                         //         const lng = result[0].x; // 경도
-    //                         //         getdata[0].lat = lat;
-    //                         //         getdata[0].lng = lng;
-    //                         //         console.log(`주소: ${'ㅎㅇ맨'}, 위도: ${lat}, 경도: ${lng}`);
-    //                         //     } else {
-    //                         //         console.log(`주소 변환 실패: ${status}`);
-    //                         //     }
-    //                         // });
-    
-    //                         for (let i = 0; i < getdata.length; i++) {
-    //                             geocoder.addressSearch(data1.data[i].소재지, function (result, status) {
-    //                                 if (status === kakao.maps.services.Status.OK) {
-    //                                     const lat = result[0].y; // 위도
-    //                                     const lng = result[0].x; // 경도
-    //                                     console.log(`주소: ${data1.data[i].소재지}, 위도: ${lat}, 경도: ${lng}`);
-    //                                 } else {
-    //                                     console.log(`주소 변환 실패: ${status}`);
-    //                                 }
-    //                             });
-    //                         }
-    
-                            
-    
-    //                         for (let i = 0; i < 1; i++) {
-    //                             let markerPosition = new kakao.maps.LatLng(
-    //                                 getdata[i].lat,
-    //                                 getdata[i].lot
-    //                             );
-    
-    //                             marker = new kakao.maps.Marker({
-    //                                 position: markerPosition,
-    //                                 image: markerImage,
-    //                             });
-    //                             marker.setZIndex(-2);
-    //                             marker.setMap(map);
-    //                             // 생성된 마커를 배열에 추가합니다
-    //                             pmarkers.push(marker);
-    //                         }
-    //                     });
-    //             });
-    //     } else {
-    //         for (var i = 0; i < pmarkers.length; i++) {
-    //             pmarkers[i].setMap(null);
-    //         }
-    //         pmarkers = [];
-    //     }
-    //     gethospital.classList.toggle("selectedhospital");
-    // });
+                for (let i = 0; i < getdata.length; i++) {
+                    let markerPosition = new kakao.maps.LatLng(
+                        getdata[i].y,
+                        getdata[i].x
+                    );
+
+                    marker = new kakao.maps.Marker({
+                        position: markerPosition,
+                        image: markerImage,
+                    });
+                    // console.log(data);
+                    marker.setZIndex(-2);
+                    marker.setMap(map);
+                    // 생성된 마커를 배열에 추가합니다
+                    hospMarkers.push(marker);
+                }
+            })
+            .catch(() => { console.log('error') })
+    } else {
+        for (var i = 0; i < hospMarkers.length; i++) {
+            hospMarkers[i].setMap(null);
+        }
+        hospMarkers = [];
+    }
+});

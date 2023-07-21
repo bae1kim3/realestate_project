@@ -115,14 +115,19 @@
             <div id="map" style="position: relative;">
                 <div class="nav-container">
                     <nav class="nav justify-content-end p-3" style="background-color: #005555;">
-{{-- 
-                        <select id="option3" name="facility" class="selectbox">
-                            <option>주변 시설</option>
-                            <option id="option_hospital" value="동물병원">동물병원</option>
-                            <option id="option_park" value="주변 공원">공원</option>
-                        </select> --}}
-                        <button id="gethospital">동물 병원</button>
-                        <button id="getpark">주변 공원</button>
+
+                        <button class="shop-btn" id="getshop">
+                        <i class="fa-solid fa-paw fa-2x"></i>
+                        <p>반려동물 용품점</p>
+                    </button>
+                    <button class="hosp-btn" id="gethosp">
+                        <i class="fa-solid fa-house-chimney-medical fa-2x"></i>
+                        <p>동물 병원</p>
+                    </button>
+                    <button class="walk-btn" id="getpark">
+                        <i class="fa-solid fa-seedling fa-2x"></i>
+                        <p>공원</p>
+                    </button>
                         <select id="option" name="gu" class="selectbox">
                             <option>구 선택</option>
                             <option id="option" value="달서구">달서구</option>
