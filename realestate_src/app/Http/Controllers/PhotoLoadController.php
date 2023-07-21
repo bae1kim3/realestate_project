@@ -1,8 +1,10 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Jjim;
 use App\Models\Photo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PhotoLoadController extends Controller
@@ -17,7 +19,31 @@ class PhotoLoadController extends Controller
             ->take($lastPhotoId)
             ->get();
 
-        return view('welcome', compact('photos', 'lastPhotoId'));
+        // 찜 
+        if((!Auth::user()->seller_license)) {
+            $id = Auth::user()->id;
+            // $liked_list = Jjim::where('id', $id)->select('s_no')->take(10)->get();
+            $liked_list = Jjim::where('id', $id)->pluck('s_no')->toArray();
+
+            // $liked_list = Jjim::join('photos', 'photos.s_no', 'jjims.s_no')
+            // ->where('id', $id)->where('mvp_photo', '1')
+            // ->take(10)
+            // ->get();
+            // $liked_s_info = 
+            
+        $liked_info = Photo::join('s_infos', 's_infos.s_no', 'photos.s_no')
+            ->where('mvp_photo', '1')
+            ->whereIn('photos.s_no', $liked_list)
+            ->orderBy('photos.updated_at', 'desc')
+            ->take(10)
+            ->get();
+            
+
+
+
+        }
+
+        return view('welcome', compact('photos', 'lastPhotoId', 'liked_info'));
     }
 
     // public function loadMorePhotos(Request $request)

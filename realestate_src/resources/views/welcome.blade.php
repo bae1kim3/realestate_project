@@ -170,12 +170,14 @@
             </div>
         </section>
 
+{{-- 찜한 매물 출력 --}}
+    @if(!(Auth::user()->seller_license))
         <div class="section sec-testimonials">
             <div class="container">
                 <div class="row mb-5 align-items-center">
                     <div class="col-md-6">
                         <h2 class="font-weight-bold heading text-primary mb-4 mb-md-0">
-                            Customer Says
+                            찜한 매물
                         </h2>
                     </div>
                     <div class="col-md-6 text-md-end">
@@ -192,102 +194,70 @@
                 </div>
                 <div class="testimonial-slider-wrap">
                     <div class="testimonial-slider">
+                    @if($liked_info)
+                        @foreach($liked_info as $info)
                         <div class="item">
                             <div class="testimonial">
-                                <img src="images/person_1-min.jpg" alt="Image" class="img-fluid rounded-circle w-25 mb-4" />
-                                <div class="rate">
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
+                                <a href="{{route('struct.detail',['s_no'=>$info->s_no])}}" class="img">
+                                    <img src="{{asset($info->url)}}" alt="Image" class="img-fluid" style="width: 350px; height: 300px; margin-bottom: 30px;" />
+                                </a>
+                                <div class="info_con">
+                                    <a href="{{route('struct.detail',['s_no'=>$info->s_no])}}">
+                                        <div class="h5 liked_title" style="color: #005555; font-weight:bold; display:inline-block; border-bottom: 3px solid #005555; padding-bottom:5px">{{ $info->s_name }}</div>
+                                    </a>
+                                    <div style="margin-bottom:8px">{{ $info->s_add }}</div>
+                                    <span class="city d-block mb-3" style="color:black; font-weight:bold; font-size:20px;">{{ number_format($info->p_deposit) }}
+                                                @if ($info->s_type === '월세')
+                                                / {{ number_format($info->p_month) }}
+                                                @endif
+                                    </span>
+                                    {{-- 건물유형, 대형동물 --}}
+                                    <span class="icon-building me-2"></span>
+                                        <span class="caption">
+                                            @switch($photo->s_option)
+                                                @case(0)
+                                                    아파트
+                                                    @break
+                                                @case(1)
+                                                    단독주택
+                                                    @break
+                                                @case(2)
+                                                    오피스텔
+                                                    @break
+                                                @case(3)
+                                                    빌라
+                                                    @break
+                                                @case(4)
+                                                    원룸
+                                                    @break
+                                                $@default
+                                                    @break
+                                            @endswitch
+                                        </span>
+                                        <span class="fa-solid fa-dog me-2"></span>
+                                        <span class="caption"> 대형동물
+                                            @switch($photo->animal_size)
+                                                @case(0)
+                                                    <strong>X</strong>
+                                                    @break
+                                                @case(1)
+                                                    <strong>O</strong>
+                                                    @break
+                                                $@default
+                                            @endswitch
+                                        </span>
                                 </div>
-                                <h3 class="h5 text-primary mb-4">James Smith</h3>
-                                <blockquote>
-                                    <p>
-                                        &ldquo;Far far away, behind the word mountains, far from the
-                                        countries Vokalia and Consonantia, there live the blind
-                                        texts. Separated they live in Bookmarksgrove right at the
-                                        coast of the Semantics, a large language ocean.&rdquo;
-                                    </p>
-                                </blockquote>
-                                <p class="text-black-50">Designer, Co-founder</p>
                             </div>
                         </div>
-
-                        <div class="item">
-                            <div class="testimonial">
-                                <img src="images/person_2-min.jpg" alt="Image" class="img-fluid rounded-circle w-25 mb-4" />
-                                <div class="rate">
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                </div>
-                                <h3 class="h5 text-primary mb-4">Mike Houston</h3>
-                                <blockquote>
-                                    <p>
-                                        &ldquo;Far far away, behind the word mountains, far from the
-                                        countries Vokalia and Consonantia, there live the blind
-                                        texts. Separated they live in Bookmarksgrove right at the
-                                        coast of the Semantics, a large language ocean.&rdquo;
-                                    </p>
-                                </blockquote>
-                                <p class="text-black-50">Designer, Co-founder</p>
-                            </div>
-                        </div>
-
-                        <div class="item">
-                            <div class="testimonial">
-                                <img src="images/person_3-min.jpg" alt="Image" class="img-fluid rounded-circle w-25 mb-4" />
-                                <div class="rate">
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                </div>
-                                <h3 class="h5 text-primary mb-4">Cameron Webster</h3>
-                                <blockquote>
-                                    <p>
-                                        &ldquo;Far far away, behind the word mountains, far from the
-                                        countries Vokalia and Consonantia, there live the blind
-                                        texts. Separated they live in Bookmarksgrove right at the
-                                        coast of the Semantics, a large language ocean.&rdquo;
-                                    </p>
-                                </blockquote>
-                                <p class="text-black-50">Designer, Co-founder</p>
-                            </div>
-                        </div>
-
-                        <div class="item">
-                            <div class="testimonial">
-                                <img src="images/person_4-min.jpg" alt="Image" class="img-fluid rounded-circle w-25 mb-4" />
-                                <div class="rate">
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                </div>
-                                <h3 class="h5 text-primary mb-4">Dave Smith</h3>
-                                <blockquote>
-                                    <p>
-                                        &ldquo;Far far away, behind the word mountains, far from the
-                                        countries Vokalia and Consonantia, there live the blind
-                                        texts. Separated they live in Bookmarksgrove right at the
-                                        coast of the Semantics, a large language ocean.&rdquo;
-                                    </p>
-                                </blockquote>
-                                <p class="text-black-50">Designer, Co-founder</p>
-                            </div>
-                        </div>
+                        @endforeach
+                    @else
+                    <span>찜한 매물이 없습니다</span>
+                    @endif
                     </div>
                 </div>
             </div>
         </div>
-
+    @endif
         <div class="section section-4 bg-light">
             <div class="container">
                 <div class="row justify-content-center text-center mb-5">
