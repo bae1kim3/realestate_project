@@ -52,45 +52,50 @@
         <div class="site-mobile-menu-body"></div>
     </div>
 
-    <nav class="site-nav justify-content-end p-3" style="height: 12%; z-index:11; background-image: url('images/hero_bg_2.jpg');">
         {{-- 원래 container 들어가있었음 --}}
+    <nav class="site-nav justify-content-end p-3" style="height: 12%; z-index:11; background-image: url('images/hero_bg_2.jpg');">
         <div class="">
             <div class="menu-bg-wrap">
-                <div class="site-navigation">
-                    <a href="{{route('welcome')}}" class="logo m-0 float-start">Property</a>
-                    <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end">
-                        <li class="active"><a href="{{route('welcome')}}">Home</a></li>
-                        <li class="has-children">
-                            <a href="#">프로필</a>
-                            <ul class="dropdown">
-                                <li><a href="#">Buy Property</a></li>
-                                <li><a href="#">Sell Property</a></li>
-                                <li class="has-children">
-                                    <a href="#">Dropdown</a>
-                                    <ul class="dropdown">
-                                        <li><a href="#">Sub Menu One</a></li>
-                                        <li><a href="#">Sub Menu Two</a></li>
-                                        <li><a href="#">Sub Menu Three</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="about.html">About</a></li>
-                        @if (!session('u_id'))
-                        <li><a href="{{ route('register') }}" class="active">회원가입</a></li>
-                        @else
-                        <li>
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <a href="{{route('logout')}}" style="color: white" onclick="event.preventDefault();
-                                                        this.closest('form').submit();">
-                                    {{ __('Log Out') }}
-                                </a>
-                        </li>
-                        </form>
-                </div>
-                @endif
+            <div class="site-navigation">
+                <a href="{{route('welcome')}}" class="logo m-0 float-start">펫 방</a>
+                <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end">
+                    <li class="active"><a href="{{route('welcome')}}">메인</a></li>
+                    @if (session('u_id'))
+                    <li class="has-children">
+                        <a href="#">추가메뉴</a>
+                        <ul class="dropdown">
+                            @if (session('seller_license'))
+                            <li><a href={{ route('dashboard') }}>매물올리기</a></li>
+                            @endif
+                            <li><a href="{{ route('profile') }}">내 정보</a></li>
+                            <li><a href="#">Sell Property</a></li>
+                            <li class="has-children">
+                                <a href="#">Dropdown</a>
+                                <ul class="dropdown">
+                                    <li><a href="#">Sub Menu One</a></li>
+                                    <li><a href="#">Sub Menu Two</a></li>
+                                    <li><a href="#">Sub Menu Three</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    @endif
+                    <li><a href="{{ route('sellers_info') }}">공인중개사 목록</a></li>
+                    <li><a href="{{ route('info') }}">공지사항</a></li>
+                    @if (!session('u_id'))
+                    <li><a href="{{ route('login') }}">로그인</a></li>
+                    <li><a href="{{ route('register') }}" class="active">회원가입</a></li>
+                    @else
+                    <li><form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <a href="{{route('logout')}}" style="color: white"
+                                onclick="event.preventDefault();
+                                                    this.closest('form').submit();">
+                                로그아웃
+                            </a>
+                            </li>
+                        </form></div>
+                    @endif
                 </ul>
 
                 <a href="#" class="burger light me-auto float-end mt-1 site-menu-toggle js-menu-toggle d-inline-block d-lg-none" data-toggle="collapse" data-target="#main-navbar">
