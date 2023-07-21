@@ -17,8 +17,10 @@
                     <h1 class="heading" data-aos="fade-up">
                         어떤 방을 찾으시나요? 펫 방이 찾아드립니다
                     </h1>
+                    <div class="narrow-w form-search d-flex align-items-stretch mb-3" data-aos="fade-up" data-aos-delay="200">
                         <input type="text" class="form-control px-4" name="search" id="search" placeholder="주소나 지하철역 명으로 검색해 주세요" />
-                        <button onclick="searchProperties()" class="btn btn-primary">검색</button>
+                        <button onclick="searchProperties()" class="btn btn-primary" style="width:100px;">검색</button>
+                    </div>
                 </div>
             </div>
         </div>

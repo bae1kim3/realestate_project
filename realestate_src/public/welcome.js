@@ -143,7 +143,6 @@ function generatePropertyItemHtml(photo) {
 }
 // 검색기능
 function searchProperties() {
-    
     var searchQuery = document.getElementById('search').value;
     var url = '/photos/more/' + '17' + '?search=' + searchQuery;
     var xhr = new XMLHttpRequest();
@@ -153,12 +152,11 @@ function searchProperties() {
             var response = JSON.parse(xhr.responseText);
             var itemContainer = document.getElementById('itemContainer');
             itemContainer.innerHTML = '';
-            console.log(response);
             response.photos.forEach(function (photo) {
                 var newPhotosHtml = generatePropertyItemHtml(photo);
                 itemContainer.insertAdjacentHTML('beforeend', newPhotosHtml);
                 itemContainer.style.maxWidth = 300 * response.photos.length + "px";
-                slidebtn = document.querySelector('.tns-nav');
+                // slidebtn = document.querySelector('.tns-nav');
                 // slidebtn.innerHTML='';
                 // for (let i = 0; i < response.photos.length; i++) {
                 //     var newBtn = generateBtn(i);
