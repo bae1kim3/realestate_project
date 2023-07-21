@@ -110,13 +110,14 @@
             <div id="map" style="position: relative;">
                 <div class="nav-container">
                     <nav class="nav justify-content-end p-3" style="background-color: #005555;">
-
-                        <select id="option3" name="gu" class="selectbox">
+{{-- 
+                        <select id="option3" name="facility" class="selectbox">
                             <option>주변 시설</option>
-                            <option id="option3" value="동물병원">동물병원</option>
-                            <option id="option3" value="주변 공원">공원</option>
-                        </select>
-                        {{-- <button id="getpark">주변 공원</button> --}}
+                            <option id="option_hospital" value="동물병원">동물병원</option>
+                            <option id="option_park" value="주변 공원">공원</option>
+                        </select> --}}
+                        <button id="gethospital">동물 병원</button>
+                        <button id="getpark">주변 공원</button>
                         <select id="option" name="gu" class="selectbox">
                             <option>구 선택</option>
                             <option id="option" value="달서구">달서구</option>
@@ -206,7 +207,7 @@
 
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9abea084b391e97658a9380c837b9608&libraries=services,clusterer,drawing"></script>
     <script src="{{asset('map2.js')}}"></script>
-    <script src="{{asset('bootstrap.bundle.min.js')}}"></script>
+    {{-- <script src="{{asset('bootstrap.bundle.min.js')}}"></script> --}}
     <script src="{{asset('tiny-slider.js')}}"></script>
     <script src="{{asset('aos.js')}}"></script>
     <script src="{{asset('navbar.js')}}"></script>

@@ -196,5 +196,15 @@
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="{{ asset('addr.js') }}"></script>
     <script src="{{ asset('register.js')}}"></script>
-
+    <script>
+        function checkid() {
+        var userid = document.getElementById('u_id').value;
+        if (userid) {
+            url = "{{ route('check-id') }}" + "?u_id=" + userid;
+            window.open(url, "chkid", "width=700,height=400");
+        } else {
+            alert('아이디를 입력하세요');
+        }
+    }
+    </script>
 </x-app-layout>
