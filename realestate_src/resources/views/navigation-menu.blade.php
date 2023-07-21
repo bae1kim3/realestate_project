@@ -14,7 +14,7 @@
                 <a href="{{route('welcome')}}" class="logo m-0 float-start">펫 방</a>
                 <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end">
                     <li class="active"><a href="{{route('welcome')}}">메인</a></li>
-                    @if (isset(session()->all()['auth']))
+                    @if (session('u_id'))
                     <li class="has-children">
                         <a href="#">추가메뉴</a>
                         <ul class="dropdown">
