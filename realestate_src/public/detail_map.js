@@ -5,8 +5,10 @@ let getShop = document.getElementById('getshop');
 let getHosp = document.getElementById('gethosp');
 let getWalk = document.getElementById('getwalk');
 let imageSize = new kakao.maps.Size(35, 35); // 마커이미지의 크기입니다의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-let pmarkers = [];
-// let imageSrc = "mapp.png";
+let shopMarkers = [];
+let hospMarkers = [];
+let walkMarkers = [];
+
 
 // 지도, 건물 마커 표시
     var container = document.getElementById('map');
@@ -39,7 +41,7 @@ let pmarkers = [];
 
 //api 버튼 클릭시 마커 표시
 getWalk.addEventListener("click", function() {
-    if(pmarkers.length == 0) {
+    if(walkMarkers.length == 0) {
         let pageNo = 0;
         let numOfRows = 20;
         let servicekey = "NK9bUcQ3fL1MAEyB8pXRvs9h%2FkslsZCDyjyb6ri5duPH%2F1e%2Bq%2F9gBYZEpaykEKq%2B25C8huHvBFK1PNQKjlK8%2Bw%3D%3D"
@@ -74,22 +76,22 @@ getWalk.addEventListener("click", function() {
                 marker.setZIndex(-2);
                 marker.setMap(map);
                 // 생성된 마커를 배열에 추가합니다
-                pmarkers.push(marker);
+                walkMarkers.push(marker);
             }
         })
         .catch(() => {console.log('error')})
     } else {
-        for (var i = 0; i < pmarkers.length; i++) {
-            pmarkers[i].setMap(null);
+        for (var i = 0; i < walkMarkers.length; i++) {
+            walkMarkers[i].setMap(null);
         }
-        pmarkers = [];
+        walkMarkers = [];
     }
 
 });
 
 // 동물 상점 마커
 getShop.addEventListener("click", function() {
-    if(pmarkers.length == 0) {
+    if(shopMarkers.length == 0) {
         let page = 1;
         let size = 10;
         const REST_API_KEY = 'dae00046c1734639efa0941b96eb225b';
@@ -109,7 +111,7 @@ getShop.addEventListener("click", function() {
         .then((response) => response.json())
         .then((data) => {
             let getdata = data.documents;
-            var imageSrc = 'https://cdn-icons-png.flaticon.com/128/2447/2447823.png';
+            var imageSrc = 'https://cdn-icons-png.flaticon.com/128/10714/10714015.png';
             
             markerImage = new kakao.maps.MarkerImage(
                 imageSrc,
@@ -130,22 +132,22 @@ getShop.addEventListener("click", function() {
                 marker.setZIndex(-2);
                 marker.setMap(map);
                 // 생성된 마커를 배열에 추가합니다
-                pmarkers.push(marker);
+                shopMarkers.push(marker);
             }
         })
         .catch(() => {console.log('error')})
     } else {
-        for (var i = 0; i < pmarkers.length; i++) {
-            pmarkers[i].setMap(null);
+        for (var i = 0; i < shopMarkers.length; i++) {
+            shopMarkers[i].setMap(null);
         }
-        pmarkers = [];
+        shopMarkers = [];
     }
 
 });
 
 // 동물병원 마커
 getHosp.addEventListener("click", function() {
-    if(pmarkers.length == 0) {
+    if(hospMarkers.length == 0) {
         let page = 1;
         let size = 10;
         const REST_API_KEY = 'dae00046c1734639efa0941b96eb225b';
@@ -164,6 +166,7 @@ getHosp.addEventListener("click", function() {
         fetch(url, options)
         .then((response) => response.json())
         .then((data) => {
+
             let getdata = data.documents;
             var imageSrc = 'https://cdn-icons-png.flaticon.com/128/10887/10887257.png';
             
@@ -186,15 +189,15 @@ getHosp.addEventListener("click", function() {
                 marker.setZIndex(-2);
                 marker.setMap(map);
                 // 생성된 마커를 배열에 추가합니다
-                pmarkers.push(marker);
+                hospMarkers.push(marker);
             }
         })
         .catch(() => {console.log('error')})
     } else {
-        for (var i = 0; i < pmarkers.length; i++) {
-            pmarkers[i].setMap(null);
+        for (var i = 0; i < hospMarkers.length; i++) {
+            hospMarkers[i].setMap(null);
         }
-        pmarkers = [];
+        hospMarkers = [];
     }
 
 });
