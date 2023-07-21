@@ -111,7 +111,7 @@ getShop.addEventListener("click", function() {
         .then((response) => response.json())
         .then((data) => {
             let getdata = data.documents;
-            var imageSrc = 'https://cdn-icons-png.flaticon.com/128/10714/10714015.png';
+            var imageSrc = 'https://cdn-icons-png.flaticon.com/128/2447/2447823.png';
             
             markerImage = new kakao.maps.MarkerImage(
                 imageSrc,

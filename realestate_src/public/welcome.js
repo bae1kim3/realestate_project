@@ -87,9 +87,30 @@
 // }
 
 
+
+// 3차때 가로스크롤 갱신 없애서 삭제
+// var scrollContainer = document.getElementById('scroll-container');
+// var scrollHandler = function () {
+    //     if (scrollContainer.scrollLeft + scrollContainer.clientWidth >= scrollContainer.scrollWidth - 1) {
+        //         loadMorePhotos();
+        //     }
+        // };
+        
+        
+        // function attachScrollHandler() {
+            //     scrollContainer.addEventListener('scroll', scrollHandler);
+            //   }
+            // attachScrollHandler();
+            
+// html 생성 폼
+function generateitemContainerHtml() {
+    var html = '<div class="property-item" style="width: 350px;">'
+                +'</div>'
+    return html;
+}
 function generatePropertyItemHtml(photo) {
     var deposit = photo.p_deposit.toLocaleString();
-    var html = '<div class="property-item" style="width: 350px;">' +
+    var html = 
         '<a href="/sDetail/' + photo.s_no + '" class="img">' +
         '<img src="' + photo.url + '" alt="Image" class="img-fluid" style="width: 350px; height: 300px; margin-bottom: 50px;" />' +
         '</a>' +
@@ -152,26 +173,12 @@ function generatePropertyItemHtml(photo) {
         '</div>' +
         '<a href="/sDetail/' + photo.s_no + '" class="btn btn-primary py-2 px-3">매물 보러가기</a>' +
         '</div>' +
-        '</div>' +
-        '</div>';
+        '</div>' ;
 
     return html;
 }
 
-// 3차때 가로스크롤 갱신 없애서 삭제
-// var scrollContainer = document.getElementById('scroll-container');
-// var scrollHandler = function () {
-//     if (scrollContainer.scrollLeft + scrollContainer.clientWidth >= scrollContainer.scrollWidth - 1) {
-//         loadMorePhotos();
-//     }
-// };
-
-
-// function attachScrollHandler() {
-//     scrollContainer.addEventListener('scroll', scrollHandler);
-//   }
-// attachScrollHandler();
-
+// 검색기능
 function searchProperties() {
     var searchQuery = document.getElementById('search').value;
     var url = '/photos/more/' + 17 + '?search=' + searchQuery;
@@ -180,11 +187,14 @@ function searchProperties() {
     xhr.onload = function () {
         if (xhr.status === 200) {
             var response = JSON.parse(xhr.responseText);
-            var itemContainer = document.getElementById('property-slider');
+            var itemContainer = document.getElementById('itemContainer');
             itemContainer.innerHTML = '';
+            newContainer = itemContainer.generateitemContainerHtml();
+            insertAdjacentHTML('beforeend', newContainer);
+            let choiceDiv = document.getElementsByClassName('property-item');
             response.photos.forEach(function (photo) {
                 var newPhotosHtml = generatePropertyItemHtml(photo, 17);
-                itemContainer.insertAdjacentHTML('beforeend', newPhotosHtml);
+                choiceDiv.insertAdjacentHTML('beforeend', newPhotosHtml);
             });
         } else {
             console.error('Error: ' + xhr.status);

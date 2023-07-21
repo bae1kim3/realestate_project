@@ -56,8 +56,8 @@
                     </div>
                 </div>
 
-                <x-validation-errors class="mb-4" />
         <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
+                <x-validation-errors class="mb-4" />
             <form action="{{ route('struct.insert.post') }}" id="frm" method="POST" enctype="multipart/form-data">
                 @csrf
                 <x-input type="file" name="photo[]" class="form-control-file mt-2" multiple />
@@ -66,20 +66,20 @@
                         {{ session('status') }}
                     </div>
                 @endif
-                @foreach($errors->all() as $error)
+                {{-- @foreach($errors->all() as $error)
                     <div class="mt-3 alert text-red-600 " role="alert">
                         {{ $error }}
                     </div>
-                @endforeach
+                @endforeach --}}
                 <div class="col-6 mb-3" role="alert" style="display: none" id="err_up"></div>
                     <div class="col-6 mb-3">
-                        <x-label for="s_name" class="">건물 이름</x-label>
+                        <x-label for="s_name" style="margin-top:20px">건물 이름</x-label>
                         <input type="text" placeholder="건물 이름" name="s_name" id="s_name" value="{{old('s_name')}}" class="form-control" required class="mt-2 dark:bg-gray-600 dark:text-white"/>
                     </div>
                     <div class="col-6 mb-3">
                         <x-label for="s_addr">주소</x-label>
                         <x-input type="text" id="sample6_address" name="s_addr" placeholder="대구 지역 내 도로명 주소" readonly required value="{{old('s_addr')}}" class="form-control"/>
-                        <x-button type="button" class="mt-3 dark:text-white dark:bg-gray-600" onclick="sample6_execDaumPostcode()" >우편번호 찾기</x-button>
+                        <x-button type="button" class="btn btn-primary py-2 px-3" onclick="sample6_execDaumPostcode()" style="margin-top:10px">우편번호 찾기</x-button>
                     </div>
                 <x-label for="sell_cat">매매 유형</x-label>
                 <div class="col-6 mb-3">
@@ -141,8 +141,8 @@
                 <br>
 
                 <div class="col-6 mb-3">
-                <x-button type="button" id="submit_btn" class="dark:bg-gray-600 dark:text-white">방 올리기</x-button>
-                <x-button type="button" onclick="location.href='{{url('/')}}'" class="dark:bg-gray-600 dark:text-white">취소</x-button>
+                <x-button type="button" id="submit_btn" class="btn btn-primary py-2 px-3">방 올리기</x-button>
+                <x-button type="button" onclick="location.href='{{url('/')}}'" class="btn btn-primary py-2 px-3">취소</x-button>
                 </div>
             </form>
 

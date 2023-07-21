@@ -40,8 +40,8 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <div class="property-slider-wrap">`
-                        <div class="property-slider" style="max-width:8000px;">
+                    <div class="property-slider-wrap">
+                        <div class="property-slider" style="max-width:8000px;" id="itemContainer">
                             @foreach($photos as $photo)
                             <div class="property-item" style="width: 350px;">
                                 <a href="{{route('struct.detail',['s_no'=>$photo->s_no])}}" class="img">
@@ -497,5 +497,5 @@
             </div>
         </div>
 
-
+<script src="{{asset('welcome.js')}}"></script>
 </x-app-layout>
