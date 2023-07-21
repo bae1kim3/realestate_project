@@ -20,10 +20,38 @@ class PhotoLoadController extends Controller
         return view('welcome', compact('photos', 'lastPhotoId'));
     }
 
+    // public function loadMorePhotos(Request $request)
+    // {
+    //     $lastPhotoId = $request->lastPhotoId;
+    //     $updatePhoto = 5;
+    //     $search = $request->input('search');
+
+    //     $query = Photo::join('s_infos', 's_infos.s_no', 'photos.s_no')
+    //         ->where('mvp_photo', '1')
+    //         ->orderBy('photos.updated_at', 'desc');
+
+    //     // 검색기능
+    //     if (!empty($search)) {
+    //         $query->where(function ($query) use ($search) {
+    //             $query->where('s_infos.s_stai', 'LIKE', "%{$search}%") //  지하철역 검색
+    //                 ->orWhere('s_infos.s_add', 'LIKE', "%{$search}%"); // 도로명 주소 검색
+    //         $lastPhotoId = 0;
+    //         });
+    //     }
+
+    //     $photos = $query->skip($lastPhotoId)
+    //         ->take($updatePhoto)
+    //         ->get();
+
+    //     // 여태까지 출력된 사진의 총 갯수
+    //     $lastPhotoId = $lastPhotoId + $updatePhoto;
+
+    //     return response()->json(['photos' => $photos, 'lastPhotoId' => $lastPhotoId]);
+    // }
+
+
     public function loadMorePhotos(Request $request)
     {
-        $lastPhotoId = $request->lastPhotoId;
-        $updatePhoto = 5;
         $search = $request->input('search');
 
         $query = Photo::join('s_infos', 's_infos.s_no', 'photos.s_no')
@@ -31,21 +59,16 @@ class PhotoLoadController extends Controller
             ->orderBy('photos.updated_at', 'desc');
 
         // 검색기능
-        if (!empty($search)) {
             $query->where(function ($query) use ($search) {
                 $query->where('s_infos.s_stai', 'LIKE', "%{$search}%") //  지하철역 검색
                     ->orWhere('s_infos.s_add', 'LIKE', "%{$search}%"); // 도로명 주소 검색
-            $lastPhotoId = 0;
             });
-        }
+        
 
-        $photos = $query->skip($lastPhotoId)
-            ->take($updatePhoto)
+        $photos = $query
+            ->take(17)
             ->get();
 
-        // 여태까지 출력된 사진의 총 갯수
-        $lastPhotoId = $lastPhotoId + $updatePhoto;
-
-        return response()->json(['photos' => $photos, 'lastPhotoId' => $lastPhotoId]);
+        return response()->json(['photos' => $photos]);
     }
 }
