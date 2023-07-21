@@ -63,10 +63,9 @@ class PhotoLoadController extends Controller
                 $query->where('s_infos.s_stai', 'LIKE', "%{$search}%") //  지하철역 검색
                     ->orWhere('s_infos.s_add', 'LIKE', "%{$search}%"); // 도로명 주소 검색
             });
-        
-
+        $searchCount = $query->count();
         $photos = $query
-            ->take(17)
+            ->take($searchCount)
             ->get();
 
         return response()->json(['photos' => $photos]);

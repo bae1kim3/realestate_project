@@ -31,39 +31,7 @@
 // var loadingPhotos = false;
 // var lastPhotoId = document.querySelector('#lastPhotoItem').dataset.id;
 
-// function loadMorePhotos() {
-//     if (loadingPhotos) return;
-//     loadingPhotos = true;
-//     var url = '/photos/more/' + lastPhotoId;
 
-//     var searchQuery = document.getElementById('search').value;
-//     url += '?search=' + searchQuery;
-
-//     var xhr = new XMLHttpRequest();
-//     xhr.open('GET', url);
-//     xhr.onload = function () {
-//         if (xhr.status === 200) {
-//             var response = JSON.parse(xhr.responseText);
-//             var scrollContainer = document.getElementById('scroll-container');
-//             var newPhotos = response.photos.slice(0, 5);
-//             newPhotos.forEach(function (photo) {
-//                 var newPhotosHtml = generatePhotoHtml(photo, response.lastPhotoId);
-//                 scrollContainer.insertAdjacentHTML('beforeend', newPhotosHtml);
-//             });
-//             if (response.lastPhotoId >= 20) {
-//                 scrollContainer.removeEventListener('scroll', scrollHandler);
-//                 loadingPhotos = false;
-//                 return;
-//             }
-            
-//             loadingPhotos = false;
-//             lastPhotoId = response.lastPhotoId;
-//         } else {
-//             console.error('Error: ' + xhr.status);
-//         }
-//     };
-//     xhr.send();
-// }
 
 // function generatePhotoHtml(photo, lastPhotoId) {
 //     var deposit = photo.p_deposit.toLocaleString();
@@ -106,6 +74,7 @@
 function generatePropertyItemHtml(photo) {
     var deposit = photo.p_deposit.toLocaleString();
     var html = 
+        '<div class="property-item tns-item tns-slide-cloned" style="width: 350px;" aria-hidden="true" tabindex="-1">' +
         '<a href="/sDetail/' + photo.s_no + '" class="img">' +
         '<img src="' + photo.url + '" alt="Image" class="img-fluid" style="width: 350px; height: 300px; margin-bottom: 50px;" />' +
         '</a>' +
@@ -127,19 +96,19 @@ function generatePropertyItemHtml(photo) {
         '<span class="caption">';
 
     switch (photo.s_option) {
-        case 0:
+        case '0':
             html += '아파트';
             break;
-        case 1:
+        case '1':
             html += '단독주택';
             break;
-        case 2:
+        case '2':
             html += '오피스텔';
             break;
-        case 3:
+        case '3':
             html += '빌라';
             break;
-        case 4:
+        case '4':
             html += '원룸';
             break;
         default:
@@ -153,10 +122,10 @@ function generatePropertyItemHtml(photo) {
         '<span class="caption"> 대형동물';
 
     switch (photo.animal_size) {
-        case 0:
+        case '0':
             html += ' <strong>X</strong>';
             break;
-        case 1:
+        case '1':
             html += ' <strong>O</strong>';
             break;
         default:
@@ -172,11 +141,11 @@ function generatePropertyItemHtml(photo) {
 
     return html;
 }
-
 // 검색기능
 function searchProperties() {
+    
     var searchQuery = document.getElementById('search').value;
-    var url = '/photos/more/' + 17 + '?search=' + searchQuery;
+    var url = '/photos/more/' + '17' + '?search=' + searchQuery;
     var xhr = new XMLHttpRequest();
     xhr.open('GET', url);
     xhr.onload = function () {
@@ -184,15 +153,27 @@ function searchProperties() {
             var response = JSON.parse(xhr.responseText);
             var itemContainer = document.getElementById('itemContainer');
             itemContainer.innerHTML = '';
-            itemContainer.insertAdjacentHTML('beforeend', '<div class="property-item" style="width: 350px;"></div>');
-            let choiceDiv = document.getElementsByClassName('property-item');
+            console.log(response);
             response.photos.forEach(function (photo) {
-                var newPhotosHtml = generatePropertyItemHtml(photo, 17);
-                choiceDiv.insertAdjacentHTML('beforeend', newPhotosHtml);
+                var newPhotosHtml = generatePropertyItemHtml(photo);
+                itemContainer.insertAdjacentHTML('beforeend', newPhotosHtml);
+                itemContainer.style.maxWidth = 300 * response.photos.length + "px";
+                slidebtn = document.querySelector('.tns-nav');
+                // slidebtn.innerHTML='';
+                // for (let i = 0; i < response.photos.length; i++) {
+                //     var newBtn = generateBtn(i);
+                //     slidebtn.insertAdjacentHTML('beforeend', newBtn);
+                // }
             });
         } else {
             console.error('Error: ' + xhr.status);
         }
-    };
+    }
     xhr.send();
 }
+
+// function generateBtn(i) {
+//     var html = 
+//         '<button type="button" data-nav="' + i + '" aria-controls="itemContainer" style aria-label="Carousel Page ' + (i + 1) + '" class tabindex="-1"></button>';
+//     return html;
+// }

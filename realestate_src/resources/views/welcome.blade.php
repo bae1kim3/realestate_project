@@ -41,7 +41,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="property-slider-wrap">
-                        <div class="property-slider" style="max-width:8000px;" id="itemContainer">
+                        <div class="property-slider" id="itemContainer" style="max-width:8000px;">
                             @foreach($photos as $photo)
                             <div class="property-item" style="width: 350px;">
                                 <a href="{{route('struct.detail',['s_no'=>$photo->s_no])}}" class="img">
