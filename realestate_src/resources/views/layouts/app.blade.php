@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="{{asset('aos.css')}}" />
     <link rel="stylesheet" href="{{asset('style.css')}}" />
 
-    {{-- 추가 css나 js 있으면 여기 쓰기 --}}
+    {{-- 추가 css 있으면 여기 쓰기 --}}
     @if (isset($header))
         <header>
             {{ $header }}
