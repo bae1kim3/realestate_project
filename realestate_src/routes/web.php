@@ -97,10 +97,11 @@ Route::get('/password-reset',[ResetPasswordController::class, 'resetps'])
 Route::get('/chk-del-user', [UserController::class, 'chkDelUser'])->name('profile.chk_del_user');
 Route::post('/chk-del-user-post',[UserController::class, 'chkDelUserPost'])->name('profile.chk_del_user.post');
 
-//건물 수정, 삭제
+//건물 작성
 Route::post('/s-insert-post',[StructureController::class, 'structInsertStore'])->name('struct.insert.post');
 
-Route::get('/sDetail/{s_no}', [StructureController::class, 'structInsertStore'])->name('struct.detail.get');
+Route::get('/sDetail/{s_no}', [StructureController::class, 'structInsertStore'])->name('struct.detail.get'); // 이거 안쓰는건가..??
+//건물 상세
 Route::get('/sDetail/{s_no}', [StructureDetailController::class, 'stateInfo'])->name('struct.detail');
 
 Route::get('/welcome', [PhotoLoadController::class, 'index'])->name('welcome.com');
@@ -124,5 +125,9 @@ Route::get('/info',[NavController::class, 'info'])->name('info');
 
 Route::get('/sellers_info',[NavController::class, 'sellers_info'])->name('sellers_info');
 
+// 페이스북 로그인
 Route::get('auth/facebook',[FacebookController::class, 'facebookpage']);;
 Route::get('auth/facebook/callback',[FacebookController::class, 'facebookredirect']);;
+
+// 건물 수정
+Route::get('/sDetail/{s_no}/update', [StructureController::class, 'structUpdate'])->name('struct.update');
