@@ -171,7 +171,7 @@
         </section>
 
 {{-- 찜한 매물 출력 --}}
-    @if(!(Auth::user()->seller_license))
+    @if(session('seller_license') === null)
         <div class="section sec-testimonials">
             <div class="container">
                 <div class="row mb-5 align-items-center">
@@ -197,11 +197,11 @@
                     @if($liked_info)
                         @foreach($liked_info as $info)
                         <div class="item">
-                            <div class="testimonial">
+                            <div class="testimonial" >
                                 <a href="{{route('struct.detail',['s_no'=>$info->s_no])}}" class="img">
-                                    <img src="{{asset($info->url)}}" alt="Image" class="img-fluid" style="width: 350px; height: 300px; margin-bottom: 30px;" />
+                                    <img src="{{asset($info->url)}}" alt="Image" class="img-fluid" style="width: 350px; height: 300px;" />
                                 </a>
-                                <div class="info_con">
+                                <div class="info_con" style="padding:30px;">
                                     <a href="{{route('struct.detail',['s_no'=>$info->s_no])}}">
                                         <div class="h5 liked_title" style="color: #005555; font-weight:bold; display:inline-block; border-bottom: 3px solid #005555; padding-bottom:5px">{{ $info->s_name }}</div>
                                     </a>
@@ -250,9 +250,9 @@
                             </div>
                         </div>
                         @endforeach
-                    @else
-                    <span>찜한 매물이 없습니다</span>
-                    @endif
+                        @else
+                        <div>찜한 매물이 없습니다</div>
+                        @endif
                     </div>
                 </div>
             </div>
