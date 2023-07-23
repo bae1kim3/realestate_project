@@ -36,6 +36,7 @@ class StructureController extends Controller
                 , 's_ele' => 'required|in:0,1'
                 , 's_addr' => 'required|string'
                 // ********************* TODO : x,y 위경도 범위 유효성검사 넣기!!
+                , 's_option'=> 'required|in:0,1,2,3,4'// 0723 jy add
 
             ]
         );
@@ -123,6 +124,7 @@ class StructureController extends Controller
             $data['p_deposit'] = $req->p_deposit;
             $data['p_month'] = $req->p_month;
             $data['animal_size'] = $req->animal_size;
+            $data['s_option'] = $req->s_option; //0723 jy add
 
             // 건물 옵션 del 0625 jy
             // $data01['s_parking'] = $req->s_parking;
@@ -217,5 +219,9 @@ class StructureController extends Controller
             // add 0625 end jy
         }
     }
+    
+    public function structUpdate(Request $req) {
+
+    }
 }
-// }
+

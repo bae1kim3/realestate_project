@@ -90,6 +90,20 @@
                     <label for="sell_cat_buy">매매</-label>
                     <input type="radio" name="sell_cat_info" value="매매" id="sell_cat_buy" {{old('sell_cat_info') === '매매'? 'checked' : ''}} />
                 </div>
+                {{-- 0723 jy add 건물유형 --}}
+                <x-label for="s_options">건물 유형</x-label>
+                <div class="col-6 mb-3">
+                    <label for="s_info_apt">아파트</label>
+                    <input type="radio" name="s_option" value="0" id="s_info_apt" {{old('s_option') === '0'? 'checked' : ''}} />
+                    <label for="s_info_house">단독주택</-label>
+                    <input type="radio" name="s_option" value="1" id="s_info_house" {{old('s_option') === '1'? 'checked' : ''}} />
+                    <label for="s_info_offi">오피스텔</-label>
+                    <input type="radio" name="s_option" value="2" id="s_info_offi" {{old('s_option') === '2'? 'checked' : ''}} />
+                    <label for="s_info_villa">빌라</-label>
+                    <input type="radio" name="s_option" value="3" id="s_info_villa" {{old('s_option') === '3'? 'checked' : ''}} />
+                    <label for="s_info_one">원룸</-label>
+                    <input type="radio" name="s_option" value="4" id="s_info_one" {{old('s_option') === '4'? 'checked' : ''}} />
+                </div>
                 <div class="col-6 mb-3">
                 <x-label for="s_size"  class="col-6 mb-3">방 면적</x-label>
                 <x-input type="text" name="s_size" id="s_size" required maxlength="11" value="{{old('s_size')}}" class="form-control"/>평
