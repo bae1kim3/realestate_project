@@ -57,7 +57,7 @@
                             <input type="hidden" value="{{$id}}" id="id">
                             <input type="hidden" value="{{$likedFlg}}" id="likedFlg">
 
-                            @if(!session('seller_license'))
+                            @if(session('seller_license') === null)
                             {{-- <div style="position:absolute; z-index:100; right:10px; top:10px"> --}}
                                 <div style="position:absolute; z-index:100; right:10px; top:10px; background-color:white; width:3em; height:3em; border-radius:50%; border: solid 0.5px gray;"></div>
                                     <span class="fa-regular fa-heart fa-2x emp-heart" id="emp_heart" onclick="storeLiked()" style="position:absolute; z-index:100; right:17px; top:20px;"></span>
