@@ -44,14 +44,16 @@
     flex: 1;
     position: relative;
 }
-
+.nav {
+    height:120px;
+}
 .nav-container {
     position: sticky;
     top: 0;
     z-index: 10;
     background-color: #1f2937;
   }
-  
+
   .nav-container nav {
     display: flex;
     justify-content: flex-end;
@@ -73,7 +75,7 @@
 .dropdown-toggle,
 #getpark,
 .selectbox {
-    width: 6vw;
+    width: 100px;
     cursor: pointer;
     padding: 10px;
     min-width: 70px;
@@ -95,7 +97,7 @@
 }
 
 .open {
-    width: 6vw;
+    width: 110px;
     min-width: 70px;
     display: inline-block;
     white-space: nowrap; /* 텍스트 줄바꿈 방지 */
@@ -117,13 +119,13 @@
     display: block;
     margin-bottom: 5px;
 }
-.selected {
+/* .selected {
     border: 3px solid yellowgreen !important;
     box-sizing: border-box;
 }
 .selectedpark {
     background-color: yellowgreen !important;
-}
+} */
 
 /* #u_id {
     text-align: center;
@@ -169,3 +171,31 @@ a:hover {
 .nab_div {
     display: inline-block;
 }
+.selectbox,
+#getpark,
+#gethosp,
+#getshop {
+    width: 90px;
+    height: 70px;
+}
+.selectbox {
+    width: 100px;
+}
+#gethosp,
+#getshop {
+    padding-top: 5px;
+}
+
+/* 1000px 미만인 경우 */
+/* @media screen and (max-width: 1000px) {
+    .nav-container nav {
+        width: 700px;
+        flex-direction: row; 
+        flex-wrap: nowrap; 
+    }
+    .nav-container {
+        overflow-x: auto; 
+        white-space: nowrap; 
+    }
+}
+ */
