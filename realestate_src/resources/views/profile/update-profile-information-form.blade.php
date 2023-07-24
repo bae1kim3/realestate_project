@@ -157,8 +157,8 @@
                 </div>
                 <div class="testimonial-slider-wrap">
                     <div class="testimonial-slider">
-                    @if(!empty($liked_info[0]))
-                        @foreach($liked_info as $info)
+                    @if(!empty($photos[0]))
+                        @foreach($photos as $info)
                         <div class="item">
                             <div class="testimonial" >
                                 <a href="{{route('struct.detail',['s_no'=>$info->s_no])}}" class="img">

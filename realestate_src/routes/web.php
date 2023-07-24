@@ -59,6 +59,7 @@ Route::get('/', function () {
 
 Route::get('profileUp',[ProfileController::class, 'goPro'])->name('profile');
 
+Route::get('profileUp',[ProfileController::class, 'sellerprofile'])->name('sellpro');
 
 Route::post('/UpdatePassPost', [ProfileController::class, 'UpdatePassPost'])->name('up_pass');
 
@@ -136,3 +137,4 @@ Route::get('auth/facebook/callback',[FacebookController::class, 'facebookredirec
 // 건물 수정
 Route::get('/sDetail/{s_no}/edit', [StructureController::class, 'structEdit'])->name('struct.edit');
 Route::put('/sDetail/{s_no}', [StructureController::class, 'structUpdate'])->name('struct.update');
+

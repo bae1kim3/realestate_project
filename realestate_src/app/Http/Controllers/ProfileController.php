@@ -72,4 +72,27 @@ class ProfileController extends Controller
             return view('profile.update-profile-information-form', compact('photos', 'lastPhotoId', 'liked_info'));
     }
 }
+public function sellerprofile(){
+    $lastPhotoId = 17;
+    $sellerli = session('seller_license');
+    $user = User::where('seller_license', $sellerli)->first();
+
+    if ($user) {
+        $s_info = S_info::where('u_no', $user->id)->first();
+
+        if ($s_info) {
+            $photos = Photo::join('s_infos', 's_infos.s_no', 'photos.s_no')
+            ->where('mvp_photo', '1')
+            ->orderBy('photos.updated_at', 'desc')
+            ->take($lastPhotoId)
+            ->get();
+            return view('profile.update-profile-information-form', compact('photos', 'lastPhotoId','s_info'));
+        } else {
+            return redirect()->back()->with('error', 's_info not found.');
+        }
+    } else {
+        return redirect()->back()->with('error', 'User not found.');
+    }
+}
+
 }

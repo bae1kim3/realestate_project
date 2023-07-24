@@ -21,7 +21,11 @@
                             @if (session('seller_license'))
                             <li><a href={{ route('dashboard') }}>매물올리기</a></li>
                             @endif
+                            @if (session('seller_license'))
+                            <li><a href="{{ route('sellpro') }}">내 정보</a></li>
+                            @else
                             <li><a href="{{ route('profile') }}">내 정보</a></li>
+                            @endif
                             <li><a href="#">Sell Property</a></li>
                             <li class="has-children">
                                 <a href="#">Dropdown</a>
