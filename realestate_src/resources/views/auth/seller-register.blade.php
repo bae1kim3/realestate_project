@@ -61,7 +61,7 @@
                 <x-validation-errors class="mb-4" />
                 <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
                     <form method="POST" action="{{ route('register') }}">
-                    
+
                         @csrf
                         <div class="col-6 mb-3">
                             <x-label for="name" value="{{ __('이름') }}" />
@@ -116,7 +116,7 @@
                         <div class="col-6 mb-3">
                             <x-label for="pw_question" value="{{ __('비밀번호 찾기 전용 질문') }}" class="dark:text-white" />
                             <div class="dropdown">
-                                <button class="dropdown-toggle" onclick="toggleDropdown()" type="button" style="width: 400px">
+                                <button class="dropdown-toggle" onclick="toggleDropdown()" type="button" style="width: 60%">
                                     질문
                                     <span class="arrow">&#9662;</span>
                                 </button>

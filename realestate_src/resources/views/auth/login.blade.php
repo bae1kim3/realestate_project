@@ -103,8 +103,8 @@
     @endif
 
     <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
-        <x-validation-errors class="mb-4" />
         <form method="POST" action="{{ route('login') }}">
+            <x-validation-errors class="mb-4" />
             @csrf
             <div class="col-6 mb-3">
                 <x-label for="u_id" value="{{ __('User ID') }}" class="dark:text-gray-100" />
@@ -126,10 +126,11 @@
                     href="{{ route('find-username') }}">
                     {{ __('아이디를 잊었나요?') }}
                 </a>
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 dark:text-gray-100"
-                    href="{{ route('find-userpassinput') }}">
+                @if (Route::has('password.request'))
+                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
                     {{ __('비밀번호를 잊었나요?') }}
                 </a>
+            @endif
             </p>
 
             <div class="flex items-center justify-end mt-4">
@@ -137,9 +138,6 @@
                     {{ __('Log in') }}
                 </button>
             <a href="{{ url('auth/facebook') }}"><img style="width:20%; height:15%" src="{{ asset('facebook.jpg') }}" alt="Facebook"></a>
-            </div>
-            <div style="text-align: center;">
-
             </div>
         </form>
     </div>

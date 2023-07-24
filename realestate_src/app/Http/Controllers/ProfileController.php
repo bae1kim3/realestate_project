@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\Photo;
+use App\Models\S_info;
+use App\Models\Jjim;
+use Illuminate\Support\Facades\Auth;
+
 
 class ProfileController extends Controller
 {
@@ -37,6 +42,34 @@ class ProfileController extends Controller
     }
     }
     public function goPro(){
-        return view('profile.update-profile-information-form');
+        $lastPhotoId = 17;
+        $photos = Photo::join('s_infos', 's_infos.s_no', 'photos.s_no')
+            ->where('mvp_photo', '1')
+            ->orderBy('photos.updated_at', 'desc')
+            ->take($lastPhotoId)
+            ->get();
+
+        $liked_info = [];
+        if(Auth::check()) {
+            if(session('seller_license')== null) {
+                $id = Auth::user()->id;
+                // $liked_list = Jjim::where('id', $id)->select('s_no')->take(10)->get();
+                $liked_list = Jjim::where('id', $id)->pluck('s_no')->toArray();
+
+                // $liked_list = Jjim::join('photos', 'photos.s_no', 'jjims.s_no')
+                // ->where('id', $id)->where('mvp_photo', '1')
+                // ->take(10)
+                // ->get();
+                // $liked_s_info =
+
+                $liked_info = Photo::join('s_infos', 's_infos.s_no', 'photos.s_no')
+                ->where('mvp_photo', '1')
+                ->whereIn('photos.s_no', $liked_list)
+                ->orderBy('photos.updated_at', 'desc')
+                ->take(10)
+                ->get();
+            }
+            return view('profile.update-profile-information-form', compact('photos', 'lastPhotoId', 'liked_info'));
     }
+}
 }

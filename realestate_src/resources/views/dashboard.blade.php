@@ -177,61 +177,42 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="{{ asset('addr.js') }}"></script>
 
-{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    function checkid() {
-        var userid = document.getElementById('u_id').value;
-        if (userid) {
-            url = "{{ route('check-id') }}" + "?u_id=" + userid;
-            window.open(url, "chkid", "width=700,height=400");
-        } else {
-            alert('아이디를 입력하세요');
+    var geocoder = new kakao.maps.services.Geocoder();
+
+const submit_btn = document.getElementById('submit_btn');
+
+submit_btn.addEventListener('click', () => {
+    var val = document.getElementById('sample6_address').value;
+    var s_log = document.getElementById('s_log');
+    var s_lat = document.getElementById('s_lat');
+    if(!val) {
+        window.scrollTo(0,0);
+        $err = document.getElementById('err_up').innerHTML = "정보를 입력하세요";
+        err_up.style.display = 'block';
+        return;
+    }
+
+    var callback = function(result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+            // console.log(result);
+            // console.log(result[0]['x']);
+            // console.log(result[0]['y']);
+            s_lat.value = result[0]['x'];
+            s_log.value = result[0]['y'];
+
+            document.getElementById('frm').submit();
+
+            document.getElementById('submit_btn').setAttribute("disabled", "true");
+
         }
-    }
+    };
+    geocoder.addressSearch(val, callback);
+});
 
-    function toggleDropdown() {
-        var dropdownMenu = document.getElementById('dropdownMenu');
-        dropdownMenu.classList.toggle('show');
-    }
 
-    function selectOption(value, label) {
-        document.getElementById('selectedOption').value = value;
-        document.querySelector('.dropdown-toggle').innerHTML = label + '<span class="arrow">&#9662;</span>';
 
-        var dropdownMenu = document.getElementById('dropdownMenu');
-        dropdownMenu.classList.remove('show');
 
-        var pwQuestionInput = document.querySelector('input[name="pw_question"]');
-        pwQuestionInput.value = value;
-        console.log(pwQuestionInput);
-    }
-
-    $(document).ready(function() {
-        // Input field change event handler
-        $('#u_id').on('input', function() {
-            var u_id = $(this).val();
-
-            // Perform AJAX request to check if the u_id is already taken
-            $.ajax({
-                url: '/check-uid', // Replace with the actual URL for checking duplicate u_id
-                method: 'POST',
-                data: {
-                    u_id: u_id
-                },
-                success: function(response) {
-                    if (response.exists) {
-                        // u_id is already taken
-                        $('#u_id').addClass('is-invalid');
-                        $('#u_id-error').html('This User ID is already taken.');
-                    } else {
-                        // u_id is available
-                        $('#u_id').removeClass('is-invalid');
-                        $('#u_id-error').html('');
-                    }
-                }
-            });
-        });
-    });
-</script> --}}
+</script>
 
 </x-app-layout>

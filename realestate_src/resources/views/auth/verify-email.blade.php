@@ -1,7 +1,4 @@
 <x-app-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-        </x-slot>
 <div class="hero page-inner overlay" style="background-image: url('{{ asset('images/hero_bg_1.jpg') }}')">
       <div class="container">
         <div class="row justify-content-center align-items-center">
@@ -50,6 +47,4 @@
         </div>
       </div>
     </div>
-</x-authentication-card>
-
 </x-app-layout>

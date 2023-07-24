@@ -23,54 +23,116 @@
 <x-app-layout>
     <div class="hero page-inner overlay" style="background-image: url('{{ asset('images/hero_bg_1.jpg') }}')">
         <div class="container">
-            <div class="row justify-content-center align-items-center">
-                <div class="col-lg-9 text-center mt-5">
-                    <h1 class="heading" data-aos="fade-up">마이페이지</h1>
+    <div class="row justify-content-center align-items-center">
+      <div class="col-lg-9 text-center mt-5">
+        <h1 class="heading" data-aos="fade-up">마이페이지</h1>
 
-                    <nav aria-label="breadcrumb" data-aos="fade-up" data-aos-delay="200">
-                        <ol class="breadcrumb text-center justify-content-center">
-                            <li id="use" sytle="color:white"><a href="{{ route('welcome') }}">home</a></li>
-                            <p> / </p>
-                            <li id="sell">
-                                마이페이지
-                            </li>
-                        </ol>
-                    </nav>
-                </div>
-            </div>
-        </div>
+        <nav
+          aria-label="breadcrumb"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
+          <ol class="breadcrumb text-center justify-content-center">
+            <li class="breadcrumb-item"><a href="index.html">메인</a></li>
+            <li
+              class="breadcrumb-item active text-white-50"
+              aria-current="page"
+            >
+            마이페이지
+            </li>
+          </ol>
+        </nav>
+      </div>
     </div>
-
+  </div>
+</div>
     <div class="section">
-        <div class="container">
-            <div class="row mb-5 align-items-center">
-                <div class="col-lg-6">
-                    <h2 class="font-weight-bold text-primary heading">
-                        내가 찜한 매물
-                    </h2>
-                </div>
-                <div class="col-lg-6 text-lg-end">
-                    <p>
-                        <a href="{{route('map.map')}}" target="_blank" class="btn btn-primary text-white py-3 px-4">지도에서 매물 검색</a>
-                    </p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="property-slider-wrap">`
-                        <div class="property-slider">
+{{-- 찜한 매물 출력 --}}
+    @if(Auth::check() && session('seller_license') === null)
+            <div class="container">
+                <div class="row mb-5 align-items-center">
+                    <div class="col-md-6">
+                        <h2 class="font-weight-bold heading text-primary mb-4 mb-md-0">
+                            찜한 매물
+                        </h2>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <div id="testimonial-nav">
+                            <span class="prev" data-controls="prev">Prev</span>
 
-                            <!-- .item -->
-                        </div>
-
-                        <div id="property-nav" class="controls" tabindex="0" aria-label="Carousel Navigation">
-                            <span class="prev" data-controls="prev" aria-controls="property" tabindex="-1">이전</span>
-                            <span class="next" data-controls="next" aria-controls="property" tabindex="-1">다음</span>
+                            <span class="next" data-controls="next">Next</span>
                         </div>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-lg-4"></div>
+                </div>
+                <div class="testimonial-slider-wrap">
+                    <div class="testimonial-slider">
+                    @if(!empty($liked_info[0]))
+                        @foreach($liked_info as $info)
+                        <div class="item">
+                            <div class="testimonial" >
+                                <a href="{{route('struct.detail',['s_no'=>$info->s_no])}}" class="img">
+                                    <img src="{{asset($info->url)}}" alt="Image" class="img-fluid" style="width: 350px; height: 300px;" />
+                                </a>
+                                <div class="info_con" style="padding:30px;">
+                                    <a href="{{route('struct.detail',['s_no'=>$info->s_no])}}">
+                                        <div class="h5 liked_title" style="color: #005555; font-weight:bold; display:inline-block; border-bottom: 3px solid #005555; padding-bottom:5px">{{ $info->s_name }}</div>
+                                    </a>
+                                    <div style="margin-bottom:8px">{{ $info->s_add }}</div>
+                                    <span class="city d-block mb-3" style="color:black; font-weight:bold; font-size:20px;">{{ number_format($info->p_deposit) }}
+                                                @if ($info->s_type === '월세')
+                                                / {{ number_format($info->p_month) }}
+                                                @endif
+                                    </span>
+                                    {{-- 건물유형, 대형동물 --}}
+                                    <span class="icon-building me-2"></span>
+                                        <span class="caption">
+                                            @switch($info->s_option)
+                                                @case(0)
+                                                    아파트
+                                                    @break
+                                                @case(1)
+                                                    단독주택
+                                                    @break
+                                                @case(2)
+                                                    오피스텔
+                                                    @break
+                                                @case(3)
+                                                    빌라
+                                                    @break
+                                                @case(4)
+                                                    원룸
+                                                    @break
+                                                $@default
+                                                    @break
+                                            @endswitch
+                                        </span>
+                                        <span class="fa-solid fa-dog me-2"></span>
+                                        <span class="caption"> 대형동물
+                                            @switch($info->animal_size)
+                                                @case(0)
+                                                    <strong>X</strong>
+                                                    @break
+                                                @case(1)
+                                                    <strong>O</strong>
+                                                    @break
+                                                $@default
+                                            @endswitch
+                                        </span>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                        @else
+                        <span>찜한 매물이 없습니다</span>
+                        @endif
+                    </div>
+                </div>
             </div>
-        </div>
+    @endif
 
         <section class="features-1">
             <div class="container">
@@ -123,124 +185,6 @@
             </div>
         </section>
 
-        <div class="section sec-testimonials">
-            <div class="container">
-                <div class="row mb-5 align-items-center">
-                    <div class="col-md-6">
-                        <h2 class="font-weight-bold heading text-primary mb-4 mb-md-0">
-                            Customer Says
-                        </h2>
-                    </div>
-                    <div class="col-md-6 text-md-end">
-                        <div id="testimonial-nav">
-                            <span class="prev" data-controls="prev">Prev</span>
-
-                            <span class="next" data-controls="next">Next</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-4"></div>
-                </div>
-                <div class="testimonial-slider-wrap">
-                    <div class="testimonial-slider">
-                        <div class="item">
-                            <div class="testimonial">
-                                <img src="images/person_1-min.jpg" alt="Image" class="img-fluid rounded-circle w-25 mb-4" />
-                                <div class="rate">
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                </div>
-                                <h3 class="h5 text-primary mb-4">James Smith</h3>
-                                <blockquote>
-                                    <p>
-                                        &ldquo;Far far away, behind the word mountains, far from the
-                                        countries Vokalia and Consonantia, there live the blind
-                                        texts. Separated they live in Bookmarksgrove right at the
-                                        coast of the Semantics, a large language ocean.&rdquo;
-                                    </p>
-                                </blockquote>
-                                <p class="text-black-50">Designer, Co-founder</p>
-                            </div>
-                        </div>
-
-                        <div class="item">
-                            <div class="testimonial">
-                                <img src="images/person_2-min.jpg" alt="Image" class="img-fluid rounded-circle w-25 mb-4" />
-                                <div class="rate">
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                </div>
-                                <h3 class="h5 text-primary mb-4">Mike Houston</h3>
-                                <blockquote>
-                                    <p>
-                                        &ldquo;Far far away, behind the word mountains, far from the
-                                        countries Vokalia and Consonantia, there live the blind
-                                        texts. Separated they live in Bookmarksgrove right at the
-                                        coast of the Semantics, a large language ocean.&rdquo;
-                                    </p>
-                                </blockquote>
-                                <p class="text-black-50">Designer, Co-founder</p>
-                            </div>
-                        </div>
-
-                        <div class="item">
-                            <div class="testimonial">
-                                <img src="images/person_3-min.jpg" alt="Image" class="img-fluid rounded-circle w-25 mb-4" />
-                                <div class="rate">
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                </div>
-                                <h3 class="h5 text-primary mb-4">Cameron Webster</h3>
-                                <blockquote>
-                                    <p>
-                                        &ldquo;Far far away, behind the word mountains, far from the
-                                        countries Vokalia and Consonantia, there live the blind
-                                        texts. Separated they live in Bookmarksgrove right at the
-                                        coast of the Semantics, a large language ocean.&rdquo;
-                                    </p>
-                                </blockquote>
-                                <p class="text-black-50">Designer, Co-founder</p>
-                            </div>
-                        </div>
-
-                        <div class="item">
-                            <div class="testimonial">
-                                <img src="images/person_4-min.jpg" alt="Image" class="img-fluid rounded-circle w-25 mb-4" />
-                                <div class="rate">
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                </div>
-                                <h3 class="h5 text-primary mb-4">Dave Smith</h3>
-                                <blockquote>
-                                    <p>
-                                        &ldquo;Far far away, behind the word mountains, far from the
-                                        countries Vokalia and Consonantia, there live the blind
-                                        texts. Separated they live in Bookmarksgrove right at the
-                                        coast of the Semantics, a large language ocean.&rdquo;
-                                    </p>
-                                </blockquote>
-                                <p class="text-black-50">Designer, Co-founder</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="section section-4 bg-light">
             <div class="container">
                 <div class="row justify-content-center text-center mb-5">
@@ -272,7 +216,7 @@
                                     <div class="col-span-6 sm:col-span-4">
                                         <x-label for="u_addr" value="{{ __('주소') }}" class="mt-3" style="font-weight:700"/>
                                         <x-input id="sample6_address" type="text" name="u_addr" class="mt-1 block w-full dark:bg-gray-600 dark:text-white" readonly value="{{Auth::user()->u_addr}}"  />
-                                        <x-button type="button" onclick="sample6_execDaumPostcode()" value="주소 검색" class="a_btn ">주소 검색</x-button>
+                                        <x-button type="button" onclick="sample6_execDaumPostcode()" value="주소 검색" class="a_btn;btn btn-primary py-2 px-3;">주소 검색</x-button>
                                     </div>
                                     <div class="col-span-6 sm:col-span-4">
                                         <x-input id="s_lat" name="s_lat" type="hidden" class=" block w-full dark:bg-gray-600 dark:text-white"  />
@@ -315,7 +259,7 @@
                 @if(!(Illuminate\Support\Facades\Auth::user()->seller_license))
                     {{-- animal size --}}
                     <div class="col-span-6 sm:col-span-4 mt-3">
-                        <x-label for="animal_size" value="{{ __('동물크기') }}" style="font-weight:700"/>
+                        <x-label for="animal_size" value="{{ __('동물크기') }}" style="font-weight:700" />
                         {{-- <x-input id="animal_size" type="text" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" wire:model.defer="state.animal_size" autocomplete="animal_size" /> --}}
                         <label for="animal_size_lg" class="dark:text-white">대형</label>
                         <input type="radio" name="animal_size" id="animal_size_lg" @if(Auth::user()->animal_size === "1") checked @endif value="1" name="animal_size" class="dark:bg-gray-700">
@@ -323,7 +267,7 @@
                         <input type="radio" name="animal_size" id="animal_size_sm" @if(Auth::user()->animal_size === "0") checked @endif value="0" name="animal_size" class="dark:bg-gray-700">
                     </div>
                 @endif
-                <x-button wire:loading.attr="disabled" id="submit_btn" class="s_btn">
+                <x-button wire:loading.attr="disabled" id="submit_btn" class="s_btn;btn btn-primary py-2 px-3">
                     {{ __('저장') }}
                 </x-button>
                                 </p>
@@ -366,6 +310,10 @@
                 <div class="col-lg-7 mx-auto text-center">
                     <h2 class="mb-4">Be a part of our growing real state agents</h2>
                     <p>
+                        <a href="{{ route('profile.chk_del_user') }}">
+                            <x-danger-button class="btn btn-primary text-white py-3 px-4">회원 탈퇴
+                            </x-danger-button>
+                            </a>
                         <a href="#" target="_blank" class="btn btn-primary text-white py-3 px-4">Apply for Real Estate agent</a>
                     </p>
                 </div>
@@ -482,6 +430,5 @@
                 </div>
             </div>
         </div>
-
-
+    </div>
 </x-app-layout>

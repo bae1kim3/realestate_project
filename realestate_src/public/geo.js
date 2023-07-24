@@ -22,9 +22,9 @@ submit_btn.addEventListener('click', () => {
             s_log.value = result[0]['y'];
 
             document.getElementById('frm').submit();
-            
+
             document.getElementById('submit_btn').setAttribute("disabled", "true");
-            
+
         }
     };
     geocoder.addressSearch(val, callback);
