@@ -58,6 +58,8 @@ class StructureDetailController extends Controller
             $likedFlg = 0;
         }
 
+        $my_s_no = S_info::where('s_no', $s_info->s_no)->pluck('u_no')->toArray();
+
         
         return view('sDetail')
         ->with('photos', $photos)
@@ -66,6 +68,7 @@ class StructureDetailController extends Controller
         ->with('data01',$data01)
         ->with('mvp_photo', $mvp_photo)
         ->with('likedFlg', $likedFlg)
-        ->with('id', $id);
+        ->with('id', $id)
+        ->with('my_s_no', $my_s_no);
     }
 }
