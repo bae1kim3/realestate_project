@@ -183,7 +183,7 @@
 
 
             <div class="bg-white widget border rounded seller-detail" style="margin-top:50px">
-                <h3 class="h4 text-black widget-title mb-3">공인중개사 정보</h3>
+                <p class="mb-4" style="color:gray!important;">[ 공인중개사 정보 ]</p>
                 <h3 class="h4 text-black widget-title mb-3">{{ $user->b_name }}</h3>
                 <h3 class="mb-3 fw-bold fs-5 seller-name">{{ $user->name }}</h3>
                 <span>전화번호</span>
