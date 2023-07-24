@@ -28,7 +28,6 @@
     <link rel="stylesheet" href="{{asset('tiny-slider.css')}}" />
     <link rel="stylesheet" href="{{asset('aos.css')}}" />
     <link rel="stylesheet" href="{{asset('style.css')}}" />
-
     <link rel="stylesheet" href="{{asset('map.css')}}">
 
     <title>
@@ -140,7 +139,7 @@
                             <option id="option" value="수성구">수성구</option>
                             <option id="option" value="중구">중구</option>
                         </select>
-                        
+
                         <div class="dropdown">
                             <div class="dropdown-toggle" data-toggle="dropdown">
                                 건물 형태
@@ -234,7 +233,7 @@
 
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9abea084b391e97658a9380c837b9608&libraries=services,clusterer,drawing"></script>
     <script src="{{asset('map2.js')}}"></script>
-    {{-- <script src="{{asset('bootstrap.bundle.min.js')}}"></script> --}}
+    <script src="{{asset('bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('tiny-slider.js')}}"></script>
     <script src="{{asset('aos.js')}}"></script>
     <script src="{{asset('navbar.js')}}"></script>
