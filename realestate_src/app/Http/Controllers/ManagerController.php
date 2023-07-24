@@ -70,11 +70,13 @@ class ManagerController extends Controller
     }
 
     function adminLoginCheck(Request $req){
-        $Adminget =DB::table('admin_info')->get();
+        $Adminget =DB::table('admin_info')->find('*');
+        Log::info($Adminget);
+        Log::info($Adminget->adm_id);
         if($Adminget->adm_id == $req->AdminId && $Adminget->adm_pw == $req->AdminPw){
-            return true;
+            return 1;
         }else{
-            return false;
+            return 0;
         }
     }
 }
