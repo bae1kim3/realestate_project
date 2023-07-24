@@ -20,7 +20,7 @@ class PhotoLoadController extends Controller
             ->get();
 
         $liked_info = [];
-        
+
         // 찜 
         if(Auth::check()) {
             if(session('seller_license')== null) {

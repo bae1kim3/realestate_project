@@ -127,64 +127,100 @@
                         </div>
                         @endforeach
                         @else
-                        <span>찜한 매물이 없습니다</span>
+                        <span style="font-size:17px">찜한 매물이 없습니다</span>
                         @endif
                     </div>
                 </div>
             </div>
     @endif
 
-        <section class="features-1">
+@if(session('seller_license'))
+<div class="section sec-testimonials">
             <div class="container">
-                <div class="row">
-                    <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
-                        <div class="box-feature">
-                            <span class="flaticon-house"></span>
-                            <h3 class="mb-3">Our Properties</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Voluptates, accusamus.
-                            </p>
-                            <p><a href="#" class="learn-more">Learn More</a></p>
-                        </div>
+                <div class="row mb-5 align-items-center">
+                    <div class="col-md-6">
+                        <h2 class="font-weight-bold heading text-primary mb-4 mb-md-0">
+                            내가 올린 매물
+                        </h2>
                     </div>
-                    <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="500">
-                        <div class="box-feature">
-                            <span class="flaticon-building"></span>
-                            <h3 class="mb-3">Property for Sale</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Voluptates, accusamus.
-                            </p>
-                            <p><a href="#" class="learn-more">Learn More</a></p>
-                        </div>
-                    </div>
-                    <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
-                        <div class="box-feature">
-                            <span class="flaticon-house-3"></span>
-                            <h3 class="mb-3">Real Estate Agent</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Voluptates, accusamus.
-                            </p>
-                            <p><a href="#" class="learn-more">Learn More</a></p>
-                        </div>
-                    </div>
-                    <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="600">
-                        <div class="box-feature">
-                            <span class="flaticon-house-1"></span>
-                            <h3 class="mb-3">House for Sale</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Voluptates, accusamus.
-                            </p>
-                            <p><a href="#" class="learn-more">Learn More</a></p>
+                    <div class="col-md-6 text-md-end">
+                        <div id="testimonial-nav">
+                            <span class="prev" data-controls="prev">Prev</span>
+
+                            <span class="next" data-controls="next">Next</span>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
 
+                <div class="row">
+                    <div class="col-lg-4"></div>
+                </div>
+                <div class="testimonial-slider-wrap">
+                    <div class="testimonial-slider">
+                    @if(!empty($liked_info[0]))
+                        @foreach($liked_info as $info)
+                        <div class="item">
+                            <div class="testimonial" >
+                                <a href="{{route('struct.detail',['s_no'=>$info->s_no])}}" class="img">
+                                    <img src="{{asset($info->url)}}" alt="Image" class="img-fluid" style="width: 350px; height: 300px;" />
+                                </a>
+                                <div class="info_con" style="padding:30px;">
+                                    <a href="{{route('struct.detail',['s_no'=>$info->s_no])}}">
+                                        <div class="h5 liked_title" style="color: #005555; font-weight:bold; display:inline-block; border-bottom: 3px solid #005555; padding-bottom:5px">{{ $info->s_name }}</div>
+                                    </a>
+                                    <div style="margin-bottom:8px">{{ $info->s_add }}</div>
+                                    <span class="city d-block mb-3" style="color:black; font-weight:bold; font-size:20px;">{{ number_format($info->p_deposit) }}
+                                                @if ($info->s_type === '월세')
+                                                / {{ number_format($info->p_month) }}
+                                                @endif
+                                    </span>
+                                    {{-- 건물유형, 대형동물 --}}
+                                    <span class="icon-building me-2"></span>
+                                        <span class="caption">
+                                            @switch($info->s_option)
+                                                @case(0)
+                                                    아파트
+                                                    @break
+                                                @case(1)
+                                                    단독주택
+                                                    @break
+                                                @case(2)
+                                                    오피스텔
+                                                    @break
+                                                @case(3)
+                                                    빌라
+                                                    @break
+                                                @case(4)
+                                                    원룸
+                                                    @break
+                                                $@default
+                                                    @break
+                                            @endswitch
+                                        </span>
+                                        <span class="fa-solid fa-dog me-2"></span>
+                                        <span class="caption"> 대형동물
+                                            @switch($info->animal_size)
+                                                @case(0)
+                                                    <strong>X</strong>
+                                                    @break
+                                                @case(1)
+                                                    <strong>O</strong>
+                                                    @break
+                                                $@default
+                                            @endswitch
+                                        </span>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                        @else
+                        <span style="font-size:17px">내가 올린 매물이 없습니다</span>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+@endif
         <div class="section section-4 bg-light">
             <div class="container">
                 <div class="row justify-content-center text-center mb-5">
