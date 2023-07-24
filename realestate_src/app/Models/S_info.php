@@ -28,5 +28,6 @@ class S_info extends Model
         ,'p_deposit'
         ,'p_month'
         ,'animal_size'
+        ,'s_option'
     ];
 }
