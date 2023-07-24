@@ -56,7 +56,7 @@
 
 </div>
 </x-app-layout> --}}
-<link rel="stylesheet" href="deluser.css">
+{{-- <link rel="stylesheet" href="deluser.css"> --}}
 <style>
        .hidden{
         display: none;
@@ -205,13 +205,13 @@
 
 {{-- 탈퇴 모달 --}}
         <div id="modal" class="hidden">
-            <div id="modaldiv" style="border: 1px solid #89a5ea; background-color:#a1a0a0;" class="dark:bg-gray-900 rounded-lg p-6 shadow-md">
-                <h1 id="modalTitle" class="text-lg font-bold mb-4">회원 탈퇴</h1>
-                <p id="modalMessage">정말로 탈퇴하시겠습니까? 모든 정보가 지워집니다.</p>
-                <button id="modalCloseBtn" onclick="closeModal()" class="mt-6 bg-gray-500 hover:bg-gray-700 text-white py-2 px-4 rounded">
+            <div id="modaldiv" style="border: 1px solid black; background-color:white;" class="dark:bg-gray-900 rounded-lg p-6 shadow-md">
+                <h1 id="modalTitle" class="text-lg font-bold mb-4" style="color:green">회원 탈퇴</h1>
+                <p id="modalMessage" style="color:green">정말로 탈퇴하시겠습니까? 모든 정보가 지워집니다.</p>
+                <button id="modalCloseBtn" onclick="closeModal()" class="btn btn-primary py-2 px-3">
                     닫기
                 </button>
-                <button type="button" class="mt-6 bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded" id="confirmBtn" onclick="withdrawal()" style="margin-left:10px;">이해했습니다</button>
+                <button type="button" class="btn btn-primary py-2 px-3" id="confirmBtn" onclick="withdrawal()" style="margin-left:10px; background-color:red">이해했습니다</button>
             </div>
         </div>
 
