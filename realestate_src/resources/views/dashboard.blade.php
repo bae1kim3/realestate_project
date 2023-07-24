@@ -177,7 +177,7 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="{{ asset('addr.js') }}"></script>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     function checkid() {
         var userid = document.getElementById('u_id').value;
@@ -232,6 +232,6 @@
             });
         });
     });
-</script>
+</script> --}}
 
 </x-app-layout>
