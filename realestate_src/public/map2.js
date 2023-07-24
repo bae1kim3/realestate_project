@@ -466,10 +466,10 @@ getpark.addEventListener("click", function (checkbox) {
 
 //api 버튼 클릭시 마커 표시
 
-// 동물 상점 마커
-
+// 반려동물 용품점 마커
 getShop.addEventListener("click", function (checkbox) {
-    if (pmarkers.length == 0) {
+    // 동물용품점 마커가 찍혀있지 않으면 작동 찍혀있으면 사라짐
+    if (shopMarkers.length == 0) {
         var selectedOption = selectBox.value;
         let value = checkbox.value;
         if (checkbox.checked) {
@@ -490,17 +490,17 @@ getShop.addEventListener("click", function (checkbox) {
         fetch(url)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
+                // 지금 설정한 구,군에 따라 기준좌표 설정
                 defaultlat = data.latlng.lat;
                 defaultlng = data.latlng.lng;
 
                 let page = 1;
-                let size = 10;
-                const shopUrl = "https://dapi.kakao.com/v2/local/search/keyword.json?" +
+                let size = 15;
+                const url = "https://dapi.kakao.com/v2/local/search/keyword.json?" +
                     "page=" + page +
                     "&size=" + size +
-                    "&sort=distance&query=반려동물용품점&x=" + defaultlat +
-                    "&y=" + defaultlng +
+                    "&sort=distance&query=반려동물용품점&x=" + defaultlng +
+                    "&y=" + defaultlat +
                     "&radius=5000";
 
                 const REST_API_KEY = 'dae00046c1734639efa0941b96eb225b';
@@ -510,7 +510,7 @@ getShop.addEventListener("click", function (checkbox) {
                         'Authorization': `KakaoAK ${REST_API_KEY}`
                     }
                 };
-                fetch(shopUrl, options)
+                fetch(url, options)
                     .then((response) => response.json())
                     .then((data) => {
                         console.log(data);
@@ -550,53 +550,78 @@ getShop.addEventListener("click", function (checkbox) {
 });
 
 // 동물병원 마커
-getHosp.addEventListener("click", function () {
+getHosp.addEventListener("click", function (checkbox) {
+    // 동물용품점 마커가 찍혀있지 않으면 작동 찍혀있으면 사라짐
     if (hospMarkers.length == 0) {
-        let page = 1;
-        let size = 10;
-        const REST_API_KEY = 'dae00046c1734639efa0941b96eb225b';
-        const url = "https://dapi.kakao.com/v2/local/search/keyword.json?" +
-            "page=" + page +
-            "&size=" + size +
-            "&sort=distance&query=동물병원&x=" + sLat.value +
-            "&y=" + sLong.value +
-            "&radius=5000";
-        const options = {
-            method: 'GET',
-            headers: {
-                'Authorization': `KakaoAK ${REST_API_KEY}`
+        var selectedOption = selectBox.value;
+        let value = checkbox.value;
+        if (checkbox.checked) {
+            selectValues.push(value);
+        } else {
+            let index = selectValues.indexOf(value);
+            if (index !== -1) {
+                selectValues.splice(index, 1);
             }
-        };
-        fetch(url, options)
+        }
+        let url =
+            "http://192.168.0.129/api/mapopt/" +
+            (selectValues.length ? selectValues.join(",") : "1") +
+            "/" +
+            selectedOption +
+            "/" +
+            (soptionValues.length ? soptionValues.join(",") : "1");
+        fetch(url)
             .then((response) => response.json())
             .then((data) => {
+                // 지금 설정한 구,군에 따라 기준좌표 설정
+                defaultlat = data.latlng.lat;
+                defaultlng = data.latlng.lng;
+                let page = 1;
+                let size = 15;
+                const url = "https://dapi.kakao.com/v2/local/search/keyword.json?" +
+                    "page=" + page +
+                    "&size=" + size +
+                    "&sort=distance&query=동물병원&x=" + defaultlng +
+                    "&y=" + defaultlat +
+                    "&radius=5000";
+                const REST_API_KEY = 'dae00046c1734639efa0941b96eb225b';
+                const options = {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `KakaoAK ${REST_API_KEY}`
+                    }
+                };
+                fetch(url, options)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log(data);
+                        let getdata = data.documents;
+                        var imageSrc = 'https://cdn-icons-png.flaticon.com/128/10887/10887257.png';
 
-                let getdata = data.documents;
-                var imageSrc = 'https://cdn-icons-png.flaticon.com/128/10887/10887257.png';
+                        markerImage = new kakao.maps.MarkerImage(
+                            imageSrc,
+                            imageSize
+                        );
 
-                markerImage = new kakao.maps.MarkerImage(
-                    imageSrc,
-                    imageSize
-                );
-
-                for (let i = 0; i < getdata.length; i++) {
-                    let markerPosition = new kakao.maps.LatLng(
-                        getdata[i].y,
-                        getdata[i].x
-                    );
-
-                    marker = new kakao.maps.Marker({
-                        position: markerPosition,
-                        image: markerImage,
-                    });
-                    // console.log(data);
-                    marker.setZIndex(-2);
-                    marker.setMap(map);
-                    // 생성된 마커를 배열에 추가합니다
-                    hospMarkers.push(marker);
-                }
+                        for (let i = 0; i < getdata.length; i++) {
+                            let markerPosition = new kakao.maps.LatLng(
+                                getdata[i].y,
+                                getdata[i].x
+                            );
+                            marker = new kakao.maps.Marker({
+                                position: markerPosition,
+                                image: markerImage,
+                            });
+                            marker.setZIndex(-2);
+                            marker.setMap(map);
+                            // 생성된 마커를 배열에 추가합니다
+                            hospMarkers.push(marker);
+                        }
+                    })
             })
-            .catch(() => { console.log('error') })
+            .catch(() => {
+                console.log('error');
+            });
     } else {
         for (var i = 0; i < hospMarkers.length; i++) {
             hospMarkers[i].setMap(null);
