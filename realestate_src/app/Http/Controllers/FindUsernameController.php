@@ -16,7 +16,7 @@ class FindUsernameController extends Controller
     {
         $email = $request->input('email');
         $user = User::where('email', $email)->first();
-    
+
         if ($user) {
             // 아이디를 찾은 경우
             return response()->json(['user' => $user]);

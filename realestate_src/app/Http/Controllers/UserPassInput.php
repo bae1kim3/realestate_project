@@ -1,32 +1,30 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Controllers;
 
-use Livewire\Component;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
-class UserPassInput extends Component
+class UserPassInput extends Controller
 {
     public $email;
     public $phone_no;
     public $pw_question;
 
-    public function mount()
-    {
-        $this->email = '';
-        $this->phone_no = '';
-        $this->pw_question = '';
-    }
-
     public function findUserPwQuestion(Request $request)
     {
-        $user = User::where('email', $this->email)
-            ->where('phone_no', $this->phone_no)
-            ->first();
+        $email=$request->input('email');
+        $phone_no=$request->input('phone_no');
+
+        $user = User::where('email', $email)
+        ->where('phone_no', $phone_no)
+        ->first();
 
         if ($user) {
+            Log::debug('DB : User Table', [$user->email]);
+        Log::debug('Question int to String Start');
             $pwQuestionFlag = $user->pw_question;
 
             switch ($pwQuestionFlag) {
@@ -52,15 +50,18 @@ class UserPassInput extends Component
 
             $request->session()->put('pw_question', $this->pw_question);
             $request->session()->put('email', $user->email);
+            Log::debug('Question int to String End', [$this->pw_question]);
 
-            return redirect()->route('find-userpass');
+            return view('find-userpass');
         } else {
+            Log::debug('Error : No User data');
             Session::flash('error_message', '사용자를 찾을 수 없습니다.');
+            return redirect()->route('find-userpassinput');
         }
     }
 
     public function render()
     {
-        return view('livewire.find-userpassinput');
+        return view('find-userpassinput');
     }
 }

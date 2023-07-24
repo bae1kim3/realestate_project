@@ -12,8 +12,8 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\CheckController;
 use App\Http\Controllers\FindUsernameController;
 use App\Http\Controllers\UserPassController;
-use App\Http\Livewire\FindUserPass;
-use App\Http\Livewire\UserPassInput;
+use App\Http\Contorllers\FindUserPass;
+use App\Http\Controllers\UserPassInput;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\PhotoLoadController;
 use App\Http\Controllers\StructureController;
@@ -77,9 +77,13 @@ Route::get('/find-userpass', [FindUserPass::class, '__invoke'])
     ->name('find-userpass')
     ->middleware('checkEmail');
 
-Route::post('/find-userpass', [UserPassController::class, 'findUserpass'])->name('find-userpass.post');
+    Route::get('/find-userpass', [FindUserPass::class, '__invoke'])
+    ->name('find-userpass')
+    ->middleware('checkEmail');
 
-Route::get('/find-userpassinput', [UserPassInput::class, '__invoke'])->name('find-userpassinput');
+Route::post('/find-userpass', [UserPassInput::class, 'findUserPwQuestion'])->name('find-userpass');
+
+Route::get('/find-userpassinput', [UserPassInput::class, 'render'])->name('find-userpassinput');
 
 
 Route::get('/check-id', [CheckController::class, 'checkId'])->name('check-id');
@@ -88,7 +92,7 @@ Route::get('/checkLicense', [CheckController::class, 'checkLicense'])->name('che
 Route::get('/chk_phone_no', [UserController::class, 'chk_phone_no'])->name('profile.chk_phone_no');
 
 Route::post('/update-password', [ResetPasswordController::class, 'update'])->name('updatePassword');
-Route::get('/password-reset',[ResetPasswordController::class, 'resetps'])
+Route::post('/password-reset',[ResetPasswordController::class, 'resetps'])
     ->name('password-reset')
     ->middleware('checkEmail');
 

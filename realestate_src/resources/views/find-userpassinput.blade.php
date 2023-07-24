@@ -35,26 +35,24 @@
             비밀번호 찾기
          </h3>
           <p class="text-black-50">
-           비밀번호를 회원가입시 입력한 답변을 입력해 주세요
+           비밀번호를 찾으려면 이메일과 전화번호를 입력해 주세요
           </p>
           <div>
-            <form action="{{ route('updatePassword') }}" method="post">
-                @csrf
-                    <div class="mt-4">
-                        <x-label for="password" value="{{ __('새 비밀번호') }}" class="dark:text-white"/>
-                        <x-input id="password" class="block mt-1 w-full dark:bg-gray-700 dark:text-white" type="password" name="password" required autocomplete="new-password" />
+            <form action="{{ route('find-userpass') }}" method="post">
+                <x-label for="email" value="{{ __('이메일') }}" class="dark:text-gray-100" />
+                <x-input type="email" name="email" placeholder="이메일 입력"
+                    class="block mt-1 w-full dark:bg-gray-700 dark:text-white" />
+                <br>
+                <x-label for="phone_no" value="{{ __('전화번호') }}" class="dark:text-gray-100" />
+                <x-input type="text" name="phone_no" placeholder="전화번호 입력"
+                    class="block mt-1 w-full dark:bg-gray-700 dark:text-white" style="margin-right: 10px"/>
+                <br />
+                <x-button class="btn btn-primary py-2 px-3" style="margin-top: 10px">입력</x-button>
+                @if (Session::has('error_message'))
+                    <div class="alert alert-danger">
+                        {{ Session::get('error_message') }}
                     </div>
-
-                    <div class="mt-4">
-                        <x-label for="password_confirmation" value="{{ __('비밀번호 확인') }}" class="dark:text-white"/>
-                        <x-input id="password_confirmation" class="block mt-1 w-full dark:bg-gray-700 dark:text-white" type="password" name="password_confirmation" required autocomplete="new-password" />
-                    </div>
-                    <div class="flex items-center justify-end mt-4">
-                        <x-button class="btn btn-primary py-2 px-3">
-                        저장
-                        </x-button>
-                    </div>
-                </div>
+                @endif
             </form>
         </div>
         </div>

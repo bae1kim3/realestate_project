@@ -35,26 +35,20 @@
             비밀번호 찾기
          </h3>
           <p class="text-black-50">
-           비밀번호를 회원가입시 입력한 답변을 입력해 주세요
+           비밀번호를 회원가입시 저장한 답변을 입력해 주세요
           </p>
           <div>
-            <form action="{{ route('updatePassword') }}" method="post">
-                @csrf
-                    <div class="mt-4">
-                        <x-label for="password" value="{{ __('새 비밀번호') }}" class="dark:text-white"/>
-                        <x-input id="password" class="block mt-1 w-full dark:bg-gray-700 dark:text-white" type="password" name="password" required autocomplete="new-password" />
+            <form action="{{ route('password-reset') }}" method="post">
+                <x-label for="pw_answer" class="block dark:text-white">질문: {{ session('pw_question') }}</x-label><br>
+                <x-input type="text" wire:model="pw_answer" placeholder="답변 입력"
+                    class="block mt-1 w-full dark:bg-gray-700 dark:text-white" />
+                <br /><br>
+                <x-button class="btn btn-primary py-2 px-3">비밀번호 찾기</x-button>
+                @if (Session::has('error_message'))
+                    <div class="alert alert-danger">
+                        {{ Session::get('error_message') }}
                     </div>
-
-                    <div class="mt-4">
-                        <x-label for="password_confirmation" value="{{ __('비밀번호 확인') }}" class="dark:text-white"/>
-                        <x-input id="password_confirmation" class="block mt-1 w-full dark:bg-gray-700 dark:text-white" type="password" name="password_confirmation" required autocomplete="new-password" />
-                    </div>
-                    <div class="flex items-center justify-end mt-4">
-                        <x-button class="btn btn-primary py-2 px-3">
-                        저장
-                        </x-button>
-                    </div>
-                </div>
+                @endif
             </form>
         </div>
         </div>

@@ -38,6 +38,6 @@ class FindUserPass extends Component
 
     public function render()
     {
-        return view('livewire.find-userpass');
+        return view('find-userpass.post');
     }
 }
