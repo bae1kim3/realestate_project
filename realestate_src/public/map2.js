@@ -6,7 +6,7 @@ const checkboxes = document.querySelectorAll(
 const scheckboxes = document.querySelectorAll(
     '.dropdown-menu input[class="sopt"]'
 );
-const sshpaecheckboxes = document.querySelectorAll(
+const sshapecheckboxes = document.querySelectorAll(
     '.dropdown-menu input[class="sshape"]'
 );
 const getpark = document.getElementById("getpark");
@@ -17,7 +17,7 @@ let selectedMarker = null;
 let cardId;
 let selectValues = [];
 let soptionValues = [];
-let sshpadeValues = [];
+let sshapeValues = [];
 let level = 8;
 // 지도에 표시된 마커 객체를 가지고 있을 배열입니다
 let markers = [];
@@ -330,7 +330,8 @@ document.addEventListener("DOMContentLoaded", function () {
         "/" +
         (soptionValues.length ? soptionValues.join(",") : "1") +
         "/" +
-        (sshpadeValues.length ? sshpadeValues.join(",") : "1");
+        (sshapeValues.length ? sshapeValues.join(",") : "1")
+        ;
     addfetch(url, selectedOption);
 });
 
@@ -344,7 +345,8 @@ selectBox.addEventListener("change", function () {
         "/" +
         (soptionValues.length ? soptionValues.join(",") : "1") +
         "/" +
-        (sshpadeValues.length ? sshpadeValues.join(",") : "1");
+        (sshapeValues.length ? sshapeValues.join(",") : "1")
+        ;
     addfetch(url, selectedOption);
 });
 
@@ -385,7 +387,8 @@ checkboxes.forEach(function (checkbox) {
             "/" +
             (soptionValues.length ? soptionValues.join(",") : "1") +
             "/" +
-            (sshpadeValues.length ? sshpadeValues.join(",") : "1");
+            (sshapeValues.length ? sshapeValues.join(",") : "1")
+            ;
         addfetch(url, selectedOption);
     });
 });
@@ -410,21 +413,22 @@ scheckboxes.forEach(function (checkbox) {
             "/" +
             (soptionValues.length ? soptionValues.join(",") : "1") +
             "/" +
-            (sshpadeValues.length ? sshpadeValues.join(",") : "1");
+            (sshapeValues.length ? sshapeValues.join(",") : "1")
+            ;
         addfetch(url, selectedOption);
     });
 });
 
-sshpaecheckboxes.forEach(function (checkbox) {
+sshapecheckboxes.forEach(function (checkbox) {
     checkbox.addEventListener("change", function () {
         var selectedOption = selectBox.value;
         let value = checkbox.value;
         if (checkbox.checked) {
-            sshpadeValues.push(value);
+            sshapeValues.push(value);
         } else {
-            let index = sshpadeValues.indexOf(value);
+            let index = sshapeValues.indexOf(value);
             if (index !== -1) {
-                sshpadeValues.splice(index, 1);
+                sshapeValues.splice(index, 1);
             }
         }
         let url =
@@ -435,7 +439,8 @@ sshpaecheckboxes.forEach(function (checkbox) {
             "/" +
             (soptionValues.length ? soptionValues.join(",") : "1") +
             "/" +
-            (sshpadeValues.length ? sshpadeValues.join(",") : "1");
+            (sshapeValues.length ? sshapeValues.join(",") : "1")
+            ;
         addfetch(url, selectedOption);
     });
 });
@@ -460,7 +465,8 @@ getpark.addEventListener("click", function (checkbox) {
             "/" +
             (soptionValues.length ? soptionValues.join(",") : "1") +
             "/" +
-            (sshpadeValues.length ? sshpadeValues.join(",") : "1");
+            (sshapeValues.length ? soptionValues.join(",") : "1")
+            ;
         // AJAX 요청 보내기
         fetch(url)
             .then((response) => response.json())
@@ -556,7 +562,8 @@ getShop.addEventListener("click", function (checkbox) {
             "/" +
             (soptionValues.length ? soptionValues.join(",") : "1") +
             "/" +
-            (sshpadeValues.length ? sshpadeValues.join(",") : "1");
+            (sshapeValues.length ? soptionValues.join(",") : "1")
+            ;
         fetch(url)
             .then((response) => response.json())
             .then((data) => {
@@ -646,7 +653,8 @@ getHosp.addEventListener("click", function (checkbox) {
             "/" +
             (soptionValues.length ? soptionValues.join(",") : "1") +
             "/" +
-            (sshpadeValues.length ? sshpadeValues.join(",") : "1");
+            (sshapeValues.length ? soptionValues.join(",") : "1")
+            ;
         fetch(url)
             .then((response) => response.json())
             .then((data) => {

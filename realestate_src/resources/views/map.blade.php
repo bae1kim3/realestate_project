@@ -147,19 +147,19 @@
                             </div>
                             <div class="dropdown-menu">
                                 <label class="custom-label">
-                                    <input type="checkbox" class="sshpae" id="optcheck6" value="0"> 아파트
+                                    <input type="checkbox" class="sshape" id="optcheck6" value="0"> 아파트
                                 </label>
                                 <label class="custom-label">
-                                    <input type="checkbox" class="sshpae" id="optcheck7" value="1"> 단독주택
+                                    <input type="checkbox" class="sshape" id="optcheck7" value="1"> 단독주택
                                 </label>
                                 <label class="custom-label">
-                                    <input type="checkbox" class="sshpae" id="optcheck8" value="2"> 오피스텔
+                                    <input type="checkbox" class="sshape" id="optcheck8" value="2"> 오피스텔
                                 </label>
                                 <label class="custom-label">
-                                    <input type="checkbox" class="sshpae" id="optcheck9" value="3"> 빌라
+                                    <input type="checkbox" class="sshape" id="optcheck9" value="3"> 빌라
                                 </label>
                                 <label class="custom-label">
-                                    <input type="checkbox" class="sshpae" id="optcheck10" value="4"> 원룸
+                                    <input type="checkbox" class="sshape" id="optcheck10" value="4"> 원룸
                                 </label>
                             </div>
                         </div>
