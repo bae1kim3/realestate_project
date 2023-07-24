@@ -152,10 +152,40 @@ function searchProperties() {
             var response = JSON.parse(xhr.responseText);
             var itemContainer = document.getElementById('itemContainer');
             itemContainer.innerHTML = '';
+            const h2Element = document.querySelector('.col-lg-6 h2.text-primary.heading');
+            h2Element.textContent = '검색결과';
+            const checkElement = document.getElementById('search_chk');
+            // 버튼 초기화
+            checkElement.innerHTML = '';
+            // 버튼 요소를 생성합니다.
+            const button = document.createElement("button");
+            button.textContent = "대형동물";
+            button.setAttribute("style", "border:none; padding:16px 20px; border-radius:30px; margin-right:10px");
+            button.setAttribute("id", "animal_btn");
+            // 버튼을 "search_chk"라는 ID를 가진 요소에 추가합니다.
+            search_chk.appendChild(button);
+
+            checkElement.addEventListener("mouseover", () => {
+                button.setAttribute("style", "border:none; padding:16px 20px; border-radius:30px; margin-right:10px; background-color: #00204a; color: white; transition: .3s all ease;");
+            });
+            checkElement.addEventListener("mouseout", () => {
+                button.setAttribute("style", "border:none; padding:16px 20px; border-radius:30px; margin-right:10px; transition: .3s all ease;");
+            });
+
+
+            checkElement.addEventListener("click", () => {
+                response.photos.filter(function(photo) {
+                    itemContainer.innerHTML = '';
+                    return photo.animal_size == '1';
+                }).forEach(function (photo) {
+                    var newPhotosHtml = generatePropertyItemHtml(photo);
+                    itemContainer.insertAdjacentHTML('beforeend', newPhotosHtml);
+                    itemContainer.style.maxWidth = 300 * response.photos.length + "px";
+                });
+            });
+            // response.photos.animal_size
             response.photos.forEach(function (photo) {
                 var newPhotosHtml = generatePropertyItemHtml(photo);
-                const h2Element = document.querySelector('.col-lg-6 h2.text-primary.heading');
-                h2Element.textContent = '검색결과';
                 itemContainer.insertAdjacentHTML('beforeend', newPhotosHtml);
                 itemContainer.style.maxWidth = 300 * response.photos.length + "px";
                 // slidebtn = document.querySelector('.tns-nav');

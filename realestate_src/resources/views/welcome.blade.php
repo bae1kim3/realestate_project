@@ -30,14 +30,20 @@
         <div class="container">
             <div class="row mb-5 align-items-center">
                 <div class="col-lg-6">
-                    <h2 class="text-primary heading" style="font-weight: 500;">
-                        최근 등록된 매물
-                    </h2>
+                            <h2 class="text-primary heading" style="font-weight: 500;">
+                                최근 등록된 매물
+                            </h2>
                 </div>
                 <div class="col-lg-6 text-lg-end">
-                    <p>
-                        <a href="{{route('map.map')}}" target="_blank" class="btn btn-primary text-white py-3 px-4">지도에서 매물 검색</a>
-                    </p>
+                    <div style="display:flex-end">
+                        <div>
+                            {{-- 대형동물 버튼 --}}
+                            <span id="search_chk"></span>
+                            <span>
+                                <a href="{{route('map.map')}}" target="_blank" class="btn btn-primary text-white py-3 px-4">지도에서 매물 검색</a>
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -118,6 +124,7 @@
                 </div>
             </div>
         </div>
+    </div>
 {{-- 찜한 매물 출력 --}}
     @if(Auth::check() && session('seller_license') === null)
         <div class="section sec-testimonials">
@@ -162,7 +169,7 @@
                                     {{-- 건물유형, 대형동물 --}}
                                     <span class="icon-building me-2"></span>
                                         <span class="caption">
-                                            @switch($photo->s_option)
+                                            @switch($info->s_option)
                                                 @case(0)
                                                     아파트
                                                     @break
@@ -184,7 +191,7 @@
                                         </span>
                                         <span class="fa-solid fa-dog me-2"></span>
                                         <span class="caption"> 대형동물
-                                            @switch($photo->animal_size)
+                                            @switch($info->animal_size)
                                                 @case(0)
                                                     <strong>X</strong>
                                                     @break
@@ -206,6 +213,7 @@
             </div>
         </div>
     @endif
+
         <section class="features-1">
             <div class="container">
                 <div class="row">
