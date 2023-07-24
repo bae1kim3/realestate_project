@@ -171,7 +171,7 @@
         </section>
 
 {{-- 찜한 매물 출력 --}}
-    @if(session('seller_license') === null)
+    @if(Auth::check() && session('seller_license') === null)
         <div class="section sec-testimonials">
             <div class="container">
                 <div class="row mb-5 align-items-center">
@@ -194,7 +194,7 @@
                 </div>
                 <div class="testimonial-slider-wrap">
                     <div class="testimonial-slider">
-                    @if($liked_info)
+                    @if(!empty($liked_info[0]))
                         @foreach($liked_info as $info)
                         <div class="item">
                             <div class="testimonial" >
@@ -251,14 +251,14 @@
                         </div>
                         @endforeach
                         @else
-                        <div>찜한 매물이 없습니다</div>
+                        <span>찜한 매물이 없습니다</span>
                         @endif
                     </div>
                 </div>
             </div>
         </div>
     @endif
-        <div class="section section-4 bg-light">
+        {{-- <div class="section section-4 bg-light">
             <div class="container">
                 <div class="row justify-content-center text-center mb-5">
                     <div class="col-lg-5">
@@ -467,7 +467,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
 <script src="{{asset('welcome.js')}}"></script>
 </x-app-layout>
