@@ -12,10 +12,32 @@ use Illuminate\Support\Facades\Log;
 
 class ManagerController extends Controller
 {
-    function getUser() {
-      $userList['indiUser'] = User::whereNull('deleted_at')->WhereNull("seller_license")->get();
-      $userList['realtorUser'] = User::whereNull('deleted_at')->whereNotNull("seller_license")->get();
-      $userList['states'] = S_info::whereNull('deleted_at')->get();
+    function getUser($pageNum) {
+        $userList['indiUser'] = User::whereNull('deleted_at')->WhereNull("seller_license")->get();
+        $userList['realtorUser'] = User::whereNull('deleted_at')->whereNotNull("seller_license")->get();
+        $userList['states'] = S_info::whereNull('deleted_at')->get();
+        $limit_num=13;
+        $offset = ( $pageNum * $limit_num ) - $limit_num;
+
+        $indiUserCnt = count($userList['indiUser']);
+        $userList['max_indiUserPageNum'] = ceil($indiUserCnt/$limit_num);
+
+        $realtorUserCnt = count($userList['realtorUser']);
+        $userList['max_realtorUserPageNum'] = ceil($realtorUserCnt/$limit_num);
+
+        $statesCnt = count($userList['states']);
+        $userList['max_statesPageNum'] = ceil($statesCnt/$limit_num);
+
+        $userList['indiUser'] = User::whereNull('deleted_at')->WhereNull("seller_license")->offset($offset)
+        ->limit($limit_num)
+        ->get();
+        $userList['realtorUser'] = User::whereNull('deleted_at')->whereNotNull("seller_license")->offset($offset)
+        ->limit($limit_num)
+        ->get();
+        $userList['states'] = S_info::whereNull('deleted_at')->offset($offset)
+        ->limit($limit_num)
+        ->get();
+
       return $userList;
     }
 
@@ -43,7 +65,7 @@ class ManagerController extends Controller
           $delete_row[$i] = S_info::where('s_no',$req['stateNumber'][$i])->delete();
         }
       }
-      
+
       return $delete_row;
     }
 }
