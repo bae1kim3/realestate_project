@@ -6,6 +6,9 @@ const checkboxes = document.querySelectorAll(
 const scheckboxes = document.querySelectorAll(
     '.dropdown-menu input[class="sopt"]'
 );
+const sshapeboxes = document.querySelectorAll(
+    '.dropdown-menu input[class="sshape"]'
+);
 const getpark = document.getElementById("getpark");
 let getShop = document.getElementById('getshop');
 let getHosp = document.getElementById('gethosp');
@@ -14,6 +17,7 @@ let selectedMarker = null;
 let cardId;
 let selectValues = [];
 let soptionValues = [];
+let sshapeValues = [];
 let level = 8;
 // 지도에 표시된 마커 객체를 가지고 있을 배열입니다
 let markers = [];
@@ -299,7 +303,9 @@ document.addEventListener("DOMContentLoaded", function () {
         "/" +
         selectedOption +
         "/" +
-        (soptionValues.length ? soptionValues.join(",") : "1");
+        (soptionValues.length ? soptionValues.join(",") : "1") +
+        "/" +
+        (sshapeValues.length ? sshapeValues.join(",") : "n");
     addfetch(url, selectedOption);
 });
 selectBox.addEventListener("change", function () {
@@ -310,7 +316,9 @@ selectBox.addEventListener("change", function () {
         "/" +
         selectedOption +
         "/" +
-        (soptionValues.length ? soptionValues.join(",") : "1");
+        (soptionValues.length ? soptionValues.join(",") : "1") +
+        "/" +
+        (sshapeValues.length ? sshapeValues.join(",") : "n");
     addfetch(url, selectedOption);
 });
 // 드롭다운 토글 버튼 클릭 이벤트 처리
@@ -346,7 +354,9 @@ checkboxes.forEach(function (checkbox) {
             "/" +
             selectedOption +
             "/" +
-            (soptionValues.length ? soptionValues.join(",") : "1");
+            (soptionValues.length ? soptionValues.join(",") : "1") +
+            "/" +
+            (sshapeValues.length ? sshapeValues.join(",") : "n");
         addfetch(url, selectedOption);
     });
 });
@@ -368,7 +378,34 @@ scheckboxes.forEach(function (checkbox) {
             "/" +
             selectedOption +
             "/" +
-            (soptionValues.length ? soptionValues.join(",") : "1");
+            (soptionValues.length ? soptionValues.join(",") : "1") +
+            "/" +
+            (sshapeValues.length ? sshapeValues.join(",") : "n");
+        addfetch(url, selectedOption);
+    });
+});
+
+sshapeboxes.forEach(function (checkbox) {
+    checkbox.addEventListener("change", function () {
+        var selectedOption = selectBox.value;
+        let value = checkbox.value;
+        if (checkbox.checked) {
+            sshapeValues.push(value);
+        } else {
+            let index = sshapeValues.indexOf(value);
+            if (index !== -1) {
+                sshapeValues.splice(index, 1);
+            }
+        }
+        let url =
+            "/api/mapopt/" +
+            (selectValues.length ? selectValues.join(",") : "1") +
+            "/" +
+            selectedOption +
+            "/" +
+            (soptionValues.length ? soptionValues.join(",") : "1") +
+            "/" +
+            (sshapeValues.length ? sshapeValues.join(",") : "n");
         addfetch(url, selectedOption);
     });
 });
@@ -390,7 +427,9 @@ getpark.addEventListener("click", function (checkbox) {
             "/" +
             selectedOption +
             "/" +
-            (soptionValues.length ? soptionValues.join(",") : "1");
+            (soptionValues.length ? soptionValues.join(",") : "1") +
+            "/" +
+            (sshapeValues.length ? sshapeValues.join(",") : "n");
         // AJAX 요청 보내기
         fetch(url)
             .then((response) => response.json())
@@ -482,7 +521,9 @@ getShop.addEventListener("click", function (checkbox) {
             "/" +
             selectedOption +
             "/" +
-            (soptionValues.length ? soptionValues.join(",") : "1");
+            (soptionValues.length ? soptionValues.join(",") : "1") +
+            "/" +
+            (sshapeValues.length ? sshapeValues.join(",") : "n");
         fetch(url)
             .then((response) => response.json())
             .then((data) => {
@@ -568,7 +609,9 @@ getHosp.addEventListener("click", function (checkbox) {
             "/" +
             selectedOption +
             "/" +
-            (soptionValues.length ? soptionValues.join(",") : "1");
+            (soptionValues.length ? soptionValues.join(",") : "1") +
+            "/" +
+            (sshapeValues.length ? sshapeValues.join(",") : "n");
         fetch(url)
             .then((response) => response.json())
             .then((data) => {
