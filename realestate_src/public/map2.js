@@ -252,7 +252,10 @@ function addfetch(url, selectedOption) {
                         + data["sinfo"][i].s_add;
                 } else {
                     cardText.innerHTML =
-                        "<b>매매유형</b> : "
+                        "<b>건물유형</b> : "
+                        + data["sinfo"][i].s_option
+                        + "<br>"
+                        + "<b>매매유형</b> : "
                         + data["sinfo"][i].s_type
                         + "<br><b>가격</b> : "
                         + data["sinfo"][i].p_deposit.toLocaleString("ko-KR")
@@ -291,7 +294,7 @@ function addfetch(url, selectedOption) {
 document.addEventListener("DOMContentLoaded", function () {
     var selectedOption = selectBox.value;
     let url =
-        "http://192.168.0.129/api/mapopt/" +
+        "/api/mapopt/" +
         (selectValues.length ? selectValues.join(",") : "1") +
         "/" +
         selectedOption +
@@ -302,7 +305,7 @@ document.addEventListener("DOMContentLoaded", function () {
 selectBox.addEventListener("change", function () {
     var selectedOption = selectBox.value;
     let url =
-        "http://192.168.0.129/api/mapopt/" +
+        "/api/mapopt/" +
         (selectValues.length ? selectValues.join(",") : "1") +
         "/" +
         selectedOption +
@@ -338,7 +341,29 @@ checkboxes.forEach(function (checkbox) {
             }
         }
         let url =
-            "http://192.168.0.129/api/mapopt/" +
+            "/api/mapopt/" +
+            (selectValues.length ? selectValues.join(",") : "1") +
+            "/" +
+            selectedOption +
+            "/" +
+            (soptionValues.length ? soptionValues.join(",") : "1");
+        addfetch(url, selectedOption);
+    });
+});
+scheckboxes.forEach(function (checkbox) {
+    checkbox.addEventListener("change", function () {
+        var selectedOption = selectBox.value;
+        let value = checkbox.value;
+        if (checkbox.checked) {
+            soptionValues.push(value);
+        } else {
+            let index = soptionValues.indexOf(value);
+            if (index !== -1) {
+                soptionValues.splice(index, 1);
+            }
+        }
+        let url =
+            "/api/mapopt/" +
             (selectValues.length ? selectValues.join(",") : "1") +
             "/" +
             selectedOption +
@@ -360,7 +385,7 @@ getpark.addEventListener("click", function (checkbox) {
             }
         }
         let url =
-            "http://192.168.0.129/api/mapopt/" +
+            "/api/mapopt/" +
             (selectValues.length ? selectValues.join(",") : "1") +
             "/" +
             selectedOption +
@@ -452,7 +477,7 @@ getShop.addEventListener("click", function (checkbox) {
             }
         }
         let url =
-            "http://192.168.0.129/api/mapopt/" +
+            "/api/mapopt/" +
             (selectValues.length ? selectValues.join(",") : "1") +
             "/" +
             selectedOption +
@@ -538,7 +563,7 @@ getHosp.addEventListener("click", function (checkbox) {
             }
         }
         let url =
-            "http://192.168.0.129/api/mapopt/" +
+            "/api/mapopt/" +
             (selectValues.length ? selectValues.join(",") : "1") +
             "/" +
             selectedOption +
