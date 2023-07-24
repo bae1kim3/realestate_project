@@ -80,7 +80,7 @@ class MapController extends Controller
             ->orderByDesc('sinfo.s_type')
             ->get();
 
-        return dd($soptarray);
+        return $info;
     }
 }
 
