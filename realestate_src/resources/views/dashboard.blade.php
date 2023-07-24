@@ -171,48 +171,4 @@
     </div>
     </div>
 
-<script type="text/javascript"
-    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1def08893c26998733c374c40b12ac42&libraries=services,clusterer,drawing">
-</script>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="{{ asset('addr.js') }}"></script>
-
-<script>
-    var geocoder = new kakao.maps.services.Geocoder();
-
-const submit_btn = document.getElementById('submit_btn');
-
-submit_btn.addEventListener('click', () => {
-    var val = document.getElementById('sample6_address').value;
-    var s_log = document.getElementById('s_log');
-    var s_lat = document.getElementById('s_lat');
-    if(!val) {
-        window.scrollTo(0,0);
-        $err = document.getElementById('err_up').innerHTML = "정보를 입력하세요";
-        err_up.style.display = 'block';
-        return;
-    }
-
-    var callback = function(result, status) {
-        if (status === kakao.maps.services.Status.OK) {
-            // console.log(result);
-            // console.log(result[0]['x']);
-            // console.log(result[0]['y']);
-            s_lat.value = result[0]['x'];
-            s_log.value = result[0]['y'];
-
-            document.getElementById('frm').submit();
-
-            document.getElementById('submit_btn').setAttribute("disabled", "true");
-
-        }
-    };
-    geocoder.addressSearch(val, callback);
-});
-
-
-
-
-</script>
-
 </x-app-layout>
