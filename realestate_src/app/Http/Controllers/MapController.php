@@ -44,7 +44,7 @@ class MapController extends Controller
 
         $array = explode(',', $opt);
         $soptarray = explode(',', $sopt);
-        dd($soptarray);
+        
         $info['trade'] = DB::table('s_infos AS sinfo')
             ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
             ->select('p_deposit', 's_type')
