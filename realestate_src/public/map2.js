@@ -6,6 +6,9 @@ const checkboxes = document.querySelectorAll(
 const scheckboxes = document.querySelectorAll(
     '.dropdown-menu input[class="sopt"]'
 );
+const sshpaecheckboxes = document.querySelectorAll(
+    '.dropdown-menu input[class="sshape"]'
+);
 const getpark = document.getElementById("getpark");
 let getShop = document.getElementById('getshop');
 let getHosp = document.getElementById('gethosp');
@@ -14,6 +17,7 @@ let selectedMarker = null;
 let cardId;
 let selectValues = [];
 let soptionValues = [];
+let sshpadeValues = [];
 let level = 8;
 // 지도에 표시된 마커 객체를 가지고 있을 배열입니다
 let markers = [];
@@ -324,7 +328,9 @@ document.addEventListener("DOMContentLoaded", function () {
         "/" +
         selectedOption +
         "/" +
-        (soptionValues.length ? soptionValues.join(",") : "1");
+        (soptionValues.length ? soptionValues.join(",") : "1") +
+        "/" +
+        (sshpadeValues.length ? sshpadeValues.join(",") : "1");
     addfetch(url, selectedOption);
 });
 
@@ -336,7 +342,9 @@ selectBox.addEventListener("change", function () {
         "/" +
         selectedOption +
         "/" +
-        (soptionValues.length ? soptionValues.join(",") : "1");
+        (soptionValues.length ? soptionValues.join(",") : "1") +
+        "/" +
+        (sshpadeValues.length ? sshpadeValues.join(",") : "1");
     addfetch(url, selectedOption);
 });
 
@@ -356,6 +364,7 @@ document.addEventListener("click", function (event) {
     }
 });
 
+// 거래 유형 
 checkboxes.forEach(function (checkbox) {
     checkbox.addEventListener("change", function () {
         var selectedOption = selectBox.value;
@@ -374,7 +383,59 @@ checkboxes.forEach(function (checkbox) {
             "/" +
             selectedOption +
             "/" +
-            (soptionValues.length ? soptionValues.join(",") : "1");
+            (soptionValues.length ? soptionValues.join(",") : "1") +
+            "/" +
+            (sshpadeValues.length ? sshpadeValues.join(",") : "1");
+        addfetch(url, selectedOption);
+    });
+});
+
+scheckboxes.forEach(function (checkbox) {
+    checkbox.addEventListener("change", function () {
+        var selectedOption = selectBox.value;
+        let value = checkbox.value;
+        if (checkbox.checked) {
+            soptionValues.push(value);
+        } else {
+            let index = soptionValues.indexOf(value);
+            if (index !== -1) {
+                soptionValues.splice(index, 1);
+            }
+        }
+        let url =
+            "http://192.168.0.129/api/mapopt/" +
+            (selectValues.length ? selectValues.join(",") : "1") +
+            "/" +
+            selectedOption +
+            "/" +
+            (soptionValues.length ? soptionValues.join(",") : "1") +
+            "/" +
+            (sshpadeValues.length ? sshpadeValues.join(",") : "1");
+        addfetch(url, selectedOption);
+    });
+});
+
+sshpaecheckboxes.forEach(function (checkbox) {
+    checkbox.addEventListener("change", function () {
+        var selectedOption = selectBox.value;
+        let value = checkbox.value;
+        if (checkbox.checked) {
+            sshpadeValues.push(value);
+        } else {
+            let index = sshpadeValues.indexOf(value);
+            if (index !== -1) {
+                sshpadeValues.splice(index, 1);
+            }
+        }
+        let url =
+            "http://192.168.0.129/api/mapopt/" +
+            (selectValues.length ? selectValues.join(",") : "1") +
+            "/" +
+            selectedOption +
+            "/" +
+            (soptionValues.length ? soptionValues.join(",") : "1") +
+            "/" +
+            (sshpadeValues.length ? sshpadeValues.join(",") : "1");
         addfetch(url, selectedOption);
     });
 });
@@ -397,7 +458,9 @@ getpark.addEventListener("click", function (checkbox) {
             "/" +
             selectedOption +
             "/" +
-            (soptionValues.length ? soptionValues.join(",") : "1");
+            (soptionValues.length ? soptionValues.join(",") : "1") +
+            "/" +
+            (sshpadeValues.length ? sshpadeValues.join(",") : "1");
         // AJAX 요청 보내기
         fetch(url)
             .then((response) => response.json())
@@ -433,9 +496,9 @@ getpark.addEventListener("click", function (checkbox) {
                         console.log(data1);
                         let getdata = data1.body.items.item;
                         console.log(getdata);
-                        var imageSrc = "mapp.png";
+                        var imageSrcPark = "mapp.png";
                         markerImage = new kakao.maps.MarkerImage(
-                            imageSrc,
+                            imageSrcPark,
                             imageSize
                         );
                         for (let i = 0; i < getdata.length; i++) {
@@ -453,6 +516,11 @@ getpark.addEventListener("click", function (checkbox) {
                             // 생성된 마커를 배열에 추가합니다
                             pmarkers.push(marker);
                         }
+                        // 공원 마커찍고 기본 마커 이미지로 초기화
+                        markerImage = new kakao.maps.MarkerImage(
+                            imageSrc,
+                            imageSize
+                        );
                     });
             });
     } else {
@@ -486,7 +554,9 @@ getShop.addEventListener("click", function (checkbox) {
             "/" +
             selectedOption +
             "/" +
-            (soptionValues.length ? soptionValues.join(",") : "1");
+            (soptionValues.length ? soptionValues.join(",") : "1") +
+            "/" +
+            (sshpadeValues.length ? sshpadeValues.join(",") : "1");
         fetch(url)
             .then((response) => response.json())
             .then((data) => {
@@ -515,10 +585,10 @@ getShop.addEventListener("click", function (checkbox) {
                     .then((data) => {
                         console.log(data);
                         let getdata = data.documents;
-                        var imageSrc = 'https://cdn-icons-png.flaticon.com/128/2447/2447823.png';
+                        var imageSrcShop = 'https://cdn-icons-png.flaticon.com/128/2447/2447823.png';
 
                         markerImage = new kakao.maps.MarkerImage(
-                            imageSrc,
+                            imageSrcShop,
                             imageSize
                         );
 
@@ -536,6 +606,11 @@ getShop.addEventListener("click", function (checkbox) {
                             // 생성된 마커를 배열에 추가합니다
                             shopMarkers.push(marker);
                         }
+                        // 상점 마커찍고 기본 마커 이미지로 초기화
+                        markerImage = new kakao.maps.MarkerImage(
+                            imageSrc,
+                            imageSize
+                        );
                     })
             })
             .catch(() => {
@@ -569,7 +644,9 @@ getHosp.addEventListener("click", function (checkbox) {
             "/" +
             selectedOption +
             "/" +
-            (soptionValues.length ? soptionValues.join(",") : "1");
+            (soptionValues.length ? soptionValues.join(",") : "1") +
+            "/" +
+            (sshpadeValues.length ? sshpadeValues.join(",") : "1");
         fetch(url)
             .then((response) => response.json())
             .then((data) => {
@@ -596,10 +673,10 @@ getHosp.addEventListener("click", function (checkbox) {
                     .then((data) => {
                         console.log(data);
                         let getdata = data.documents;
-                        var imageSrc = 'https://cdn-icons-png.flaticon.com/128/10887/10887257.png';
+                        var imageSrcHosp = 'https://cdn-icons-png.flaticon.com/128/10887/10887257.png';
 
                         markerImage = new kakao.maps.MarkerImage(
-                            imageSrc,
+                            imageSrcHosp,
                             imageSize
                         );
 
@@ -617,6 +694,11 @@ getHosp.addEventListener("click", function (checkbox) {
                             // 생성된 마커를 배열에 추가합니다
                             hospMarkers.push(marker);
                         }
+                        // 병원 마커찍고 기본 마커 이미지로 초기화
+                        markerImage = new kakao.maps.MarkerImage(
+                            imageSrc,
+                            imageSize
+                        );
                     })
             })
             .catch(() => {

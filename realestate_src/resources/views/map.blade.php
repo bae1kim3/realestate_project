@@ -52,50 +52,51 @@
         <div class="site-mobile-menu-body"></div>
     </div>
 
-        {{-- 원래 container 들어가있었음 --}}
+    {{-- 원래 container 들어가있었음 --}}
     <nav class="site-nav justify-content-end p-3" style="height: 12%; z-index:11; background-image: url('images/hero_bg_2.jpg');">
         <div class="">
             <div class="menu-bg-wrap">
-            <div class="site-navigation">
-                <a href="{{route('welcome')}}" class="logo m-0 float-start">펫 방</a>
-                <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end">
-                    <li class="active"><a href="{{route('welcome')}}">메인</a></li>
-                    @if (session('u_id'))
-                    <li class="has-children">
-                        <a href="#">추가메뉴</a>
-                        <ul class="dropdown">
-                            @if (session('seller_license'))
-                            <li><a href={{ route('dashboard') }}>매물올리기</a></li>
-                            @endif
-                            <li><a href="{{ route('profile') }}">내 정보</a></li>
-                            <li><a href="#">Sell Property</a></li>
-                            <li class="has-children">
-                                <a href="#">Dropdown</a>
-                                <ul class="dropdown">
-                                    <li><a href="#">Sub Menu One</a></li>
-                                    <li><a href="#">Sub Menu Two</a></li>
-                                    <li><a href="#">Sub Menu Three</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    @endif
-                    <li><a href="{{ route('sellers_info') }}">공인중개사 목록</a></li>
-                    <li><a href="{{ route('info') }}">공지사항</a></li>
-                    @if (!session('u_id'))
-                    <li><a href="{{ route('login') }}">로그인</a></li>
-                    <li><a href="{{ route('register') }}" class="active">회원가입</a></li>
-                    @else
-                    <li><form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <a href="{{route('logout')}}" style="color: white"
-                                onclick="event.preventDefault();
+                <div class="site-navigation">
+                    <a href="{{route('welcome')}}" class="logo m-0 float-start">펫 방</a>
+                    <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end">
+                        <li class="active"><a href="{{route('welcome')}}">메인</a></li>
+                        @if (session('u_id'))
+                        <li class="has-children">
+                            <a href="#">추가메뉴</a>
+                            <ul class="dropdown">
+                                @if (session('seller_license'))
+                                <li><a href={{ route('dashboard') }}>매물올리기</a></li>
+                                @endif
+                                <li><a href="{{ route('profile') }}">내 정보</a></li>
+                                <li><a href="#">Sell Property</a></li>
+                                <li class="has-children">
+                                    <a href="#">Dropdown</a>
+                                    <ul class="dropdown">
+                                        <li><a href="#">Sub Menu One</a></li>
+                                        <li><a href="#">Sub Menu Two</a></li>
+                                        <li><a href="#">Sub Menu Three</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        @endif
+                        <li><a href="{{ route('sellers_info') }}">공인중개사 목록</a></li>
+                        <li><a href="{{ route('info') }}">공지사항</a></li>
+                        @if (!session('u_id'))
+                        <li><a href="{{ route('login') }}">로그인</a></li>
+                        <li><a href="{{ route('register') }}" class="active">회원가입</a></li>
+                        @else
+                        <li>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <a href="{{route('logout')}}" style="color: white" onclick="event.preventDefault();
                                                     this.closest('form').submit();">
-                                로그아웃
-                            </a>
-                            </li>
-                        </form></div>
-                    @endif
+                                    로그아웃
+                                </a>
+                        </li>
+                        </form>
+                </div>
+                @endif
                 </ul>
 
                 <a href="#" class="burger light me-auto float-end mt-1 site-menu-toggle js-menu-toggle d-inline-block d-lg-none" data-toggle="collapse" data-target="#main-navbar">
@@ -117,17 +118,17 @@
                     <nav class="nav justify-content-end p-3" style="background-color: #005555;">
 
                         <button class="shop-btn" id="getshop">
-                        <i class="fa-solid fa-paw fa-2x"></i>
-                        <p>반려동물 용품점</p>
-                    </button>
-                    <button class="hosp-btn" id="gethosp">
-                        <i class="fa-solid fa-house-chimney-medical fa-2x"></i>
-                        <p>동물 병원</p>
-                    </button>
-                    <button class="walk-btn" id="getpark">
-                        <i class="fa-solid fa-seedling fa-2x"></i>
-                        <p>공원</p>
-                    </button>
+                            <i class="fa-solid fa-paw fa-2x"></i>
+                            <p>반려동물 용품점</p>
+                        </button>
+                        <button class="hosp-btn" id="gethosp">
+                            <i class="fa-solid fa-house-chimney-medical fa-2x"></i>
+                            <p>동물 병원</p>
+                        </button>
+                        <button class="walk-btn" id="getpark">
+                            <i class="fa-solid fa-seedling fa-2x"></i>
+                            <p>공원</p>
+                        </button>
                         <select id="option" name="gu" class="selectbox">
                             <option>구 선택</option>
                             <option id="option" value="달서구">달서구</option>
@@ -139,14 +140,30 @@
                             <option id="option" value="수성구">수성구</option>
                             <option id="option" value="중구">중구</option>
                         </select>
-                        <select id="option2" name="s_option" class="selectbox">
-                            <option>건물 형태</option>
-                            <option id="option2" value="아파트">아파트</option>
-                            <option id="option2" value="단독주택">단독주택</option>
-                            <option id="option2" value="오피스텔">오피스텔</option>
-                            <option id="option2" value="빌라">빌라</option>
-                            <option id="option2" value="원룸">원룸</option>
-                        </select>
+                        
+                        <div class="dropdown">
+                            <div class="dropdown-toggle" data-toggle="dropdown">
+                                건물 형태
+                            </div>
+                            <div class="dropdown-menu">
+                                <label class="custom-label">
+                                    <input type="checkbox" class="sshpae" id="optcheck6" value="0"> 아파트
+                                </label>
+                                <label class="custom-label">
+                                    <input type="checkbox" class="sshpae" id="optcheck7" value="1"> 단독주택
+                                </label>
+                                <label class="custom-label">
+                                    <input type="checkbox" class="sshpae" id="optcheck8" value="2"> 오피스텔
+                                </label>
+                                <label class="custom-label">
+                                    <input type="checkbox" class="sshpae" id="optcheck9" value="3"> 빌라
+                                </label>
+                                <label class="custom-label">
+                                    <input type="checkbox" class="sshpae" id="optcheck10" value="4"> 원룸
+                                </label>
+                            </div>
+                        </div>
+
                         <div class="dropdown">
                             <div class="dropdown-toggle" data-toggle="dropdown">
                                 거래 유형
