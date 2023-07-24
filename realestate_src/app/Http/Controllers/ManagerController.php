@@ -70,13 +70,21 @@ class ManagerController extends Controller
     }
 
     function adminLoginCheck(Request $req){
-        $Adminget =DB::table('admin_info')->find('*');
+        $Adminget =DB::table('admin_info')->get();
         Log::info($Adminget);
-        Log::info($Adminget->adm_id);
-        if($Adminget->adm_id == $req->AdminId && $Adminget->adm_pw == $req->AdminPw){
-            return 1;
+        Log::info($Adminget[0]->adm_id);
+        Log::info($Adminget[0]->adm_pw);
+        Log::info($req['AdminId']);
+        Log::info($req['AdminPw']);
+        Log::info($req);
+
+        // Log::info($Adminget->adm_id);
+        if($Adminget[0]->adm_id == $req['data']['AdminId'] && $Adminget[0]->adm_pw == $req['data']['AdminPw']){
+            $successCheck = '1';
+            return $successCheck;
         }else{
-            return 0;
+            $successCheck = '0';
+            return $successCheck;
         }
     }
 }
