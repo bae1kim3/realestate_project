@@ -131,7 +131,8 @@ Route::get('/sellers_info',[NavController::class, 'sellers_info'])->name('seller
 
 // 페이스북 로그인
 Route::get('auth/facebook',[FacebookController::class, 'facebookpage']);;
-Route::get('auth/facebook/callback',[FacebookController::class, 'facebookredirect']);;
+Route::get('auth/facebook/callback',[FacebookController::class, 'facebookredirect']);
 
 // 건물 수정
-Route::get('/sDetail/{s_no}/update', [StructureController::class, 'structUpdate'])->name('struct.update');
+Route::get('/sDetail/{s_no}/edit', [StructureController::class, 'structEdit'])->name('struct.edit');
+Route::put('/sDetail/{s_no}', [StructureController::class, 'structUpdate'])->name('struct.update');
