@@ -154,6 +154,8 @@ function searchProperties() {
             itemContainer.innerHTML = '';
             response.photos.forEach(function (photo) {
                 var newPhotosHtml = generatePropertyItemHtml(photo);
+                const h2Element = document.querySelector('.col-lg-6 h2.text-primary.heading');
+                h2Element.textContent = '검색결과';
                 itemContainer.insertAdjacentHTML('beforeend', newPhotosHtml);
                 itemContainer.style.maxWidth = 300 * response.photos.length + "px";
                 // slidebtn = document.querySelector('.tns-nav');

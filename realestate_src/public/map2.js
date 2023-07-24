@@ -402,7 +402,6 @@ getpark.addEventListener("click", function (checkbox) {
         fetch(url)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 const servicekey =
                     "cHVjVjglbOBfaJaLkhiSbBrRU2U3MkuefQS0rxexSVZcSA8vF6zeNrhf7LmjNlJGibN%2BM%2BPpK9GGjbmpsfD7FA%3D%3D";
                 if (selectedOption == "구 선택") {
@@ -419,8 +418,6 @@ getpark.addEventListener("click", function (checkbox) {
                     "https://apis.data.go.kr/6270000/dgInParkwalk/getDgWalkParkList?serviceKey=" +
                     servicekey +
                     "&pageNo=" +
-
-
                     pageno +
                     "&numOfRows=" +
                     numofrows +
@@ -490,31 +487,33 @@ getShop.addEventListener("click", function (checkbox) {
             selectedOption +
             "/" +
             (soptionValues.length ? soptionValues.join(",") : "1");
-        // AJAX 요청 보내기
         fetch(url)
             .then((response) => response.json())
             .then((data) => {
+                console.log(data);
                 defaultlat = data.latlng.lat;
                 defaultlng = data.latlng.lng;
+
                 let page = 1;
                 let size = 10;
-                const REST_API_KEY = 'dae00046c1734639efa0941b96eb225b';
-                const url = "https://dapi.kakao.com/v2/local/search/keyword.json?" +
+                const shopUrl = "https://dapi.kakao.com/v2/local/search/keyword.json?" +
                     "page=" + page +
                     "&size=" + size +
                     "&sort=distance&query=반려동물용품점&x=" + defaultlat +
                     "&y=" + defaultlng +
                     "&radius=5000";
+
+                const REST_API_KEY = 'dae00046c1734639efa0941b96eb225b';
                 const options = {
                     method: 'GET',
                     headers: {
                         'Authorization': `KakaoAK ${REST_API_KEY}`
                     }
                 };
-            });
-                fetch(url, options)
+                fetch(shopUrl, options)
                     .then((response) => response.json())
                     .then((data) => {
+                        console.log(data);
                         let getdata = data.documents;
                         var imageSrc = 'https://cdn-icons-png.flaticon.com/128/2447/2447823.png';
 
@@ -528,26 +527,26 @@ getShop.addEventListener("click", function (checkbox) {
                                 getdata[i].y,
                                 getdata[i].x
                             );
-                            console.log(getdata);
                             marker = new kakao.maps.Marker({
                                 position: markerPosition,
                                 image: markerImage,
                             });
-                            // console.log(data);
                             marker.setZIndex(-2);
                             marker.setMap(map);
                             // 생성된 마커를 배열에 추가합니다
                             shopMarkers.push(marker);
                         }
                     })
-                    .catch(() => { console.log('error') })
-            } else {
-                for(var i = 0; i<shopMarkers.length; i++) {
+            })
+            .catch(() => {
+                console.log('error');
+            });
+    } else {
+        for (var i = 0; i < shopMarkers.length; i++) {
             shopMarkers[i].setMap(null);
         }
         shopMarkers = [];
     }
-
 });
 
 // 동물병원 마커

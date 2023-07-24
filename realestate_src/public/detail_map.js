@@ -110,6 +110,7 @@ getShop.addEventListener("click", function() {
         fetch(url, options)
         .then((response) => response.json())
         .then((data) => {
+            console.log(data);
             let getdata = data.documents;
             var imageSrc = 'https://cdn-icons-png.flaticon.com/128/2447/2447823.png';
             
