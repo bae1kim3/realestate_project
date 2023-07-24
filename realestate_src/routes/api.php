@@ -29,3 +29,4 @@ Route::delete('/liked/delete/{s_no}', [ApiLikedController::class, 'destroy']);
 
 Route::get('/admin/{pageNum}',[ManagerController::class, 'getUser']);
 Route::delete('/admin',[ManagerController::class, 'deleteUser']);
+Route::post('/admin',[ManagerController::class, 'adminLoginCheck']);

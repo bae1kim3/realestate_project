@@ -68,4 +68,13 @@ class ManagerController extends Controller
 
       return $delete_row;
     }
+
+    function adminLoginCheck(Request $req){
+        $Adminget =DB::table('admin_info')->get();
+        if($Adminget->adm_id == $req->AdminId && $Adminget->adm_pw == $req->AdminPw){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
