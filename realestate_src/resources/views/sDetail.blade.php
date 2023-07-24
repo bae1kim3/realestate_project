@@ -1,7 +1,7 @@
 <style>
     .gal-item img {
         width: 100%;
-        height: 100%;
+        /* height: 100%;     */
         object-fit: cover;
     }
     .slide-one-item.home-slider img {
@@ -212,14 +212,14 @@
             <input type="hidden" value="{{ $s_info->s_log }}" id="s_log"/>
             <input type="hidden" value="{{ $s_info->s_lat }}" id="s_lat"/>
             <div class="map-btn">
-                <div class="map-btn-con">
+                <div class="map-btn-con" style="display:flex; justify-content: center">
                     <button class="shop-btn" id="getshop">
                         <i class="fa-solid fa-paw fa-2x"></i>
                         <p>반려동물 용품점</p>
                     </button>
                     <button class="hosp-btn" id="gethosp">
                         <i class="fa-solid fa-house-chimney-medical fa-2x"></i>
-                        <p>동물 병원</p>
+                        <p style="padding:0 70px">동물 병원</p>
                     </button>
                     <button class="walk-btn" id="getwalk">
                         <i class="fa-solid fa-seedling fa-2x"></i>

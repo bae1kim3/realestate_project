@@ -15,9 +15,6 @@
                 <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end">
                     <li class="active"><a href="{{route('welcome')}}">메인</a></li>
                     @if (session('u_id'))
-                    <li class="has-children">
-                        <a href="#">추가메뉴</a>
-                        <ul class="dropdown">
                             @if (session('seller_license'))
                             <li><a href={{ route('dashboard') }}>매물올리기</a></li>
                             @endif
@@ -26,20 +23,9 @@
                             @else
                             <li><a href="{{ route('profile') }}">내 정보</a></li>
                             @endif
-                            <li><a href="#">Sell Property</a></li>
-                            <li class="has-children">
-                                <a href="#">Dropdown</a>
-                                <ul class="dropdown">
-                                    <li><a href="#">Sub Menu One</a></li>
-                                    <li><a href="#">Sub Menu Two</a></li>
-                                    <li><a href="#">Sub Menu Three</a></li>
-                                </ul>
-                            </li>
-                        </ul>
                     </li>
                     @endif
                     <li><a href="{{ route('sellers_info') }}">공인중개사 목록</a></li>
-                    <li><a href="{{ route('info') }}">공지사항</a></li>
                     @if (!session('u_id'))
                     <li><a href="{{ route('login') }}">로그인</a></li>
                     <li><a href="{{ route('register') }}" class="active">회원가입</a></li>
