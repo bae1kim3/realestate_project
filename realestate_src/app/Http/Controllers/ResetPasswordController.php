@@ -25,7 +25,7 @@ class ResetPasswordController extends Controller
             return redirect()->back()->withErrors(['password' => '비밀번호 확인이 일치하지 않습니다.'])->withInput();
         }
 
-        $user = User::where('email', session('email'))->first();
+        $user = User::where('email', $request->email)->first();
         if (!$user) {
             return redirect()->back()->withErrors(['password' => '유효하지 않은 사용자입니다.']);
         }

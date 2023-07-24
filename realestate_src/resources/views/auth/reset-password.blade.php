@@ -83,7 +83,7 @@
                         </div>
                     </div>
                     <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
-        <form method="POST" action="{{ route('password.update') }}">
+        <form method="POST" action="{{ route('updatePassword') }}">
             @csrf
             <x-validation-errors class="mb-4" />
 

@@ -104,9 +104,9 @@
 
     <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
         <form method="POST" action="{{ route('login') }}">
-            <x-validation-errors class="mb-4" />
             @csrf
             <div class="col-6 mb-3">
+                <x-validation-errors class="mb-4" />
                 <x-label for="u_id" value="{{ __('User ID') }}" class="dark:text-gray-100" />
                 <x-input id="u_id" class="form-control" type="text"
                     name="u_id" :value="old('u_id')" required autofocus />

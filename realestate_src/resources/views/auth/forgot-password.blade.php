@@ -1,25 +1,3 @@
-<style>
-    p {
-            color: white;
-            margin: 0px 10px
-        }
-
-        li {
-            color: gray;
-        }
-
-        .test {
-            display: none;
-        }
-
-        .color {
-            color: white;
-        }
-
-        .color2 {
-            color: gray;
-        }
-</style>
 <x-app-layout>
     <div class="hero page-inner overlay" style="background-image: url('{{ asset('images/hero_bg_1.jpg') }}')">
         <div class="container">
@@ -40,6 +18,8 @@
             </div>
         </div>
     </div>
+
+
     <div class="section">
         <div class="container">
             <div class="row">
@@ -76,25 +56,25 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
 
                     <form method="POST" action="{{ route('password.email') }}">
                         @csrf
 
                         <div class="col-6 mb-3">
-                            <x-label for="email" value="{{ __('이메일') }}" />
-                            <x-input id="email"  class="form-control" type="email" name="email" :value="old('email')" required
+                            <x-label for="email" value="{{ __('Email') }}" />
+                            <x-input id="email" class="form-control" type="email" name="email" :value="old('email')" required
                                 autofocus autocomplete="username" />
                         </div>
 
-                            <x-button class="btn btn-primary py-2 px-3">
+                        <div class="flex items-center justify-end mt-4">
+                            <x-button class="btn btn-primary py-2 px-3" onclick="alert('이메일 발송완료 인증을 해주세요.')">
                                 {{ __('초기화 링크') }}
                             </x-button>
                         </div>
                     </form>
-                    </div>
                 </div>
                 </div>
               </div>
+            </div>
     </x-app-layout>
