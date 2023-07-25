@@ -78,12 +78,6 @@ Route::get('/find-userpass', [FindUserPass::class, '__invoke'])
     ->name('find-userpass')
     ->middleware('checkEmail');
 
-    Route::get('/find-userpass', [FindUserPass::class, '__invoke'])
-    ->name('find-userpass')
-    ->middleware('checkEmail');
-
-Route::post('/find-userpass', [UserPassInput::class, 'findUserPwQuestion'])->name('find-userpass');
-
 Route::get('/find-userpassinput', [UserPassInput::class, 'render'])->name('find-userpassinput');
 
 
@@ -135,6 +129,6 @@ Route::get('auth/facebook',[FacebookController::class, 'facebookpage']);;
 Route::get('auth/facebook/callback',[FacebookController::class, 'facebookredirect']);
 
 // 건물 수정
-Route::get('/sDetail/{s_no}/edit', [StructureController::class, 'structEdit'])->name('struct.edit');
-Route::put('/sDetail/{s_no}', [StructureController::class, 'structUpdate'])->name('struct.update');
+Route::get('/sDetail/up/{s_no}', [StructureController::class, 'structEdit'])->name('struct.edit');
+Route::put('/sDetailt/up/{s_no}', [StructureController::class, 'structUpdate'])->name('struct.update');
 
