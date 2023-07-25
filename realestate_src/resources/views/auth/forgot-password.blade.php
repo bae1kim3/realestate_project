@@ -1,10 +1,31 @@
+<style>
+    p {
+        color: white;
+        margin: 0px 10px
+    }
+
+    li {
+        color: gray;
+    }
+
+    .test {
+        display: none;
+    }
+
+    .color {
+        color: white;
+    }
+
+    .color2 {
+        color: gray;
+    }
+</style>
 <x-app-layout>
     <div class="hero page-inner overlay" style="background-image: url('{{ asset('images/hero_bg_1.jpg') }}')">
         <div class="container">
             <div class="row justify-content-center align-items-center">
                 <div class="col-lg-9 text-center mt-5">
                     <h1 class="heading" data-aos="fade-up">비밀번호 변경</h1>
-
                     <nav aria-label="breadcrumb" data-aos="fade-up" data-aos-delay="200">
                         <ol class="breadcrumb text-center justify-content-center">
                             <li id="use" sytle="color:white"><a href="{{ route('welcome') }}">메인</a></li>
@@ -62,7 +83,7 @@
                         @csrf
 
                         <div class="col-6 mb-3">
-                            <x-label for="email" value="{{ __('Email') }}" />
+                            <x-label for="email" value="{{ __('이메일') }}" />
                             <x-input id="email" class="form-control" type="email" name="email" :value="old('email')" required
                                 autofocus autocomplete="username" />
                         </div>
