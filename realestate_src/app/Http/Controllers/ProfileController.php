@@ -74,8 +74,8 @@ class ProfileController extends Controller
 }
 public function sellerprofile(){
     $lastPhotoId = 17;
-    $sellerli = session('seller_license');
-    $user = User::where('seller_license', $sellerli)->first();
+    $u_id = session('u_id');
+    $user = User::where('u_id', $u_id)->first();
 
     if ($user) {
         $s_info = S_info::where('u_no', $user->id)->first();

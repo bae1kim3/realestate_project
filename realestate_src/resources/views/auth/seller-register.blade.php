@@ -58,10 +58,9 @@
                 </div>
 
                 {{-- 회원가입 작성 폼 --}}
-                <x-validation-errors class="mb-4" />
                 <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
                     <form method="POST" action="{{ route('register') }}">
-
+                        <x-validation-errors class="mb-4" />
                         @csrf
                         <div class="col-6 mb-3">
                             <x-label for="name" value="{{ __('이름') }}" />
