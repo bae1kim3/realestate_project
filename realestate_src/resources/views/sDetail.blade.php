@@ -163,14 +163,15 @@
                     </div>
                 </div>
 
-                <div class="row no-gutters mt-5">
+                <div class="no-gutters mt-5" style="width:100%">
                     <div class="col-12">
                         <h2 class="h4 text-black mb-3">Gallery</h2>
                     </div>
+                    <div class="col-12">
                     @foreach ($photos as $photo)
-                    
-                    <a href="{{ asset($photo->url) }}" class="image-popup gal-item"><div style="background-image:url('{{ asset($photo->url) }}'); background-repeat: no-repeat; background-size:cover; width:200px; height:200px"></div></a>
+                    <a href="{{ asset($photo->url) }}" class="image-popup gal-item" style="display:inline-block;"><div style="display:inline-block; background-image:url('{{ asset($photo->url) }}'); background-repeat: no-repeat; background-size:cover; width:150px; height:150px"></div></a>
                     @endforeach
+                    </div>
 
                 </div>
             </div>

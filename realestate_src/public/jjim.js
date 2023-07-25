@@ -40,7 +40,7 @@ function storeLiked () {
         console.log(apiData);
         if(apiData['errorcode'] === 'E01'){
             // return console.log(apiData['msg']);
-            return window.location.href = 'http://192.168.0.129/login';
+            return window.location.href = '/login';
         }
 
         fullHeart.classList.remove('none');
@@ -76,7 +76,7 @@ function deleteLiked() {
         console.log(apiData);
         if(apiData['errorcode'] === 'E01'){
             // return console.log(apiData['msg']);
-            return window.location.href = 'http://www.localhost/login';
+            return window.location.href = '/login';
         }
         fullHeart.classList.add('none');
         empHeart.classList.remove('none');
