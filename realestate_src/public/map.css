@@ -88,7 +88,7 @@
 
 .dropdown-menu {
     position: absolute;
-    top: 100%;
+    /* top: 100%; */
     left: 0;
     display: none;
     background-color: #fff;
@@ -119,13 +119,13 @@
     display: block;
     margin-bottom: 5px;
 }
-/* .selected {
+.selected {
     border: 3px solid yellowgreen !important;
     box-sizing: border-box;
 }
-.selectedpark {
+/* .selectedpark {
     background-color: yellowgreen !important;
-} */
+}  */
 
 /* #u_id {
     text-align: center;
@@ -165,8 +165,11 @@ a:hover {
     overflow: hidden; /* 넘치는 텍스트 숨김 */
     text-overflow: ellipsis;
 }
-.dropdown-toggle1 {
+.dropdown-toggle1,
+.dropdown-toggle {
     text-align: center;
+    height: 70px;
+    line-height: 50px;
 }
 .nab_div {
     display: inline-block;
@@ -187,15 +190,15 @@ a:hover {
 }
 
 /* 1000px 미만인 경우 */
-/* @media screen and (max-width: 1000px) {
+@media screen and (max-width: 1000px) {
     .nav-container nav {
         width: 700px;
         flex-direction: row; 
         flex-wrap: nowrap; 
     }
     .nav-container {
-        overflow-x: auto; 
+        overflow-x: auto;
         white-space: nowrap; 
     }
 }
- */
+

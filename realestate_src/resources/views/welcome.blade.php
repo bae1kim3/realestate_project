@@ -6,9 +6,9 @@
     </x-slot>
     <div class="hero">
         <div class="hero-slide">
-            <div class="img overlay" style="background-image: url('images/hero_bg_3.jpg')"></div>
-            <div class="img overlay" style="background-image: url('images/hero_bg_2.jpg')"></div>
-            <div class="img overlay" style="background-image: url('images/hero_bg_1.jpg')"></div>
+            <div class="img overlay" style="background-image: url('images/AdobeStock_481320874_Preview.jpeg')"></div>
+            <div class="img overlay" style="background-image: url('images/AdobeStock_622111621_Preview.jpeg')"></div>
+            <div class="img overlay" style="background-image: url('images/hero_bg_1.jpeg')"></div>
         </div>
 
         <div class="container">
