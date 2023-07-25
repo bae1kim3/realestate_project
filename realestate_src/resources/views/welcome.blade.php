@@ -8,7 +8,7 @@
         <div class="hero-slide">
             <div class="img overlay" style="background-image: url('images/AdobeStock_481320874_Preview.jpeg')"></div>
             <div class="img overlay" style="background-image: url('images/AdobeStock_622111621_Preview.jpeg')"></div>
-            <div class="img overlay" style="background-image: url('images/hero_bg_1.jpeg')"></div>
+            <div class="img overlay" style="background-image: url('images/AdobeStock_390828488_Preview.jpeg')"></div>
         </div>
 
         <div class="container">
