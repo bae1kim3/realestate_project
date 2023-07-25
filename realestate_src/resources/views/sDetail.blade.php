@@ -71,20 +71,20 @@
                         </div>
                     </div>
                     <div class="bg-white property-body border-bottom border-left border-right">
-                        <p class="hits">조회수 {{$s_info->hits}}</p>
+                        <p class="hits" style="font-size:15px">조회수 {{number_format($s_info->hits)}}</p>
                         <div class="row mb-5">
                             <div class="col-md-6">
-                                <strong class="text-success h1 mb-3 price">
+                                <span class="text-success mb-3 price" style="font-size:50px">
                                     @if($s_info->p_month)
-                                    {{ $s_info->p_deposit }} / {{ $s_info->p_month }}
+                                    {{ number_format($s_info->p_deposit) }} / {{ number_format($s_info->p_month) }}
                                     @else
-                                    {{ $s_info->p_deposit }}
+                                    {{ number_format($s_info->p_deposit) }}
                                     @endif
-                                </strong>
-                                <p>만원</p>
+                                </span>
+                                <span>만원</span>
                             </div>
                         </div>
-                        <div class="row mb-5 summary-block">
+                        <div class="row mb-5 summary-block" style="font-size:20px">
                             <div class="col-md-6 col-lg-4 text-center border-bottom border-top py-3">
                                 <span class="d-inline-block text-black mb-0 caption-text">판매 유형</span>
                                 <strong class="d-block summary-block-s">{{ $s_info->s_type }}</strong>
@@ -190,23 +190,19 @@
                 <p class="mb-4" style="color:gray!important;">[ 공인중개사 정보 ]</p>
                 <h3 class="h4 text-black widget-title mb-3">{{ $user->b_name }}</h3>
                 <h3 class="mb-3 fw-bold fs-5 seller-name">{{ $user->name }}</h3>
-                <span>전화번호</span>
-                <p>
-                {{$user->phone_no}}
-                </p>
-                <span>부동산 주소</span>
+                <div>전화번호</div>
+                <a href="tel:{{$user->phone_no}}" style="display:inline-block; margin-bottom:16px">{{$user->phone_no}}</a>
+                <div>부동산 주소</div>
                 <p>
                 {{$user->u_addr}}
                 </p>
                 </p>
-                <span>이메일</span>
-                <p>
-                {{$user->email}}
-                </p>
+                <div>이메일</div>
+                <a href="mailto:{{$user->email}}">{{$user->email}}</a>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit qui explicabo, libero nam, saepe eligendi. Molestias maiores illum error rerum. Exercitationem ullam saepe, minus, reiciendis ducimus quis. Illo, quisquam, veritatis.</p>
             </div>
             <h4 class="text-black widget-title mb-3">위치</h4>
-            <p>{{ $s_info->s_add }}</p>
+            <p style="font-size:15px">{{ $s_info->s_add }}</p>
             <div id="map" style="width: 100%; height: 400px; margin-bottom:30px;"></div>
             <input type="hidden" value="{{ $s_info->s_name }}" id="s_name"/>
             <input type="hidden" value="{{ $s_info->s_log }}" id="s_log"/>

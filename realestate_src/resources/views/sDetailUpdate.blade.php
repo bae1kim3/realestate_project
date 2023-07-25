@@ -62,7 +62,6 @@
                 @csrf
                 @method('put')
                 {{-- <input type="hidden" name="_method" value="PUT"> --}}
-                <x-input type="file" name="photo[]" class="form-control-file mt-2" multiple />
                 @if(session('status'))
                     <div class="alert alert-success" role="alert">
                         {{ session('status') }}
@@ -157,7 +156,7 @@
                 <br>
 
                 <div class="col-6 mb-3">
-                <x-button type="button" id="submit_btn" class="btn btn-primary py-2 px-3">방 올리기</x-button>
+                <x-button type="button" id="submit_btn" class="btn btn-primary py-2 px-3" style="margin-right:10px">방 올리기</x-button>
                 <x-button type="button" onclick="location.href='{{route('struct.detail',['s_no' =>$s_infos->s_no])}}'" class="btn btn-primary py-2 px-3">취소</x-button>
                 </div>
             </form>

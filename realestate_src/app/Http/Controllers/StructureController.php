@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Photo;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
@@ -223,6 +224,7 @@ class StructureController extends Controller
     }
     
     public function structEdit($s_no) {
+        // Log::debug('-------------- structEdit start --------------');
         $s_infos = [];
         $s_options = [];
         $result = S_info::where('s_no', $s_no)->pluck('u_no')->toArray();
@@ -231,17 +233,23 @@ class StructureController extends Controller
                 $s_infos = S_info::find($s_no);
                 $s_options = State_option::find($s_no);
         }
+        // Log::debug('-------------- structEdit end --------------');
         return view('sDetailUpdate' , compact('s_infos', 's_options'));
     }
 
     
     // 상세 페이지 수정
     public function structUpdate (Request $req, $s_no) {
-    // 유효성 검사
+    
+        // Log::debug('-------------- structUpdate start --------------');
+        // Log::debug('structUpdate : request', [$req->s_size,$req->s_fl,$req->p_deposit, $s_no]);
+
         $validator = Validator::make(
             $req->all(),
             [
                 's_name' => 'required|regex:/^[가-힣0-9\s]+$/u|max:30'
+                // 's_name' => 'required|alpha_dash|max:30'
+                // alpha_dash : 한글 영문 숫자 - _ 다 되는데 ㄱㄱ 이런 글자도 통과됨..
                 , 'sell_cat_info' => 'required|in:월세,전세,매매'
                 , 's_size' => 'required|integer|max:99999999999'
                 , 'p_deposit' => 'required|integer|max:99999999999'
@@ -261,170 +269,89 @@ class StructureController extends Controller
                 ->withInput()
                 ->withErrors($validator);
         }
-        $error = [];
-
-        // 월세 클릭했을때, 월세값 없이 넘겨주면 에러
-        // 전세, 매매일때, 
-        $radio_Btn = $req->sell_cat_info;
-        $p_month = $req->p_month;
-        $p_deposit = $req->p_deposit;
-        if ($radio_Btn === "월세") {
-            if ((!$p_month && $p_deposit) || ($p_month && !$p_deposit) || (!$p_month && !$p_deposit)) {
-                $error['p_month_err'] = '보증금과 월세 가격을 작성 해주세요';
-            }
-        } elseif (($radio_Btn === "전세" || $radio_Btn === "매매")) {
-            if ($p_month || !$p_deposit) {
-                $error['buy_err'] = '거래 유형을 확인하고 가격을 적어주세요';
-            }
-        }
-
-        // '대구시' 빼고 주소 넘겨주기
-        $s_addr_all = $req->s_addr;
-        $pieces = "";
-        if (!$s_addr_all) {
-            $error['addr_err'] = '주소를 입력해주세요';
-        } elseif (mb_strpos($s_addr_all, '대구') === false) {
-            $error['gu_err'] = '대구 지역 주소가 아닙니다';
-        } else {
-            $pieces = mb_substr($s_addr_all, 3);
-        }
-
-        // db에 있는 역이름이랑 $req 넘어온 역이름 비교 -> 둘이 일치 안하면 에러메세지 뜨게
-        $sub_name = Subway::where('sub_name', $req->sub_name)->first();
-
-        if (!$sub_name) {
-            $error['sub_err'] = '역 이름을 확인해주세요';
-        }
-
-        $photos = $req->file('photo');
-        if (!$photos) {
-            $error['photo_err'] = '사진을 선택해주세요';
-        }
-
-        $s_info = S_info::find($s_no);
-        Log::debug("s_info",[$s_info]);
-
-        if (!empty($error)) {
-            // 리다이렉트 해서 에러 세션에 담음
-            return redirect()->back()->withInput()->withErrors($error);
-        } 
-        else {
-
-
-            if ($req->s_name !== $s_info->s_name) {
-                $updateData[] = 's_name';
-            }
-            if ($pieces !== $s_info->s_add) {
-                $updateData[] = 's_add';
-            }
-            if ($req->sell_cat_info !== $s_info->s_type) {
-                $updateData[] = 's_type';
-            }
-            if ($req->s_size !== $s_info->s_size) {
-                $updateData[] = 's_size';
-            }
-            if ($req->s_fl !== $s_info->s_fl) {
-                $updateData[] = 's_fl';
-            }
-            if ($req->s_log !== $s_info->s_log) {
-                $updateData[] = 's_log';
-            }
-            if ($req->sub_name !== $s_info->s_stai) {
-                $updateData[] = 's_stai';
-            }
-            if ($req->s_lat !== $s_info->s_lat) {
-                $updateData[] = 's_lat';
-            }
-            if ($req->p_deposit !== $s_info->p_deposit) {
-                $updateData[] = 'p_deposit';
-            }
-            if ($req->p_month !== $s_info->p_month) {
-                $updateData[] = 'p_month';
-            }
-            if ($req->animal_size !== $s_info->animal_size) {
-                $updateData[] = 'animal_size';
-            }
-            if ($req->s_option !== $s_info->s_option) {
-                $updateData[] = 's_option';
-            }
-
-            foreach($updateData as $val) {
-
-                $s_info->$val = $req->$val;
-            }
             
-            $s_info->save(); // update
-            // *************** TODO : insert 하는 동시에 pk가져오는 체이닝 메소드!!!!!!1번
+            $error = [];
 
-            $s_info_op = State_option::find($s_no);
-
-            if ($req->s_parking !== $s_info_op->s_parking) {
-                $updateData[] = 's_parking';
-            }
-            if ($req->s_ele !== $s_info_op->s_ele) {
-                $updateData[] = 's_ele';
-            }
-
-            foreach($updateData as $val) {
-
-                $s_info_op->$val = $req->$val;
-            }
-
-            $s_info_op->save(); // 건물 옵션 insert
-                //***********TODO : transaction 추가하기!!!!!!!! 2번
-
-                // photo start -----------------------------------
-
-                // 최소 5장, 최대 10장의 사진 검사
-                $photos = is_array($photos) ? $photos : [$photos];
-
-                // 최소 5장, 최대 10장의 사진 검사
-                $minPhotos = 5;
-                $maxPhotos = 10;
-                $totalPhotos = count($photos);
-
-                $isFirstPhoto = true; // 첫번째 사진인지 체크
-
-                if ($totalPhotos < $minPhotos || $totalPhotos > $maxPhotos) {
-                    return redirect()->back()->withErrors([
-                        'error' => '사진은 ' . $minPhotos . ' 이상 ' . $maxPhotos . ' 이하로 올려주세요'
-                    ]);
-                } else {
-                    foreach ($photos as $photo) {
-                        if (!$photo) {
-                            continue;
-                        }
-
-                        // 확장자 검사
-                        $extension = $photo->getClientOriginalExtension();
-                        if (!in_array($extension, ['jpg', 'jpeg', 'png'])) {
-                            return redirect()->back()->withErrors([
-                                'error' => '파일형식은 jpg와 png만 지원합니다'
-                            ]);
-                        }
-                        // Store
-                        $path = $photo->store('public');
-
-                        $mvp_photo = $isFirstPhoto ? '1' : '0'; // 대표 사진 플래그 설정
-
-                        $photo = Photo::create([
-                            's_no' => $s_no,
-                            'url' => Storage::url($path),
-                            'hashname' => $photo->hashName(),
-                            'originalname' => $photo->getClientOriginalName(),
-                            'mvp_photo' => $mvp_photo, // 대표 사진 플래그 저장
-                        ]);
-
-                        $isFirstPhoto = false; // 첫번째 사진 체크 후 '0' 들어가게
-
-                    }
-
-                    // *****************TODO : begin transaction create 밑에 다 몰아서하기
-                    // return redirect()->route('struct.detail', ['s_no' => $s_no]);
-                    return route('struct.detail', ['s_no' => $s_no]);
+            // 월세 클릭했을때, 월세값 없이 넘겨주면 에러
+            // 전세, 매매일때, 
+            $radio_Btn = $req->sell_cat_info;
+            $p_month = $req->p_month;
+            $p_deposit = $req->p_deposit;
+            if ($radio_Btn === "월세") {
+                if ((!$p_month && $p_deposit) || ($p_month && !$p_deposit) || (!$p_month && !$p_deposit)) {
+                    $error['p_month_err'] = '보증금과 월세 가격을 작성 해주세요';
+                }
+            } elseif (($radio_Btn === "전세" || $radio_Btn === "매매")) {
+                if ($p_month || !$p_deposit) {
+                    $error['buy_err'] = '거래 유형을 확인하고 가격을 적어주세요';
                 }
             }
+            
+            // '대구시' 빼고 주소 넘겨주기
+            $s_addr_all = $req->s_addr;
+            $pieces = "";
+            if (!$s_addr_all) {
+                $error['addr_err'] = '주소를 입력해주세요';
+            } elseif (mb_strpos($s_addr_all, '대구') === false) {
+                $error['gu_err'] = '대구 지역 주소가 아닙니다';
+            } else {
+                $pieces = mb_substr($s_addr_all, 3);
+            }
+    
+            // db에 있는 역이름이랑 $req 넘어온 역이름 비교 -> 둘이 일치 안하면 에러메세지 뜨게
+            $sub_name = Subway::where('sub_name', $req->sub_name)->first();
+            
+            if (!$sub_name) {
+                $error['sub_err'] = '역 이름을 확인해주세요';
+            }
+    
+            
+    
+            if (!empty($error)) {
+                // 리다이렉트 해서 에러 세션에 담음
+                // Log::debug('structUpdate : all error', [$error]);
+                return redirect()->back()->withInput()->withErrors($error);
+            } 
+            else {
+                try{
+                    DB::beginTransaction();
+                    $s_info = S_info::find($s_no);
+                    $s_info_op = State_option::find($s_no);
+                    // Log::debug('structUpdate : s_info find', [$s_info]);
+
+                    $s_info->s_name = $req->s_name;
+                    $s_info->s_add = $pieces;
+                    $s_info->s_size = $req->s_size;
+                    $s_info->s_fl = $req->s_fl;
+                    $s_info->s_log = $req->s_log;
+                    $s_info->s_stai = $req->sub_name;
+                    $s_info->s_lat = $req->s_lat;
+                    $s_info->p_deposit = $req->p_deposit;
+                    $s_info->p_month = $req->p_month;
+                    $s_info->animal_size = $req->animal_size;
+                    $s_info->s_option = $req->s_option;
+                    $s_info_op->s_parking = $req->s_parking;
+                    $s_info_op->s_ele = $req->s_ele;
+
+                    $s_info->save(); // update
+
+                    $s_info_op->save(); // update
+
+                    
+
+                    DB::commit();
+
+                    return redirect()->route('struct.detail', ['s_no' => $s_no]);
+                    // Log::debug('-------------- structUpdate end --------------');
+                    
+                    }
+
+                catch(\Exception $e) {
+                    DB::rollBack();
+                    return redirect()->back()->withErrors(['error' => '데이터 처리 중 오류가 발생했습니다. 다시 시도해주세요.']);
+                    }
+
+                
         }
     }
-
-
+}

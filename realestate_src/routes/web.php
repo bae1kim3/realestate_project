@@ -130,5 +130,5 @@ Route::get('auth/facebook/callback',[FacebookController::class, 'facebookredirec
 
 // 건물 수정
 Route::get('/sDetail/up/{s_no}', [StructureController::class, 'structEdit'])->name('struct.edit');
-Route::put('/sDetailt/up/{s_no}', [StructureController::class, 'structUpdate'])->name('struct.update');
+Route::put('/sDetail/up/{s_no}', [StructureController::class, 'structUpdate'])->name('struct.update');
 
