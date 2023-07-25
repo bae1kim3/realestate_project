@@ -21,7 +21,7 @@
                             @if (session('seller_license'))
                             <li><a href="{{ route('sellpro') }}">내 정보</a></li>
                             @else
-                            <li><a href="{{ route('profile') }}">내 정보</a></li>
+                            <li><a href="{{ route('userpro') }}">내 정보</a></li>
                             @endif
                     </li>
                     @endif

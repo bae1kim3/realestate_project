@@ -57,9 +57,9 @@ Route::get('/', function () {
     return redirect('welcome');
 })->name('welcome');
 
-Route::get('profileUp',[ProfileController::class, 'goPro'])->name('profile');
+Route::get('profileUUp',[ProfileController::class, 'goPro'])->name('userpro');
 
-Route::get('profileUp',[ProfileController::class, 'sellerprofile'])->name('sellpro');
+Route::get('profileSUp',[ProfileController::class, 'sellerprofile'])->name('sellpro');
 
 Route::post('/UpdatePassPost', [ProfileController::class, 'UpdatePassPost'])->name('up_pass');
 
