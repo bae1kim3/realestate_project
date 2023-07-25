@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-            <link rel="preconnect" href="https://fonts.googleapis.com">
-            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-            <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&family=Orbit&family=Roboto+Mono:wght@600&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&family=Orbit&family=Roboto+Mono:wght@600&display=swap" rel="stylesheet">
     </x-slot>
     <div class="hero">
         <div class="hero-slide">
@@ -30,9 +30,9 @@
         <div class="container">
             <div class="row mb-5 align-items-center">
                 <div class="col-lg-6">
-                            <h2 class="text-primary heading" style="font-weight: 500;">
-                                최근 등록된 매물
-                            </h2>
+                    <h2 class="text-primary heading" style="font-weight: 500;">
+                        최근 등록된 매물
+                    </h2>
                 </div>
                 <div class="col-lg-6 text-lg-end">
                     <div style="display:flex-end">
@@ -71,23 +71,23 @@
                                                 <span class="icon-building me-2"></span>
                                                 <span class="caption">
                                                     @switch($photo->s_option)
-                                                        @case(0)
-                                                            아파트
-                                                            @break
-                                                        @case(1)
-                                                            단독주택
-                                                            @break
-                                                        @case(2)
-                                                            오피스텔
-                                                            @break
-                                                        @case(3)
-                                                            빌라
-                                                            @break
-                                                        @case(4)
-                                                            원룸
-                                                            @break
-                                                        $@default
-                                                            @break
+                                                    @case(0)
+                                                    아파트
+                                                    @break
+                                                    @case(1)
+                                                    단독주택
+                                                    @break
+                                                    @case(2)
+                                                    오피스텔
+                                                    @break
+                                                    @case(3)
+                                                    빌라
+                                                    @break
+                                                    @case(4)
+                                                    원룸
+                                                    @break
+                                                    $@default
+                                                    @break
                                                     @endswitch
                                                 </span>
                                             </span>
@@ -95,13 +95,13 @@
                                                 <span class="fa-solid fa-dog me-2"></span>
                                                 <span class="caption"> 대형동물
                                                     @switch($photo->animal_size)
-                                                        @case(0)
-                                                            <strong>X</strong>
-                                                            @break
-                                                        @case(1)
-                                                            <strong>O</strong>
-                                                            @break
-                                                        $@default
+                                                    @case(0)
+                                                    <strong>X</strong>
+                                                    @break
+                                                    @case(1)
+                                                    <strong>O</strong>
+                                                    @break
+                                                    $@default
 
                                                     @endswitch
                                                 </span>
@@ -125,200 +125,200 @@
             </div>
         </div>
     </div>
-{{-- 찜한 매물 출력 --}}
+    {{-- 찜한 매물 출력 --}}
     @if(Auth::check() && session('seller_license') === null)
-        <div class="section sec-testimonials">
-            <div class="container">
-                <div class="row mb-5 align-items-center">
-                    <div class="col-md-6">
-                        <h2 class="font-weight-bold heading text-primary mb-4 mb-md-0">
-                            찜한 매물
-                        </h2>
-                    </div>
-                    <div class="col-md-6 text-md-end">
-                        <div id="testimonial-nav">
-                            <span class="prev" data-controls="prev">Prev</span>
-
-                            <span class="next" data-controls="next">Next</span>
-                        </div>
-                    </div>
+    <div class="section sec-testimonials">
+        <div class="container">
+            <div class="row mb-5 align-items-center">
+                <div class="col-md-6">
+                    <h2 class="font-weight-bold heading text-primary mb-4 mb-md-0">
+                        찜한 매물
+                    </h2>
                 </div>
+                <div class="col-md-6 text-md-end">
+                    <div id="testimonial-nav">
+                        <span class="prev" data-controls="prev">Prev</span>
 
-                <div class="row">
-                    <div class="col-lg-4"></div>
-                </div>
-                <div class="testimonial-slider-wrap">
-                    <div class="testimonial-slider">
-                    @if(!empty($liked_info[0]))
-                        @foreach($liked_info as $info)
-                        <div class="item">
-                            <div class="testimonial" >
-                                <a href="{{route('struct.detail',['s_no'=>$info->s_no])}}" class="img">
-                                    <img src="{{asset($info->url)}}" alt="Image" class="img-fluid" style="width: 350px; height: 300px;" />
-                                </a>
-                                <div class="info_con" style="padding:30px;">
-                                    <a href="{{route('struct.detail',['s_no'=>$info->s_no])}}">
-                                        <div class="h5 liked_title" style="color: #005555; font-weight:bold; display:inline-block; border-bottom: 3px solid #005555; padding-bottom:5px">{{ $info->s_name }}</div>
-                                    </a>
-                                    <div style="margin-bottom:8px">{{ $info->s_add }}</div>
-                                    <span class="city d-block mb-3" style="color:black; font-weight:bold; font-size:20px;">{{ number_format($info->p_deposit) }}
-                                                @if ($info->s_type === '월세')
-                                                / {{ number_format($info->p_month) }}
-                                                @endif
-                                    </span>
-                                    {{-- 건물유형, 대형동물 --}}
-                                    <span class="icon-building me-2"></span>
-                                        <span class="caption">
-                                            @switch($info->s_option)
-                                                @case(0)
-                                                    아파트
-                                                    @break
-                                                @case(1)
-                                                    단독주택
-                                                    @break
-                                                @case(2)
-                                                    오피스텔
-                                                    @break
-                                                @case(3)
-                                                    빌라
-                                                    @break
-                                                @case(4)
-                                                    원룸
-                                                    @break
-                                                $@default
-                                                    @break
-                                            @endswitch
-                                        </span>
-                                        <span class="fa-solid fa-dog me-2"></span>
-                                        <span class="caption"> 대형동물
-                                            @switch($info->animal_size)
-                                                @case(0)
-                                                    <strong>X</strong>
-                                                    @break
-                                                @case(1)
-                                                    <strong>O</strong>
-                                                    @break
-                                                $@default
-                                            @endswitch
-                                        </span>
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
-                        @else
-                        <span>찜한 매물이 없습니다</span>
-                        @endif
+                        <span class="next" data-controls="next">Next</span>
                     </div>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-lg-4"></div>
+            </div>
+            <div class="testimonial-slider-wrap">
+                <div class="testimonial-slider">
+                    @if(!empty($liked_info[0]))
+                    @foreach($liked_info as $info)
+                    <div class="item">
+                        <div class="testimonial">
+                            <a href="{{route('struct.detail',['s_no'=>$info->s_no])}}" class="img">
+                                <img src="{{asset($info->url)}}" alt="Image" class="img-fluid" style="width: 350px; height: 300px;" />
+                            </a>
+                            <div class="info_con" style="padding:30px;">
+                                <a href="{{route('struct.detail',['s_no'=>$info->s_no])}}">
+                                    <div class="h5 liked_title" style="color: #005555; font-weight:bold; display:inline-block; border-bottom: 3px solid #005555; padding-bottom:5px">{{ $info->s_name }}</div>
+                                </a>
+                                <div style="margin-bottom:8px">{{ $info->s_add }}</div>
+                                <span class="city d-block mb-3" style="color:black; font-weight:bold; font-size:20px;">{{ number_format($info->p_deposit) }}
+                                    @if ($info->s_type === '월세')
+                                    / {{ number_format($info->p_month) }}
+                                    @endif
+                                </span>
+                                {{-- 건물유형, 대형동물 --}}
+                                <span class="icon-building me-2"></span>
+                                <span class="caption">
+                                    @switch($info->s_option)
+                                    @case(0)
+                                    아파트
+                                    @break
+                                    @case(1)
+                                    단독주택
+                                    @break
+                                    @case(2)
+                                    오피스텔
+                                    @break
+                                    @case(3)
+                                    빌라
+                                    @break
+                                    @case(4)
+                                    원룸
+                                    @break
+                                    $@default
+                                    @break
+                                    @endswitch
+                                </span>
+                                <span class="fa-solid fa-dog me-2"></span>
+                                <span class="caption"> 대형동물
+                                    @switch($info->animal_size)
+                                    @case(0)
+                                    <strong>X</strong>
+                                    @break
+                                    @case(1)
+                                    <strong>O</strong>
+                                    @break
+                                    $@default
+                                    @endswitch
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                    @else
+                    <span>찜한 매물이 없습니다</span>
+                    @endif
+                </div>
+            </div>
         </div>
+    </div>
     @endif
 
     <div class="section pt-0">
         <div class="container">
             <h1>이달의 매물</h1>
-          <div class="row justify-content-between mb-5">
-            <div class="col-lg-7 mb-5 mb-lg-0">
-              <div class="img-about dots">
-                <a href="{{route('struct.detail',['s_no'=>$photo->s_no])}}" class="img">
-                <img class="img-fluid" src="{{ asset($photo->url) }}" alt="img" style="width: 80%;height:80%">
-                </a>
-            </div>
-            </div>
-            <div class="col-lg-4">
-              <div class="d-flex feature-h">
-                <span class="wrap-icon me-3">
-                  <span class="icon-home2"></span>
-                </span>
-                <div class="feature-text">
-                  <h3 class="heading">건물 이름</h3>
-                  <p class="text-black-50">
-                    {{ $building->s_name }}
-                  </p>
+            <div class="row justify-content-between mb-5">
+                <div class="col-lg-7 mb-5 mb-lg-0">
+                    <div class="img-about dots">
+                        <a href="{{route('struct.detail',['s_no'=>$photo->s_no])}}" class="img">
+                            <img class="img-fluid" src="{{ asset($photo->url) }}" alt="img" style="width: 80%;height:80%">
+                        </a>
+                    </div>
                 </div>
-              </div>
+                <div class="col-lg-4">
+                    <div class="d-flex feature-h">
+                        <span class="wrap-icon me-3">
+                            <span class="icon-home2"></span>
+                        </span>
+                        <div class="feature-text">
+                            <h3 class="heading">건물 이름</h3>
+                            <p class="text-black-50">
+                                {{ $building->s_name }}
+                            </p>
+                        </div>
+                    </div>
 
-              <div class="d-flex feature-h">
-                <span class="wrap-icon me-3">
-                  <span class="icon-person"></span>
-                </span>
-                <div class="feature-text">
-                  <h3 class="heading">건물 위치</h3>
-                  <p class="text-black-50">
-                    {{$building->s_add}}
-                  </p>
-                </div>
-              </div>
+                    <div class="d-flex feature-h">
+                        <span class="wrap-icon me-3">
+                            <span class="icon-person"></span>
+                        </span>
+                        <div class="feature-text">
+                            <h3 class="heading">건물 위치</h3>
+                            <p class="text-black-50">
+                                {{$building->s_add}}
+                            </p>
+                        </div>
+                    </div>
 
-              <div class="d-flex feature-h">
-                <span class="wrap-icon me-3">
-                  <span class="icon-security"></span>
-                </span>
-                <div class="feature-text">
-                  <h3 class="heading">조회수</h3>
-                  <p class="text-black-50">
-                    {{$building->hits}} 회
-                  </p>
+                    <div class="d-flex feature-h">
+                        <span class="wrap-icon me-3">
+                            <span class="icon-security"></span>
+                        </span>
+                        <div class="feature-text">
+                            <h3 class="heading">조회수</h3>
+                            <p class="text-black-50">
+                                {{$building->hits}} 회
+                            </p>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
+    </div>
 
-        <section class="features-1">
-            <h1>개발진</h1>
-            <div class="container">
-                <div class="row">
-                    <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
-                        <h3>조장</h3>
-                        <div class="box-feature">
-                            <img src="images/person_1-min.jpg" alt="Image" class="img-fluid" />
-                            <h3 class="mb-3">배창현</h3>
-                            <p>
-                                API, 관리자페이지, 지도 담당
-                            </p>
-                            <p><a href="#" class="learn-more">Learn More</a></p>
-                        </div>
+    <section class="features-1">
+        <h1>개발진</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+                    <h3>조장</h3>
+                    <div class="box-feature">
+                        <img src="images/person_1-min.jpg" alt="Image" class="img-fluid" />
+                        <h3 class="mb-3">배창현</h3>
+                        <p>
+                            API, 관리자페이지, 지도 담당
+                        </p>
+                        <p><a href="#" class="learn-more">Learn More</a></p>
                     </div>
-                    <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="500">
-                        <h3>팀원</h3>
-                        <div class="box-feature">
-                            <img src="images/person_2-min.jpg" alt="Image" class="img-fluid" />
-                            <h3 class="mb-3">김영범</h3>
-                            <p>
-                                디자인, 로그인, 회원가입 담당
-                            </p>
-                            <p><a href="#" class="learn-more">Learn More</a></p>
-                        </div>
+                </div>
+                <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="500">
+                    <h3>팀원</h3>
+                    <div class="box-feature">
+                        <img src="images/person_2-min.jpg" alt="Image" class="img-fluid" />
+                        <h3 class="mb-3">김영범</h3>
+                        <p>
+                            디자인, 로그인, 회원가입 담당
+                        </p>
+                        <p><a href="#" class="learn-more">Learn More</a></p>
                     </div>
-                    <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
-                        <h3>팀원</h3>
-                        <div class="box-feature">
-                            <img src="images/person_3-min.jpg" alt="Image" class="img-fluid" />
-                            <h3 class="mb-3">김민규</h3>
-                            <p>
-                                지도, 메인페이지 담당
-                            </p>
-                            <p><a href="#" class="learn-more">Learn More</a></p>
-                        </div>
+                </div>
+                <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+                    <h3>팀원</h3>
+                    <div class="box-feature">
+                        <img src="images/person_3-min.jpg" alt="Image" class="img-fluid" />
+                        <h3 class="mb-3">김민규</h3>
+                        <p>
+                            지도페이지, 메인페이지 담당
+                        </p>
+                        <p><a href="#" class="learn-more">Learn More</a></p>
                     </div>
-                    <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="600">
-                        <h3>팀원</h3>
-                        <div class="box-feature">
-                            <img src="images/person_4-min.jpg" alt="Image" class="img-fluid" />
-                            <h3 class="mb-3">김주영</h3>
-                            <p>
-                                디테일, 수정 담당
-                            </p>
-                            <p><a href="#" class="learn-more">Learn More</a></p>
-                        </div>
+                </div>
+                <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="600">
+                    <h3>팀원</h3>
+                    <div class="box-feature">
+                        <img src="images/person_4-min.jpg" alt="Image" class="img-fluid" />
+                        <h3 class="mb-3">김주영</h3>
+                        <p>
+                            디테일 페이지, 수정페이지 담당
+                        </p>
+                        <p><a href="#" class="learn-more">Learn More</a></p>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
 
 
-<script src="{{asset('welcome.js')}}"></script>
+    <script src="{{asset('welcome.js')}}"></script>
 </x-app-layout>
