@@ -76,11 +76,13 @@ public function sellerprofile(){
     $lastPhotoId = 17;
     $u_id = session('u_id');
     $user = User::where('u_id', $u_id)->first();
+    $s_info=[];
 
-    var_dump($user);
     if ($user) {
         $s_info = S_info::where('u_no', $user->id)->first();
-
+        if(!$s_info){
+            return view('profile.update-profile-information-form');
+        }
         if ($s_info) {
             $photos = Photo::join('s_infos', 's_infos.s_no', 'photos.s_no')
             ->where('mvp_photo', '1')
