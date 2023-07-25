@@ -8,7 +8,6 @@ use App\Models\State_option;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class ManagerController extends Controller
 {
@@ -16,7 +15,7 @@ class ManagerController extends Controller
         $userList['indiUser'] = User::whereNull('deleted_at')->WhereNull("seller_license")->get();
         $userList['realtorUser'] = User::whereNull('deleted_at')->whereNotNull("seller_license")->get();
         $userList['states'] = S_info::whereNull('deleted_at')->get();
-        $limit_num=13;
+        $limit_num=12;
         $offset = ( $pageNum * $limit_num ) - $limit_num;
 
         $indiUserCnt = count($userList['indiUser']);
@@ -42,11 +41,9 @@ class ManagerController extends Controller
     }
 
     function deleteUser(Request $req){
-      Log::info($req);
       if(isset($req['usersNumber'])){
         for($i = 0; $i < count($req['usersNumber']); $i++ ){
           $state_chk=S_info::where('u_no',$req['usersNumber'][$i])->get();
-          Log::info($state_chk);
           if(count($state_chk) != 0){
             for($j = 0; $j < count($state_chk); $j++){
             Photo::where('s_no',$state_chk[$j]->s_no)->delete();
@@ -71,14 +68,6 @@ class ManagerController extends Controller
 
     function adminLoginCheck(Request $req){
         $Adminget =DB::table('admin_info')->get();
-        Log::info($Adminget);
-        Log::info($Adminget[0]->adm_id);
-        Log::info($Adminget[0]->adm_pw);
-        Log::info($req['AdminId']);
-        Log::info($req['AdminPw']);
-        Log::info($req);
-
-        // Log::info($Adminget->adm_id);
         if($Adminget[0]->adm_id == $req['data']['AdminId'] && $Adminget[0]->adm_pw == $req['data']['AdminPw']){
             $successCheck = '1';
             return $successCheck;
