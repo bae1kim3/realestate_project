@@ -19,7 +19,7 @@
                     </h1>
                     <div class="narrow-w form-search d-flex align-items-stretch mb-3" data-aos="fade-up" data-aos-delay="200">
                         <input type="text" class="form-control px-4" name="search" id="search" placeholder="주소나 지하철역 명으로 검색해 주세요" />
-                        <button onclick="searchProperties()" class="btn btn-primary py-2 px-4">검색</button>
+                        <button onclick="searchProperties()" class="btn btn-primary py-2 px-4">Search</button>
                     </div>
                 </div>
             </div>
