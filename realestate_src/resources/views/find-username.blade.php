@@ -130,10 +130,10 @@
                 </div>
               </div>
     <div id="modal" class="hidden">
-        <div id="modaldiv" style="border: 1px solid #89a5ea; background-color:#929292;" class="rounded-lg p-6">
+        <div id="modaldiv" style="border: 1px solid black; background-color:white;" class="rounded-lg p-6">
             <h1 id="modalTitle" class="text-lg font-bold mb-4"></h1>
             <p id="modalMessage"></p>
-            <button id="modalCloseBtn" class="mt-6 bg-gray-500 hover:bg-gray-700 text-white py-2 px-4 rounded">
+            <button id="modalCloseBtn" class="btn btn-primary py-2 px-3">
                 닫기
             </button>
         </div>
@@ -162,14 +162,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (data.hasOwnProperty("user")) {
                     // 아이디를 찾은 경우
                     modalTitle.textContent = "아이디 찾기 완료";
+                    modalTitle.style.color = "black";
                     modalMessage.textContent = "아이디: " + data.user.u_id;
+                    modalMessage.style.color = "black";
                     var modaldiv = document.getElementById('modaldiv');
                     var loginButton = document.querySelector("#modaldiv button.login-button");
                     if (!loginButton) {
                         loginButton = document.createElement("button");
-                        loginButton.className = "mt-6 bg-gray-500 hover:bg-gray-700 text-white py-2 px-4 rounded login-button";
-
-
+                        loginButton.className = "btn btn-primary py-2 px-3";modalTitle.style.color = "blue";
 
 
                         // ***************** TODO : 로그인버튼, hidden으로 주고, 아이디를 찾은 경우에 없애기

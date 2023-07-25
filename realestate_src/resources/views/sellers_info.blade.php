@@ -157,7 +157,7 @@
                     >
                       <div class="counter-wrap mb-5 mb-lg-0">
                         <span class="number"
-                          ><span class="countup text-primary">2917</span></span
+                          ><span class="countup text-primary">777</span></span
                         >
                         <span class="caption text-black-50"># of Buy Properties</span>
                       </div>
@@ -169,7 +169,7 @@
                     >
                       <div class="counter-wrap mb-5 mb-lg-0">
                         <span class="number"
-                          ><span class="countup text-primary">3918</span></span
+                          ><span class="countup text-primary">777</span></span
                         >
                         <span class="caption text-black-50"># of Sell Properties</span>
                       </div>
@@ -181,7 +181,7 @@
                     >
                       <div class="counter-wrap mb-5 mb-lg-0">
                         <span class="number"
-                          ><span class="countup text-primary">38928</span></span
+                          ><span class="countup text-primary">7777</span></span
                         >
                         <span class="caption text-black-50"># of All Properties</span>
                       </div>
@@ -193,7 +193,7 @@
                     >
                       <div class="counter-wrap mb-5 mb-lg-0">
                         <span class="number"
-                          ><span class="countup text-primary">1291</span></span
+                          ><span class="countup text-primary">777</span></span
                         >
                         <span class="caption text-black-50"># of Agents</span>
                       </div>

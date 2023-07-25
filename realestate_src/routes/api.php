@@ -26,7 +26,7 @@ Route::get('/mapopt', [MapController::class, 'getpark']);
 Route::post('/liked/post/{s_no}', [ApiLikedController::class, 'store']);
 Route::delete('/liked/delete/{s_no}', [ApiLikedController::class, 'destroy']);
 
-
 Route::get('/admin/{pageNum}',[ManagerController::class, 'getUser']);
+Route::get('/admin/{searchWorld}/{listNumber}/{pageNum}',[ManagerController::class, 'search']);
 Route::delete('/admin',[ManagerController::class, 'deleteUser']);
 Route::post('/admin',[ManagerController::class, 'adminLoginCheck']);
