@@ -16,7 +16,7 @@ class ManagerController extends Controller
         $userList['indiUser'] = User::whereNull('deleted_at')->WhereNull("seller_license")->get();
         $userList['realtorUser'] = User::whereNull('deleted_at')->whereNotNull("seller_license")->get();
         $userList['states'] = S_info::whereNull('deleted_at')->get();
-        $limit_num=13;
+        $limit_num=12;
         $offset = ( $pageNum * $limit_num ) - $limit_num;
 
         $indiUserCnt = count($userList['indiUser']);
