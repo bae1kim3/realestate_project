@@ -23,7 +23,7 @@
             {{ __('사용자 라이센스 확인') }}
         </x-slot>
         <x-slot name="logo">
-            <img src="{{ asset('logo.jpg') }}" alt="" style="width: 150px; height:150px">
+            
             <x-authentication-card-logo />
         </x-slot>
 
