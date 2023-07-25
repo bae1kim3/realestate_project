@@ -19,7 +19,7 @@
                     </h1>
                     <div class="narrow-w form-search d-flex align-items-stretch mb-3" data-aos="fade-up" data-aos-delay="200">
                         <input type="text" class="form-control px-4" name="search" id="search" placeholder="주소나 지하철역 명으로 검색해 주세요" />
-                        <button onclick="searchProperties()" class="btn btn-primary" style="width:100px;">검색</button>
+                        <button onclick="searchProperties()" class="btn btn-primary py-2 px-4">검색</button>
                     </div>
                 </div>
             </div>
@@ -214,49 +214,102 @@
         </div>
     @endif
 
+    <div class="section pt-0">
+        <div class="container">
+            <h1>이달의 매물</h1>
+          <div class="row justify-content-between mb-5">
+            <div class="col-lg-7 mb-5 mb-lg-0">
+              <div class="img-about dots">
+                <a href="{{route('struct.detail',['s_no'=>$photo->s_no])}}" class="img">
+                <img class="img-fluid" src="{{ asset($photo->url) }}" alt="img" style="width: 80%;height:80%">
+                </a>
+            </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="d-flex feature-h">
+                <span class="wrap-icon me-3">
+                  <span class="icon-home2"></span>
+                </span>
+                <div class="feature-text">
+                  <h3 class="heading">건물 이름</h3>
+                  <p class="text-black-50">
+                    {{ $building->s_name }}
+                  </p>
+                </div>
+              </div>
+
+              <div class="d-flex feature-h">
+                <span class="wrap-icon me-3">
+                  <span class="icon-person"></span>
+                </span>
+                <div class="feature-text">
+                  <h3 class="heading">건물 위치</h3>
+                  <p class="text-black-50">
+                    {{$building->s_add}}
+                  </p>
+                </div>
+              </div>
+
+              <div class="d-flex feature-h">
+                <span class="wrap-icon me-3">
+                  <span class="icon-security"></span>
+                </span>
+                <div class="feature-text">
+                  <h3 class="heading">조회수</h3>
+                  <p class="text-black-50">
+                    {{$building->hits}} 회
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
         <section class="features-1">
+            <h1>개발진</h1>
             <div class="container">
                 <div class="row">
                     <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+                        <h3>조장</h3>
                         <div class="box-feature">
-                            <span class="flaticon-house"></span>
-                            <h3 class="mb-3">Our Properties</h3>
+                            <img src="images/person_1-min.jpg" alt="Image" class="img-fluid" />
+                            <h3 class="mb-3">배창현</h3>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Voluptates, accusamus.
+                                API, 관리자페이지, 지도 담당
                             </p>
                             <p><a href="#" class="learn-more">Learn More</a></p>
                         </div>
                     </div>
                     <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="500">
+                        <h3>팀원</h3>
                         <div class="box-feature">
-                            <span class="flaticon-house"></span>
-                            <h3 class="mb-3">Property for Sale</h3>
+                            <img src="images/person_2-min.jpg" alt="Image" class="img-fluid" />
+                            <h3 class="mb-3">김영범</h3>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Voluptates, accusamus.
+                                디자인, 로그인, 회원가입 담당
                             </p>
                             <p><a href="#" class="learn-more">Learn More</a></p>
                         </div>
                     </div>
                     <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+                        <h3>팀원</h3>
                         <div class="box-feature">
-                            <span class="flaticon-house"></span>
-                            <h3 class="mb-3">Real Estate Agent</h3>
+                            <img src="images/person_3-min.jpg" alt="Image" class="img-fluid" />
+                            <h3 class="mb-3">김민규</h3>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Voluptates, accusamus.
+                                지도, 메인페이지 담당
                             </p>
                             <p><a href="#" class="learn-more">Learn More</a></p>
                         </div>
                     </div>
                     <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="600">
+                        <h3>팀원</h3>
                         <div class="box-feature">
-                            <span class="flaticon-house-1"></span>
-                            <h3 class="mb-3">House for Sale</h3>
+                            <img src="images/person_4-min.jpg" alt="Image" class="img-fluid" />
+                            <h3 class="mb-3">김주영</h3>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Voluptates, accusamus.
+                                디테일, 수정 담당
                             </p>
                             <p><a href="#" class="learn-more">Learn More</a></p>
                         </div>

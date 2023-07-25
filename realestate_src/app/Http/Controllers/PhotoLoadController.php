@@ -6,6 +6,7 @@ use App\Models\Photo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\S_info;
 
 class PhotoLoadController extends Controller
 {
@@ -21,19 +22,19 @@ class PhotoLoadController extends Controller
 
         $liked_info = [];
 
-        // 찜 
+        // 찜
         if(Auth::check()) {
             if(session('seller_license')== null) {
                 $id = Auth::user()->id;
                 // $liked_list = Jjim::where('id', $id)->select('s_no')->take(10)->get();
                 $liked_list = Jjim::where('id', $id)->pluck('s_no')->toArray();
-    
+
                 // $liked_list = Jjim::join('photos', 'photos.s_no', 'jjims.s_no')
                 // ->where('id', $id)->where('mvp_photo', '1')
                 // ->take(10)
                 // ->get();
-                // $liked_s_info = 
-                
+                // $liked_s_info =
+
                 $liked_info = Photo::join('s_infos', 's_infos.s_no', 'photos.s_no')
                 ->where('mvp_photo', '1')
                 ->whereIn('photos.s_no', $liked_list)
@@ -41,12 +42,19 @@ class PhotoLoadController extends Controller
                 ->take(10)
                 ->get();
             }
-            
+
 
 
         }
 
-        return view('welcome', compact('photos', 'lastPhotoId', 'liked_info'));
+
+        $building = S_info::orderBy('hits', 'desc')->first();
+
+        $s_no = $building ? $building->s_no : null;
+
+        $photo = Photo::where('s_no', $s_no)->where('mvp_photo', 1)->first();
+
+        return view('welcome', compact('photos', 'lastPhotoId', 'liked_info','photo','building'));
     }
 
     // public function loadMorePhotos(Request $request)
