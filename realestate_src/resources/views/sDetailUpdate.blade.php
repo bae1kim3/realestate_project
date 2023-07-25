@@ -58,20 +58,21 @@
 
         <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
                 <x-validation-errors class="mb-4" />
-            <form action="{{ route('struct.update', ['s_no' => $s_infos->s_no]) }}" id="frm" method="PUT" enctype="multipart/form-data">
+            <form action="{{ route('struct.update', ['s_no' => $s_infos->s_no]) }}" id="frm" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('put')
+                {{-- <input type="hidden" name="_method" value="PUT"> --}}
                 <x-input type="file" name="photo[]" class="form-control-file mt-2" multiple />
                 @if(session('status'))
                     <div class="alert alert-success" role="alert">
                         {{ session('status') }}
                     </div>
                 @endif
-                @foreach($errors->all() as $error)
+                {{-- @foreach($errors->all() as $error)
                     <div class="mt-3 alert text-red-600 " role="alert">
                         {{ $error }}
                     </div>
-                @endforeach
+                @endforeach --}}
                 <div class="col-6 mb-3" role="alert" style="display: none" id="err_up"></div>
                     <div class="col-6 mb-3">
                         <x-label for="s_name" style="margin-top:20px">건물 이름</x-label>
@@ -79,7 +80,7 @@
                     </div>
                     <div class="col-6 mb-3">
                         <x-label for="s_addr">주소</x-label>
-                        <x-input type="text" id="sample6_address" name="s_addr" placeholder="대구 지역 내 도로명 주소" readonly required value="{{$s_infos->s_add}}" class="form-control"/>
+                        <x-input type="text" id="sample6_address" name="s_addr" placeholder="대구 지역 내 도로명 주소" readonly required value="대구 {{$s_infos->s_add}}" class="form-control"/>
                         <x-button type="button" class="btn btn-primary py-2 px-3" onclick="sample6_execDaumPostcode()" style="margin-top:10px">우편번호 찾기</x-button>
                     </div>
                 <x-label for="sell_cat">매매 유형</x-label>
