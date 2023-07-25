@@ -77,6 +77,7 @@ public function sellerprofile(){
     $u_id = session('u_id');
     $user = User::where('u_id', $u_id)->first();
 
+    var_dump($user);
     if ($user) {
         $s_info = S_info::where('u_no', $user->id)->first();
 
