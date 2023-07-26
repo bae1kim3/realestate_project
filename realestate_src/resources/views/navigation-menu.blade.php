@@ -1,3 +1,7 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap');
+</style>
+
 <div class="site-mobile-menu site-navbar-target">
     <div class="site-mobile-menu-header">
         <div class="site-mobile-menu-close">
@@ -11,7 +15,7 @@
     <div class="container">
         <div class="menu-bg-wrap">
             <div class="site-navigation">
-                <a href="{{route('welcome')}}" class="logo m-0 float-start">펫 방</a>
+                <a href="{{route('welcome')}}" class="logo m-0 float-start" style="font-family: 'Rubik Mono One', sans-serif; text-shadow:-1px 0px white, 0px 1px white, 1px 0px white, 0px -1px white; color:#005555!important">Petbang</a>
                 <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end">
                     <li class="active"><a href="{{route('welcome')}}">메인</a></li>
                     <li><a href="{{ route('map.map') }}">지도</a></li>
