@@ -134,3 +134,7 @@ Route::put('/sDetail/up/{s_no}', [StructureController::class, 'structUpdate'])->
 
 // Route::get('/{site}/redirect',['as'=>'redirect','user'=>'Auth\FacebookController@redirectToProvider']);
 // Route::get('/{site}/callback',['as'=>'redirect','user'=>'Auth\FacebookController@handlerProviderCallback']);
+
+
+Route::get('login/kakao',[FacebookController::class,'facebookpage'])->name('login.kakao');
+Route::get('login/kakao/callback',[FacebookController::class,'handlekakaoCallback']);
