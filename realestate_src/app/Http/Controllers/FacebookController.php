@@ -11,12 +11,12 @@ use Exception;
 class FacebookController extends Controller
 {
     public function facebookpage(){
-    return Socialite::driver('facebook')->redirect();
+    return Socialite::driver('kakao')->redirect();
     }
     public function facebookredirect()
 {
-    $user = Socialite::driver('facebook')->user();
-    $finduser = User::where('facebook_id', $user->email)->first();
+    $user = Socialite::driver('kakao')->user();
+    $finduser = User::where('kakao_id', $user->email)->first();
 
     if ($finduser) {
         Auth::login($finduser);
