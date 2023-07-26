@@ -60,7 +60,7 @@
     </div>
 
     {{-- 원래 container 들어가있었음 --}}
-    <nav class="site-nav justify-content-end p-3" style="height: 113px; z-index:11; background-image: url('images/hero_bg_2.jpg');">
+    <nav class="site-nav justify-content-end p-3" style="height: 113px; z-index:11; background-image: url('images/AdobeStock_606140335_Preview.jpeg');">
         <div class="">
             <div class="menu-bg-wrap">
             <div class="site-navigation">
