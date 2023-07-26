@@ -252,7 +252,7 @@
                                     <div class="col-span-6 sm:col-span-4">
                                         <x-label for="u_addr" value="{{ __('주소') }}" class="mt-3" style="font-weight:700"/>
                                         <x-input id="sample6_address" type="text" name="u_addr" class="mt-1 block w-full dark:bg-gray-600 dark:text-white" readonly value="{{Auth::user()->u_addr}}"  />
-                                        <x-button type="button" onclick="sample6_execDaumPostcode()" value="주소 검색" class="a_btn;btn btn-primary py-2 px-3;">주소 검색</x-button>
+                                        <x-button type="button" onclick="sample6_execDaumPostcode()" value="주소 검색" class="a_btn;btn btn-primary py-2 px-3;" style="margin-left:30px;">주소 검색</x-button>
                                     </div>
                                     <div class="col-span-6 sm:col-span-4">
                                         <x-input id="s_lat" name="s_lat" type="hidden" class=" block w-full dark:bg-gray-600 dark:text-white"  />
@@ -288,14 +288,14 @@
                                 <p class="text-black-50">
                 {{-- business name --}}
                     <div class="col-span-6 sm:col-span-4">
-                        <x-label for="b_name" value="{{ __('상호명') }}" class="mt-3" style="font-weight:700"/>
+                        <x-label for="b_name" value="{{ __('내 상호명') }}" class="mt-3" style="font-weight:700"/>
                         <x-input id="b_name" type="text" name="b_name" maxlength="20" class="mt-1 block w-full dark:bg-gray-600 dark:text-white" value="{{Auth::user()->b_name}}" placeholder="상호명 작성"/>
                     </div>
                 @endif
                 @if(!(Illuminate\Support\Facades\Auth::user()->seller_license))
                     {{-- animal size --}}
                     <div class="col-span-6 sm:col-span-4 mt-3">
-                        <x-label for="animal_size" value="{{ __('동물크기') }}" style="font-weight:700" />
+                    <h3 class="heading">내 동물 크기</h3><br>
                         {{-- <x-input id="animal_size" type="text" class="mt-1 block w-full dark:bg-gray-700 dark:text-white" wire:model.defer="state.animal_size" autocomplete="animal_size" /> --}}
                         <label for="animal_size_lg" class="dark:text-white">대형</label>
                         <input type="radio" name="animal_size" id="animal_size_lg" @if(Auth::user()->animal_size === "1") checked @endif value="1" name="animal_size" class="dark:bg-gray-700">
@@ -303,7 +303,8 @@
                         <input type="radio" name="animal_size" id="animal_size_sm" @if(Auth::user()->animal_size === "0") checked @endif value="0" name="animal_size" class="dark:bg-gray-700">
                     </div>
                 @endif
-                <x-button wire:loading.attr="disabled" id="submit_btn" class="s_btn;btn btn-primary py-2 px-3">
+                <br><br><br>
+                <x-button wire:loading.attr="disabled" id="submit_btn" class="btn btn-primary py-2 px-3">
                     {{ __('저장') }}
                 </x-button>
                                 </p>
