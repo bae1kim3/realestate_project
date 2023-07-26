@@ -75,7 +75,7 @@
                         </div>
 
                         <div class="mt-4" id="check">
-                            <x-button type="button" id="check_button" value="아이디 중복 검사" onclick="checkid();" class="dark:bg-gray-600">아이디 중복검사</x-button>
+                            <x-button type="button" id="check_button" value="아이디 중복 검사" onclick="checkid();" class="dark:bg-gray-600" style="background-color:#00204a;">아이디 중복검사</x-button>
                         </div>
 
                         <div class="col-6 mb-3">
@@ -103,7 +103,7 @@
 
                         <div class="col-6 mb-3">
                             <p style="color:red">라이센스 번호 확인</p>
-                            <x-button type="button" id="check_license_button" value="라이센스 확인" onclick="checkli();">라이센스 확인</x-button>
+                            <x-button type="button" id="check_license_button" value="라이센스 확인" onclick="checkli();" style="background-color:#00204a;">라이센스 확인</x-button>
                         </div>
 
                         <div class="col-6 mb-3">
@@ -141,7 +141,7 @@
                             <br>
                             <x-input type="text" id="sample6_address" name="u_addr" class="form-control" placeholder="대구 지역 내 도로명 주소" readonly />
                             <br>
-                            <x-button type="button" onclick="sample6_execDaumPostcode()">우편번호 찾기</x-button>
+                            <x-button type="button" onclick="sample6_execDaumPostcode()" style="background-color:#00204a;">우편번호 찾기</x-button>
                             <br>
                             @if (session()->has('addr_err'))
                             <div>{{ session()->get('addr_err') }}</div>
@@ -187,7 +187,7 @@
                         @endif
 
                         <div class="flex items-center justify-end mt-4">
-                            <x-button class="ml-4 dark:bg-gray-600">
+                            <x-button class="ml-4 dark:bg-gray-600" style="background-color:#00204a;">
                                 {{ __('회원가입') }}
                             </x-button>
                             <br>

@@ -144,4 +144,9 @@
 </div>
 </div>
 </div>
+    <style>
+    p  {
+        color: #888;
+    }
+    </style>
 </x-app-layout>
