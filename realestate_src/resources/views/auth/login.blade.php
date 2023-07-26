@@ -137,7 +137,8 @@
                 <button type="submit" class="btn btn-primary py-2 px-3">
                     {{ __('Log in') }}
                 </button>
-            <a href="{{ route('login.kakao') }}"><img style="width:20%; height:15%" src="{{ asset('facebook.jpg') }}" alt="Facebook"></a>
+            <a href="{{ url('auth/facebook') }}"><img style="width:20%; height:15%" src="{{ asset('facebook.jpg') }}" alt="Facebook"></a>
+            <a href="{{ route('login.kakao') }}">카카오 로그인</a>
             </div>
         </form>
     </div>

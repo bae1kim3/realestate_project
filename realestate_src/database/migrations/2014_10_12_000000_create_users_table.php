@@ -19,6 +19,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('u_id', 100)->unique();
+            $table->string('kakao_id')->nullable();
             $table->string('facebook_id')->nullable();
             $table->string('email')->unique();
             $table->string('name');

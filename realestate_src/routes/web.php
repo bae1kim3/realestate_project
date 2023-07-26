@@ -22,7 +22,7 @@ use App\Http\Controllers\MapController;
 use App\Http\Controllers\JjimController;
 use App\Http\Controllers\UpdateUserInfoController;
 use App\Http\Controllers\NavController;
-use App\Http\Controllers\FacebookController;
+use App\Http\Controllers\SocialController;
 
 /*
 |--------------------------------------------------------------------------
@@ -125,8 +125,8 @@ Route::get('/info',[NavController::class, 'info'])->name('info');
 Route::get('/sellers_info',[NavController::class, 'sellers_info'])->name('sellers_info');
 
 // 페이스북 로그인
-Route::get('auth/facebook',[FacebookController::class, 'facebookpage']);;
-Route::get('auth/facebook/callback',[FacebookController::class, 'facebookredirect']);
+Route::get('auth/facebook',[SocialController::class, 'facebookpage']);;
+Route::get('auth/facebook/callback',[SocialController::class, 'facebookredirect']);
 
 // 건물 수정
 Route::get('/sDetail/up/{s_no}', [StructureController::class, 'structEdit'])->name('struct.edit');
@@ -136,5 +136,5 @@ Route::put('/sDetail/up/{s_no}', [StructureController::class, 'structUpdate'])->
 // Route::get('/{site}/callback',['as'=>'redirect','user'=>'Auth\FacebookController@handlerProviderCallback']);
 
 
-Route::get('login/kakao',[FacebookController::class,'facebookpage'])->name('login.kakao');
-Route::get('login/kakao/callback',[FacebookController::class,'handlekakaoCallback']);
+Route::get('/login/kakao',[SocialController::class,'redirectToKakao'])->name('login.kakao');
+Route::get('/login/kakao/callback',[SocialController::class,'handleKakaoCallback']);
