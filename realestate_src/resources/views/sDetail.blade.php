@@ -9,6 +9,18 @@
         height: 500px;
         object-fit: cover;
     }
+        @font-face {
+        font-family: 'S-CoreDream-6Bold';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+        }
+        @font-face {
+        font-family: 'S-CoreDream-3Light';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+        }
 </style>
 
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -38,7 +50,7 @@
         <div class="container">
             <div class="row align-items-center justify-content-center text-center">
                 <div class="col-md-10">
-                    <h1 class="mb-2">{{ $s_info->s_add }}</h1>
+                    <h1 class="mb-2" style="font-family:'S-CoreDream-3Light';">{{ $s_info->s_add }}</h1>
                     <p>{{$s_info->s_name}}</p>
                 </div>
             </div>
@@ -93,24 +105,24 @@
                                 <span class="d-inline-block text-black mb-0 caption-text">건물 유형</span>
                                 <strong class="d-block summary-block-s">
                                     @switch($s_info->s_option)
-                                                        @case(0)
-                                                            아파트
-                                                            @break
-                                                        @case(1)
-                                                            단독주택
-                                                            @break
-                                                        @case(2)
-                                                            오피스텔
-                                                            @break
-                                                        @case(3)
-                                                            빌라
-                                                            @break
-                                                        @case(4)
-                                                            원룸
-                                                            @break
-                                                        @default
-                                                            @break
-                                                    @endswitch
+                                        @case(0)
+                                            아파트
+                                            @break
+                                        @case(1)
+                                            단독주택
+                                            @break
+                                        @case(2)
+                                            오피스텔
+                                            @break
+                                        @case(3)
+                                            빌라
+                                            @break
+                                        @case(4)
+                                            원룸
+                                            @break
+                                        @default
+                                            @break
+                                    @endswitch
                                 </strong>
                             </div>
                             <div class="col-md-6 col-lg-4 text-center border-bottom border-top py-3">
@@ -128,7 +140,42 @@
             {{-- 상세 정보 --}}
 
                 <h2 class="h4 text-black">More Info</h2>
-                <div>
+                <div style="font-family:'S-CoreDream-3Light';">
+                    <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M62.4 53.9C56.8 37.1 38.6 28.1 21.9 33.6S-3.9 57.4 1.6 74.1L51.6 224H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H72.9l56.7 170.1c4.5 13.5 17.4 22.4 31.6 21.9s26.4-10.4 29.8-24.2L233 288h46L321 455.8c3.4 13.8 15.6 23.7 29.8 24.2s27.1-8.4 31.6-21.9L439.1 288H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H460.4l50-149.9c5.6-16.8-3.5-34.9-20.2-40.5s-34.9 3.5-40.5 20.2L392.9 224H329L287 56.2C283.5 42 270.7 32 256 32s-27.5 10-31 24.2L183 224h-64L62.4 53.9zm78 234.1H167l-11.4 45.6L140.4 288zM249 224l7-28.1 7 28.1H249zm96 64h26.6l-15.2 45.6L345 288z"/></svg>
+                    <span style="font-size:20px; color:black; margin-left:10px">{{ $s_info->s_type }}</span>
+                    </div>
+                    <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M278.6 9.4c-12.5-12.5-32.8-12.5-45.3 0l-64 64c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l9.4-9.4V224H109.3l9.4-9.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-64 64c-12.5 12.5-12.5 32.8 0 45.3l64 64c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-9.4-9.4H224V402.7l-9.4-9.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l64 64c12.5 12.5 32.8 12.5 45.3 0l64-64c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-9.4 9.4V288H402.7l-9.4 9.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l64-64c12.5-12.5 12.5-32.8 0-45.3l-64-64c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l9.4 9.4H288V109.3l9.4 9.4c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-64-64z"/></svg>
+                    <span style="font-size:20px; color:black; margin-left:10px">@switch($s_info->s_option)
+                            @case(0)
+                                아파트
+                                @break
+                            @case(1)
+                                단독주택
+                                @break
+                            @case(2)
+                                오피스텔
+                                @break
+                            @case(3)
+                                빌라
+                                @break
+                            @case(4)
+                                원룸
+                                @break
+                            @default
+                                @break
+                        @endswitch</span>
+                    </div>
+                    <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M278.6 9.4c-12.5-12.5-32.8-12.5-45.3 0l-64 64c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l9.4-9.4V224H109.3l9.4-9.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-64 64c-12.5 12.5-12.5 32.8 0 45.3l64 64c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-9.4-9.4H224V402.7l-9.4-9.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l64 64c12.5 12.5 32.8 12.5 45.3 0l64-64c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-9.4 9.4V288H402.7l-9.4 9.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l64-64c12.5-12.5 12.5-32.8 0-45.3l-64-64c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l9.4 9.4H288V109.3l9.4 9.4c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-64-64z"/></svg>
+                    <span style="font-size:20px; color:black; margin-left:10px">
+                        @if ($s_info->animal_size == 0)
+                            가능
+                        @else
+                            불가능
+                        @endif</span>
+                    </div>
                     <div>
                     <svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M278.6 9.4c-12.5-12.5-32.8-12.5-45.3 0l-64 64c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l9.4-9.4V224H109.3l9.4-9.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-64 64c-12.5 12.5-12.5 32.8 0 45.3l64 64c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-9.4-9.4H224V402.7l-9.4-9.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l64 64c12.5 12.5 32.8 12.5 45.3 0l64-64c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-9.4 9.4V288H402.7l-9.4 9.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l64-64c12.5-12.5 12.5-32.8 0-45.3l-64-64c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l9.4 9.4H288V109.3l9.4 9.4c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-64-64z"/></svg>
                     <span style="font-size:20px; color:black; margin-left:10px">{{ $s_info->s_size }} 평</span>

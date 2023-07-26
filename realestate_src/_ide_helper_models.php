@@ -16,10 +16,12 @@ namespace App\Models{
  *
  * @property int $s_no
  * @property int $id
+ * @property string|null $liked_flg
  * @method static \Illuminate\Database\Eloquent\Builder|Jjim newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Jjim newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Jjim query()
  * @method static \Illuminate\Database\Eloquent\Builder|Jjim whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Jjim whereLikedFlg($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Jjim whereSNo($value)
  */
 	class Jjim extends \Eloquent {}
@@ -75,11 +77,11 @@ namespace App\Models{
  * @property int $p_deposit
  * @property int|null $p_month
  * @property string $animal_size
- * @property int $hits
- * @property string $s_option
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property int|null $hits
+ * @property string $s_option
  * @method static \Database\Factories\S_infoFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|S_info newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|S_info newQuery()
@@ -172,11 +174,9 @@ namespace App\Models{
  *
  * @property int $id
  * @property string $u_id
- * @property string|null $facebook_id
  * @property string $email
  * @property string $name
  * @property string $phone_no
- * @property \Illuminate\Support\Carbon|null $email_verified_at
  * @property string $password
  * @property string|null $two_factor_secret
  * @property string|null $two_factor_recovery_codes
@@ -193,6 +193,8 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property string|null $facebook_id
+ * @property \Illuminate\Support\Carbon|null $email_verified_at
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens

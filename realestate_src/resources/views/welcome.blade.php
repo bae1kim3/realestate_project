@@ -3,6 +3,21 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&family=Orbit&family=Roboto+Mono:wght@600&display=swap" rel="stylesheet">
+        <style>
+        @font-face {
+        font-family: 'S-CoreDream-6Bold';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+        }
+        @font-face {
+        font-family: 'S-CoreDream-3Light';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+        }
+        
+    </style>
     </x-slot>
     <div class="hero">
         <div class="hero-slide">
@@ -14,9 +29,9 @@
         <div class="container">
             <div class="row justify-content-center align-items-center">
                 <div class="col-lg-9 text-center">
-                    <h1 class="heading" data-aos="fade-up">
+                    <h2 class="heading" data-aos="fade-up">
                         어떤 방을 찾으시나요? 펫 방이 찾아드립니다
-                    </h1>
+                    </h2>
                     <div class="narrow-w form-search d-flex align-items-stretch mb-3" data-aos="fade-up" data-aos-delay="200">
                         <input type="text" class="form-control px-4" name="search" id="search" placeholder="주소나 지하철역 명으로 검색해 주세요" />
                         <button onclick="searchProperties()" class="btn btn-primary py-2 px-4">Search</button>
@@ -30,7 +45,7 @@
         <div class="container">
             <div class="row mb-5 align-items-center">
                 <div class="col-lg-6">
-                    <h2 class="text-primary heading" style="font-weight: 500;">
+                    <h2 class="text-primary heading" style="font-family:'S-CoreDream-6Bold';">
                         최근 등록된 매물
                     </h2>
                 </div>
@@ -131,7 +146,7 @@
         <div class="container">
             <div class="row mb-5 align-items-center">
                 <div class="col-md-6">
-                    <h2 class="font-weight-bold heading text-primary mb-4 mb-md-0">
+                    <h2 class=" heading mb-4 mb-md-0" style="font-family:'S-CoreDream-6Bold';">
                         찜한 매물
                     </h2>
                 </div>
@@ -216,7 +231,7 @@
 
     <div class="section pt-0">
         <div class="container">
-            <h1>이달의 매물</h1>
+            <h2 class="mb-5" style="font-weight:800; font-family: 'S-CoreDream-6Bold';">이달의 매물</h2>
             <div class="row justify-content-between mb-5">
                 <div class="col-lg-7 mb-5 mb-lg-0">
                     <div class="img-about dots">
@@ -231,10 +246,10 @@
                             <span class="icon-home2"></span>
                         </span>
                         <div class="feature-text">
-                            <h3 class="heading">건물 이름</h3>
-                            <p class="text-black-50">
-                                {{ $building->s_name }}
+                            <p class="text-black-50" style="margin-bottom:8px">
+                                건물 이름
                             </p>
+                            <h3 class="heading">{{ $building->s_name }}</h3>
                         </div>
                     </div>
 
@@ -243,10 +258,10 @@
                             <span class="icon-person"></span>
                         </span>
                         <div class="feature-text">
-                            <h3 class="heading">건물 위치</h3>
-                            <p class="text-black-50">
-                                {{$building->s_add}}
+                            <p class="text-black-50" style="margin-bottom:8px">
+                                건물 위치
                             </p>
+                            <h3 class="heading">{{$building->s_add}}</h3>
                         </div>
                     </div>
 
@@ -255,10 +270,10 @@
                             <span class="icon-security"></span>
                         </span>
                         <div class="feature-text">
-                            <h3 class="heading">조회수</h3>
-                            <p class="text-black-50">
-                                {{$building->hits}} 회
+                            <p class="text-black-50" style="margin-bottom:8px">
+                                조회수
                             </p>
+                            <h3 class="heading">{{$building->hits}} 회</h3>
                         </div>
                     </div>
                 </div>
@@ -267,51 +282,47 @@
     </div>
 
     <section class="features-1">
-        <h1>개발진</h1>
+        <h1 style="font-family:'S-CoreDream-6Bold'; margin-bottom:16px">개발진</h1>
         <div class="container">
             <div class="row">
                 <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
-                    <h3>조장</h3>
+                    <h3 style="font-family: 'S-CoreDream-3Light';">조장</h3>
                     <div class="box-feature">
-                        <img src="images/person_1-min.jpg" alt="Image" class="img-fluid" />
-                        <h3 class="mb-3">배창현</h3>
+                        <img src="images/person_1-min.jpg" alt="Image" class="img-fluid" style="margin-bottom:16px;"/>
+                        <h3 class="mb-3"  style="margin-bottom:16px;"/>배창현</h3>
                         <p>
                             API, 관리자페이지, 지도 담당
                         </p>
-                        <p><a href="#" class="learn-more">Learn More</a></p>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="500">
-                    <h3>팀원</h3>
+                    <h3  style="font-family: 'S-CoreDream-3Light';">팀원</h3>
                     <div class="box-feature">
-                        <img src="images/person_2-min.jpg" alt="Image" class="img-fluid" />
-                        <h3 class="mb-3">김영범</h3>
+                        <img src="images/person_2-min.jpg" alt="Image" class="img-fluid" style="margin-bottom:16px;"/>
+                        <h3 class="mb-3" style="margin-bottom:16px;">김영범</h3>
                         <p>
                             디자인, 로그인, 회원가입 담당
                         </p>
-                        <p><a href="#" class="learn-more">Learn More</a></p>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
-                    <h3>팀원</h3>
+                    <h3  style="font-family: 'S-CoreDream-3Light';">팀원</h3>
                     <div class="box-feature">
-                        <img src="images/person_3-min.jpg" alt="Image" class="img-fluid" />
-                        <h3 class="mb-3">김민규</h3>
+                        <img src="images/person_3-min.jpg" alt="Image" class="img-fluid" style="margin-bottom:16px;"/>
+                        <h3 class="mb-3" style="margin-bottom:16px;">김민규</h3>
                         <p>
                             지도페이지, 메인페이지 담당
                         </p>
-                        <p><a href="#" class="learn-more">Learn More</a></p>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="600">
-                    <h3>팀원</h3>
+                    <h3  style="font-family: 'S-CoreDream-3Light';">팀원</h3>
                     <div class="box-feature">
-                        <img src="images/person_4-min.jpg" alt="Image" class="img-fluid" />
-                        <h3 class="mb-3">김주영</h3>
+                        <img src="images/person_4-min.jpg" alt="Image" class="img-fluid" style="margin-bottom:16px;"/>
+                        <h3 class="mb-3" style="margin-bottom:16px;">김주영</h3>
                         <p>
                             디테일 페이지, 수정페이지 담당
                         </p>
-                        <p><a href="#" class="learn-more">Learn More</a></p>
                     </div>
                 </div>
             </div>
