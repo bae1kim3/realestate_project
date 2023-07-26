@@ -132,3 +132,5 @@ Route::get('auth/facebook/callback',[FacebookController::class, 'facebookredirec
 Route::get('/sDetail/up/{s_no}', [StructureController::class, 'structEdit'])->name('struct.edit');
 Route::put('/sDetail/up/{s_no}', [StructureController::class, 'structUpdate'])->name('struct.update');
 
+// Route::get('/{site}/redirect',['as'=>'redirect','user'=>'Auth\FacebookController@redirectToProvider']);
+// Route::get('/{site}/callback',['as'=>'redirect','user'=>'Auth\FacebookController@handlerProviderCallback']);

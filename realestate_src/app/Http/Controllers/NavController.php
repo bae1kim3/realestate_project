@@ -16,7 +16,7 @@ class NavController extends Controller
 
     public function Sellers_Info()
     {
-        $usersWithSellerLicense = User::whereNotNull('seller_license')->take(10)->get();
+        $usersWithSellerLicense = User::whereNotNull('seller_license')->get();
         $building = S_info::orderBy('hits', 'desc')->first();
 
         $s_no = $building ? $building->s_no : null;
