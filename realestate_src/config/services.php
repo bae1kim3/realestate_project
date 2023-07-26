@@ -36,7 +36,7 @@ return [
         'redirect' => env('KAKAO_REDIRECT_URI')
     ],
     'google' => [
-        'client_id' => env('GOOGLE_CLIENT)ID'),
+        'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
         'redirect' => env('GOOGLE_REDIRECT'),
     ],
@@ -46,9 +46,9 @@ return [
         'redirect' => env('NAVER_REDIRECT_URI'),
     ],
     'facebook' => [
-        'client_id' => '592265133088040',
-        'client_secret' => '44a77a5aefeea9d0b817f2e1cfd03630',
-        'redirect' => 'http://192.168.0.129/auth/facebook/callback',
+        'client_id' => env('FACEBOOK_CLIENT_KEY'),
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
+        'redirect' => env('FACEBOOK_REDIRECT_URI')
     ],
 
 ];
