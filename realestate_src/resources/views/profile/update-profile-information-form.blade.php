@@ -132,6 +132,7 @@
                     </div>
                 </div>
             </div>
+            </div>
     @endif
 
 @if(session('seller_license'))
@@ -145,9 +146,9 @@
                     </div>
                     <div class="col-md-6 text-md-end">
                         <div id="testimonial-nav">
-                            <span class="prev" data-controls="prev">Prev</span>
+                            <span class="prev" data-controls="prev">이전</span>
 
-                            <span class="next" data-controls="next">Next</span>
+                            <span class="next" data-controls="next">다음</span>
                         </div>
                     </div>
                 </div>

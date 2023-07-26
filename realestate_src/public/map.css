@@ -1,12 +1,14 @@
 .site-nav {
     z-index: 2;
 }
-
+body {
+    overflow:hidden;
+}
 .contents {
     width: 99vw;
     height: 100vh;
     position: relative;
-    top: 121px; /* 네비게이션 높이만큼 아래로 이동 */
+    top: 113px; /* 네비게이션 높이만큼 아래로 이동 */
     display: flex;
     flex-wrap: wrap;
 }

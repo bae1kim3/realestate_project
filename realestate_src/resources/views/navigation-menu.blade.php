@@ -14,6 +14,7 @@
                 <a href="{{route('welcome')}}" class="logo m-0 float-start">펫 방</a>
                 <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end">
                     <li class="active"><a href="{{route('welcome')}}">메인</a></li>
+                    <li><a href="{{ route('map.map') }}">지도</a></li>
                     @if (session('u_id'))
                         @if (session('seller_license'))
                         <li><a href="{{ route('dashboard') }}">매물올리기</a></li>

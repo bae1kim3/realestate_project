@@ -31,7 +31,7 @@
 
                     <nav aria-label="breadcrumb" data-aos="fade-up" data-aos-delay="200">
                         <ol class="breadcrumb text-center justify-content-center">
-                            <li id="use" sytle="color:white"><a href="{{ route('welcome') }}">home</a></li>
+                            <li id="use" sytle="color:white"><a href="{{ route('welcome') }}">메인</a></li>
                             <p> / </p>
                             <li id="sell">
                                 로그인
@@ -107,13 +107,13 @@
             @csrf
             <div class="col-6 mb-3">
                 <x-validation-errors class="mb-4" />
-                <x-label for="u_id" value="{{ __('User ID') }}" class="dark:text-gray-100" />
+                <x-label for="u_id" value="{{ __('아이디') }}" class="dark:text-gray-100" />
                 <x-input id="u_id" class="form-control" type="text"
                     name="u_id" :value="old('u_id')" required autofocus />
             </div>
 
             <div class="col-6 mb-3">
-                <x-label for="password" value="{{ __('Password') }}" class="dark:text-gray-100" />
+                <x-label for="password" value="{{ __('비밀번호') }}" class="dark:text-gray-100" />
                 <x-input id="password" class="form-control"
                     type="password" name="password" required autocomplete="current-password" />
             </div>
