@@ -32,10 +32,8 @@
         @media (max-width: 991px) {
             #logoutBtn {
                 color: black;
-                /* max-width가 991px 이하일 때 글자 색을 검정색으로 변경 */
             }
         }
-
     </style>
     {{-- 추가 css 있으면 여기 쓰기 --}}
     @if (isset($header))
@@ -48,7 +46,7 @@
     {{-- @livewireStyles --}}
 
     <title>
-        펫 방 &mdash; 집구하자
+        펫 방
     </title>
 
 </head>
