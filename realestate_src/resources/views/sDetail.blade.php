@@ -246,7 +246,7 @@
                 </p>
                 <div>이메일</div>
                 <a href="mailto:{{$user->email}}">{{$user->email}}</a>
-                <p class="mt-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit qui explicabo, libero nam, saepe eligendi. Molestias maiores illum error rerum. Exercitationem ullam saepe, minus, reiciendis ducimus quis. Illo, quisquam, veritatis.</p>
+                <p class="mt-3">소비자에게 좋은 매물 만을 보여드릴 수 있도록 노력하는 부동산이 되겠습니다.</p>
             </div>
             <h4 class="text-black widget-title mb-3">위치</h4>
             <p style="font-size:15px">{{ $s_info->s_add }}</p>

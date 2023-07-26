@@ -13,25 +13,26 @@ use Illuminate\Support\Facades\DB;
 
 class StructureDetailController extends Controller
 {
-    public function stateInfo($s_no){
+    public function stateInfo($s_no)
+    {
         $photos = Photo::where('s_no', $s_no)->get();
         $mvp_photo = Photo::where('mvp_photo', '1')->where('s_no', $s_no)->first();
         // dd($mvp_photo);
         $s_info = S_info::where('s_no', $s_no)->first();
-        $data01 = State_option::where('s_no',$s_no)->first(); 
+        $data01 = State_option::where('s_no', $s_no)->first();
         $u_no = $s_info->u_no;
-        $user = User::find($u_no); 
-        if( session('u_no') ){
+        $user = User::find($u_no);
+        if (session('u_no')) {
             $id = session('u_no');
         } else {
             $id = null;
         }
 
-        
+
         //0714 jy add
         // 조회수
         DB::beginTransaction();
-        try { 
+        try {
             $s_info->hits++;
             $s_info->save();
             DB::commit();
@@ -39,17 +40,17 @@ class StructureDetailController extends Controller
             DB::rollback();
             throw $e;
         }
-        
+
         // 찜 flg 넘겨주기 0719 jy
-        
-        if(session('u_no')) {
+
+        if (session('u_no')) {
             $userId = session('u_no');
 
-        $liked = Jjim::where('id', $userId)
+            $liked = Jjim::where('id', $userId)
                 ->where('s_no', $s_info->s_no)
                 ->exists();
 
-            if(!$liked) {
+            if (!$liked) {
                 $likedFlg = 0;
             } else {
                 $likedFlg = 1;
@@ -60,15 +61,18 @@ class StructureDetailController extends Controller
 
         $my_s_no = S_info::where('s_no', $s_info->s_no)->pluck('u_no')->toArray();
 
+        // 전화번호에 하이픈찍기
+            $user->phone_no = substr($user->phone_no, 0, 3) . '-' . substr($user->phone_no, 3, 4) . '-' . substr($user->phone_no, 7);
         
+
         return view('sDetail')
-        ->with('photos', $photos)
-        ->with('user',$user)
-        ->with('s_info',$s_info)
-        ->with('data01',$data01)
-        ->with('mvp_photo', $mvp_photo)
-        ->with('likedFlg', $likedFlg)
-        ->with('id', $id)
-        ->with('my_s_no', $my_s_no);
+            ->with('photos', $photos)
+            ->with('user', $user)
+            ->with('s_info', $s_info)
+            ->with('data01', $data01)
+            ->with('mvp_photo', $mvp_photo)
+            ->with('likedFlg', $likedFlg)
+            ->with('id', $id)
+            ->with('my_s_no', $my_s_no);
     }
 }

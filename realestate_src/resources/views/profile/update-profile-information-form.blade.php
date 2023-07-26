@@ -19,32 +19,57 @@
     .color2 {
         color: gray;
     }
+    @font-face {
+    font-family: 'S-CoreDream-6Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    }
+    @font-face {
+    font-family: 'S-CoreDream-3Light';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    }
+
+    input {
+        border: 1px solid #ced4da;
+        padding: 0.375rem 0.75rem;
+        border-radius: 0.25rem;
+        transition: border-color:#dee2e6 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    }
+    input:hover {
+        outline:none
+    }
+    input:focus {
+        outline: 1px solid #adb5bd;
+    }
 </style>
 <x-app-layout>
     <div class="hero page-inner overlay" style="background-image: url('{{ asset('images/hero_bg_1.jpg') }}')">
         <div class="container">
     <div class="row justify-content-center align-items-center">
-      <div class="col-lg-9 text-center mt-5">
-        <h1 class="heading" data-aos="fade-up">마이페이지</h1>
+        <div class="col-lg-9 text-center mt-5">
+            <h1 class="heading" data-aos="fade-up">마이페이지</h1>
 
-        <nav
-          aria-label="breadcrumb"
-          data-aos="fade-up"
-          data-aos-delay="200"
-        >
-          <ol class="breadcrumb text-center justify-content-center">
-            <li class="breadcrumb-item"><a href="index.html">메인</a></li>
-            <li
-              class="breadcrumb-item active text-white-50"
-              aria-current="page"
+            <nav
+            aria-label="breadcrumb"
+            data-aos="fade-up"
+            data-aos-delay="200"
             >
-            마이페이지
-            </li>
-          </ol>
-        </nav>
-      </div>
+            <ol class="breadcrumb text-center justify-content-center">
+                <li class="breadcrumb-item"><a href="index.html">메인</a></li>
+                <li
+                class="breadcrumb-item active text-white-50"
+                aria-current="page"
+                >
+                마이페이지
+                </li>
+            </ol>
+            </nav>
+        </div>
+        </div>
     </div>
-  </div>
 </div>
     <div class="section">
 {{-- 찜한 매물 출력 --}}
@@ -52,7 +77,7 @@
             <div class="container">
                 <div class="row mb-5 align-items-center">
                     <div class="col-md-6">
-                        <h2 class="font-weight-bold heading text-primary mb-4 mb-md-0">
+                        <h2 class="font-weight-bold heading text-primary mb-4 mb-md-0" style="font-family:'S-CoreDream-6Bold';">
                             찜한 매물
                         </h2>
                     </div>
@@ -140,7 +165,7 @@
             <div class="container">
                 <div class="row mb-5 align-items-center">
                     <div class="col-md-6">
-                        <h2 class="font-weight-bold heading text-primary mb-4 mb-md-0">
+                        <h2 class="font-weight-bold heading text-primary mb-4 mb-md-0" style="font-family:'S-CoreDream-6Bold';">
                             내가 올린 매물
                         </h2>
                     </div>
@@ -226,7 +251,7 @@
             <div class="container">
                 <div class="row justify-content-center text-center mb-5">
                     <div class="col-lg-5">
-                        <h2 class="font-weight-bold heading text-primary mb-4">
+                        <h2 class="font-weight-bold heading text-primary mb-4" style="font-family:'S-CoreDream-6Bold';">
                             내 정보
                         </h2>
                         <p class="text-black-50">
@@ -248,18 +273,15 @@
                             <form action="{{ route('update.userinfo.post') }}" id="frm" method="post" >
                                 @csrf
                             <div class="feature-text">
-                                <h3 class="heading">내 주소</h3>
-                                <p class="text-black-50">
+                                <h3 class="heading">주소</h3>
                                     <div class="col-span-6 sm:col-span-4">
-                                        <x-label for="u_addr" value="{{ __('주소') }}" class="mt-3" style="font-weight:700"/>
                                         <x-input id="sample6_address" type="text" name="u_addr" class="mt-1 block w-full dark:bg-gray-600 dark:text-white" readonly value="{{Auth::user()->u_addr}}"  />
-                                        <x-button type="button" onclick="sample6_execDaumPostcode()" value="주소 검색" class="a_btn;btn btn-primary py-2 px-3;" style="margin-left:30px;">주소 검색</x-button>
+                                        <x-button type="button" onclick="sample6_execDaumPostcode()" value="주소 검색" class="a_btn;btn btn-primary py-2 px-3;" style="border-radius:30px">주소 검색</x-button>
                                     </div>
                                     <div class="col-span-6 sm:col-span-4">
                                         <x-input id="s_lat" name="s_lat" type="hidden" class=" block w-full dark:bg-gray-600 dark:text-white"  />
                                         <x-input id="s_log" name="s_log" type="hidden" class=" block w-full dark:bg-gray-600 dark:text-white"   />
                                     </div>
-                                </p>
                             </div>
                         </div>
 
@@ -268,31 +290,29 @@
                                 <span class="icon-person"></span>
                             </span>
                             <div class="feature-text">
-                                <h3 class="heading">내 이름</h3>
-                                <p class="text-black-50">
-                                    <div class="col-span-6 sm:col-span-4">
-                                        <x-label for="name" value="{{ __('이름') }}" style="font-weight:700"/>
-                                        <x-input id="name" name="name" maxlength="20" type="text" class="mt-1 block w-full dark:bg-gray-600 dark:text-white" value="{{Auth::user()->name}}" placeholder="한글 이름으로 작성" />
-                                    </div>
-                                </p>
+                                <div class="col-span-6 sm:col-span-4">
+                                    <h3 class="heading">이름</h3>
+                                    <x-input id="name" name="name" maxlength="20" type="text" class="mt-1 block w-full dark:bg-gray-600 dark:text-white" value="{{Auth::user()->name}}" placeholder="한글 이름으로 작성" />
+                                </div>
                             </div>
                         </div>
 
                         <div class="d-flex feature-h">
                             <span class="wrap-icon me-3">
+                                @if(Illuminate\Support\Facades\Auth::user()->seller_license)
                                 <span class="icon-security"></span>
+                                @elseif(!(Illuminate\Support\Facades\Auth::user()->seller_license))
+                                <svg xmlns="http://www.w3.org/2000/svg" height="1em"  style="transform:translate(30px, 30px)" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M226.5 92.9c14.3 42.9-.3 86.2-32.6 96.8s-70.1-15.6-84.4-58.5s.3-86.2 32.6-96.8s70.1 15.6 84.4 58.5zM100.4 198.6c18.9 32.4 14.3 70.1-10.2 84.1s-59.7-.9-78.5-33.3S-2.7 179.3 21.8 165.3s59.7 .9 78.5 33.3zM69.2 401.2C121.6 259.9 214.7 224 256 224s134.4 35.9 186.8 177.2c3.6 9.7 5.2 20.1 5.2 30.5v1.6c0 25.8-20.9 46.7-46.7 46.7c-11.5 0-22.9-1.4-34-4.2l-88-22c-15.3-3.8-31.3-3.8-46.6 0l-88 22c-11.1 2.8-22.5 4.2-34 4.2C84.9 480 64 459.1 64 433.3v-1.6c0-10.4 1.6-20.8 5.2-30.5zM421.8 282.7c-24.5-14-29.1-51.7-10.2-84.1s54-47.3 78.5-33.3s29.1 51.7 10.2 84.1s-54 47.3-78.5 33.3zM310.1 189.7c-32.3-10.6-46.9-53.9-32.6-96.8s52.1-69.1 84.4-58.5s46.9 53.9 32.6 96.8s-52.1 69.1-84.4 58.5z"/></svg>
+                                </span>
+                                @endif
                             </span>
                             <div class="feature-text">
                                 @if(Illuminate\Support\Facades\Auth::user()->seller_license)
-
                                 <h3 class="heading">상호명</h3>
-                                <p class="text-black-50">
-                {{-- business name --}}
-                    <div class="col-span-6 sm:col-span-4">
-                        <x-label for="b_name" value="{{ __('내 상호명') }}" class="mt-3" style="font-weight:700"/>
-                        <x-input id="b_name" type="text" name="b_name" maxlength="20" class="mt-1 block w-full dark:bg-gray-600 dark:text-white" value="{{Auth::user()->b_name}}" placeholder="상호명 작성"/>
-                    </div>
-                @endif
+                                <div class="col-span-6 sm:col-span-4">
+                                    <x-input id="b_name" type="text" name="b_name" maxlength="20" class="mt-1 block w-full dark:bg-gray-600 dark:text-white" value="{{Auth::user()->b_name}}" placeholder="상호명 작성"/>
+                                </div>
+                                @endif
                 @if(!(Illuminate\Support\Facades\Auth::user()->seller_license))
                     {{-- animal size --}}
                     <div class="col-span-6 sm:col-span-4 mt-3">
@@ -308,13 +328,13 @@
                 <x-button wire:loading.attr="disabled" id="submit_btn" class="btn btn-primary py-2 px-3">
                     {{ __('저장') }}
                 </x-button>
-                                </p>
-                            </div>
-                            </form>
+                    </div>
+                    </form>
+                        
                         </div>
                     </div>
                 </div>
-                <div class="row section-counter mt-5">
+                {{-- <div class="row section-counter mt-5">
                     <div class="col-6 col-sm-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
                         <div class="counter-wrap mb-5 mb-lg-0">
                             <span class="number"><span class="countup text-primary">3298</span></span>
@@ -339,139 +359,23 @@
                             <span class="caption text-black-50"># of Agents</span>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
 
         <div class="section">
             <div class="row justify-content-center footer-cta" data-aos="fade-up">
                 <div class="col-lg-7 mx-auto text-center">
-                    <h2 class="mb-4">Be a part of our growing real state agents</h2>
                     <p>
                         <a href="{{ route('profile.chk_del_user') }}">
                             <x-danger-button class="btn btn-primary text-white py-3 px-4">회원 탈퇴
                             </x-danger-button>
                             </a>
-                        <a href="#" target="_blank" class="btn btn-primary text-white py-3 px-4">Apply for Real Estate agent</a>
                     </p>
                 </div>
                 <!-- /.col-lg-7 -->
             </div>
             <!-- /.row -->
         </div>
-
-        <div class="section section-5 bg-light">
-            <div class="container">
-                <div class="row justify-content-center text-center mb-5">
-                    <div class="col-lg-6 mb-5">
-                        <h2 class="font-weight-bold heading text-primary mb-4">
-                            Our Agents
-                        </h2>
-                        <p class="text-black-50">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
-                            enim pariatur similique debitis vel nisi qui reprehenderit totam?
-                            Quod maiores.
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0">
-                        <div class="h-100 person">
-                            <img src="images/person_1-min.jpg" alt="Image" class="img-fluid" />
-
-                            <div class="person-contents">
-                                <h2 class="mb-0"><a href="#">James Doe</a></h2>
-                                <span class="meta d-block mb-3">Real Estate Agent</span>
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                    Facere officiis inventore cumque tenetur laboriosam, minus
-                                    culpa doloremque odio, neque molestias?
-                                </p>
-
-                                <ul class="social list-unstyled list-inline dark-hover">
-                                    <li class="list-inline-item">
-                                        <a href="#"><span class="icon-twitter"></span></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#"><span class="icon-facebook"></span></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#"><span class="icon-linkedin"></span></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#"><span class="icon-instagram"></span></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0">
-                        <div class="h-100 person">
-                            <img src="images/person_2-min.jpg" alt="Image" class="img-fluid" />
-
-                            <div class="person-contents">
-                                <h2 class="mb-0"><a href="#">Jean Smith</a></h2>
-                                <span class="meta d-block mb-3">Real Estate Agent</span>
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                    Facere officiis inventore cumque tenetur laboriosam, minus
-                                    culpa doloremque odio, neque molestias?
-                                </p>
-
-                                <ul class="social list-unstyled list-inline dark-hover">
-                                    <li class="list-inline-item">
-                                        <a href="#"><span class="icon-twitter"></span></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#"><span class="icon-facebook"></span></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#"><span class="icon-linkedin"></span></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#"><span class="icon-instagram"></span></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0">
-                        <div class="h-100 person">
-                            <img src="images/person_3-min.jpg" alt="Image" class="img-fluid" />
-
-                            <div class="person-contents">
-                                <h2 class="mb-0"><a href="#">Alicia Huston</a></h2>
-                                <span class="meta d-block mb-3">Real Estate Agent</span>
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                    Facere officiis inventore cumque tenetur laboriosam, minus
-                                    culpa doloremque odio, neque molestias?
-                                </p>
-
-                                <ul class="social list-unstyled list-inline dark-hover">
-                                    <li class="list-inline-item">
-                                        <a href="#"><span class="icon-twitter"></span></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#"><span class="icon-facebook"></span></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#"><span class="icon-linkedin"></span></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#"><span class="icon-instagram"></span></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
-    <style>
-    p  {
-        color: #888;
-    }
-    </style>
 </x-app-layout>
