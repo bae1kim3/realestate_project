@@ -58,10 +58,10 @@
                 </div>
 
                 {{-- 회원가입 작성폼 --}}
-                <x-validation-errors class="mb-4" />
                 <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
                     <form method="POST" action="{{ route('register') }}">
                             @csrf
+                            <x-validation-errors class="mb-4" />
                             <div class="col-6 mb-3">
                                 <x-label for="name" value="{{ __('이름') }}" />
                                 <x-input id="name" class="form-control" type="text" name="name" :value="old('name')" autofocus autocomplete="name" />
@@ -140,9 +140,10 @@
 
                             <div class="col-6 mb-3">
                                 <x-label for="phone_no" value="{{ __('전화번호') }}" class="dark:text-white" />
-                                <x-input id="phone_no" class="form-control" type="tel" name="phone_no" :value="old('phone_no')" autocomplete="phone_no" />
+                                <x-input id="phone_no" class="form-control" type="tel" name="phone_no" :value="old('phone_no')" autocomplete="phone_no" oninput="validatePhoneNumber()" />
                                 <span id="phone_no-error" class="error-message" style="color: rgb(250, 73, 73);"></span>
                             </div>
+
 
                             <div>
                                 <x-label for="animal_size" value="{{ __('대형 동물') }}" />

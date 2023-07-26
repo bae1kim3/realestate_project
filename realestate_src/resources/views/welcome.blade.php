@@ -16,7 +16,7 @@
         font-weight: normal;
         font-style: normal;
         }
-        
+
     </style>
     </x-slot>
     <div class="hero">
@@ -229,6 +229,7 @@
     </div>
     @endif
 
+    @if ($photo)
     <div class="section pt-0">
         <div class="container">
             <h2 class="mb-5" style="font-weight:800; font-family: 'S-CoreDream-6Bold';">이달의 매물</h2>
@@ -328,7 +329,7 @@
             </div>
         </div>
     </section>
-
+    @endif
 
 
     <script src="{{asset('welcome.js')}}"></script>
