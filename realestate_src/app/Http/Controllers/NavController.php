@@ -22,6 +22,11 @@ class NavController extends Controller
         $s_no = $building ? $building->s_no : null;
 
         $photos = Photo::where('s_no', $s_no)->where('mvp_photo', 1)->first();
+        
+        // 전화번호에 하이픈찍기
+        for($i=0; $i < count($usersWithSellerLicense); $i++) {
+        $usersWithSellerLicense[$i]->phone_no = substr($usersWithSellerLicense[$i]->phone_no, 0, 3) . '-' . substr($usersWithSellerLicense[$i]->phone_no, 3, 4) . '-' . substr($usersWithSellerLicense[$i]->phone_no, 7);
+        }
 
         return view('sellers_info', ['users' => $usersWithSellerLicense, 'photo' => $photos,'bild'=>$building]);
     }

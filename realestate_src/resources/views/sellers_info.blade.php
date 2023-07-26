@@ -54,7 +54,6 @@
                             <blockquote>
                                 <p>부동산 이름 : {{ $use->b_name }}</p>
                                 <p>연락처 : <span id="phoneNo">{{ $use->phone_no }}</span></p>
-                                <p>연락처 : <span id="phoneNumber">01043462688</span></p>
                                 <p>가입날짜 : {{ date('Y-m-d',strtotime($use->created_at)) }}</p>
                             </blockquote>
                             {{-- <p class="text-black-50">Designer, Co-founder</p> --}}
@@ -162,17 +161,4 @@
             </div>
         </div>
     </div>
-      <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const phoneNumberSpan = document.getElementById("phoneNumber");
-      const phoneNumber = phoneNumberSpan.textContent;
-
-      // 전화번호 형식에 맞게 하이픈을 추가합니다.
-      const formattedPhoneNumber = phoneNumber.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
-
-      // span 태그의 내용을 변경하여 하이픈이 추가된 전화번호로 업데이트합니다.
-      phoneNumberSpan.textContent = formattedPhoneNumber;
-    });
-  </script>
-
 </x-app-layout>
