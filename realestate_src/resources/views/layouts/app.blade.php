@@ -28,7 +28,9 @@
     <link rel="stylesheet" href="{{asset('tiny-slider.css')}}" />
     <link rel="stylesheet" href="{{asset('aos.css')}}" />
     <link rel="stylesheet" href="{{asset('style.css')}}" />
+
     <style>
+    @import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap');
         @media (max-width: 991px) {
             #logoutBtn {
                 color: black;

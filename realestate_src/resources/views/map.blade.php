@@ -34,9 +34,17 @@
         펫 방 &mdash; 집구하자
     </title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap');
+
         .site-footer {
             height: 100px;
             border-top: 1px solid black;
+        }
+
+        @media (max-width: 991px) {
+            #logoutBtn {
+                color: black;
+            }
         }
 
     </style>
@@ -52,40 +60,39 @@
     </div>
 
     {{-- 원래 container 들어가있었음 --}}
-    <nav class="site-nav justify-content-end p-3" style="height: 12%; z-index:11; background-image: url('images/hero_bg_2.jpg');">
+    <nav class="site-nav justify-content-end p-3" style="height: 113px; z-index:11; background-image: url('images/hero_bg_2.jpg');">
         <div class="">
             <div class="menu-bg-wrap">
-                <div class="site-navigation">
-                    <a href="{{route('welcome')}}" class="logo m-0 float-start">펫 방</a>
-                    <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end">
-                        <li class="active"><a href="{{route('welcome')}}">메인</a></li>
-                        @if (session('u_id'))
+            <div class="site-navigation">
+                <a href="{{route('welcome')}}" class="logo m-0 float-start" style="font-family: 'Rubik Mono One', sans-serif; text-shadow:-1px 0px white, 0px 1px white, 1px 0px white, 0px -1px white; color:#005555!important; font-size:2rem">Petbang</a>
+                <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end">
+                    <li class="active"><a href="{{route('welcome')}}">메인</a></li>
+                    <li><a href="{{ route('map.map') }}">지도</a></li>
+                    @if (session('u_id'))
                         @if (session('seller_license'))
-                        <li><a href={{ route('dashboard') }}>매물올리기</a></li>
+                        <li><a href="{{ route('dashboard') }}">매물올리기</a></li>
                         @endif
                         @if (session('seller_license'))
                         <li><a href="{{ route('sellpro') }}">내 정보</a></li>
                         @else
                         <li><a href="{{ route('userpro') }}">내 정보</a></li>
                         @endif
-                        </li>
-                        @endif
-                        <li><a href="{{ route('sellers_info') }}">공인중개사 목록</a></li>
-                        @if (!session('u_id'))
-                        <li><a href="{{ route('login') }}">로그인</a></li>
-                        <li><a href="{{ route('register') }}" class="active">회원가입</a></li>
-                        @else
-                        <li>
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <a href="{{route('logout')}}" style="color: white" onclick="event.preventDefault();
+                    @endif
+                    <li><a href="{{ route('sellers_info') }}">공인중개사 목록</a></li>
+                    @if (!session('u_id'))
+                    <li><a href="{{ route('login') }}">로그인</a></li>
+                    <li><a href="{{ route('register') }}" class="active">회원가입</a></li>
+                    @else
+                    <li class="active">
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <a href="{{route('logout')}}" style="color: white" onclick="event.preventDefault();
                                                     this.closest('form').submit();">
-                                    로그아웃
-                                </a>
-                        </li>
+                                <span id="logoutBtn">로그아웃</span>
+                            </a>
                         </form>
-                </div>
-                @endif
+                    </li>
+                    @endif
                 </ul>
 
                 <a href="#" class="burger light me-auto float-end mt-1 site-menu-toggle js-menu-toggle d-inline-block d-lg-none" data-toggle="collapse" data-target="#main-navbar">
