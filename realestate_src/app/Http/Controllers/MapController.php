@@ -19,72 +19,6 @@ class MapController extends Controller
         }
     }
 
-    //     function getopt($opt, $gu, $sopt)
-    //     {
-    //         $lat = 0;
-    //         $lng = 0;
-    //         $latlngData = [
-    //             "구 선택" => ["lat" => 35.8714354, "lng" => 128.601445],
-    //             "달서구" => ["lat" => 35.82997744, "lng" => 128.5325905],
-    //             "달성군" => ["lat" => 35.77475029, "lng" => 128.4313995],
-    //             "북구" => ["lat" => 35.8858646, "lng" => 128.5828924],
-    //             "남구" => ["lat" => 35.84621351, "lng" => 128.597702],
-    //             "서구" => ["lat" => 35.87194054, "lng" => 128.5591601],
-    //             "중구" => ["lat" => 35.86952722, "lng" => 128.6061745],
-    //             "수성구" => ["lat" => 35.85835148, "lng" => 128.6307011],
-    //             "동구" => ["lat" => 35.88682728, "lng" => 128.6355584],
-    //         ];
-
-    //         if (isset($latlngData[$gu])) {
-    //             $lat = $latlngData[$gu]['lat'];
-    //             $lng = $latlngData[$gu]['lng'];
-    //         }
-
-    //         $info['latlng'] = ['lat' => $lat, 'lng' => $lng];
-
-    //         $array = explode(',', $opt);
-    //         $soptarray = explode(',', $sopt);
-
-    //         $info['trade'] = DB::table('s_infos AS sinfo')
-    //             ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
-    //             ->select('p_deposit', 's_type')
-    //             ->where('s_add', 'LIKE', $gu . '%')
-    //             ->whereIn('s_type', ['매매', '전세', '월세'])
-    //             ->whereNull('phot.deleted_at')
-    //             ->get();
-
-    //         // 동적 쿼리 생성을 위한 배열 초기화
-    //         $queryConditions = [
-    //             'sinfo.s_add' => 'LIKE ' . $gu . '%',
-    //             'sinfo.s_type' => $array,
-    //             'sopt.s_parking' => $soptarray,
-    //             'sopt.s_ele' => $soptarray,
-    //             'phot.mvp_photo' => 1,
-    //             'phot.deleted_at' => null,
-    //         ];
-
-    //         // 건물 형태(sshape) 처리 추가
-    //         // if ($sshape !== null) {
-    //         //     $shapeArray = explode(',', $sshape);
-    //         //     $queryConditions['sinfo.s_shape'] = $shapeArray;
-    //         // }
-
-    //         // 동적 쿼리 생성
-    //         $query = DB::table('s_infos AS sinfo')
-    //             ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
-    //             ->leftJoin('state_options AS sopt', 'sinfo.s_no', '=', 'sopt.s_no')
-    //             ->select('sinfo.*', 'phot.url', 'sopt.s_parking', 'sopt.s_ele')
-    //             ->where($queryConditions);
-
-    //         $info['sinfo'] = $query
-    //             ->orderByDesc('sinfo.s_type')
-    //             ->get();
-
-    //         return $info;
-    //     }
-    // }
-
-
     function getopt($opt, $gu, $sopt, $sshape)
     {
         Log::info($sshape);
@@ -133,6 +67,11 @@ class MapController extends Controller
                 $lng = 0;
                 break;
         }
+        $money = DB::table('s_infos AS sinfo')
+        ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
+        ->select('p_deposit', 's_type')
+        ->where('s_add', 'LIKE', $gu . '%');
+
         $info['latlng'] = ['lat' => $lat, 'lng' => $lng];
         $array = explode(',', $opt);
         $soptarray = explode(',', $sopt);
@@ -141,28 +80,19 @@ class MapController extends Controller
         if(count($sshapearray) == 1 && $sshapearray[0] == 'n'){
         if ($gu != '구 선택') {
             // 매매가 평균 구하는 쿼리
-            $info['trade'] = DB::table('s_infos AS sinfo')
-                ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
-                ->select('p_deposit', 's_type')
-                ->where('s_add', 'LIKE', $gu . '%')
+            $info['trade'] = $money
                 ->where('s_type', '매매')
                 ->whereNull('phot.deleted_at')
                 ->get();
-            $info['jeonse'] = DB::table('s_infos AS sinfo')
-                ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
-                ->select('p_deposit', 's_type')
-                ->where('s_add', 'LIKE', $gu . '%')
+            $info['jeonse'] = $money
                 ->where('s_type', '전세')
                 ->whereNull('phot.deleted_at')
                 ->get();
-            $info['monthly'] = DB::table('s_infos AS sinfo')
-                ->join('photos AS phot', 'sinfo.s_no', '=', 'phot.s_no')
-                ->select('p_deposit', 's_type', 'p_month')
-                ->where('s_add', 'LIKE', $gu . '%')
+            $info['monthly'] = $money
                 ->where('s_type', '월세')
                 ->whereNull('phot.deleted_at')
                 ->get();
-            
+
             // '구 선택'이 아닐 때 '월세', '전세', '매매' 중에서 하나만 넘어왔을 때
             if (count($array) == 1 && $array[0] != 1) {
                 if ((count($soptarray) == 1 && $soptarray[0] != 1) && $soptarray[0] == 's_parking' || $soptarray[0] == 's_ele') {
@@ -524,7 +454,7 @@ class MapController extends Controller
                     ->where('s_type', '월세')
                     ->whereNull('phot.deleted_at')
                     ->get();
-                
+
                 // '구 선택'이 아닐 때 '월세', '전세', '매매' 중에서 하나만 넘어왔을 때
                 if (count($array) == 1 && $array[0] != 1) {
                     if ((count($soptarray) == 1 && $soptarray[0] != 1) && $soptarray[0] == 's_parking' || $soptarray[0] == 's_ele') {
@@ -910,7 +840,7 @@ class MapController extends Controller
                     ->where('s_type', '월세')
                     ->whereNull('phot.deleted_at')
                     ->get();
-                
+
                 // '구 선택'이 아닐 때 '월세', '전세', '매매' 중에서 하나만 넘어왔을 때
                 if (count($array) == 1 && $array[0] != 1) {
                     if ((count($soptarray) == 1 && $soptarray[0] != 1) && $soptarray[0] == 's_parking' || $soptarray[0] == 's_ele') {
@@ -1296,7 +1226,7 @@ class MapController extends Controller
                     ->where('s_type', '월세')
                     ->whereNull('phot.deleted_at')
                     ->get();
-                
+
                 // '구 선택'이 아닐 때 '월세', '전세', '매매' 중에서 하나만 넘어왔을 때
                 if (count($array) == 1 && $array[0] != 1) {
                     if ((count($soptarray) == 1 && $soptarray[0] != 1) && $soptarray[0] == 's_parking' || $soptarray[0] == 's_ele') {
@@ -1682,7 +1612,7 @@ class MapController extends Controller
                     ->where('s_type', '월세')
                     ->whereNull('phot.deleted_at')
                     ->get();
-                
+
                 // '구 선택'이 아닐 때 '월세', '전세', '매매' 중에서 하나만 넘어왔을 때
                 if (count($array) == 1 && $array[0] != 1) {
                     if ((count($soptarray) == 1 && $soptarray[0] != 1) && $soptarray[0] == 's_parking' || $soptarray[0] == 's_ele') {
@@ -2068,7 +1998,7 @@ class MapController extends Controller
                     ->where('s_type', '월세')
                     ->whereNull('phot.deleted_at')
                     ->get();
-                
+
                 // '구 선택'이 아닐 때 '월세', '전세', '매매' 중에서 하나만 넘어왔을 때
                 if (count($array) == 1 && $array[0] != 1) {
                     if ((count($soptarray) == 1 && $soptarray[0] != 1) && $soptarray[0] == 's_parking' || $soptarray[0] == 's_ele') {
@@ -2431,6 +2361,6 @@ class MapController extends Controller
                 }
             }
         }
-        
+
     }
 }
