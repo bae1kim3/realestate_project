@@ -461,9 +461,7 @@ getpark.addEventListener("click", function (checkbox) {
                 fetch(url)
                     .then((response) => response.json())
                     .then((data1) => {
-                        console.log(data1);
                         let getdata = data1.body.items.item;
-                        console.log(getdata);
                         var imageSrcPark = "mapp.png";
                         markerImage = new kakao.maps.MarkerImage(
                             imageSrcPark,
@@ -550,7 +548,6 @@ getShop.addEventListener("click", function (checkbox) {
                 fetch(url, options)
                     .then((response) => response.json())
                     .then((data) => {
-                        console.log(data);
                         let getdata = data.documents;
                         var imageSrcShop = 'https://cdn-icons-png.flaticon.com/128/2447/2447823.png';
                         markerImage = new kakao.maps.MarkerImage(
@@ -636,7 +633,6 @@ getHosp.addEventListener("click", function (checkbox) {
                 fetch(url, options)
                     .then((response) => response.json())
                     .then((data) => {
-                        console.log(data);
                         let getdata = data.documents;
                         var imageSrcHosp = 'https://cdn-icons-png.flaticon.com/128/10887/10887257.png';
 
