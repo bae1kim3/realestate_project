@@ -1,3 +1,17 @@
+<style>
+@font-face {
+    font-family: 'S-CoreDream-6Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    }
+    @font-face {
+    font-family: 'S-CoreDream-3Light';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    }
+</style>
 <x-app-layout>
     <div class="hero page-inner overlay" style="background-image: url('images/hero_bg_1.jpg')">
         <div class="container">
@@ -22,7 +36,7 @@
         <div class="container">
             <div class="row mb-5 align-items-center">
                 <div class="col-md-6">
-                    <h2 class="font-weight-bold heading text-primary mb-4 mb-md-0">
+                    <h2 class="font-weight-bold heading text-primary mb-4 mb-md-0" style="font-family: 'S-CoreDream-6Bold';">
                         공인중개사 목록
                     </h2>
                 </div>
@@ -69,7 +83,7 @@
 
     <div class="section pt-0">
         <div class="container">
-            <h1>이달의 매물</h1>
+            <h2 style="font-family: 'S-CoreDream-6Bold';">이달의 매물</h2>
             <div class="row justify-content-between mb-5">
                 <div class="col-lg-7 mb-5 mb-lg-0">
                     <div class="img-about dots">
