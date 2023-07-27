@@ -1,0 +1,91 @@
+body {
+  background: #f5f5f5;
+  height: 100%;
+  overflow: hidden;
+}
+table {
+  border: 1px #a39485 solid;
+  font-size: 0.9em;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+  width: 1600px;
+  border-collapse: collapse;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+th {
+  text-align: left;
+}
+
+thead {
+  font-weight: bold;
+  color: #fff;
+  background: #73685d;
+}
+
+td,
+th {
+  padding: 1em 0.5em;
+  vertical-align: middle;
+  text-align: center;
+}
+
+td {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  background: #fff;
+}
+
+a {
+  color: #73685d;
+}
+#sidebar {
+  width: 240px;
+  min-width: 240px;
+  height: 90.9vh;
+  color: #fff;
+  background-color: #73685d;
+}
+#sidebar > a {
+  color: #fff;
+}
+/* 등장 애니매이션(3개가 한세트) */
+.modalTransition-enter-from {
+  opacity: 0;
+}
+.modalTransition-enter-active {
+  transition: all 1s;
+}
+.modalTransition-enter-to {
+  opacity: 1;
+}
+
+/* 퇴장 애니매이션 */
+.modalTransition-leave-from {
+  /* opacity: 1; */
+  transform: translateX(0px);
+}
+.modalTransition-leave-active {
+  transition: all 2s;
+}
+.modalTransition-leave-to {
+  /* opacity: 0; */
+  transform: translateX(3000px);
+}
+.bg_black {
+  width: 40%;
+  height: 40%;
+  background-color: rgb(115, 104, 93, 0.5);
+  border-radius: 10px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.bg_white {
+  width: 95%;
+  height: 92%;
+  background-color: #73685d;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 15px auto;
+}
