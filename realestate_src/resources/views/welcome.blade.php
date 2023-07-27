@@ -32,10 +32,20 @@
                     <h2 class="heading" data-aos="fade-up">
                         어떤 방을 찾으시나요? 펫 방이 찾아드립니다
                     </h2>
-                    <div class="narrow-w form-search d-flex align-items-stretch mb-3" data-aos="fade-up" data-aos-delay="200">
-                        <input type="text" class="form-control px-4" name="search" id="search" placeholder="주소나 지하철역 명으로 검색해 주세요" />
-                        <button onclick="searchProperties()" class="btn btn-primary py-2 px-4">Search</button>
-                    </div>
+                    <form action="{{route('search.get')}}" method="get">
+                        <div class="narrow-w form-search d-flex align-items-stretch mb-3" data-aos="fade-up" data-aos-delay="200">
+                            <input type="text" class="form-control px-4" name="search" id="search" placeholder="주소나 지하철역 명으로 검색해 주세요" />
+                            <button type="submit"  class="btn btn-primary py-2 px-4">Search</button>
+                            <label for="animal_size">대형동물 가능</label>
+                            <input type="checkbox" id="animal_size" name="animal_size" value="1">
+                            <label for="p_month">월세</label>
+                            <input type="checkbox" id="p_month" name="p_month" value="월세">
+                            <label for="p_jeonse">전세</label>
+                            <input type="checkbox" id="p_jeonse" name="p_jeonse" value="전세">
+                            <label for="p_sell">매매</label>
+                            <input type="checkbox" id="p_sell" name="p_sell" value="매매">
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -52,8 +62,6 @@
                 <div class="col-lg-6 text-lg-end">
                     <div style="display:flex-end">
                         <div>
-                            {{-- 대형동물 버튼 --}}
-                            <span id="search_chk"></span>
                             <span>
                                 <a href="{{route('map.map')}}" target="_blank" class="btn btn-primary text-white py-3 px-4">지도에서 매물 검색</a>
                             </span>

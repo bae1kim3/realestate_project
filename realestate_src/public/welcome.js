@@ -154,56 +154,56 @@ function searchProperties() {
             itemContainer.innerHTML = '';
             const h2Element = document.querySelector('.col-lg-6 h2.text-primary.heading');
             h2Element.textContent = '검색결과';
-            const checkElement = document.getElementById('search_chk');
-            // 버튼 초기화
-            checkElement.innerHTML = '';
-            // 버튼 요소를 생성합니다.
-            const button = document.createElement("button");
-            button.textContent = "대형동물";
-            button.setAttribute("style", "border:none; padding:16px 20px; border-radius:30px; margin-right:10px");
-            button.setAttribute("id", "animal_btn");
-            button.setAttribute("name", "animal_size");
-            // 체크박스 요소 생성
-            //월세
-            const labelMonth = document.createElement("label")
-            labelMonth.textContent = "월세";
-            labelMonth.setAttribute("for", "p_month");
-            const chkboxMonth = document.createElement("input")
-            chkboxMonth.setAttribute("type", "checkbox");
-            chkboxMonth.setAttribute("name", "p_month");
-            chkboxMonth.setAttribute("id", "p_month");
-            //전세
-            const labelJeonse = document.createElement("label")
-            labelJeonse.textContent = "전세";
-            labelJeonse.setAttribute("for", "p_jeonse");
-            const chkboxJeonse = document.createElement("input")
-            chkboxJeonse.setAttribute("type", "checkbox");
-            chkboxJeonse.setAttribute("name", "p_jeonse");
-            chkboxJeonse.setAttribute("id", "p_jeonse");
-            //매매
-            const labelSell = document.createElement("label")
-            labelSell.textContent = "매매";
-            labelSell.setAttribute("for", "p_sell");
-            const chkboxSell = document.createElement("input")
-            chkboxSell.setAttribute("type", "checkbox");
-            chkboxSell.setAttribute("name", "p_sell");
-            chkboxSell.setAttribute("id", "p_sell");
-            // 버튼을 "search_chk"라는 ID를 가진 요소에 추가합니다.
-            search_chk.appendChild(button);
-            search_chk.appendChild(labelMonth);
-            search_chk.appendChild(chkboxMonth);
-            search_chk.appendChild(labelJeonse);
-            search_chk.appendChild(chkboxJeonse);
-            search_chk.appendChild(labelSell);
-            search_chk.appendChild(chkboxSell);
+            // const checkElement = document.getElementById('search_chk');
+            // // 버튼 초기화
+            // checkElement.innerHTML = '';
+            // // 버튼 요소를 생성합니다.
+            // const button = document.createElement("button");
+            // button.textContent = "대형동물";
+            // button.setAttribute("style", "border:none; padding:16px 20px; border-radius:30px; margin-right:10px");
+            // button.setAttribute("id", "animal_btn");
+            // button.setAttribute("name", "animal_size");
+            // // 체크박스 요소 생성
+            // //월세
+            // const labelMonth = document.createElement("label")
+            // labelMonth.textContent = "월세";
+            // labelMonth.setAttribute("for", "p_month");
+            // const chkboxMonth = document.createElement("input")
+            // chkboxMonth.setAttribute("type", "checkbox");
+            // chkboxMonth.setAttribute("name", "p_month");
+            // chkboxMonth.setAttribute("id", "p_month");
+            // //전세
+            // const labelJeonse = document.createElement("label")
+            // labelJeonse.textContent = "전세";
+            // labelJeonse.setAttribute("for", "p_jeonse");
+            // const chkboxJeonse = document.createElement("input")
+            // chkboxJeonse.setAttribute("type", "checkbox");
+            // chkboxJeonse.setAttribute("name", "p_jeonse");
+            // chkboxJeonse.setAttribute("id", "p_jeonse");
+            // //매매
+            // const labelSell = document.createElement("label")
+            // labelSell.textContent = "매매";
+            // labelSell.setAttribute("for", "p_sell");
+            // const chkboxSell = document.createElement("input")
+            // chkboxSell.setAttribute("type", "checkbox");
+            // chkboxSell.setAttribute("name", "p_sell");
+            // chkboxSell.setAttribute("id", "p_sell");
+            // // 버튼을 "search_chk"라는 ID를 가진 요소에 추가합니다.
+            // search_chk.appendChild(button);
+            // search_chk.appendChild(labelMonth);
+            // search_chk.appendChild(chkboxMonth);
+            // search_chk.appendChild(labelJeonse);
+            // search_chk.appendChild(chkboxJeonse);
+            // search_chk.appendChild(labelSell);
+            // search_chk.appendChild(chkboxSell);
             
 
-            checkElement.addEventListener("mouseover", () => {
-                button.setAttribute("style", "border:none; padding:16px 20px; border-radius:30px; margin-right:10px; background-color: #00204a; color: white; transition: .3s all ease;");
-            });
-            checkElement.addEventListener("mouseout", () => {
-                button.setAttribute("style", "border:none; padding:16px 20px; border-radius:30px; margin-right:10px; transition: .3s all ease;");
-            });
+            // checkElement.addEventListener("mouseover", () => {
+            //     button.setAttribute("style", "border:none; padding:16px 20px; border-radius:30px; margin-right:10px; background-color: #00204a; color: white; transition: .3s all ease;");
+            // });
+            // checkElement.addEventListener("mouseout", () => {
+            //     button.setAttribute("style", "border:none; padding:16px 20px; border-radius:30px; margin-right:10px; transition: .3s all ease;");
+            // });
 
 
             // checkElement.addEventListener("click", () => {
@@ -239,11 +239,18 @@ function searchProperties() {
 //         '<button type="button" data-nav="' + i + '" aria-controls="itemContainer" style aria-label="Carousel Page ' + (i + 1) + '" class tabindex="-1"></button>';
 //     return html;
 // }
+// let btnAnimal = document.getElementById('animal_btn');
+// let chkboxMonth = document.getElementById('p_month');
+// let chkboxJeonse = document.getElementById('p_jeonse');
+// let chkboxSell = document.getElementById('p_sell');
+// // 버튼, 체크박스 클릭했을 때 
 
-let chkboxMonth = document.getElementById('p_month');
-let chkboxJeonse = document.getElementById('p_jeonse');
-let chkboxSell = document.getElementById('p_sell');
-// 체크박스 클릭했을 때 
-function checkBoxOpSearch() {
+// btnAnimal.addEventListener('click', function() {
+//     fetch('/checkbox', {
+//         body: JSON.stringify({
+//             animal_size: '1'
+//         })
+//     })
+//     .then(response=> response.json())
     
-}
+// })

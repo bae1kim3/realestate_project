@@ -111,31 +111,44 @@ class PhotoLoadController extends Controller
         return response()->json(['photos' => $photos]);
     }
 
-    public function checkBoxSearch(Request $request)
-    {
-        $search = $request->input('search');
-
+    // 검색 리스트 페이지
+    public function checkBoxGet(Request $req) {
         $query = Photo::join('s_infos', 's_infos.s_no', 'photos.s_no')
             ->where('mvp_photo', '1')
-            ->orderBy('photos.updated_at', 'desc')
-            ->when(isset($request->animal_size), function($q) {
-                $q->where('animal_size', '1');
-            })
-            ->when(isset($request->p_month), function($q) {
-                $q->where('p_month', '월세');
-            })
-            ->when(isset($request->p_jeonse), function($q) {
-                $q->where('p_jeonse', '전세');
-            })
-            ->when(isset($request->p_sell), function($q) {
-                $q->where('p_sell', '매매');
-            });
+            ->orderBy('photos.updated_at', 'desc');
+            
+        return redirect()->view('searchPage')->with('searchInfo', $query);
+    }
 
-        $query->where(function ($query) use ($search) {
-            $query->where('s_infos.s_stai', 'LIKE', "%{$search}%") //  지하철역 검색
-                ->orWhere('s_infos.s_add', 'LIKE', "%{$search}%"); // 도로명 주소 검색
-        });
-        $chk_search = $query->get();
+    public function checkBoxPost(Request $request, $search)
+    {
+        if($request->input('search')) {
+            $search = $request->input('search');
+
+            $query = Photo::join('s_infos', 's_infos.s_no', 'photos.s_no')
+                ->where('mvp_photo', '1')
+                ->orderBy('photos.updated_at', 'desc')
+                ->when(isset($request->animal_size), function($query) {
+                    return $query->where('animal_size', '1');
+                })
+                ->when(isset($request->p_month), function($query) {
+                    return $query->where('p_month', '월세');
+                })
+                ->when(isset($request->p_jeonse), function($query) {
+                    return $query->where('p_jeonse', '전세');
+                })
+                ->when(isset($request->p_sell), function($query) {
+                    return $query->where('p_sell', '매매');
+                });
+    
+            $query->where(function ($query) use ($search) {
+                $query->where('s_infos.s_stai', 'LIKE', "%{$search}%") //  지하철역 검색
+                    ->orWhere('s_infos.s_add', 'LIKE', "%{$search}%"); // 도로명 주소 검색
+            });
+            $chk_search = $query->get();
+        }
+        
+        
         return response()->json(['chk_search'=> $chk_search]);
         
     }
