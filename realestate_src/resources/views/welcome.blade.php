@@ -39,11 +39,11 @@
                             <label for="animal_size">대형동물 가능</label>
                             <input type="checkbox" id="animal_size" name="animal_size" value="1">
                             <label for="p_month">월세</label>
-                            <input type="checkbox" id="p_month" name="p_month" value="월세">
+                            <input type="checkbox" id="p_month" name="p_type" value="월세">
                             <label for="p_jeonse">전세</label>
-                            <input type="checkbox" id="p_jeonse" name="p_jeonse" value="전세">
+                            <input type="checkbox" id="p_jeonse" name="p_type" value="전세">
                             <label for="p_sell">매매</label>
-                            <input type="checkbox" id="p_sell" name="p_sell" value="매매">
+                            <input type="checkbox" id="p_sell" name="p_type" value="매매">
                         </div>
                     </form>
                 </div>

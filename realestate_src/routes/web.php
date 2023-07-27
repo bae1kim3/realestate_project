@@ -140,5 +140,5 @@ Route::get('/login/kakao',[SocialController::class,'redirectToKakao'])->name('lo
 Route::get('/login/kakao/callback',[SocialController::class,'handleKakaoCallback']);
 
 //검색 체크박스
-Route::get('/search', [PhotoLoadController::class, 'loadMorePhotos'])->name('search.get');
+Route::get('/search', [PhotoLoadController::class, 'checkBoxGet'])->name('search.get');
 Route::post('/search', [PhotoLoadController::class, 'checkBoxPost'])->name('search.post');

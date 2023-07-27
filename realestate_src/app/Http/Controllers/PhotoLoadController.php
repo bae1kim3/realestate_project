@@ -89,40 +89,82 @@ class PhotoLoadController extends Controller
 
     public function loadMorePhotos(Request $request)
     {
-        //검색 키워드 들고오기
-        $search = $request->input('search');
+        // //검색 키워드 들고오기
+        // $search = $request->input('search');
 
-        // 대형동물, 거래유형(월, 전, 매)
-        //mvp_photo 1 의 s_infos + photos 정보 들고오기
+        // // 대형동물, 거래유형(월, 전, 매)
+        // //mvp_photo 1 의 s_infos + photos 정보 들고오기
         
-        $query = Photo::join('s_infos', 's_infos.s_no', 'photos.s_no')
-            ->where('mvp_photo', '1')
-            ->orderBy('photos.updated_at', 'desc');
+        // $query = Photo::join('s_infos', 's_infos.s_no', 'photos.s_no')
+        //     ->where('mvp_photo', '1')
+        //     ->orderBy('photos.updated_at', 'desc');
 
-        // 검색기능
-            $query->where(function ($query) use ($search) {
-                $query->where('s_infos.s_stai', 'LIKE', "%{$search}%") //  지하철역 검색
-                    ->orWhere('s_infos.s_add', 'LIKE', "%{$search}%"); // 도로명 주소 검색
-            });
+        // // 검색기능
+        //     $query->where(function ($query) use ($search) {
+        //         $query->where('s_infos.s_stai', 'LIKE', "%{$search}%") //  지하철역 검색
+        //             ->orWhere('s_infos.s_add', 'LIKE', "%{$search}%"); // 도로명 주소 검색
+        //     });
 
-        $searchCount = $query->count();
-        $photos = $query->take($searchCount)->get(); // 검색 정보 들고옴
+        // $searchCount = $query->count();
+        // $photos = $query->take($searchCount)->get(); // 검색 정보 들고옴
 
-        return response()->json(['photos' => $photos]);
+        // return response()->json(['photos' => $photos]);
     }
 
     // 검색 리스트 페이지
-    public function checkBoxGet(Request $req) {
-        $query = Photo::join('s_infos', 's_infos.s_no', 'photos.s_no')
-            ->where('mvp_photo', '1')
-            ->orderBy('photos.updated_at', 'desc');
+    public function checkBoxGet(Request $request) {
+        //검색 키워드 들고오기
+        if($request->input('search') ==! null){
             
-        return redirect()->view('searchPage')->with('searchInfo', $query);
+            $search = $request->input('search');
+            $query = Photo::join('s_infos', 's_infos.s_no', 'photos.s_no')
+                    ->where('mvp_photo', '1')
+                    ->orderBy('photos.updated_at', 'desc')
+                    ->when(isset($request->animal_size), function($query) {
+                        return $query->where('animal_size', '1');
+                    })
+                    ->when($request->p_type == '월세', function($query) {
+                        return $query->where('s_type', '월세');
+                    })
+                    ->when($request->p_type == '전세', function($query) {
+                        return $query->where('s_type', '전세');
+                    })
+                    ->when($request->p_type == '매매', function($query) {
+                        return $query->where('s_type', '매매');
+                    });
+        
+                $query->where(function ($query) use ($search) {
+                    $query->where('s_infos.s_stai', 'LIKE', "%{$search}%") //  지하철역 검색
+                        ->orWhere('s_infos.s_add', 'LIKE', "%{$search}%"); // 도로명 주소 검색
+                });
+                $chk_search = $query->get();
+        }
+        else {
+            $search = $request->input('search');
+            $query = Photo::join('s_infos', 's_infos.s_no', 'photos.s_no')
+                    ->where('mvp_photo', '1')
+                    ->orderBy('photos.updated_at', 'desc')
+                    ->when(isset($request->animal_size), function($query) {
+                        return $query->where('animal_size', '1');
+                    })
+                    ->when($request->p_type == '월세', function($query) {
+                        return $query->where('s_type', '월세');
+                    })
+                    ->when($request->p_type == '전세', function($query) {
+                        return $query->where('s_type', '전세');
+                    })
+                    ->when($request->p_type == '매매', function($query) {
+                        return $query->where('s_type', '매매');
+                    });
+                $chk_search = $query->get();
+        }
+            
+        return view('searchPage')->with('chk_search', $chk_search);
     }
 
-    public function checkBoxPost(Request $request, $search)
+    public function checkBoxPost(Request $request)
     {
-        if($request->input('search')) {
+        if($request->input('search') !== null) {
             $search = $request->input('search');
 
             $query = Photo::join('s_infos', 's_infos.s_no', 'photos.s_no')
@@ -131,14 +173,14 @@ class PhotoLoadController extends Controller
                 ->when(isset($request->animal_size), function($query) {
                     return $query->where('animal_size', '1');
                 })
-                ->when(isset($request->p_month), function($query) {
-                    return $query->where('p_month', '월세');
+                ->when($request->p_type == '월세', function($query) {
+                    return $query->where('s_type', '월세');
                 })
-                ->when(isset($request->p_jeonse), function($query) {
-                    return $query->where('p_jeonse', '전세');
+                ->when($request->p_type == '전세', function($query) {
+                    return $query->where('s_type', '전세');
                 })
-                ->when(isset($request->p_sell), function($query) {
-                    return $query->where('p_sell', '매매');
+                ->when($request->p_type == '매매', function($query) {
+                    return $query->where('s_type', '매매');
                 });
     
             $query->where(function ($query) use ($search) {
@@ -147,9 +189,28 @@ class PhotoLoadController extends Controller
             });
             $chk_search = $query->get();
         }
+        else {
+            $search = $request->input('search');
+            $query = Photo::join('s_infos', 's_infos.s_no', 'photos.s_no')
+                    ->where('mvp_photo', '1')
+                    ->orderBy('photos.updated_at', 'desc')
+                    ->when(isset($request->animal_size), function($query) {
+                        return $query->where('animal_size', '1');
+                    })
+                    ->when($request->p_type == '월세', function($query) {
+                        return $query->where('s_type', '월세');
+                    })
+                    ->when($request->p_type == '전세', function($query) {
+                        return $query->where('s_type', '전세');
+                    })
+                    ->when($request->p_type == '매매', function($query) {
+                        return $query->where('s_type', '매매');
+                    });
+                $chk_search = $query->get();
+        }
         
         
-        return response()->json(['chk_search'=> $chk_search]);
+        return view('searchPage')->with('chk_search', $chk_search);
         
     }
 }
