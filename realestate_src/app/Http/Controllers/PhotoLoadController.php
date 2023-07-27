@@ -89,8 +89,12 @@ class PhotoLoadController extends Controller
 
     public function loadMorePhotos(Request $request)
     {
+        //검색 키워드 들고오기
         $search = $request->input('search');
 
+        // 대형동물, 거래유형(월, 전, 매)
+        //mvp_photo 1 의 s_infos + photos 정보 들고오기
+        
         $query = Photo::join('s_infos', 's_infos.s_no', 'photos.s_no')
             ->where('mvp_photo', '1')
             ->orderBy('photos.updated_at', 'desc');
@@ -100,11 +104,39 @@ class PhotoLoadController extends Controller
                 $query->where('s_infos.s_stai', 'LIKE', "%{$search}%") //  지하철역 검색
                     ->orWhere('s_infos.s_add', 'LIKE', "%{$search}%"); // 도로명 주소 검색
             });
+
         $searchCount = $query->count();
-        $photos = $query
-            ->take($searchCount)
-            ->get();
+        $photos = $query->take($searchCount)->get(); // 검색 정보 들고옴
 
         return response()->json(['photos' => $photos]);
+    }
+
+    public function checkBoxSearch(Request $request)
+    {
+        $search = $request->input('search');
+
+        $query = Photo::join('s_infos', 's_infos.s_no', 'photos.s_no')
+            ->where('mvp_photo', '1')
+            ->orderBy('photos.updated_at', 'desc')
+            ->when(isset($request->animal_size), function($q) {
+                $q->where('animal_size', '1');
+            })
+            ->when(isset($request->p_month), function($q) {
+                $q->where('p_month', '월세');
+            })
+            ->when(isset($request->p_jeonse), function($q) {
+                $q->where('p_jeonse', '전세');
+            })
+            ->when(isset($request->p_sell), function($q) {
+                $q->where('p_sell', '매매');
+            });
+
+        $query->where(function ($query) use ($search) {
+            $query->where('s_infos.s_stai', 'LIKE', "%{$search}%") //  지하철역 검색
+                ->orWhere('s_infos.s_add', 'LIKE', "%{$search}%"); // 도로명 주소 검색
+        });
+        $chk_search = $query->get();
+        return response()->json(['chk_search'=> $chk_search]);
+        
     }
 }
