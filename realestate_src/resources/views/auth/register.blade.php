@@ -27,11 +27,11 @@
                         <h4 class="heading" data-aos="fade-up">일반회원과 공인중개사중 하나를 선택하세요</h4>
                         <nav aria-label="breadcrumb" data-aos="fade-up" data-aos-delay="200">
                             <ol class="breadcrumb text-center justify-content-center">
-                                    <li id="use" style="font-size: 30px; font-weight: bolder;">일반회원</li>
+                                <li id="use" style="font-size: 30px; font-weight: bolder;">일반회원</li>
                                 <p style="color:white; margin:0px 10px; font-size:30px"> / </p>
-                                    <li id="sell" style="font-size: 30px; font-weight: bolder;">
-                                        공인중개사
-                                    </li>
+                                <li id="sell" style="font-size: 30px; font-weight: bolder;">
+                                    공인중개사
+                                </li>
                             </ol>
                         </nav>
                     </div>
@@ -159,16 +159,20 @@
             document.addEventListener("DOMContentLoaded", function() {
                 const termsTextarea = document.getElementById("termsTextarea2");
                 const agreeCheckbox = document.getElementById("agreeCheckbox");
+                const registerButton = document.getElementById("registerButton");
 
-                termsTextarea.addEventListener("scroll", function() {
-                    if (
-                        termsTextarea.scrollTop ===
-                        termsTextarea.scrollHeight - termsTextarea.clientHeight
-                    ) {
-                        // 스크롤을 끝까지 내렸을 때
+                function checkScrollPosition() {
+                    const isScrolledToBottom =
+                        termsTextarea.scrollTop + termsTextarea.clientHeight >=
+                        termsTextarea.scrollHeight;
+
+                    if (isScrolledToBottom) {
                         agreeCheckbox.disabled = false;
+                        registerButton.disabled = false;
                     }
-                });
+                }
+
+                termsTextarea.addEventListener("scroll", checkScrollPosition);
             });
 
             const checkbox = document.getElementById('agreeCheckbox');
@@ -185,27 +189,31 @@
             const checkbox2 = document.getElementById('agreeCheckbox2');
             const registerButton2 = document.getElementById('registerButton2');
 
-            checkbox2.addEventListener('click', function() {
-                if (checkbox2.checked) {
-                    registerButton2.style.display = 'block';
-                } else {
-                    registerButton2.style.display = 'none';
-                }
-            });
+            // checkbox2.addEventListener('click', function() {
+            //     if (checkbox2.checked) {
+            //         registerButton2.style.display = 'block';
+            //     } else {
+            //         registerButton2.style.display = 'none';
+            //     }
+            // });
 
             document.addEventListener("DOMContentLoaded", function() {
                 const termsTextarea = document.getElementById("termsTextarea");
                 const agreeCheckbox = document.getElementById("agreeCheckbox2");
+                const registerButton = document.getElementById("registerButton2");
 
-                termsTextarea.addEventListener("scroll", function() {
-                    if (
-                        termsTextarea.scrollTop ===
-                        termsTextarea.scrollHeight - termsTextarea.clientHeight
-                    ) {
-                        // 스크롤을 끝까지 내렸을 때
+                function checkScrollPosition() {
+                    const isScrolledToBottom =
+                        termsTextarea.scrollTop + termsTextarea.clientHeight >=
+                        termsTextarea.scrollHeight;
+
+                    if (isScrolledToBottom) {
                         agreeCheckbox.disabled = false;
+                        registerButton.disabled = false;
                     }
-                });
+                }
+
+                termsTextarea.addEventListener("scroll", checkScrollPosition);
             });
 
         </script>
