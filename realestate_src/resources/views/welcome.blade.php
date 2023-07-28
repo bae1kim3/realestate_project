@@ -51,17 +51,17 @@
                                 <!-- 월세 체크박스 -->
                                 <div style="margin-right:20px; display:flex; justify-content:center; align-items:center;">
                                     <label for="p_month" style="width:50px; color:white; font-size:20px;">월세</label>
-                                    <input type="checkbox" id="p_month" name="p_type" value="월세">
+                                    <input type="checkbox" id="p_month" name="p_month" value="월세">
                                 </div>
                                 <!-- 전세 체크박스 -->
                                 <div style="margin-right:20px; display:flex; justify-content:center; align-items:center;">
                                     <label for="p_jeonse" style="width:50px; color:white; font-size:20px;">전세</label>
-                                    <input type="checkbox" id="p_jeonse" name="p_type" value="전세">
+                                    <input type="checkbox" id="p_jeonse" name="p_jeonse" value="전세">
                                 </div>
                                 <!-- 매매 체크박스 -->
                                 <div style="margin-right:20px; display:flex; justify-content:center; align-items:center;">
                                     <label for="p_sell" style="width:50px; color:white; font-size:20px;">매매</label>
-                                    <input type="checkbox" id="p_sell" name="p_type" value="매매">
+                                    <input type="checkbox" id="p_sell" name="p_sell" value="매매">
                                 </div>
                             </div>
                         </div>
