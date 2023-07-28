@@ -105,8 +105,8 @@
                     <input type="radio" name="s_option" value="4" id="s_info_one" {{old('s_option') === '4'? 'checked' : ''}} />
                 </div>
                 <div class="col-6 mb-3">
-                <x-label for="s_size"  class="col-6 mb-3">방 면적</x-label>
-                <x-input type="text" name="s_size" id="s_size" required maxlength="11" value="{{old('s_size')}}" class="form-control"/>평
+                <x-label for="s_size"  class="col-6">방 면적</x-label>
+                <x-input type="text" name="s_size" id="s_size" required maxlength="11" value="{{old('s_size')}}" class="form-control" placeholder="평수"/>
                 </div>
 
                 <x-input type="hidden" name="s_lat" id="s_lat" />
@@ -114,19 +114,19 @@
 
             <div class="col-6 mb-3">
                 <x-label for="sub_name">건물과 제일 가까운 역</x-label>
-                <x-input type="text" name="sub_name" maxlength="11" id="sub_name" required value="{{old('sub_name')}}" class="form-control" />역
+                <x-input type="text" name="sub_name" maxlength="11" id="sub_name" required value="{{old('sub_name')}}" class="form-control" placeholder="역이름만 적어주세요 ex) 고산" />
             </div>
             <div class="col-6 mb-3">
                 <label for="p_deposit">보증금/매매가/전세가</label>
-                <input type="text" name="p_deposit" id="p_deposit" class="form-control" required value="{{old('p_deposit')}}" maxlength="11"/>만원
+                <input type="text" name="p_deposit" id="p_deposit" class="form-control" required value="{{old('p_deposit')}}" maxlength="11" placeholder="만원"/>
             </div>
                 <div class="col-6 mb-3">
                 <x-label for="p_month">월세</x-label>
-                <x-input type="text" name="p_month" id="p_month" class="form-control" value="{{old('p_month')}}" maxlength="11"/>만원
+                <x-input type="text" name="p_month" id="p_month" class="form-control" value="{{old('p_month')}}" maxlength="11" placeholder="만원"/>
             </div>
                 <div class="col-6 mb-3">
                 <x-label for="s_fl">층수</x-label>
-                <x-input type="text" name="s_fl" id="s_fl" class="form-control" required value="{{old('s_fl')}}" maxlength="3"/>층
+                <x-input type="text" name="s_fl" id="s_fl" class="form-control" required value="{{old('s_fl')}}" maxlength="3" placeholder="층"/>
                 </div>
                 <hr style="margin-top:40px"><br><br>
                 <x-label for="s_parking">주차 가능 여부</x-label>
