@@ -17,7 +17,7 @@
         </style>
     </ x-slot>
     <div style="padding-top:400px; background-color:#f5f2f2; height:40%" >
-            <div class="row justify-content-center align-items-center" style="position:absolute; top:20%;left:12%; width:1500px">
+            <div class="row justify-content-center align-items-center" style="position:absolute; top:20%;left:11%; width:1500px">
                 <div class="col-lg-9 text-center">
                     <h2 class="heading mb-3" data-aos="fade-up" style="font-family: 'S-CoreDream-3Light';">
                         어떤 방을 찾으시나요? 펫 방이 찾아드립니다
