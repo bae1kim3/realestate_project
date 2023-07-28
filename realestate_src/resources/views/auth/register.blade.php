@@ -162,11 +162,10 @@
                 const registerButton = document.getElementById("registerButton");
 
                 function checkScrollPosition() {
-                    const isScrolledToBottom =
-                        termsTextarea.scrollTop + termsTextarea.clientHeight >=
-                        termsTextarea.scrollHeight;
+                    const scrolledRatio =
+                        termsTextarea.scrollTop / (termsTextarea.scrollHeight - termsTextarea.clientHeight);
 
-                    if (isScrolledToBottom) {
+                    if (scrolledRatio >= 0.95) {
                         agreeCheckbox.disabled = false;
                         registerButton.disabled = false;
                     }
@@ -203,11 +202,10 @@
                 const registerButton = document.getElementById("registerButton2");
 
                 function checkScrollPosition() {
-                    const isScrolledToBottom =
-                        termsTextarea.scrollTop + termsTextarea.clientHeight >=
-                        termsTextarea.scrollHeight;
+                    const scrolledRatio =
+                        termsTextarea.scrollTop / (termsTextarea.scrollHeight - termsTextarea.clientHeight);
 
-                    if (isScrolledToBottom) {
+                    if (scrolledRatio >= 0.95) {
                         agreeCheckbox.disabled = false;
                         registerButton.disabled = false;
                     }
