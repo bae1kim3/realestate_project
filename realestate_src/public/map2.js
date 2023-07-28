@@ -42,9 +42,13 @@ let sName = document.getElementById('s_name');
 let defaultlng = '';
 let defaultlat = '';
 function addlist(data, i) {
+    // 금액에 ,찍기
+    function formatNumberWith(number) {
+        return number.toLocaleString();
+    }
     iwContent[
         i
-    ] = `<div style="padding:4px"><b>${data["sinfo"][i].s_name}</b>(${data["sinfo"][i].s_type})</div>`; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+    ] = `<div style="padding:4px; width: 120px; color: black;"><b>${data["sinfo"][i].s_name}</b>(${data["sinfo"][i].s_type}) : ${formatNumberWith(data["sinfo"][i].p_deposit)}${data["sinfo"][i].p_month ? ' / ' + formatNumberWith(data["sinfo"][i].p_month) : ''}</div>`; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
     // 인포윈도우를 생성합니다
     infowindow[i] = new kakao.maps.InfoWindow({
         content: iwContent[i],
