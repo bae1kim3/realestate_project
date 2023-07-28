@@ -87,9 +87,9 @@
                 </div>
             </div>
         <div class="row">
-            <div class="col-12">
+            <div class="col-12" style="display:flex; flex-wrap:wrap; justify-content:space-between">
                     @foreach($chk_search as $photo)
-                    <div class="property-item" style="display:inline-block">
+                    <div class="property-item" style="display:inline-block;">
                         <a href="{{route('struct.detail',['s_no'=>$photo->s_no])}}" class="img">
                             <img src="{{asset($photo->url)}}" alt="Image" class="img-fluid" style="width: 350px; height: 300px; margin-bottom: 50px;" />
                         </a>
