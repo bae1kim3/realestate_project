@@ -4,7 +4,7 @@
  * The file downloaded from
  * https://github.com/caouecs/Laravel-lang/blob/master/ko/validation.php
  */
-
+// vendor validation.php에 넣으세요
 return [
 
     /*
@@ -127,6 +127,21 @@ return [
         'code'=> '제품 ID',
         'price'=> '가격',
         'context'=> '상세설명',
+        'u_id' => '아이디',
+        'phone_no' => '전화번호',
+        'u_addr' => '주소',
+        'pw_answer' => '비밀번호 찾기 전용 질문',
+        'b_name' => '상호명',
+        'seller_license' => '공인중개사 라이센스',
+        's_name' => '건물이름',
+        'sell_cat_info' => '매매유형',
+        's_size' => '평수',
+        'p_deposit' => '보증금/매매가/전세가',
+        'sub_name' => '지하철 역',
+        's_fl' => '층수',
+        's_parking' => '주차 가능',
+        's_ele' => '엘리베이터 유무',
+        's_option' => '건물 옵션',
 //        'use'=> '제품용도',
 //        'size'=> '제품규격',
     ],

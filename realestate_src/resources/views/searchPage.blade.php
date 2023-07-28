@@ -87,7 +87,7 @@
                 </div>
             </div>
         <div class="row">
-            <div class="col-12" style="display:flex; flex-wrap:wrap; justify-content:space-between">
+            <div class="col-12">
                     @foreach($chk_search as $photo)
                     <div class="property-item" style="display:inline-block;">
                         <a href="{{route('struct.detail',['s_no'=>$photo->s_no])}}" class="img">
@@ -153,6 +153,7 @@
                     @endforeach
                     <!-- .item -->
                 </div>
+
             </div>
         </div>
     </div>
