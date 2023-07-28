@@ -150,26 +150,26 @@
             <div class="row section-counter mt-5">
                 <div class="col-6 col-sm-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
                     <div class="counter-wrap mb-5 mb-lg-0">
-                        <span class="number"><span class="countup text-primary">777</span></span>
-                        <span class="caption text-black-50"># of Buy Properties</span>
+                        <span class="number"><span class="countup text-primary">{{$user_n}}</span></span>
+                        <span class="caption text-black-50"># 일반 회원 수</span>
                     </div>
                 </div>
                 <div class="col-6 col-sm-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
                     <div class="counter-wrap mb-5 mb-lg-0">
-                        <span class="number"><span class="countup text-primary">777</span></span>
-                        <span class="caption text-black-50"># of Sell Properties</span>
+                        <span class="number"><span class="countup text-primary">{{$seller_n}}</span></span>
+                        <span class="caption text-black-50"># 공인중개사 수</span>
                     </div>
                 </div>
                 <div class="col-6 col-sm-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="500">
                     <div class="counter-wrap mb-5 mb-lg-0">
-                        <span class="number"><span class="countup text-primary">7777</span></span>
-                        <span class="caption text-black-50"># of All Properties</span>
+                        <span class="number"><span class="countup text-primary">{{$hits}}</span></span>
+                        <span class="caption text-black-50"># 토탈 조회수</span>
                     </div>
                 </div>
                 <div class="col-6 col-sm-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="600">
                     <div class="counter-wrap mb-5 mb-lg-0">
-                        <span class="number"><span class="countup text-primary">777</span></span>
-                        <span class="caption text-black-50"># of Agents</span>
+                        <span class="number"><span class="countup text-primary">{{$expen}}</span></span>
+                        <span class="caption text-black-50"># 가장 비싼 매물</span>
                     </div>
                 </div>
             </div>

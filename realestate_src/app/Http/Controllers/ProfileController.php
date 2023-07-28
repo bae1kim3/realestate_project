@@ -49,6 +49,8 @@ class ProfileController extends Controller
             ->take($lastPhotoId)
             ->get();
 
+
+
         $liked_info = [];
         if(Auth::check()) {
             if(session('seller_license')== null) {
@@ -60,7 +62,8 @@ class ProfileController extends Controller
                 // ->where('id', $id)->where('mvp_photo', '1')
                 // ->take(10)
                 // ->get();
-                // $liked_s_info =
+                // $liked_s_info
+
 
                 $liked_info = Photo::join('s_infos', 's_infos.s_no', 'photos.s_no')
                 ->where('mvp_photo', '1')
@@ -76,6 +79,7 @@ public function sellerprofile(){
     $lastPhotoId = 17;
     $u_id = session('u_id');
     $user = User::where('u_id', $u_id)->first();
+
     $s_info=[];
 
     if ($user) {
