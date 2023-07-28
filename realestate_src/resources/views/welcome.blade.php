@@ -33,17 +33,37 @@
                         어떤 방을 찾으시나요? 펫 방이 찾아드립니다
                     </h2>
                     <form action="{{route('search.get')}}" method="get">
-                        <div class="narrow-w form-search d-flex align-items-stretch mb-3" data-aos="fade-up" data-aos-delay="200">
-                            <input type="text" class="form-control px-4" name="search" id="search" placeholder="주소나 지하철역 명으로 검색해 주세요" />
-                            <button type="submit"  class="btn btn-primary py-2 px-4">Search</button>
-                            <label for="animal_size">대형동물 가능</label>
-                            <input type="checkbox" id="animal_size" name="animal_size" value="1">
-                            <label for="p_month">월세</label>
-                            <input type="checkbox" id="p_month" name="p_type" value="월세">
-                            <label for="p_jeonse">전세</label>
-                            <input type="checkbox" id="p_jeonse" name="p_type" value="전세">
-                            <label for="p_sell">매매</label>
-                            <input type="checkbox" id="p_sell" name="p_type" value="매매">
+                            <div class="form-search d-flex flex-column align-items-stretch mb-3" data-aos="fade-up" data-aos-delay="200" style="flex-wrap: nowrap;">
+                            <!-- 검색창과 버튼을 세로로 정렬하는 컨테이너를 flex-column으로 변경 -->
+                            <div style="display:flex; width:100%">
+                                <!-- 검색창 -->
+                                <input type="text" class="form-control px-4" name="search" id="search" placeholder="주소나 지하철역 명으로 검색해 주세요" />
+                                <!-- 버튼 -->
+                                <button type="submit" class="btn btn-primary py-2 px-4">Search</button>
+                            </div>
+                            <!-- 체크박스들을 수평으로 정렬하는 컨테이너 -->
+                            <div style="display:flex; justify-content:center; align-items:center; margin-top: 10px;">
+                                <!-- 대형동물 가능 체크박스 -->
+                                <div style="margin-right:20px; display:flex; justify-content:center; align-items:center;">
+                                    <label for="animal_size" style="width:150px; color:white; font-size:20px; ">대형동물 가능</label>
+                                    <input type="checkbox" id="animal_size" name="animal_size" value="1">
+                                </div>
+                                <!-- 월세 체크박스 -->
+                                <div style="margin-right:20px; display:flex; justify-content:center; align-items:center;">
+                                    <label for="p_month" style="width:50px; color:white; font-size:20px;">월세</label>
+                                    <input type="checkbox" id="p_month" name="p_type" value="월세">
+                                </div>
+                                <!-- 전세 체크박스 -->
+                                <div style="margin-right:20px; display:flex; justify-content:center; align-items:center;">
+                                    <label for="p_jeonse" style="width:50px; color:white; font-size:20px;">전세</label>
+                                    <input type="checkbox" id="p_jeonse" name="p_type" value="전세">
+                                </div>
+                                <!-- 매매 체크박스 -->
+                                <div style="margin-right:20px; display:flex; justify-content:center; align-items:center;">
+                                    <label for="p_sell" style="width:50px; color:white; font-size:20px;">매매</label>
+                                    <input type="checkbox" id="p_sell" name="p_type" value="매매">
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
