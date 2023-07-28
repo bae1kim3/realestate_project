@@ -138,7 +138,7 @@
                     {{ __('Log in') }}
                 </button>
             <a href="{{ url('auth/facebook') }}"><img style="width:20%; height:15%" src="{{ asset('facebook.jpg') }}" alt="Facebook"></a>
-            <a href="{{ route('login.kakao') }}">카카오 로그인</a>
+            <a href="{{ route('login.kakao') }}"><img style="width:20%; height:12%" src="{{ asset('kakao.png') }}" alt="kakao"></a>
             </div>
         </form>
     </div>

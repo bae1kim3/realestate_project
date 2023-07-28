@@ -176,8 +176,8 @@
                             </div>
                             @endif
                             <br>
-                            <div class="fb-login-button" data-width="" data-size="" data-button-type="" data-layout="" data-auto-logout-link="false" data-use-continue-as="false"><a href="{{ url('auth/facebook') }}">페이스북으로 시작하기</a></div>
-
+            <a href="{{ url('auth/facebook') }}">페이스북으로 시작하기</a>
+            <a href="{{ route('login.kakao') }}">카카오톡으로 시작하기</a>
                             <div class="flex items-center justify-end mt-4">
                                 <x-button class="ml-4 dark:bg-gray-600" style="background-color:#00204a;">
                                     {{ __('회원가입') }}

@@ -27,15 +27,11 @@
                         <h4 class="heading" data-aos="fade-up">일반회원과 공인중개사중 하나를 선택하세요</h4>
                         <nav aria-label="breadcrumb" data-aos="fade-up" data-aos-delay="200">
                             <ol class="breadcrumb text-center justify-content-center">
-                                <button class="btn btn-primary py-1 px-2">
-                                    <li id="use" style="font-size: 20px; font-weight: bolder;">일반회원</li>
-                                </button>
-                                <p style="color:white; margin:0px 10px; font-size:20px"> / </p>
-                                <button class="btn btn-primary py-1 px-2">
-                                    <li id="sell" style="font-size: 20px; font-weight: bolder;">
+                                    <li id="use" style="font-size: 30px; font-weight: bolder;">일반회원</li>
+                                <p style="color:white; margin:0px 10px; font-size:30px"> / </p>
+                                    <li id="sell" style="font-size: 30px; font-weight: bolder;">
                                         공인중개사
                                     </li>
-                                </button>
                             </ol>
                         </nav>
                     </div>
