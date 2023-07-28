@@ -38,7 +38,6 @@ let selectedCard = 0;
 let num = 0;
 let shopMarkers = [];
 let hospMarkers = [];
-let walkMarkers = [];
 let sName = document.getElementById('s_name');
 let defaultlng = '';
 let defaultlat = '';
