@@ -60,7 +60,7 @@
                 <x-validation-errors class="mb-4" />
             <form action="{{ route('struct.insert.post') }}" id="frm" method="POST" enctype="multipart/form-data">
                 @csrf
-                <x-input type="file" name="photo[]" class="form-control-file mt-2" multiple />
+                <x-input style="margin-bottom:16px;" type="file" name="photo[]" class="form-control-file mt-2" multiple />
                 @if(session('status'))
                     <div class="alert alert-success" role="alert">
                         {{ session('status') }}
@@ -71,7 +71,7 @@
                         {{ $error }}
                     </div>
                 @endforeach --}}
-                <div class="col-6 mb-3" role="alert" style="display: none" id="err_up"></div>
+                <div class="col-6 mb-3" role="alert" style="display: none; color:black" id="err_up"></div>
                     <div class="col-6 mb-3">
                         <x-label for="s_name" style="margin-top:20px">건물 이름</x-label>
                         <input type="text" placeholder="건물 이름" name="s_name" id="s_name" value="{{old('s_name')}}" class="form-control" required class="mt-2 dark:bg-gray-600 dark:text-white"/>
