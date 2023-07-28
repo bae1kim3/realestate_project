@@ -18,9 +18,9 @@
     </ x-slot>
     <div class="hero">
         <div class="hero-slide">
-            <div class="img overlay" style="background-image: url('images/AdobeStock_481320874_Preview.jpeg')"></div>
-            <div class="img overlay" style="background-image: url('images/AdobeStock_622111621_Preview.jpeg')"></div>
-            <div class="img overlay" style="background-image: url('images/AdobeStock_390828488_Preview.jpeg')"></div>
+            <div class="img overlay" style="background-image: url('doghuman.jpg')"></div>
+            <div class="img overlay" style="background-image: url('doghuman02.jpg')"></div>
+            <div class="img overlay" style="background-image: url('cathuman.jpg')"></div>
         </div>
 
         <div class="container">
