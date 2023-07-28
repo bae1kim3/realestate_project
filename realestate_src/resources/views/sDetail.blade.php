@@ -50,8 +50,8 @@
         <div class="container">
             <div class="row align-items-center justify-content-center text-center">
                 <div class="col-md-10">
-                    <h1 class="mb-2" style="font-family:'S-CoreDream-3Light';">{{ $s_info->s_add }}</h1>
-                    <p>{{$s_info->s_name}}</p>
+                    <h1 class="mb-2" style="font-family:'S-CoreDream-3Light';">{{$s_info->s_name}}</h1>
+                    <p>{{ $s_info->s_add }}</p>
                 </div>
             </div>
         </div>
