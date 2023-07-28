@@ -30,16 +30,9 @@ class StructureController extends Controller
                 's_name' => 'required|regex:/^[가-힣0-9\s]+$/u|max:30'
                 // 's_name' => 'required|alpha_dash|max:30'
                 // alpha_dash : 한글 영문 숫자 - _ 다 되는데 ㄱㄱ 이런 글자도 통과됨..
-                , 'sell_cat_info' => 'required|in:월세,전세,매매'
-                , 's_size' => 'required|integer|max:99999999999'
-                , 'p_deposit' => 'required|integer|max:99999999999'
-                , 'p_month' => 'nullable|integer|max:99999999999'
-                , 'sub_name' => 'required|string||regex:/^[가-힣\s]+$/u'
-                , 's_fl' => 'required|integer|max:500', 's_parking' => 'required|in:0,1'
-                , 's_ele' => 'required|in:0,1'
-                , 's_addr' => 'required|string'
+                , 'sell_cat_info' => 'required|in:월세,전세,매매', 's_size' => 'required|integer|max:99999999999', 'p_deposit' => 'required|integer|max:99999999999', 'p_month' => 'nullable|integer|max:99999999999', 'sub_name' => 'required|string||regex:/^[가-힣\s]+$/u', 's_fl' => 'required|integer|max:500', 's_parking' => 'required|in:0,1', 's_ele' => 'required|in:0,1', 's_addr' => 'required|string'
                 // ********************* TODO : x,y 위경도 범위 유효성검사 넣기!!
-                , 's_option'=> 'required|in:0,1,2,3,4'// 0723 jy add
+                , 's_option' => 'required|in:0,1,2,3,4' // 0723 jy add
 
             ]
         );
@@ -190,31 +183,43 @@ class StructureController extends Controller
                                 'error' => '파일형식은 jpg와 png만 지원합니다'
                             ]);
                         }
-                        $url=$photo->url;
-                        $size=getimagesize($url);
-                        $sizeWidth=$size[0];
-                        $sizeHeight=$size[1];
-                        if($sizeWidth>300 && $sizeWidth<500 && $sizeHeight>300 && $sizeHeight<500){
+
+                        // 임시 파일로 저장
+                        $tempFilePath = $photo->store('temp', 'public');
+                        $tempFilePath = public_path('storage/' . $tempFilePath);
+
+                        $size = getimagesize($tempFilePath);
+                        $sizeWidth = $size[0];
+                        $sizeHeight = $size[1];
+
+                        $minSize = 300;
+                        $maxSize = 500;
+                        if ($sizeWidth >= $minSize && $sizeWidth <= $maxSize && $sizeHeight >= $minSize && $sizeHeight <= $maxSize) {
                             // Store
                             $path = $photo->store('public');
-                        } else{
+
+                            $mvp_photo = $isFirstPhoto ? '1' : '0'; // 대표 사진 플래그 설정
+
+                            $photo = Photo::create([
+                                's_no' => $s_no,
+                                'url' => Storage::url($path),
+                                'hashname' => $photo->hashName(),
+                                'originalname' => $photo->getClientOriginalName(),
+                                'mvp_photo' => $mvp_photo, // 대표 사진 플래그 저장
+                            ]);
+
+                            $isFirstPhoto = false; // 첫번째 사진 체크 후 '0' 들어가게
+
+                            // 임시 파일 삭제
+                            unlink($tempFilePath);
+                        } else {
+                            // 임시 파일 삭제
+                            unlink($tempFilePath);
+
                             return redirect()->back()->withErrors([
-                                'error'=>'이미지 크기를 300이상 500이하로 해주세요'
+                                'error' => '이미지 크기를 300이상 500이하로 해주세요'
                             ]);
                         }
-
-
-                        $mvp_photo = $isFirstPhoto ? '1' : '0'; // 대표 사진 플래그 설정
-
-                        $photo = Photo::create([
-                            's_no' => $s_no,
-                            'url' => Storage::url($path),
-                            'hashname' => $photo->hashName(),
-                            'originalname' => $photo->getClientOriginalName(),
-                            'mvp_photo' => $mvp_photo, // 대표 사진 플래그 저장
-                        ]);
-
-                        $isFirstPhoto = false; // 첫번째 사진 체크 후 '0' 들어가게
 
                     }
 
@@ -225,7 +230,7 @@ class StructureController extends Controller
                     // return redirect()->back()->with(['status' => '매물 업로드 성공!']); // update 0625 jy
 
                     // *****************TODO : begin transaction create 밑에 다 몰아서하기
-                    return redirect()->route('struct.detail', ['s_no' => $s_no])->with('data01',$data01);
+                    return redirect()->route('struct.detail', ['s_no' => $s_no])->with('data01', $data01);
                 }
             } else {
                 return redirect()->back()->with(['insert_err' => '정보 등록에 실패했습니다']);
@@ -234,23 +239,24 @@ class StructureController extends Controller
         }
     }
 
-    public function structEdit($s_no) {
+    public function structEdit($s_no)
+    {
         // Log::debug('-------------- structEdit start --------------');
         $s_infos = [];
         $s_options = [];
         $result = S_info::where('s_no', $s_no)->pluck('u_no')->toArray();
-        if(session('seller_license') && session('u_no') == $result[0])
-        {
-                $s_infos = S_info::find($s_no);
-                $s_options = State_option::find($s_no);
+        if (session('seller_license') && session('u_no') == $result[0]) {
+            $s_infos = S_info::find($s_no);
+            $s_options = State_option::find($s_no);
         }
         // Log::debug('-------------- structEdit end --------------');
-        return view('sDetailUpdate' , compact('s_infos', 's_options'));
+        return view('sDetailUpdate', compact('s_infos', 's_options'));
     }
 
 
     // 상세 페이지 수정
-    public function structUpdate (Request $req, $s_no) {
+    public function structUpdate(Request $req, $s_no)
+    {
 
         // Log::debug('-------------- structUpdate start --------------');
         // Log::debug('structUpdate : request', [$req->s_size,$req->s_fl,$req->p_deposit, $s_no]);
@@ -261,16 +267,9 @@ class StructureController extends Controller
                 's_name' => 'required|regex:/^[가-힣0-9\s]+$/u|max:30'
                 // 's_name' => 'required|alpha_dash|max:30'
                 // alpha_dash : 한글 영문 숫자 - _ 다 되는데 ㄱㄱ 이런 글자도 통과됨..
-                , 'sell_cat_info' => 'required|in:월세,전세,매매'
-                , 's_size' => 'required|integer|max:99999999999'
-                , 'p_deposit' => 'required|integer|max:99999999999'
-                , 'p_month' => 'nullable|integer|max:99999999999'
-                , 'sub_name' => 'required|string||regex:/^[가-힣\s]+$/u'
-                , 's_fl' => 'required|integer|max:500', 's_parking' => 'required|in:0,1'
-                , 's_ele' => 'required|in:0,1'
-                , 's_addr' => 'required|string'
+                , 'sell_cat_info' => 'required|in:월세,전세,매매', 's_size' => 'required|integer|max:99999999999', 'p_deposit' => 'required|integer|max:99999999999', 'p_month' => 'nullable|integer|max:99999999999', 'sub_name' => 'required|string||regex:/^[가-힣\s]+$/u', 's_fl' => 'required|integer|max:500', 's_parking' => 'required|in:0,1', 's_ele' => 'required|in:0,1', 's_addr' => 'required|string'
                 // ********************* TODO : x,y 위경도 범위 유효성검사 넣기!!
-                , 's_option'=> 'required|in:0,1,2,3,4'// 0723 jy add
+                , 's_option' => 'required|in:0,1,2,3,4' // 0723 jy add
 
             ]
         );
@@ -281,88 +280,83 @@ class StructureController extends Controller
                 ->withErrors($validator);
         }
 
-            $error = [];
+        $error = [];
 
-            // 월세 클릭했을때, 월세값 없이 넘겨주면 에러
-            // 전세, 매매일때,
-            $radio_Btn = $req->sell_cat_info;
-            $p_month = $req->p_month;
-            $p_deposit = $req->p_deposit;
-            if ($radio_Btn === "월세") {
-                if ((!$p_month && $p_deposit) || ($p_month && !$p_deposit) || (!$p_month && !$p_deposit)) {
-                    $error['p_month_err'] = '보증금과 월세 가격을 작성 해주세요';
-                }
-            } elseif (($radio_Btn === "전세" || $radio_Btn === "매매")) {
-                if ($p_month || !$p_deposit) {
-                    $error['buy_err'] = '거래 유형을 확인하고 가격을 적어주세요';
-                }
+        // 월세 클릭했을때, 월세값 없이 넘겨주면 에러
+        // 전세, 매매일때,
+        $radio_Btn = $req->sell_cat_info;
+        $p_month = $req->p_month;
+        $p_deposit = $req->p_deposit;
+        if ($radio_Btn === "월세") {
+            if ((!$p_month && $p_deposit) || ($p_month && !$p_deposit) || (!$p_month && !$p_deposit)) {
+                $error['p_month_err'] = '보증금과 월세 가격을 작성 해주세요';
             }
-
-            // '대구시' 빼고 주소 넘겨주기
-            $s_addr_all = $req->s_addr;
-            $pieces = "";
-            if (!$s_addr_all) {
-                $error['addr_err'] = '주소를 입력해주세요';
-            } elseif (mb_strpos($s_addr_all, '대구') === false) {
-                $error['gu_err'] = '대구 지역 주소가 아닙니다';
-            } else {
-                $pieces = mb_substr($s_addr_all, 3);
+        } elseif (($radio_Btn === "전세" || $radio_Btn === "매매")) {
+            if ($p_month || !$p_deposit) {
+                $error['buy_err'] = '거래 유형을 확인하고 가격을 적어주세요';
             }
+        }
 
-            // db에 있는 역이름이랑 $req 넘어온 역이름 비교 -> 둘이 일치 안하면 에러메세지 뜨게
-            $sub_name = Subway::where('sub_name', $req->sub_name)->first();
+        // '대구시' 빼고 주소 넘겨주기
+        $s_addr_all = $req->s_addr;
+        $pieces = "";
+        if (!$s_addr_all) {
+            $error['addr_err'] = '주소를 입력해주세요';
+        } elseif (mb_strpos($s_addr_all, '대구') === false) {
+            $error['gu_err'] = '대구 지역 주소가 아닙니다';
+        } else {
+            $pieces = mb_substr($s_addr_all, 3);
+        }
 
-            if (!$sub_name) {
-                $error['sub_err'] = '역 이름을 확인해주세요';
+        // db에 있는 역이름이랑 $req 넘어온 역이름 비교 -> 둘이 일치 안하면 에러메세지 뜨게
+        $sub_name = Subway::where('sub_name', $req->sub_name)->first();
+
+        if (!$sub_name) {
+            $error['sub_err'] = '역 이름을 확인해주세요';
+        }
+
+
+
+        if (!empty($error)) {
+            // 리다이렉트 해서 에러 세션에 담음
+            // Log::debug('structUpdate : all error', [$error]);
+            return redirect()->back()->withInput()->withErrors($error);
+        } else {
+            try {
+                DB::beginTransaction();
+                $s_info = S_info::find($s_no);
+                $s_info_op = State_option::find($s_no);
+                // Log::debug('structUpdate : s_info find', [$s_info]);
+
+                $s_info->s_name = $req->s_name;
+                $s_info->s_add = $pieces;
+                $s_info->s_size = $req->s_size;
+                $s_info->s_fl = $req->s_fl;
+                $s_info->s_log = $req->s_log;
+                $s_info->s_stai = $req->sub_name;
+                $s_info->s_lat = $req->s_lat;
+                $s_info->p_deposit = $req->p_deposit;
+                $s_info->p_month = $req->p_month;
+                $s_info->animal_size = $req->animal_size;
+                $s_info->s_option = $req->s_option;
+                $s_info_op->s_parking = $req->s_parking;
+                $s_info_op->s_ele = $req->s_ele;
+
+                $s_info->save(); // update
+
+                $s_info_op->save(); // update
+
+
+
+                DB::commit();
+
+                return redirect()->route('struct.detail', ['s_no' => $s_no]);
+                // Log::debug('-------------- structUpdate end --------------');
+
+            } catch (\Exception $e) {
+                DB::rollBack();
+                return redirect()->back()->withErrors(['error' => '데이터 처리 중 오류가 발생했습니다. 다시 시도해주세요.']);
             }
-
-
-
-            if (!empty($error)) {
-                // 리다이렉트 해서 에러 세션에 담음
-                // Log::debug('structUpdate : all error', [$error]);
-                return redirect()->back()->withInput()->withErrors($error);
-            }
-            else {
-                try{
-                    DB::beginTransaction();
-                    $s_info = S_info::find($s_no);
-                    $s_info_op = State_option::find($s_no);
-                    // Log::debug('structUpdate : s_info find', [$s_info]);
-
-                    $s_info->s_name = $req->s_name;
-                    $s_info->s_add = $pieces;
-                    $s_info->s_size = $req->s_size;
-                    $s_info->s_fl = $req->s_fl;
-                    $s_info->s_log = $req->s_log;
-                    $s_info->s_stai = $req->sub_name;
-                    $s_info->s_lat = $req->s_lat;
-                    $s_info->p_deposit = $req->p_deposit;
-                    $s_info->p_month = $req->p_month;
-                    $s_info->animal_size = $req->animal_size;
-                    $s_info->s_option = $req->s_option;
-                    $s_info_op->s_parking = $req->s_parking;
-                    $s_info_op->s_ele = $req->s_ele;
-
-                    $s_info->save(); // update
-
-                    $s_info_op->save(); // update
-
-
-
-                    DB::commit();
-
-                    return redirect()->route('struct.detail', ['s_no' => $s_no]);
-                    // Log::debug('-------------- structUpdate end --------------');
-
-                    }
-
-                catch(\Exception $e) {
-                    DB::rollBack();
-                    return redirect()->back()->withErrors(['error' => '데이터 처리 중 오류가 발생했습니다. 다시 시도해주세요.']);
-                    }
-
-
         }
     }
 }
