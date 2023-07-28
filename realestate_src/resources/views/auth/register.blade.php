@@ -188,13 +188,13 @@
             const checkbox2 = document.getElementById('agreeCheckbox2');
             const registerButton2 = document.getElementById('registerButton2');
 
-            // checkbox2.addEventListener('click', function() {
-            //     if (checkbox2.checked) {
-            //         registerButton2.style.display = 'block';
-            //     } else {
-            //         registerButton2.style.display = 'none';
-            //     }
-            // });
+            checkbox2.addEventListener('click', function() {
+                if (checkbox2.checked) {
+                    registerButton2.style.display = 'block';
+                } else {
+                    registerButton2.style.display = 'none';
+                }
+            });
 
             document.addEventListener("DOMContentLoaded", function() {
                 const termsTextarea = document.getElementById("termsTextarea");
