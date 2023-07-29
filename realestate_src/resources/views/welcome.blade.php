@@ -100,7 +100,11 @@
                                 </a>
 
                                 <div class="property-content">
-                                    <div class="price mb-2"><span>{{ $photo->s_name }}</span></div>
+                                    <div class="price mb-2">
+                                        <a href="{{route('struct.detail',['s_no'=>$photo->s_no])}}">
+                                            <span>{{ $photo->s_name }}</span>
+                                        </a>
+                                    </div>
                                     <div>
                                         <span class="d-block mb-2 text-black-50">{{ $photo->s_add }}</span>
                                         <span class="city d-block mb-3">{{ number_format($photo->p_deposit) }}
@@ -134,24 +138,15 @@
                                                     @endswitch
                                                 </span>
                                             </span>
+                                            @if($photo->animal_size)
                                             <span class="d-block d-flex align-items-center">
                                                 <span class="fa-solid fa-dog me-2"></span>
                                                 <span class="caption"> 대형동물
-                                                    @switch($photo->animal_size)
-                                                    @case(0)
-                                                    <strong>X</strong>
-                                                    @break
-                                                    @case(1)
-                                                    <strong>O</strong>
-                                                    @break
-                                                    $@default
-
-                                                    @endswitch
+                                                <strong>O</strong>
                                                 </span>
                                             </span>
+                                            @endif
                                         </div>
-
-                                        <a href="{{route('struct.detail',['s_no'=>$photo->s_no])}}" class="btn btn-primary py-2 px-3">매물 보러가기</a>
                                     </div>
                                 </div>
                             </div>
