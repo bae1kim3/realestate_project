@@ -139,7 +139,7 @@
                         <div class="col-6 mb-3">
                             <label for="u_addr">주소</label>
                             <br>
-                            <x-input type="text" id="sample6_address" name="u_addr" class="form-control" placeholder="대구 지역 내 도로명 주소" readonly />
+                            <x-input type="text" id="sample6_address" name="u_addr" class="form-control" placeholder="'우편번호로 찾기' 버튼을 눌러서 주소를 입력하세요" readonly />
                             <br>
                             <x-button type="button" onclick="sample6_execDaumPostcode()" style="background-color:#00204a;">우편번호 찾기</x-button>
                             <br>
