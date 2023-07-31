@@ -102,7 +102,13 @@
                                 <div class="property-content">
                                     <div class="price mb-2">
                                         <a href="{{route('struct.detail',['s_no'=>$photo->s_no])}}">
-                                            <span>{{ $photo->s_name }}</span>
+                                            <span>
+                                                @if(mb_strlen($photo->s_name)>10)
+                                                {{mb_substr($photo->s_name, 0, 10, 'utf-8');}}...
+                                                @else
+                                                {{$photo->s_name}}
+                                                @endif
+                                            </span>
                                         </a>
                                     </div>
                                     <div>
@@ -142,7 +148,7 @@
                                             <span class="d-block d-flex align-items-center">
                                                 <span class="fa-solid fa-dog me-2"></span>
                                                 <span class="caption"> 대형동물
-                                                <strong>O</strong>
+                                                    <strong>O</strong>
                                                 </span>
                                             </span>
                                             @endif
@@ -163,6 +169,7 @@
             </div>
         </div>
     </div>
+    
     {{-- 찜한 매물 출력 --}}
     @if(Auth::check() && session('seller_license') === null)
     <div class="section sec-testimonials">
@@ -190,13 +197,19 @@
                     @if(!empty($liked_info[0]))
                     @foreach($liked_info as $info)
                     <div class="item">
-                        <div class="testimonial">
+                        <div class="testimonial" style="width:350px; box-shadow:0 1px 4px 0 rgba(0, 0, 0, 0.05);">
                             <a href="{{route('struct.detail',['s_no'=>$info->s_no])}}" class="img">
                                 <img src="{{asset($info->url)}}" alt="Image" class="img-fluid" style="width: 350px; height: 300px;" />
                             </a>
                             <div class="info_con" style="padding:30px;">
                                 <a href="{{route('struct.detail',['s_no'=>$info->s_no])}}">
-                                    <div class="h5 liked_title" style="color: #005555; font-weight:bold; display:inline-block; border-bottom: 3px solid #005555; padding-bottom:5px">{{ $info->s_name }}</div>
+                                    <div class="h5 liked_title" style="color: #005555; font-weight:bold; display:inline-block; border-bottom: 3px solid #005555; padding-bottom:5px">
+                                        @if(mb_strlen($info->s_name)>10)
+                                        {{mb_substr($info->s_name, 0, 10, 'utf-8');}}...
+                                        @else
+                                        {{$info->s_name}}
+                                        @endif
+                                    </div>
                                 </a>
                                 <div style="margin-bottom:8px">{{ $info->s_add }}</div>
                                 <span class="city d-block mb-3" style="color:black; font-weight:bold; font-size:20px;">{{ number_format($info->p_deposit) }}
@@ -273,7 +286,13 @@
                             <p class="text-black-50" style="margin-bottom:8px">
                                 건물 이름
                             </p>
-                            <h3 class="heading">{{ $building->s_name }}</h3>
+                            <h3 class="heading">
+                                @if(mb_strlen($photo->s_name)>10)
+                                {{mb_substr($photo->s_name, 0, 10, 'utf-8');}}...
+                                @else
+                                {{$photo->s_name}}
+                                @endif                            
+                            </h3>
                         </div>
                     </div>
 
