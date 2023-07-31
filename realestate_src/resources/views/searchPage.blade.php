@@ -16,8 +16,8 @@
 
         </style>
     </ x-slot>
-    <div style="padding-top:400px; background-color:#f5f2f2; height:40%" >
-            <div class="row justify-content-center align-items-center" style="position:absolute; top:20%;left:11%; width:1500px">
+    <div class="row justify-content-center align-items-center" style="padding-top:200px; padding-bottom:100px;background-color:#f5f2f2;" >
+            <div class="row justify-content-center align-items-center" >
                 <div class="col-lg-9 text-center">
                     <h2 class="heading mb-3" data-aos="fade-up" style="font-family: 'S-CoreDream-3Light';">
                         어떤 방을 찾으시나요? 펫 방이 찾아드립니다
@@ -62,7 +62,7 @@
 
 
     <div class="section">
-        <div class="container" style="max-width:1440px">
+        <div class="container" style="max-width:1440px; padding-left:50px; padding-right:50px">
             <div class="row mb-5 align-items-center">
                 <div class="col-lg-6">
                     <h2 class="text-primary heading" style="font-family:'S-CoreDream-6Bold';">
@@ -84,7 +84,13 @@
                         <div class="property-content">
                             <div class="price mb-2">
                                 <a href="{{route('struct.detail',['s_no'=>$photo->s_no])}}">
-                                    <span>{{ $photo->s_name }}</span>
+                                    <span>
+                                        @if(mb_strlen($photo->s_name)>10)
+                                        {{mb_substr($photo->s_name, 0, 10, 'utf-8');}}...
+                                        @else
+                                        {{$photo->s_name}}
+                                        @endif
+                                    </span>
                                 </a>
                             </div>
                             <div>
