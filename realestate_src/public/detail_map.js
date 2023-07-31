@@ -21,7 +21,7 @@ let walkMarkers = [];
     var map = new kakao.maps.Map(container, options);
 
     var position = new kakao.maps.LatLng(sLong.value, sLat.value); // 마커가 표시될 위치를 설정합니다
-    var iwContent = '<div style= "padding:5px; padding-left:45px; font-weight:900;">'+ sName.value +'</div>'; // 인포윈도우에 표시될 내용입니다
+    var iwContent = '<div style="text-align:center; width:150px; text-align:center"><div style= "padding:5px; text-align:center; font-weight:900;">'+ sName.value +'</div></div>'; // 인포윈도우에 표시될 내용입니다
     // var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize) // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
     
     // 마커를 생성합니다
