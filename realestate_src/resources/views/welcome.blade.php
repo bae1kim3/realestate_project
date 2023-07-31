@@ -218,40 +218,40 @@
                                     @endif
                                 </span>
                                 {{-- 건물유형, 대형동물 --}}
-                                <span class="icon-building me-2"></span>
-                                <span class="caption">
-                                    @switch($info->s_option)
-                                    @case(0)
-                                    아파트
-                                    @break
-                                    @case(1)
-                                    단독주택
-                                    @break
-                                    @case(2)
-                                    오피스텔
-                                    @break
-                                    @case(3)
-                                    빌라
-                                    @break
-                                    @case(4)
-                                    원룸
-                                    @break
-                                    $@default
-                                    @break
-                                    @endswitch
-                                </span>
-                                <span class="fa-solid fa-dog me-2"></span>
-                                <span class="caption"> 대형동물
-                                    @switch($info->animal_size)
-                                    @case(0)
-                                    <strong>X</strong>
-                                    @break
-                                    @case(1)
-                                    <strong>O</strong>
-                                    @break
-                                    $@default
-                                    @endswitch
-                                </span>
+                                <div class="specs d-flex mb-4">
+                                    <span class="d-block d-flex align-items-center me-3">
+                                        <span class="icon-building me-2"></span>
+                                        <span class="caption">
+                                            @switch($info->s_option)
+                                            @case(0)
+                                            아파트
+                                            @break
+                                            @case(1)
+                                            단독주택
+                                            @break
+                                            @case(2)
+                                            오피스텔
+                                            @break
+                                            @case(3)
+                                            빌라
+                                            @break
+                                            @case(4)
+                                            원룸
+                                            @break
+                                            $@default
+                                            @break
+                                            @endswitch
+                                        </span>
+                                    </span>
+                                    @if($info->animal_size)
+                                    <span class="d-block d-flex align-items-center">
+                                        <span class="fa-solid fa-dog me-2"></span>
+                                        <span class="caption"> 대형동물
+                                            <strong>O</strong>
+                                        </span>
+                                    </span>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </div>
