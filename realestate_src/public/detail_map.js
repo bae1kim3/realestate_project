@@ -4,7 +4,7 @@ let sName = document.getElementById('s_name');
 let getShop = document.getElementById('getshop');
 let getHosp = document.getElementById('gethosp');
 let getWalk = document.getElementById('getwalk');
-let imageSize = new kakao.maps.Size(35, 35); // 마커이미지의 크기입니다의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+let imageSize = new kakao.maps.Size(38, 38); // 마커이미지의 크기입니다의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 let shopMarkers = [];
 let hospMarkers = [];
 let walkMarkers = [];
@@ -112,7 +112,7 @@ getShop.addEventListener("click", function() {
         .then((data) => {
             console.log(data);
             let getdata = data.documents;
-            var imageSrc = 'https://cdn-icons-png.flaticon.com/128/2447/2447823.png';
+            var imageSrc = 'https://cdn-icons-png.flaticon.com/128/3636/3636338.png';
             
             markerImage = new kakao.maps.MarkerImage(
                 imageSrc,
@@ -169,7 +169,7 @@ getHosp.addEventListener("click", function() {
         .then((data) => {
 
             let getdata = data.documents;
-            var imageSrc = 'https://cdn-icons-png.flaticon.com/128/10887/10887257.png';
+            var imageSrc = 'https://cdn-icons-png.flaticon.com/128/4931/4931443.png';
             
             markerImage = new kakao.maps.MarkerImage(
                 imageSrc,
@@ -203,6 +203,35 @@ getHosp.addEventListener("click", function() {
 
 });
 
+// 공인중개사 주소 클릭시 길찾기 지도 새창뜸
+let sellAddr = document.getElementById("sell_addr_map");
 
+sellAddr.addEventListener("click", function() {
+    // 주소를 위,경도 바꾸기
+    var geocoder = new kakao.maps.services.Geocoder();
+    
+    var callback = function(result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+            var lat = result[0]["x"];
+            var long = result[0]["y"];
+
+            // URL을 만들어서 새 탭에서 열기
+            var mapUrl = "https://map.kakao.com/link/to/" + sellAddr.innerHTML + "," + long + "," + lat;
+            window.open(mapUrl);
+        }
+    };
+    
+    geocoder.addressSearch(sellAddr.innerHTML, callback);
+});
+
+// 지도 주소 클릭시 길찾기 지도 새창뜸
+let mapAddr = document.getElementById("map_addr");
+let mapAddrInner = "대구 "+ mapAddr.innerHTML;
+
+mapAddr.addEventListener("click", function() {
+    // URL을 만들어서 새 탭에서 열기
+    var mapUrl = "https://map.kakao.com/link/to/" + mapAddrInner + "," + sLong.value + "," + sLat.value;
+    window.open(mapUrl);
+});
 
 

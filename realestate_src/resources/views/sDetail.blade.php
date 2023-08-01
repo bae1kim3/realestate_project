@@ -1,14 +1,4 @@
 <style>
-    .gal-item img {
-        width: 100%;
-        /* height: 100%;     */
-        object-fit: cover;
-    }
-    .slide-one-item.home-slider img {
-        width: 100%;
-        height: 500px;
-        object-fit: cover;
-    }
     @font-face {
     font-family: 'S-CoreDream-6Bold';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff') format('woff');
@@ -21,6 +11,44 @@
     font-weight: normal;
     font-style: normal;
     }
+
+    .gal-item img {
+        width: 100%;
+        /* height: 100%;     */
+        object-fit: cover;
+    }
+    .slide-one-item.home-slider img {
+        width: 100%;
+        height: 500px;
+        object-fit: cover;
+    }
+
+    /* 공인중개사 정보 */
+    .seller-detail a {
+        display:inline-block; 
+        margin-bottom:16px;
+    }
+    .seller-detail a:hover {
+        font-weight: 900;
+    }
+    .seller-detail #sell_addr_map {
+        cursor: pointer;
+        transition: .3s all ease;
+    }
+    .seller-detail #sell_addr_map:hover {
+        font-weight: 900;
+    }
+
+    /* 지도 */
+    #map_addr {
+        cursor: pointer;
+        color: #005555;
+        transition: .3s all ease;
+    }
+    #map_addr:hover {
+        font-weight: 900;
+    }
+
 </style>
 
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -264,42 +292,46 @@
                 <h3 class="h4 text-black widget-title mb-3">{{ $user->b_name }}</h3>
                 <h3 class="mb-3 fw-bold fs-5 seller-name">{{ $user->name }}</h3>
                 <div>전화번호</div>
-                <a href="tel:{{$user->phone_no}}" style="display:inline-block; margin-bottom:16px">{{$user->phone_no}}</a>
+                <a href="tel:{{$user->phone_no}}">{{$user->phone_no}}</a>
                 <div>부동산 주소</div>
-                <p>
-                {{$user->u_addr}}
-                </p>
-                </p>
+                <p id="sell_addr_map">{{$user->u_addr}}</p>
                 <div>이메일</div>
                 <a href="mailto:{{$user->email}}">{{$user->email}}</a>
-                <p class="mt-3">소비자에게 좋은 매물 만을 보여드릴 수 있도록 노력하는 부동산이 되겠습니다.</p>
+                <p>소비자에게 좋은 매물 만을 보여드릴 수 있도록 노력하는 부동산이 되겠습니다.</p>
             </div>
-            <h4 class="text-black widget-title mb-3">위치</h4>
-            <p style="font-size:15px">{{ $s_info->s_add }}</p>
-            <div id="map" style="width: 100%; height: 400px; margin-bottom:30px;"></div>
-            <input type="hidden" value="{{ $s_info->s_name }}" id="s_name"/>
-            <input type="hidden" value="{{ $s_info->s_log }}" id="s_log"/>
-            <input type="hidden" value="{{ $s_info->s_lat }}" id="s_lat"/>
-            <div class="map-btn">
-                <div class="map-btn-con" style="display:flex; justify-content: center">
-                    <button class="shop-btn" id="getshop">
-                        <i class="fa-solid fa-paw fa-2x"></i>
-                        <p>반려동물 용품점</p>
-                    </button>
-                    <button class="hosp-btn" id="gethosp">
-                        <i class="fa-solid fa-house-chimney-medical fa-2x"></i>
-                        <p style="padding:0 70px">동물 병원</p>
-                    </button>
-                    <button class="walk-btn" id="getwalk">
-                        <i class="fa-solid fa-seedling fa-2x"></i>
-                        <p>산책로</p>
-                    </button>
+            
+            {{-- 지도 출력 --}}
+            <div class="detail_map">
+                <h4 class="text-black widget-title">위치</h4>
+                <p>(아래 주소 클릭 시, 길찾기 지도로 이동합니다)</p>
+                <p id="map_addr" style="font-size:18px;">{{ $s_info->s_add }}</p>
+                <div id="map" style="width: 100%; height: 400px; margin-bottom:30px;"></div>
+                <input type="hidden" value="{{ $s_info->s_name }}" id="s_name"/>
+                <input type="hidden" value="{{ $s_info->s_log }}" id="s_log"/>
+                <input type="hidden" value="{{ $s_info->s_lat }}" id="s_lat"/>
+                
+                {{-- 반경 5km 내에 마커 표시 --}}
+                <div class="map-btn">
+                    <div class="map-btn-con" style="display:flex; justify-content: center">
+                        <button class="shop-btn" id="getshop">
+                            <i class="fa-solid fa-paw fa-2x"></i>
+                            <p>반려동물 용품점</p>
+                        </button>
+                        <button class="hosp-btn" id="gethosp">
+                            <i class="fa-solid fa-house-chimney-medical fa-2x"></i>
+                            <p style="padding:0 70px">동물 병원</p>
+                        </button>
+                        <button class="walk-btn" id="getwalk">
+                            <i class="fa-solid fa-seedling fa-2x"></i>
+                            <p>산책로</p>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
         </div>
     </div>
-    </div>
+</div>
 </x-app-layout>
 
 {{-- del jy 0718 --}}
