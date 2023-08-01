@@ -76,7 +76,7 @@
         <div class="row">
             <div class="col-12">
                     @foreach($chk_search as $photo)
-                    <div class="property-item" style="display:inline-block;">
+                    <div class="property-item col-3" style="display:inline-block;">
                         <a href="{{route('struct.detail',['s_no'=>$photo->s_no])}}" class="img">
                             <img src="{{asset($photo->url)}}" alt="Image" class="img-fluid" style="width: 350px; height: 300px; margin-bottom: 50px;" />
                         </a>
@@ -142,8 +142,6 @@
                                         </span>
                                     </span>
                                 </div>
-
-                                <a href="{{route('struct.detail',['s_no'=>$photo->s_no])}}" class="btn btn-primary py-2 px-3">매물 보러가기</a>
                             </div>
                         </div>
                     </div>
