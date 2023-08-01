@@ -32,7 +32,7 @@
         </div>
     </div>
 
-    <div class="section sec-testimonials">
+    <div class="section sec-testimonials" style="padding-bottom:3rem">
         <div class="container">
             <div class="row mb-5 align-items-center">
                 <div class="col-md-6">
@@ -81,60 +81,8 @@
 
 
 
-    <div class="section pt-0">
-        <div class="container">
-            <h2 style="font-family: 'S-CoreDream-6Bold';">이달의 매물</h2>
-            <div class="row justify-content-between mb-5">
-                <div class="col-lg-7 mb-5 mb-lg-0">
-                    <div class="img-about dots">
-                        <a href="{{route('struct.detail',['s_no'=>$photo->s_no])}}" class="img">
-                            <img class="img-fluid" src="{{ asset($photo->url) }}" alt="img" style="width: 80%;height:80%">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="d-flex feature-h">
-                        <span class="wrap-icon me-3">
-                            <span class="icon-home2"></span>
-                        </span>
-                        <div class="feature-text">
-                            <h3 class="heading">건물 이름</h3>
-                            <p class="text-black-50">
-                                {{ $bild->s_name }}
-                            </p>
-                        </div>
-                    </div>
 
-                    <div class="d-flex feature-h">
-                        <span class="wrap-icon me-3">
-                            <span class="icon-person"></span>
-                        </span>
-                        <div class="feature-text">
-                            <h3 class="heading">건물 위치</h3>
-                            <p class="text-black-50">
-                                {{$bild->s_add}}
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="d-flex feature-h">
-                        <span class="wrap-icon me-3">
-                            <span class="icon-security"></span>
-                        </span>
-                        <div class="feature-text">
-                            <h3 class="heading">조회수</h3>
-                            <p class="text-black-50">
-                                {{$bild->hits}} 회
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="section">
+    <div class="section" style="padding-bottom:5rem">
         <div class="container">
             <div class="row">
                 <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
