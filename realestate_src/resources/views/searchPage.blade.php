@@ -18,14 +18,14 @@
     </ x-slot>
     <div class="row justify-content-center align-items-center" style="padding-top:200px; padding-bottom:100px;background-color:#f5f2f2;" >
             <div class="row justify-content-center align-items-center" >
-                <div class="col-lg-9 text-center">
+                <div class="col-lg-8 text-center">
                     <h2 class="heading mb-3" data-aos="fade-up" style="font-family: 'S-CoreDream-3Light';">
                         어떤 방을 찾으시나요? 펫 방이 찾아드립니다
                     </h2>
                     <form action="{{route('search.post')}}" method="post">
                         <div class="form-search d-flex flex-column align-items-stretch mb-3" data-aos="fade-up" data-aos-delay="200" style="flex-wrap: nowrap;">
                             <!-- 검색창과 버튼을 세로로 정렬하는 컨테이너를 flex-column으로 변경 -->
-                            <div style="display:flex; width:100%">
+                            <div style="display:flex; justify-content:center; align-items:center; width:75%; margin:0 auto;">
                                 <!-- 검색창 -->
                                 <input type="text" style="border-radius:25px" class="form-control px-4" name="search" id="search" placeholder="주소나 지하철역 명으로 검색해 주세요" />
                                 <!-- 버튼 -->
@@ -62,7 +62,7 @@
 
 
     <div class="section">
-        <div class="container" style="max-width:1440px; padding-left:50px; padding-right:50px">
+        <div class="container" style="max-width:75%;">
             <div class="row mb-5 align-items-center">
                 <div class="col-lg-6">
                     <h2 class="text-primary heading" style="font-family:'S-CoreDream-6Bold';">
@@ -74,9 +74,9 @@
                 </div>
             </div>
         <div class="row">
-            <div class="col-12">
+            <div class="col-12" style="padding:0">
                     @foreach($chk_search as $photo)
-                    <div class="property-item col-3" style="display:inline-block;">
+                    <div class="property-item" style="display:inline-block;">
                         <a href="{{route('struct.detail',['s_no'=>$photo->s_no])}}" class="img">
                             <img src="{{asset($photo->url)}}" alt="Image" class="img-fluid" style="width: 350px; height: 300px; margin-bottom: 50px;" />
                         </a>
