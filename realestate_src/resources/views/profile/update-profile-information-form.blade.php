@@ -89,10 +89,7 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="col-lg-4"></div>
-                </div>
+                
                 <div class="testimonial-slider-wrap">
                     <div class="testimonial-slider">
                     @if(!empty($liked_info[0]))
