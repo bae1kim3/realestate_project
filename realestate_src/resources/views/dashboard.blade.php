@@ -127,11 +127,17 @@
             </div>
             <div class="col-6 mb-4">
                 <label for="p_deposit" class="mb-2">보증금/매매가/전세가</label>
-                <input type="text" name="p_deposit" id="p_deposit" class="form-control" required value="{{old('p_deposit')}}" maxlength="11" placeholder="만원"/>
+                <div style="position:relative">
+                    <input  type="text" name="p_deposit" id="p_deposit" class="form-control" required value="{{old('p_deposit')}}" maxlength="11" placeholder="보증금/매매가/전세가"/>
+                    <div style="position: absolute; top:32%; right:5%">만원</div>
+                </div>
             </div>
                 <div class="col-6 mb-4">
                 <x-label for="p_month" class="mb-2">월세</x-label>
-                <x-input type="text" name="p_month" id="p_month" class="form-control" value="{{old('p_month')}}" maxlength="11" placeholder="만원"/>
+                <div style="position:relative">
+                    <x-input type="text" name="p_month" id="p_month" class="form-control" value="{{old('p_month')}}" maxlength="11" placeholder="월세"/>
+                    <div style="position: absolute; top:32%; right:5%">만원</div>
+                </div>
             </div>
                 <div class="col-6 mb-4">
                 <x-label for="s_fl" class="mb-2">층수</x-label>
