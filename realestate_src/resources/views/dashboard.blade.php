@@ -67,6 +67,8 @@
             <form action="{{ route('struct.insert.post') }}" id="frm" method="POST" enctype="multipart/form-data">
                 @csrf
                 <x-label for="photo" style="margin-top:20px">방 사진 (최소 5장 필수, 최대 10장)</x-label><br>
+                <p style="margin:0">사진은 추후에 <u>수정 불가</u>합니다.</p>
+                <p>사진 수정 필요시 게시글 <u>삭제</u> 후 다시 등록하세요.</p>
                 <x-input class="mb-4" type="file" name="photo[]" class="form-control-file mt-2" multiple />
                 @if(session('status'))
                     <div class="alert alert-success" role="alert">
