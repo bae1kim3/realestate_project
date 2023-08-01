@@ -74,6 +74,7 @@
 
     <x-app-layout>
 
+        
     <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url('{{$mvp_photo->url}}');" data-aos="fade" data-stellar-background-ratio="1">
         <div class="container">
             <div class="row align-items-center justify-content-center text-center">
@@ -88,7 +89,12 @@
     <div class="site-section site-section-sm">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8" style="margin-bottom:10px; margin-top:65px">
+                @if(session('seller_license') && session('u_no') == $my_s_no[0])
+                <div class="col-12" style="margin-bottom:10px;">
+                    <a href="{{route('struct.edit',['s_no'=>$s_info->s_no])}}"><button class="btn btn-primary btn-up">수정</button></a>
+                </div>
+                    @endif
+                <div class="col-lg-8">
 
                     <div style="position:relative">
                         {{-- 찜 --}}
@@ -280,13 +286,6 @@
 
         {{-- 공인중개사 정보 --}}
         <div class="col-lg-4 seller-info">
-            <div style="text-align:right; margin-bottom:10px">
-        @if(session('seller_license') && session('u_no') == $my_s_no[0])
-                <a href="{{route('struct.edit',['s_no'=>$s_info->s_no])}}"><button class="btn btn-primary btn-up">수정</button></a>
-        @else
-        <div style="margin-bottom:65px"></div>
-        @endif
-            </div>
             <div class="bg-white widget border rounded seller-detail">
                 <p class="mb-4" style="color:gray!important;">[ 공인중개사 정보 ]</p>
                 <h3 class="h4 text-black widget-title mb-3">{{ $user->b_name }}</h3>
