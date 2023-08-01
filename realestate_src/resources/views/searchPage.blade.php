@@ -127,19 +127,12 @@
                                         </span>
                                     </span>
                                     <span class="d-block d-flex align-items-center">
+                                        @if($photo->animal_size)
                                         <span class="fa-solid fa-dog me-2"></span>
                                         <span class="caption"> 대형동물
-                                            @switch($photo->animal_size)
-                                            @case(0)
-                                            <strong>X</strong>
-                                            @break
-                                            @case(1)
                                             <strong>O</strong>
-                                            @break
-                                            $@default
-
-                                            @endswitch
                                         </span>
+                                        @endif
                                     </span>
                                 </div>
                             </div>
