@@ -1,5 +1,5 @@
 # 프로젝트 주제
-대구에서 집을 찾는 반려인들을 위한 부동산 웹사이트(2차)
+대구에서 집을 찾는 반려인들을 위한 부동산 웹사이트(3차)
 
 # 개발 기간
 2023-07-14 ~ 2023-07-25
@@ -11,7 +11,7 @@
 김주영 - 상세페이지, 메인페이지, 수정페이지<br>
 
 # PPT링크(canva)
-[https://www.canva.com/design/DAFnGEcJ7S0/2TShScDeXmt4M6twA2mpZA/edit?utm_content=DAFnGEcJ7S0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton](https://www.canva.com/design/DAFpsV-fIWc/jNXSifmtcsJXfjdP4QiEjg/edit?utm_content=DAFpsV-fIWc&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+[프로젝트 PPT](https://www.canva.com/design/DAFpsV-fIWc/jNXSifmtcsJXfjdP4QiEjg/edit?utm_content=DAFpsV-fIWc&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 # 사용한 기술
 <img src="https://img.shields.io/badge/Visual Studio Code-007ACC?style=flat-square&logo=Visual Studio Code&logoColor=white"/>
